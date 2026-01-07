@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Getting Started &#8212; Rocky Mountain Ellipse 0.4.0b5.dev2+gcf560783e documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../_static/nature.css?v=0f882399" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=71a10455"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Make an Archive" href="configure_archives/index.html" />
+    <link rel="prev" title="Welcome to Rocky Mountain Ellipse’s documentation!" href="../index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="configure_archives/index.html" title="Make an Archive"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to Rocky Mountain Ellipse’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Rocky Mountain Ellipse 0.4.0b5.dev2+gcf560783e documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+
+
+  <section id="getting-started">
+<span id="id1"></span><h1>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h1>
+<p>This guide aims to provide a starting guide for using Rocky Mountain Ellipse.</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="configure_archives/index.html">Make an Archive</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configure_archives/index.html#set-user-defaults">Set User Defaults</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="first_workflow/index.html">Make Your First Workflow</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#create-a-project">Create a Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#make-a-workflow-file">Make a Workflow File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#describe-the-release">Describe the Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#add-datasets">Add Datasets</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#add-jobs">Add Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#environment-variables">Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#run-jobs">Run Jobs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#mapping-the-release">Mapping the Release</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html#publish-a-release">Publish a Release</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="manage_requirements/index.html">Manage Requirements</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manage_requirements/index.html#make-a-new-workflow">Make a New Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_requirements/index.html#add-workflow-requirements">Add Workflow Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_requirements/index.html#add-file-system-requirements">Add File System Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_requirements/index.html#run-the-new-workflow">Run the New Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="arrayschema/index.html">Array Schema</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="arrayschema/introduction.html">Why Array Schema?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrayschema/write_a_schema.html">Add an Array Schema to a Project</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="configure_archives/index.html">Make an Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_workflow/index.html">Make Your First Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manage_requirements/index.html">Manage Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="arrayschema/index.html">Array Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../cli/index.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/get_started/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="index.html">development</a></li>
+  <li><a href="../../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="configure_archives/index.html" title="Make an Archive"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../index.html" title="Welcome to Rocky Mountain Ellipse’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Rocky Mountain Ellipse 0.4.0b5.dev2+gcf560783e documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Getting Started</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, National Institute of Standards and Technology.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.0.
+    </div>
+  </body>
+</html>

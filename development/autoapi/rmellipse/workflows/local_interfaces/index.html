@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>rmellipse.workflows.local_interfaces &#8212; Rocky Mountain Ellipse 0.4.0b5.dev2+gcf560783e documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/nature.css?v=0f882399" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../../../_static/documentation_options.js?v=71a10455"></script>
+    <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+    <link rel="next" title="rmellipse.workflows.workflowtree" href="../workflowtree/index.html" />
+    <link rel="prev" title="rmellipse.workflows.extras" href="../extras/index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../workflowtree/index.html" title="rmellipse.workflows.workflowtree"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../extras/index.html" title="rmellipse.workflows.extras"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Rocky Mountain Ellipse 0.4.0b5.dev2+gcf560783e documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >rmellipse</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" accesskey="U">rmellipse.workflows</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">rmellipse.workflows.local_interfaces</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+
+
+  <section id="module-rmellipse.workflows.local_interfaces">
+<span id="rmellipse-workflows-local-interfaces"></span><h1>rmellipse.workflows.local_interfaces<a class="headerlink" href="#module-rmellipse.workflows.local_interfaces" title="Link to this heading">¶</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.workflows.local_interfaces.CacheInterface" title="rmellipse.workflows.local_interfaces.CacheInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CacheInterface</span></code></a></p></td>
+<td><p>Interface for a local cache.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.workflows.local_interfaces.EnvInterface" title="rmellipse.workflows.local_interfaces.EnvInterface"><code class="xref py py-obj docutils literal notranslate"><span class="pre">EnvInterface</span></code></a></p></td>
+<td><p>Interface with an Enviornment.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.CacheInterface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.workflows.local_interfaces.</span></span><span class="sig-name descname"><span class="pre">CacheInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cache_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.CacheInterface" title="Link to this definition">¶</a></dt>
+<dd><p>Interface for a local cache.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.CacheInterface.cache_dir">
+<span class="sig-name descname"><span class="pre">cache_dir</span></span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.CacheInterface.cache_dir" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.CacheInterface.rm_cached_release">
+<span class="sig-name descname"><span class="pre">rm_cached_release</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.CacheInterface.rm_cached_release" title="Link to this definition">¶</a></dt>
+<dd><p>Remove a cached release.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>host</strong><span class="classifier">str</span></dt><dd><p>Name of host</p>
+</dd>
+<dt><strong>workspace</strong><span class="classifier">str</span></dt><dd><p>Name of workspace.</p>
+</dd>
+<dt><strong>release_title</strong><span class="classifier">str</span></dt><dd><p>Name of release title.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.CacheInterface.get_cached_release_dir">
+<span class="sig-name descname"><span class="pre">get_cached_release_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.CacheInterface.get_cached_release_dir" title="Link to this definition">¶</a></dt>
+<dd><p>Get a directory in the local cache for a given release.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>cache_dir</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+<dt><strong>host</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+<dt><strong>workspace</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+<dt><strong>release</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Path</dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.CacheInterface.in_cache">
+<span class="sig-name descname"><span class="pre">in_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">release_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.CacheInterface.in_cache" title="Link to this definition">¶</a></dt>
+<dd><p>Check if a release exists in the cache.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>host</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+<dt><strong>workspace</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+<dt><strong>release_title</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>bool</dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.workflows.local_interfaces.</span></span><span class="sig-name descname"><span class="pre">EnvInterface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">envdir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface" title="Link to this definition">¶</a></dt>
+<dd><p>Interface with an Enviornment.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.envdir">
+<span class="sig-name descname"><span class="pre">envdir</span></span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.envdir" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.packages_dir">
+<span class="sig-name descname"><span class="pre">packages_dir</span></span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.packages_dir" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.rm_broken_packages">
+<span class="sig-name descname"><span class="pre">rm_broken_packages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.rm_broken_packages" title="Link to this definition">¶</a></dt>
+<dd><p>Remove any broken packages in the environment</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.installed_in_packages">
+<span class="sig-name descname"><span class="pre">installed_in_packages</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.installed_in_packages" title="Link to this definition">¶</a></dt>
+<dd><p>Get a list of installed packages</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>list[str]</dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.installed_in_registry">
+<span class="sig-name descname"><span class="pre">installed_in_registry</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.installed_in_registry" title="Link to this definition">¶</a></dt>
+<dd><p>Get a list of releases installed in the registry</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt>list[str]</dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.release_reg_dir">
+<span class="sig-name descname"><span class="pre">release_reg_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.release_reg_dir" title="Link to this definition">¶</a></dt>
+<dd><p>Dataset registry directory for a release.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>release_title</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>_type_</dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.release_package_dir">
+<span class="sig-name descname"><span class="pre">release_package_dir</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.release_package_dir" title="Link to this definition">¶</a></dt>
+<dd><p>Package directory for a release.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>release_title</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>_type_</dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.in_env">
+<span class="sig-name descname"><span class="pre">in_env</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.in_env" title="Link to this definition">¶</a></dt>
+<dd><p>Determine if a release is installed in the environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>release_title</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>_type_</dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.rm_release">
+<span class="sig-name descname"><span class="pre">rm_release</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.rm_release" title="Link to this definition">¶</a></dt>
+<dd><p>Remove a release from the environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>release_title</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.with_suffixes_of">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">with_suffixes_of</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_suffixes_of</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">pathlib.Path</span></span></span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.with_suffixes_of" title="Link to this definition">¶</a></dt>
+<dd><p>Replace name with the suffixes of use_suffixes_of.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>name</strong><span class="classifier">str | Path</span></dt><dd><p>string or path</p>
+</dd>
+<dt><strong>use_suffixes_of</strong><span class="classifier">str | Path</span></dt><dd><p>String or path.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>Path</dt><dd><p>Updated path</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.install_files_namespace">
+<span class="sig-name descname"><span class="pre">install_files_namespace</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolve_relative_to</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.install_files_namespace" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.install_release">
+<span class="sig-name descname"><span class="pre">install_release</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">workspace</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rmellipse.workflows.local_interfaces.CacheInterface" title="rmellipse.workflows.local_interfaces.CacheInterface"><span class="pre">CacheInterface</span></a></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.install_release" title="Link to this definition">¶</a></dt>
+<dd><p>Install a release into the environment.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>release_record</strong><span class="classifier">dict</span></dt><dd><p>_description_</p>
+</dd>
+<dt><strong>workspace</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+<dt><strong>host</strong><span class="classifier">str</span></dt><dd><p>_description_</p>
+</dd>
+<dt><strong>cache</strong><span class="classifier">CacheInterface</span></dt><dd><p>_description_</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.workflows.local_interfaces.EnvInterface.make_registry">
+<span class="sig-name descname"><span class="pre">make_registry</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">release_record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cache_release_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_versioned_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.workflows.local_interfaces.EnvInterface.make_registry" title="Link to this definition">¶</a></dt>
+<dd><p>Make a registry that symbolically links to datasets in the cache.</p>
+<p>Only symbolic links to files are made, directory structures are copied.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>release_record</strong><span class="classifier">dict</span></dt><dd><p>The record of the of the package being linked too.</p>
+</dd>
+<dt><strong>cache</strong><span class="classifier">Path</span></dt><dd><p>The cache of the package being linked too. It is assumed
+to already be downloaded.</p>
+</dd>
+<dt><strong>env</strong><span class="classifier">Path</span></dt><dd><p>The data environment directory.</p>
+</dd>
+<dt><strong>use_versioned_name: bool</strong></dt><dd><p>If True, used the versioned name when making the registry folder.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../../get_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../auto_examples/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../cli/index.html">Command Line Interface</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html">rmellipse</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../arrschema/index.html">rmellipse.arrschema</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../propagators/index.html">rmellipse.propagators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../uobjects/index.html">rmellipse.uobjects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../utils/index.html">rmellipse.utils</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">rmellipse.workflows</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../../../_sources/autoapi/rmellipse/workflows/local_interfaces/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="index.html">development</a></li>
+  <li><a href="../../../../../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="Related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../workflowtree/index.html" title="rmellipse.workflows.workflowtree"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../extras/index.html" title="rmellipse.workflows.extras"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">Rocky Mountain Ellipse 0.4.0b5.dev2+gcf560783e documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >API Reference</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../index.html" >rmellipse</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../index.html" >rmellipse.workflows</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">rmellipse.workflows.local_interfaces</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, National Institute of Standards and Technology.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.4.0.
+    </div>
+  </body>
+</html>

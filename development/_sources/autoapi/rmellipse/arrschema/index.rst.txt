@@ -1,0 +1,752 @@
+rmellipse.arrschema
+===================
+
+.. py:module:: rmellipse.arrschema
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/rmellipse/arrschema/examples/index
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   rmellipse.arrschema.ValidationError
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rmellipse.arrschema.ArrSchemaRegistry
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rmellipse.arrschema.arrschema
+   rmellipse.arrschema.load
+   rmellipse.arrschema.validate
+   rmellipse.arrschema.save
+   rmellipse.arrschema.convert
+   rmellipse.arrschema.annotate
+   rmellipse.arrschema.zeros
+   rmellipse.arrschema.as_schema
+
+
+Package Contents
+----------------
+
+.. py:class:: ArrSchemaRegistry
+
+   Bases: :py:obj:`dict`
+
+
+   Dict subclass that stores schema information.
+
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+   .. py:property:: schema
+
+
+   .. py:property:: loaders
+
+
+   .. py:property:: savers
+
+
+   .. py:method:: show_schema()
+
+
+   .. py:method:: show_loaders()
+
+
+   .. py:method:: find_schema(schema_name: str = None, schema_uid: str = None) -> dict
+
+      
+      Find a schema.
+
+      Name of uid must be provided. Will throw an error if only
+      the name is provided and multiple schema in the registry
+      share a name.
+
+      :Parameters:
+
+          **name** : str
+              Name of the schema to look for.
+
+          **uid: str**
+              uid of the schema to find.
+
+      :Returns:
+
+          dict
+              Requested schema
+
+
+
+
+      :Raises:
+
+          ValueError
+              If multiple schemas in the regsitry have the same name.
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: import_saver(schema_name=None, schema_uid: str = None, extension: str = None, saver_type: str = None, verbose: bool = False)
+
+      
+      Get a loader functiona associated
+      with a schema.
+
+
+      :Parameters:
+
+          **schema_name** : str, optional
+              Name of the schema being saved, by default None
+
+          **schema_uid** : str, optional
+              UID of the schema being saved, by default None
+
+          **extension** : str, optional
+              File extension, by default None
+
+          **saver_type** : str, optional
+              Type of saver to use, by default None
+
+          **verbose** : bool, optional
+              Print info, by default False
+
+      :Returns:
+
+          callable
+              Saver function imported from the registry
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: import_loader(schema_name=None, schema_uid: str = None, extension: str = None, loader_type: str = None, verbose: bool = False)
+
+      
+      Get a loader functiona associated
+      with a schema.
+
+
+      :Parameters:
+
+          **schema_name** : str, optional
+              _description_, by default None
+
+          **schema_uid** : str, optional
+              _description_, by default None
+
+          **extension** : str, optional
+              _description_, by default None
+
+          **loader_type** : str, optional
+              _description_, by default None
+
+          **verbose** : bool, optional
+              _description_, by default False
+
+      :Returns:
+
+          _type_
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_converter(funspec: str, input_schema: dict, output_schema: dict)
+
+      
+      Add a converting functiom between two schema.
+
+      Converting functions take in exactly one argument
+      and output exactly 1
+
+      :Parameters:
+
+          **funspec** : str
+              Path spec of function in dot-notation
+              (module.submodule:function)
+
+          **input_schema** : dict, optional
+              name of schema (or provide the uid) for converter
+
+          **output_schema** : dict, optional
+              output_schema for converter
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: import_converter(input_schema_name: str = None, input_schema_uid: str = None, output_schema_name: str = None, output_schema_uid: str = None) -> callable
+
+      
+      Add a converting functiom between two schema.
+
+      Converting functions take in exactly one argument
+      and output exactly 1
+
+      :Parameters:
+
+          **funspec** : str
+              Path spec of function in dot-notation
+              (module.submodule:function)
+
+          **input_schema_name** : str, optional
+              name of schema (or provide the uid), by default None
+
+          **input_schema_uid** : str, optional
+              uid of input schema (or provide the name), by default None
+
+          **output_schema_name** : str, optional
+              _description_, by default None
+
+          **output_schema_uid** : str, optional
+              _description_, by default None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_saver(funspec: str, extension: str, saver_type: str, schema: dict)
+
+      
+      Add a saving function to the registry.
+
+
+      :Parameters:
+
+          **funspec** : str
+              _description_
+
+          **extension** : list[str], optional
+              _description_, by default None
+
+          **saver_type** : str, optional
+              Specify the type of saver (e.g. csv like, HDF5, group_saveable).
+              If notprovided, '' is used.
+
+          **schema** : dict, optional
+              Schema, by default None
+
+
+
+
+
+      :Raises:
+
+          ValueError
+              _description_
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_loader(funspec: str, extension: str, loader_type: str, schema: dict | Mapping)
+
+      
+
+
+
+      :Parameters:
+
+          **funspec** : str
+              _description_
+
+          **extension** : list[str], optional
+              _description_, by default None
+
+          **loader_type** : str, optional
+              Specify the type of loader (e.g. csv like, HDF5, group_saveable).
+              If notprovided, '' is used.
+
+          **schema** : dict | Mapping
+              Schema to use
+
+
+
+
+
+      :Raises:
+
+          ValueError
+              _description_
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: add_schema(schema: dict | Mapping | pathlib.Path)
+
+
+.. py:exception:: ValidationError(*args, **kwargs)
+
+   Bases: :py:obj:`Exception`
+
+
+   Common base class for all non-exit exceptions.
+
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+
+.. py:function:: arrschema(name: str, shape: tuple[str | int], dims: tuple[str], dtype: str, units: Mapping | str = None, coords: Mapping = None, uid: str = None, attrs_schema: Mapping = None)
+
+   
+   Generate a dictionary that describes an array structure.
+
+
+   :Parameters:
+
+       **name** : str
+           Name of the array structure.
+
+       **shape** : tuple[str  |  int]
+           Shape of structure. Ellipses indicate arbitrary dimensions,
+           letters indicate a required dimension of unknown length, and
+           integers indicate a required dimension of a required length.
+
+       **dims** : tuple[str]
+           Names assigned to dimensions specified by shape. Any required
+           dimension must be names, and arbitrary dimensions must also be
+           ellipses.
+
+       **dtype** : str
+           Type string, corresponds to numpy's dtype (e.g. f8, c8, u8, etc)
+
+       **units** : Mapping, optional
+           Mapping of units to the array structure. If the whole structure
+           has a single unit, then a string can be passed. Optionally, a
+           single required dimension can be mapped to a 1-d array of units.
+           For example, if a dimension called "col" corresponds to columns in spread-sheet
+           like data and each column has its own unit, you could specify that
+           as {"col":["unit 1", "unit 2"]}.
+
+       **coords** : Mapping, optional
+           Mapping of required dimensions to a coordinate space. Must provide
+           at least a dtype and a single unit as a string. Optionally,
+           if the coordinates are fixed (i.e. the row and column indices of
+           stacks of 2-d matrices) then you may specify those coordinates
+           here.
+
+       **uid** : str, optional
+           The uid of a schema can be provided here, it is created using
+           uuid4 if it is not provided, by default None.
+
+       **attrs_schema** : mapping, optional
+           JSON Schema for validating metadata attributes.
+
+   :Returns:
+
+       dict
+           Dictionary conforming to an arrschema specification.
+
+
+
+
+   :Raises:
+
+       Exception
+           If some logical inconsistency or is found, or the provided
+           schema doesn't follow the specification for an array schema.
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: load(path: pathlib.Path | str, *load_args, registry: ArrSchemaRegistry, schema: dict, loader_type: str = None, validate_schema: bool = True, verbose=False, **load_kwargs) -> object
+
+   
+   Save a dataset using an array schema registry.
+
+
+   :Parameters:
+
+       **path** : Path | str
+           _description_
+
+       **registry** : ArrSchemaRegistry
+           _description_
+
+       **schema** : str, optional
+           _description_, by default None
+
+       **loader_type** : str, optional
+           _description_, by default None
+
+       **validate_schema** : bool, optional
+           _description_, by default True
+
+       **verbose** : bool, optional
+           _description_, by default False
+
+   :Returns:
+
+       object
+           _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: validate(arr: AnnotatedArrayLike, *, schema: Mapping, attach_schema: bool = True)
+
+   
+   Check if a DataArray conforms to a particular schema.
+
+
+   :Parameters:
+
+       **arr** : xarray.DataArray
+           DataArray object to validate
+
+       **schema** : Mapping, optional
+           A schema dictionary to validate against, by default None
+
+       **attach_schema** : bool, optional
+           If True, the schema is dumped into a string and
+           attatched to the attrs of the input data array.
+           The default is True.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: save(path: str | pathlib.Path, arr: AnnotatedArrayLike, *saver_args, registry: ArrSchemaRegistry, schema: dict = None, saver_type: str = None, validate_schema: bool = True, verbose=False, **saver_kwargs) -> object
+
+   
+   Load a dataset using arrschema registry.
+
+
+   :Parameters:
+
+       **path** : str | Path
+           _description_
+
+       **arr** : object
+           _description_
+
+       **registry** : ArrSchemaRegistry
+           _description_
+
+       **schema_name** : str, optional
+           _description_, by default None
+
+       **schema_uid** : str, optional
+           _description_, by default None
+
+       **saver_type** : str, optional
+           _description_, by default None
+
+       **validate_schema** : bool, optional
+           _description_, by default True
+
+       **verbose** : bool, optional
+           _description_, by default False
+
+   :Returns:
+
+       object
+           _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: convert(input: AnnotatedArrayLike, registry: ArrSchemaRegistry, output_schema: dict, input_schema: dict = None) -> Any
+
+   
+   Convert an input data to a new schema.
+
+   Convert functions take in a single input and have
+   a single output (SISO).
+
+   :Parameters:
+
+       **input** : Any
+           The input array with a known schema.
+
+       **registry** : ArrSchemaRegistry
+           The registry containing the converters.
+
+       **output_schema_name** : str, optional
+           Schema name of the output (or the uid). by default None
+
+       **output_schema_uid** : str, optional
+           Schema uid of the output (or the name), by default None
+
+       **input_schema_name** : str, optional
+           Name of the input schema (if it can't be inferred), by default None
+
+       **input_schema_uid** : str, optional
+           Schema uid of the input (if it can't be inferred), by default None
+
+   :Returns:
+
+       Any
+           Converted input to the output schema.
+
+
+
+
+   :Raises:
+
+       AttributeError
+           If the input schema can't be inferred.
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: annotate(arr: AnnotatedArrayLike)
+
+   
+   Generate an array annotation and attatch it as metadata.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: zeros(schema: dict | Mapping, like: xarray.DataArray = None, drop_mismatched_dims: bool = True, attrs: dict = None, **with_coords)
+
+.. py:function:: as_schema(array: xarray.DataArray, registry: ArrSchemaRegistry = None, schema: dict | Mapping = None, schema_uid: str = None, schema_name: str = None)
+
+   
+   Cast an array into a schema.
+
+   Casts the correct data_type of the data
+   as well as the coordinates. If coordinates
+   are fixed, applies those as the values.
+
+   :Parameters:
+
+       **array** : xr.DataArray
+           _description_
+
+       **registry** : ArrSchemaRegistry, optional
+           _description_, by default None
+
+       **schema** : dict | Mapping, optional
+           _description_, by default None
+
+       **schema_uid** : str, optional
+           _description_, by default None
+
+       **schema_name** : str, optional
+           _description_, by default None
+
+   :Returns:
+
+       _type_
+           _description_
+
+
+
+
+   :Raises:
+
+       ValueError
+           _description_
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
