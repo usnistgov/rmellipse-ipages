@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:00.180** total execution time for 1 file **from auto_examples/grp2_ArrSchema**:
+**00:00.170** total execution time for 1 file **from auto_examples/grp2_ArrSchema**:
 
 .. container::
 
@@ -33,5 +33,5 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_grp2_ArrSchema_plot_e00_making_schema.py` (``plot_e00_making_schema.py``)
-     - 00:00.180
+     - 00:00.170
      - 0.0

@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:02.023** total execution time for 6 files **from auto_examples/RME_gettingstarted**:
+**00:01.966** total execution time for 6 files **from auto_examples/RME_gettingstarted**:
 
 .. container::
 
@@ -33,20 +33,20 @@ Computation times
      - Time
      - Mem (MB)
    * - :ref:`sphx_glr_auto_examples_RME_gettingstarted_plot_e00_creating_RMEMeas_objects.py` (``plot_e00_creating_RMEMeas_objects.py``)
-     - 00:00.919
+     - 00:00.893
      - 0.0
    * - :ref:`sphx_glr_auto_examples_RME_gettingstarted_plot_e04_common_grid_handling.py` (``plot_e04_common_grid_handling.py``)
-     - 00:00.424
+     - 00:00.410
      - 0.0
    * - :ref:`sphx_glr_auto_examples_RME_gettingstarted_plot_e03_reading_writing.py` (``plot_e03_reading_writing.py``)
-     - 00:00.250
+     - 00:00.244
      - 0.0
    * - :ref:`sphx_glr_auto_examples_RME_gettingstarted_plot_e05_vectorizing.py` (``plot_e05_vectorizing.py``)
-     - 00:00.234
+     - 00:00.224
      - 0.0
    * - :ref:`sphx_glr_auto_examples_RME_gettingstarted_plot_e01_basic_uncertainty_analysis.py` (``plot_e01_basic_uncertainty_analysis.py``)
-     - 00:00.139
+     - 00:00.141
      - 0.0
    * - :ref:`sphx_glr_auto_examples_RME_gettingstarted_plot_e06_using_other_datatypes.py` (``plot_e06_using_other_datatypes.py``)
-     - 00:00.056
+     - 00:00.055
      - 0.0

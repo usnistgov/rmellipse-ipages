@@ -273,11 +273,11 @@ and grabbing just a view into the underlying nominal DataArray.
 
  .. code-block:: none
 
-    /tmp/tmpxg8st2jc/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:175: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+    /tmp/tmphih3hfx0/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:175: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
       def_short = RMEMeas.from_h5(f['Short']).nom
-    /tmp/tmpxg8st2jc/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:176: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+    /tmp/tmphih3hfx0/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:176: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
       def_open = RMEMeas.from_h5(f['Open']).nom
-    /tmp/tmpxg8st2jc/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:177: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+    /tmp/tmphih3hfx0/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:177: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
       def_load = RMEMeas.from_h5(f['Load']).nom
     <xarray.DataArray (Frequency (GHz): 341, errterm: 3)> Size: 16kB
     array([[-0.01893933-0.03268189j, -0.05556275+0.11455476j,
@@ -454,11 +454,11 @@ Lets also grab our definitions with the full uncertainty information
 
  .. code-block:: none
 
-    /tmp/tmpxg8st2jc/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:264: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+    /tmp/tmphih3hfx0/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:264: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
       def_short = RMEMeas.from_h5(f['Short'])
-    /tmp/tmpxg8st2jc/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:265: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+    /tmp/tmphih3hfx0/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:265: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
       def_open = RMEMeas.from_h5(f['Open'])
-    /tmp/tmpxg8st2jc/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:266: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+    /tmp/tmphih3hfx0/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp0_PyScriptExamples/plot_e00_SOL.py:266: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
       def_load = RMEMeas.from_h5(f['Load'])
 
 
@@ -585,7 +585,7 @@ Nominal Values
  .. code-block:: none
 
 
-    <matplotlib.legend.Legend object at 0x7f9d49872e70>
+    <matplotlib.legend.Legend object at 0x7fda2704da00>
 
 
 
@@ -701,7 +701,7 @@ kit.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 3.173 seconds)
+   **Total running time of the script:** (0 minutes 3.175 seconds)
 
 
 .. _sphx_glr_download_auto_examples_grp0_PyScriptExamples_plot_e00_SOL.py:
