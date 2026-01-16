@@ -6,7 +6,7 @@
 
 Computation times
 =================
-**00:10.783** total execution time for 8 files **from all galleries**:
+**00:06.505** total execution time for 8 files **from all galleries**:
 
 .. container::
 
@@ -32,27 +32,27 @@ Computation times
    * - Example
      - Time
      - Mem (MB)
-   * - :ref:`sphx_glr_auto_examples_grp0_PyScriptExamples_plot_e00_SOL.py` (``..\examples\grp0_PyScriptExamples\plot_e00_SOL.py``)
-     - 00:05.121
+   * - :ref:`sphx_glr_auto_examples_grp0_PyScriptExamples_plot_e00_SOL.py` (``../examples/grp0_PyScriptExamples/plot_e00_SOL.py``)
+     - 00:03.173
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e00_creating_RMEMeas_objects.py` (``..\examples\grp1_RME_gettingstarted\plot_e00_creating_RMEMeas_objects.py``)
-     - 00:03.383
+   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e00_creating_RMEMeas_objects.py` (``../examples/grp1_RME_gettingstarted/plot_e00_creating_RMEMeas_objects.py``)
+     - 00:02.041
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e04_common_grid_handling.py` (``..\examples\grp1_RME_gettingstarted\plot_e04_common_grid_handling.py``)
-     - 00:00.634
+   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e04_common_grid_handling.py` (``../examples/grp1_RME_gettingstarted/plot_e04_common_grid_handling.py``)
+     - 00:00.423
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e03_reading_writing.py` (``..\examples\grp1_RME_gettingstarted\plot_e03_reading_writing.py``)
-     - 00:00.436
+   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e03_reading_writing.py` (``../examples/grp1_RME_gettingstarted/plot_e03_reading_writing.py``)
+     - 00:00.258
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e05_vectorizing.py` (``..\examples\grp1_RME_gettingstarted\plot_e05_vectorizing.py``)
-     - 00:00.385
+   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e05_vectorizing.py` (``../examples/grp1_RME_gettingstarted/plot_e05_vectorizing.py``)
+     - 00:00.230
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_grp2_ArrSchema_plot_e00_making_schema.py` (``..\examples\grp2_ArrSchema\plot_e00_making_schema.py``)
-     - 00:00.320
+   * - :ref:`sphx_glr_auto_examples_grp2_ArrSchema_plot_e00_making_schema.py` (``../examples/grp2_ArrSchema/plot_e00_making_schema.py``)
+     - 00:00.180
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e01_basic_uncertainty_analysis.py` (``..\examples\grp1_RME_gettingstarted\plot_e01_basic_uncertainty_analysis.py``)
-     - 00:00.287
+   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e01_basic_uncertainty_analysis.py` (``../examples/grp1_RME_gettingstarted/plot_e01_basic_uncertainty_analysis.py``)
+     - 00:00.141
      - 0.0
-   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e06_using_other_datatypes.py` (``..\examples\grp1_RME_gettingstarted\plot_e06_using_other_datatypes.py``)
-     - 00:00.217
+   * - :ref:`sphx_glr_auto_examples_grp1_RME_gettingstarted_plot_e06_using_other_datatypes.py` (``../examples/grp1_RME_gettingstarted/plot_e06_using_other_datatypes.py``)
+     - 00:00.060
      - 0.0
