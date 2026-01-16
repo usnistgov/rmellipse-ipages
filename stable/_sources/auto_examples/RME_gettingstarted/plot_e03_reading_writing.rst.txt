@@ -65,7 +65,7 @@ First lets create an object that we want to save.
 
  .. code-block:: none
 
-    /tmp/tmphih3hfx0/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:26: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
+    /tmp/tmp_rm21iog/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:26: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
       meas.add_umech(
 
 
@@ -111,7 +111,7 @@ your RMEMeas object.
 
  .. code-block:: none
 
-    /tmp/tmphih3hfx0/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:60: DeprecationWarning: to_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.save_object instead.
+    /tmp/tmp_rm21iog/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:60: DeprecationWarning: to_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.save_object instead.
       meas.to_h5(f, override=True)
     <HDF5 group "/meas" (4 members)>
 
@@ -144,7 +144,7 @@ then pass in the group with it's name to
 
  .. code-block:: none
 
-    /tmp/tmphih3hfx0/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:71: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+    /tmp/tmp_rm21iog/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:71: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
       meas = RMEMeas.from_h5(f['meas'])
     meas with nominal: 
     <xarray.DataArray (d1: 10, d2: 2)> Size: 160B
@@ -258,7 +258,7 @@ is not specific enough.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.244 seconds)
+   **Total running time of the script:** (0 minutes 0.249 seconds)
 
 
 .. _sphx_glr_download_auto_examples_RME_gettingstarted_plot_e03_reading_writing.py:

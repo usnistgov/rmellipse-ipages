@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Reading/Writing RMEMeas Objects &#8212; Rocky Mountain Ellipse 0.4.0b6.dev16+gfc94c0050.d20260116 documentation</title>
+    <title>Reading/Writing RMEMeas Objects &#8212; Rocky Mountain Ellipse 0.4.0b6.dev2+ga715faf03.d20260116 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../../_static/nature.css?v=0f882399" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../_static/documentation_options.js?v=a23b5694"></script>
+    <script src="../../_static/documentation_options.js?v=bf9c561f"></script>
     <script src="../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -76,7 +76,7 @@ $(document).ready(function(){
         <li class="right" >
           <a href="plot_e01_basic_uncertainty_analysis.html" title="Basics of RME Propagation"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Rocky Mountain Ellipse 0.4.0b6.dev16+gfc94c0050.d20260116 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Rocky Mountain Ellipse 0.4.0b6.dev2+ga715faf03.d20260116 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >rmellipse Gallery</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="index.html" accesskey="U">Fundementals</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Reading/Writing RMEMeas Objects</a></li> 
@@ -125,7 +125,7 @@ to download the full example code.</p>
     <span class="n">meas</span><span class="o">.</span><span class="n">add_mc_sample</span><span class="p">(</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmphih3hfx0/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:26: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmp_rm21iog/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:26: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
   meas.add_umech(
 </pre></div>
 </div>
@@ -153,7 +153,7 @@ your RMEMeas object.</p>
     <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">meas</span><span class="o">.</span><span class="n">name</span><span class="p">])</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmphih3hfx0/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:60: DeprecationWarning: to_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.save_object instead.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmp_rm21iog/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:60: DeprecationWarning: to_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.save_object instead.
   meas.to_h5(f, override=True)
 &lt;HDF5 group &quot;/meas&quot; (4 members)&gt;
 </pre></div>
@@ -169,7 +169,7 @@ then pass in the group with it’s name to
     <span class="nb">print</span><span class="p">(</span><span class="n">meas</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmphih3hfx0/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:71: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+<div class="sphx-glr-script-out highlight-none notranslate"><div class="highlight"><pre><span></span>/tmp/tmp_rm21iog/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:71: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
   meas = RMEMeas.from_h5(f[&#39;meas&#39;])
 meas with nominal:
 &lt;xarray.DataArray (d1: 10, d2: 2)&gt; Size: 160B
@@ -251,7 +251,7 @@ is not specific enough.</p>
 <span class="k">assert</span> <span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">m1</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </pre></div>
 </div>
-<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.244 seconds)</p>
+<p class="sphx-glr-timing"><strong>Total running time of the script:</strong> (0 minutes 0.249 seconds)</p>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-rme-gettingstarted-plot-e03-reading-writing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/94d16bda2d22fcd3c2da282036305c6a/plot_e03_reading_writing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_e03_reading_writing.ipynb</span></code></a></p>
@@ -333,7 +333,7 @@ is not specific enough.</p>
         <li class="right" >
           <a href="plot_e01_basic_uncertainty_analysis.html" title="Basics of RME Propagation"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../../index.html">Rocky Mountain Ellipse 0.4.0b6.dev16+gfc94c0050.d20260116 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-0"><a href="../../index.html">Rocky Mountain Ellipse 0.4.0b6.dev2+ga715faf03.d20260116 documentation</a> &#187;</li>
           <li class="nav-item nav-item-1"><a href="../index.html" >rmellipse Gallery</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="index.html" >Fundementals</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Reading/Writing RMEMeas Objects</a></li> 

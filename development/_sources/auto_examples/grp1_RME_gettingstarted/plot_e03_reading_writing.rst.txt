@@ -67,7 +67,7 @@ First lets create an object that we want to save.
 
  .. code-block:: none
 
-    /tmp/tmphih3hfx0/c233693e00158a0468782f5d3f8b0c723b940f3f/docs/examples/grp1_RME_gettingstarted/plot_e03_reading_writing.py:28: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
+    /tmp/tmp_rm21iog/a715faf03403c2e8d0e14d7bb56f9028c3ffa3f1/docs/examples/grp1_RME_gettingstarted/plot_e03_reading_writing.py:28: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
       meas.add_umech(
 
 
@@ -259,7 +259,7 @@ is not specific enough.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.251 seconds)
+   **Total running time of the script:** (0 minutes 0.256 seconds)
 
 
 .. _sphx_glr_download_auto_examples_grp1_RME_gettingstarted_plot_e03_reading_writing.py:

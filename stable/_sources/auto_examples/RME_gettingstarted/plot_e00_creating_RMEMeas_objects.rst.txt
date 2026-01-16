@@ -120,7 +120,7 @@ from similar sources.
 
  .. code-block:: none
 
-    /tmp/tmphih3hfx0/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e00_creating_RMEMeas_objects.py:59: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
+    /tmp/tmp_rm21iog/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/RME_gettingstarted/plot_e00_creating_RMEMeas_objects.py:59: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
       meas.add_umech(
     <xarray.DataArray (d1: 2, d2: 3)> Size: 48B
     array([[0.01, 0.01, 0.01],
@@ -215,8 +215,8 @@ with the same dimensions and coordinates as the nominal.
  .. code-block:: none
 
     <xarray.DataArray (d1: 2, d2: 3)> Size: 48B
-    array([[0.0314794, 0.0314794, 0.0314794],
-           [0.0314794, 0.0314794, 0.0314794]])
+    array([[0.03301625, 0.03301625, 0.03301625],
+           [0.03301625, 0.03301625, 0.03301625]])
     Coordinates:
       * d1       (d1) float64 16B 0.1 0.2
       * d2       (d2) <U1 12B 'a' 'b' 'c'
@@ -416,8 +416,8 @@ samples.
  .. code-block:: none
 
     <xarray.DataArray (d1: 2, d2: 3)> Size: 48B
-    array([[0.99541176, 1.99541176, 2.99541176],
-           [3.99541176, 4.99541176, 5.99541176]])
+    array([[1.00918326, 2.00918326, 3.00918326],
+           [4.00918326, 5.00918326, 6.00918326]])
     Coordinates:
       * d1        (d1) float64 16B 0.1 0.2
       * d2        (d2) <U1 12B 'a' 'b' 'c'
@@ -548,7 +548,7 @@ RMEMeas supports interpolation by wrapping xarray's built in `interp` function.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.893 seconds)
+   **Total running time of the script:** (0 minutes 0.919 seconds)
 
 
 .. _sphx_glr_download_auto_examples_RME_gettingstarted_plot_e00_creating_RMEMeas_objects.py:

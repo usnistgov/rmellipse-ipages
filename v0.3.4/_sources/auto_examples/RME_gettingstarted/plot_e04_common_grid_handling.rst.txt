@@ -80,9 +80,9 @@ coordinates on dimension 'd1'.
 
  .. code-block:: none
 
-    /tmp/tmphih3hfx0/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e04_common_grid_handling.py:35: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
+    /tmp/tmp_rm21iog/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e04_common_grid_handling.py:35: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
       meas.add_umech(
-    /tmp/tmphih3hfx0/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e04_common_grid_handling.py:35: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
+    /tmp/tmp_rm21iog/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e04_common_grid_handling.py:35: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
       meas.add_umech(
 
 
@@ -142,13 +142,13 @@ propagator calls the function on the`RMEMeas.cov`attribute then on the`RMEMeas.m
     ----------------
     [0.  0.5 1.5 2.5] [0.  0.5 1.5 2.5]
     [0.  0.5 1.5 2.5] [0.  0.5 1.5 2.5]
-    grid handling runtime:0.018573760986328125 sec
+    grid handling runtime:0.019184112548828125 sec
         linear mechanisms:2
-           linear runtime:0.0038902759552001953 sec
+           linear runtime:0.003914356231689453 sec
         montecarlo trials:100
-               mc runtime:0.002108335494995117 sec
-     recategorize runtime:0.004575967788696289 sec
-           repack runtime:0.005013942718505859 sec
+               mc runtime:0.002212047576904297 sec
+     recategorize runtime:0.004676103591918945 sec
+           repack runtime:0.005139350891113281 sec
 
 
 
@@ -156,7 +156,7 @@ propagator calls the function on the`RMEMeas.cov`attribute then on the`RMEMeas.m
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.413 seconds)
+   **Total running time of the script:** (0 minutes 0.419 seconds)
 
 
 .. _sphx_glr_download_auto_examples_RME_gettingstarted_plot_e04_common_grid_handling.py:
