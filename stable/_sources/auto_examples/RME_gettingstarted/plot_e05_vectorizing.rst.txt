@@ -113,7 +113,7 @@ also have that dimension and coordinate.
  .. code-block:: none
 
     ['nominal'] ['nominal']
-    2b095afa-2712-42c2-9568-8ea7b943b444 2b095afa-2712-42c2-9568-8ea7b943b444
+    4709af11-c639-4b66-a759-7ab96d167be3 4709af11-c639-4b66-a759-7ab96d167be3
 
 
 
@@ -169,7 +169,7 @@ magnitude increase in run time for the Monte Carlo propagation.
 
 .. rst-class:: sphx-glr-timing
 
-   **Total running time of the script:** (0 minutes 0.228 seconds)
+   **Total running time of the script:** (0 minutes 0.268 seconds)
 
 
 .. _sphx_glr_download_auto_examples_RME_gettingstarted_plot_e05_vectorizing.py:

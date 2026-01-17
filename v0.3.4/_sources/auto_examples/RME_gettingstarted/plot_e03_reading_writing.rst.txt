@@ -65,7 +65,7 @@ First lets create an object that we want to save.
 
  .. code-block:: none
 
-    /tmp/tmp_rm21iog/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:26: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
+    /tmp/tmpze6xvdgm/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:26: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
       meas.add_umech(
 
 
@@ -111,7 +111,7 @@ your RMEMeas object.
 
  .. code-block:: none
 
-    /tmp/tmp_rm21iog/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:60: DeprecationWarning: to_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.save_object instead.
+    /tmp/tmpze6xvdgm/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:60: DeprecationWarning: to_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.save_object instead.
       meas.to_h5(f, override=True)
     <HDF5 group "/meas" (4 members)>
 
@@ -144,7 +144,7 @@ then pass in the group with it's name to
 
  .. code-block:: none
 
-    /tmp/tmp_rm21iog/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:71: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
+    /tmp/tmpze6xvdgm/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:71: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
       meas = RMEMeas.from_h5(f['meas'])
     meas with nominal: 
     <xarray.DataArray (d1: 10, d2: 2)> Size: 160B
