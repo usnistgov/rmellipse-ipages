@@ -58,19 +58,6 @@ First lets create an object that we want to save.
         meas.add_mc_sample(meas.nom + np.random.rand(*meas.nom.shape) * 0.01)
 
 
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /tmp/tmpze6xvdgm/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:26: DeprecationWarning: add_uid is deprecated and will be removed in 0.5.0, all umech_ids will be assigned as a uid moving. This is included to avoid breaking existing code.
-      meas.add_umech(
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 38-58
 
 HDF5 Saving
@@ -104,20 +91,6 @@ your RMEMeas object.
         print(f[meas.name])
 
 
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /tmp/tmpze6xvdgm/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:60: DeprecationWarning: to_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.save_object instead.
-      meas.to_h5(f, override=True)
-    <HDF5 group "/meas" (4 members)>
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 64-70
 
 HDF5 Reading
@@ -134,39 +107,6 @@ then pass in the group with it's name to
     with h5py.File('meas.hdf5', 'r') as f:
         meas = RMEMeas.from_h5(f['meas'])
         print(meas)
-
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /tmp/tmpze6xvdgm/d7af01cdebe95d15ae90b93035c551076e223283/docs/examples/RME_gettingstarted/plot_e03_reading_writing.py:71: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
-      meas = RMEMeas.from_h5(f['meas'])
-    meas with nominal: 
-    <xarray.DataArray (d1: 10, d2: 2)> Size: 160B
-    array([[0., 0.],
-           [0., 0.],
-           [0., 0.],
-           [0., 0.],
-           [0., 0.],
-           [0., 0.],
-           [0., 0.],
-           [0., 0.],
-           [0., 0.],
-           [0., 0.]])
-    Coordinates:
-      * d1       (d1) int64 80B 0 1 2 3 4 5 6 7 8 9
-      * d2       (d2) int64 16B 0 1
-    Attributes:
-        __class__.__module__:  xarray.core.dataarray
-        __class__.__name__:    DataArray
-        is_big_object:         True
-        save_type:             DATAARRAY_SAVEABLE
-
 
 
 
@@ -215,12 +155,6 @@ First we turn our object into the s1p_ri format using the
         header_extension='.meas'
     )
 
-
-
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 114-129
 
 Once we have our measurement in a format with read/write functions defined
@@ -250,17 +184,6 @@ is not specific enough.
     )
     assert (m2.cov.values == m1.cov.values).all()
 
-
-
-
-
-
-
-.. rst-class:: sphx-glr-timing
-
-   **Total running time of the script:** (0 minutes 0.248 seconds)
-
-
 .. _sphx_glr_download_auto_examples_RME_gettingstarted_plot_e03_reading_writing.py:
 
 .. only:: html
@@ -278,6 +201,9 @@ is not specific enough.
     .. container:: sphx-glr-download sphx-glr-download-zip
 
       :download:`Download zipped: plot_e03_reading_writing.zip <plot_e03_reading_writing.zip>`
+
+
+.. include:: plot_e03_reading_writing.recommendations
 
 
 .. only:: html

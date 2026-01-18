@@ -63,12 +63,6 @@ a propagator.
         verbose=True)
 
 
-
-
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 42-53
 
 Non-Vectorized Propagation
@@ -105,19 +99,6 @@ also have that dimension and coordinate.
     added = add(meas, 2)
 
 
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    ['nominal'] ['nominal']
-    3cdc1f2b-13a2-4661-b982-dc05b60c18e9 3cdc1f2b-13a2-4661-b982-dc05b60c18e9
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 71-79
 
 Vectorized vs. Unvectorized
@@ -147,31 +128,6 @@ magnitude increase in run time for the Monte Carlo propagation.
     add2(meas)
 
 
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    add2 with nominal: 
-    <xarray.DataArray (d1: 4, d2: 2)> Size: 64B
-    array([[2., 2.],
-           [2., 2.],
-           [2., 2.],
-           [2., 2.]])
-    Coordinates:
-      * d1       (d1) int64 32B 0 1 2 3
-      * d2       (d2) int64 16B 0 1
-
-
-
-
-.. rst-class:: sphx-glr-timing
-
-   **Total running time of the script:** (0 minutes 0.227 seconds)
-
-
 .. _sphx_glr_download_auto_examples_RME_gettingstarted_plot_e05_vectorizing.py:
 
 .. only:: html
@@ -189,6 +145,9 @@ magnitude increase in run time for the Monte Carlo propagation.
     .. container:: sphx-glr-download sphx-glr-download-zip
 
       :download:`Download zipped: plot_e05_vectorizing.zip <plot_e05_vectorizing.zip>`
+
+
+.. include:: plot_e05_vectorizing.recommendations
 
 
 .. only:: html

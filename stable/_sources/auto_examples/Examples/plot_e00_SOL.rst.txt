@@ -47,12 +47,6 @@ on github. The data set is intended to act as an example use case of the softwar
     import xarray as xr
 
 
-
-
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 28-33
 
 Demo Data
@@ -77,12 +71,6 @@ to the files can be imported as well.
 
     # HDF5 file containing the standard models
     defs_path = sample_data_dir/'definitions.hdf5'
-
-
-
-
-
-
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 54-60
@@ -124,12 +112,6 @@ S-parameter. We also store our data as a complex-valued array.
         return out
 
 
-
-
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 85-86
 
 Lets confirm this works by  reading in our raw measurements
@@ -142,12 +124,6 @@ Lets confirm this works by  reading in our raw measurements
     raw_short = from_s1p(short_raw_path)
     raw_open = from_s1p(open_raw_path)
     raw_load = from_s1p(load_raw_path)
-
-
-
-
-
-
 
 
 
@@ -235,12 +211,6 @@ passed in when the function is wrapped in a propagator.
         return result
 
 
-
-
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 170-173
 
 Lets use the function without any uncertainty propagation
@@ -270,40 +240,6 @@ and grabbing just a view into the underlying nominal DataArray.
     print(errbox)
 
 
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /tmp/tmpze6xvdgm/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/Examples/plot_e00_SOL.py:175: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
-      def_short = RMEMeas.from_h5(f['Short']).nom
-    /tmp/tmpze6xvdgm/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/Examples/plot_e00_SOL.py:176: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
-      def_open = RMEMeas.from_h5(f['Open']).nom
-    /tmp/tmpze6xvdgm/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/Examples/plot_e00_SOL.py:177: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
-      def_load = RMEMeas.from_h5(f['Load']).nom
-    <xarray.DataArray (Frequency (GHz): 341, errterm: 3)> Size: 16kB
-    array([[-0.01893933-0.03268189j, -0.05556275+0.11455476j,
-             0.00717613-0.79476367j],
-           [ 0.00823574-0.01836123j,  0.04484499+0.0895194j ,
-            -0.71682196-0.43896957j],
-           [ 0.03634635-0.02636921j,  0.06262164-0.00655716j,
-            -0.69776178+0.44672811j],
-           ...,
-           [-0.09579545-0.01372783j, -0.09339595+0.03935082j,
-             0.41148441+0.6320167j ],
-           [-0.09774565+0.04137535j,  0.02886021-0.02463072j,
-             0.73391962+0.00871807j],
-           [-0.06464375+0.08107921j, -0.09782635-0.1258208j ,
-             0.43446894-0.5824696j ]], shape=(341, 3))
-    Coordinates:
-      * Frequency (GHz)  (Frequency (GHz)) float64 3kB 18.0 18.02 ... 26.48 26.5
-      * errterm          (errterm) <U5 60B 'e00' 'e11' 'delta'
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 192-197
 
 Correcting Raw Data
@@ -331,12 +267,6 @@ and corrects a raw measurement.
         return r
 
 
-
-
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 212-213
 
 And lets use it to correct our raw device.
@@ -347,12 +277,6 @@ And lets use it to correct our raw device.
 
 
     dut = SOL_correct(errbox, raw_dut)
-
-
-
-
-
-
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 217-219
@@ -375,23 +299,6 @@ so we expect a magnitude close to 0.
     ax[1].plot(dut['Frequency (GHz)'], np.angle(dut, deg = True))
     ax[1].set_xlabel('Frequency (GHz)')
     ax[1].set_ylabel('Phase (deg)')
-
-
-
-
-.. image-sg:: /auto_examples/Examples/images/sphx_glr_plot_e00_SOL_001.png
-   :alt: DUT Corrected Data
-   :srcset: /auto_examples/Examples/images/sphx_glr_plot_e00_SOL_001.png
-   :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    Text(26.722222222222214, 0.5, 'Phase (deg)')
-
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 232-236
@@ -436,12 +343,6 @@ through the function will be run through the linear sensitivity analysis.
     raw_load = RMEMeas.from_nom('DUT',raw_load)
 
 
-
-
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 267-268
 
 Lets also grab our definitions with the full uncertainty information
@@ -454,23 +355,6 @@ Lets also grab our definitions with the full uncertainty information
         def_short = RMEMeas.from_h5(f['Short'])
         def_open = RMEMeas.from_h5(f['Open'])
         def_load = RMEMeas.from_h5(f['Load'])
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    /tmp/tmpze6xvdgm/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/Examples/plot_e00_SOL.py:269: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
-      def_short = RMEMeas.from_h5(f['Short'])
-    /tmp/tmpze6xvdgm/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/Examples/plot_e00_SOL.py:270: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
-      def_open = RMEMeas.from_h5(f['Open'])
-    /tmp/tmpze6xvdgm/a287edda79ce3f5464ad6ffd462fce95db2ae8aa/docs/examples/Examples/plot_e00_SOL.py:271: DeprecationWarning: from_h5() is deprecated and will be removed in 0.5.0, use rmellipse.utils.load_object instead.
-      def_load = RMEMeas.from_h5(f['Load'])
-
-
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 274-279
@@ -496,12 +380,6 @@ in the propagator to do our analysis.
     )
 
     dut = SOL_correct(errbox, raw_dut)
-
-
-
-
-
-
 
 
 
@@ -587,23 +465,6 @@ Nominal Values
 
 
 
-
-
-.. image-sg:: /auto_examples/Examples/images/sphx_glr_plot_e00_SOL_002.png
-   :alt: plot e00 SOL
-   :srcset: /auto_examples/Examples/images/sphx_glr_plot_e00_SOL_002.png
-   :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    <matplotlib.legend.Legend object at 0x7f6225b9f6e0>
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 367-374
 
 Uncertainties Only
@@ -632,23 +493,6 @@ phase is not well defined if your magnitude is on the origin.
         )
     ax[1].set_xlabel('Frequency (GHz)')
     ax[1].set_ylabel(f'Phase k={k} Uncertainty (deg)')
-
-
-
-
-
-.. image-sg:: /auto_examples/Examples/images/sphx_glr_plot_e00_SOL_003.png
-   :alt: plot e00 SOL
-   :srcset: /auto_examples/Examples/images/sphx_glr_plot_e00_SOL_003.png
-   :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    Text(47.097222222222214, 0.5, 'Phase k=2 Uncertainty (deg)')
 
 
 
@@ -699,28 +543,6 @@ kit.
     axs[1].set_ylabel('Phase (% of Variation)')
 
 
-
-.. image-sg:: /auto_examples/Examples/images/sphx_glr_plot_e00_SOL_004.png
-   :alt: plot e00 SOL
-   :srcset: /auto_examples/Examples/images/sphx_glr_plot_e00_SOL_004.png
-   :class: sphx-glr-single-img
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-
-    Text(38.347222222222214, 0.5, 'Phase (% of Variation)')
-
-
-
-
-.. rst-class:: sphx-glr-timing
-
-   **Total running time of the script:** (0 minutes 1.850 seconds)
-
-
 .. _sphx_glr_download_auto_examples_Examples_plot_e00_SOL.py:
 
 .. only:: html
@@ -738,6 +560,9 @@ kit.
     .. container:: sphx-glr-download sphx-glr-download-zip
 
       :download:`Download zipped: plot_e00_SOL.zip <plot_e00_SOL.zip>`
+
+
+.. include:: plot_e00_SOL.recommendations
 
 
 .. only:: html

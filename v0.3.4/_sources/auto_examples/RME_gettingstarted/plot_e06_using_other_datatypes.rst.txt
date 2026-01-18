@@ -73,20 +73,6 @@ First lets create a custom class and use it to create a RMEMeas object.
 
 
 
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    test with nominal: 
-    <xarray.DataArray ()> Size: 8B
-    array(my val is 2, dtype=object)
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 52-56
 
 Propagation
@@ -107,20 +93,6 @@ propagator with them.
 
 
     print(add(meas, meas))
-
-
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    add with nominal: 
-    <xarray.DataArray ()> Size: 8B
-    array(my val is 4, dtype=object)
-
-
 
 
 .. GENERATED FROM PYTHON SOURCE LINES 67-71
@@ -151,20 +123,6 @@ back into a DataArray with the parameter locations before you output it.
     print(new_meas)
 
 
-
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    add2 with nominal: 
-    <xarray.DataArray ()> Size: 8B
-    array(my val is 4, dtype=object)
-
-
-
-
 .. GENERATED FROM PYTHON SOURCE LINES 88-90
 
 Next we can convert our data type to a float so we can
@@ -189,27 +147,6 @@ use other built in features, like calculating standard uncertainty.
     print(lin_unc)
 
 
-
-
-.. rst-class:: sphx-glr-script-out
-
- .. code-block:: none
-
-    to_float with nominal: 
-    <xarray.DataArray ()> Size: 8B
-    array(4.)
-    <xarray.DataArray ()> Size: 8B
-    array(0.2)
-
-
-
-
-
-.. rst-class:: sphx-glr-timing
-
-   **Total running time of the script:** (0 minutes 0.108 seconds)
-
-
 .. _sphx_glr_download_auto_examples_RME_gettingstarted_plot_e06_using_other_datatypes.py:
 
 .. only:: html
@@ -227,6 +164,9 @@ use other built in features, like calculating standard uncertainty.
     .. container:: sphx-glr-download sphx-glr-download-zip
 
       :download:`Download zipped: plot_e06_using_other_datatypes.zip <plot_e06_using_other_datatypes.zip>`
+
+
+.. include:: plot_e06_using_other_datatypes.recommendations
 
 
 .. only:: html
