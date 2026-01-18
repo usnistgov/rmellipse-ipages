@@ -135,9 +135,6 @@ propagator calls the function on the`RMEMeas.cov`attribute then on the`RMEMeas.m
       :download:`Download zipped: plot_e04_common_grid_handling.zip <plot_e04_common_grid_handling.zip>`
 
 
-.. include:: plot_e04_common_grid_handling.recommendations
-
-
 .. only:: html
 
  .. rst-class:: sphx-glr-signature

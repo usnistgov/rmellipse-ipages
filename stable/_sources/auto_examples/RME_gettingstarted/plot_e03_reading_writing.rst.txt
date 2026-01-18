@@ -203,9 +203,6 @@ is not specific enough.
       :download:`Download zipped: plot_e03_reading_writing.zip <plot_e03_reading_writing.zip>`
 
 
-.. include:: plot_e03_reading_writing.recommendations
-
-
 .. only:: html
 
  .. rst-class:: sphx-glr-signature

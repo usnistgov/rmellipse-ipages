@@ -166,9 +166,6 @@ use other built in features, like calculating standard uncertainty.
       :download:`Download zipped: plot_e06_using_other_datatypes.zip <plot_e06_using_other_datatypes.zip>`
 
 
-.. include:: plot_e06_using_other_datatypes.recommendations
-
-
 .. only:: html
 
  .. rst-class:: sphx-glr-signature

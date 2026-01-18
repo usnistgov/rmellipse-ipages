@@ -1,0 +1,506 @@
+rmellipse.workflows.local_interfaces
+====================================
+
+.. py:module:: rmellipse.workflows.local_interfaces
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rmellipse.workflows.local_interfaces.CacheInterface
+   rmellipse.workflows.local_interfaces.EnvInterface
+
+
+Module Contents
+---------------
+
+.. py:class:: CacheInterface(cache_dir: pathlib.Path)
+
+   
+   Interface for a local cache.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: cache_dir
+
+
+   .. py:method:: rm_cached_release(host: str, workspace: str, release_title: str)
+
+      
+      Remove a cached release.
+
+
+      :Parameters:
+
+          **host** : str
+              Name of host
+
+          **workspace** : str
+              Name of workspace.
+
+          **release_title** : str
+              Name of release title.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: get_cached_release_dir(host: str, workspace: str, release_title: str) -> pathlib.Path
+
+      
+      Get a directory in the local cache for a given release.
+
+
+      :Parameters:
+
+          **cache_dir** : str
+              _description_
+
+          **host** : str
+              _description_
+
+          **workspace** : str
+              _description_
+
+          **release** : str
+              _description_
+
+      :Returns:
+
+          Path
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: in_cache(host: str, workspace: str, release_title: str) -> bool
+
+      
+      Check if a release exists in the cache.
+
+
+      :Parameters:
+
+          **host** : str
+              _description_
+
+          **workspace** : str
+              _description_
+
+          **release_title** : str
+              _description_
+
+      :Returns:
+
+          bool
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+.. py:class:: EnvInterface(envdir: pathlib.Path)
+
+   
+   Interface with an Enviornment.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+   .. py:attribute:: envdir
+
+
+   .. py:attribute:: packages_dir
+
+
+   .. py:method:: rm_broken_packages()
+
+      
+      Remove any broken packages in the environment
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: installed_in_packages() -> list[str]
+
+      
+      Get a list of installed packages
+
+
+
+      :Returns:
+
+          list[str]
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: installed_in_registry() -> list[str]
+
+      
+      Get a list of releases installed in the registry
+
+
+
+      :Returns:
+
+          list[str]
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: release_reg_dir(release_title: str)
+
+      
+      Dataset registry directory for a release.
+
+
+      :Parameters:
+
+          **release_title** : str
+              _description_
+
+      :Returns:
+
+          _type_
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: release_package_dir(release_title: str)
+
+      
+      Package directory for a release.
+
+
+      :Parameters:
+
+          **release_title** : str
+              _description_
+
+      :Returns:
+
+          _type_
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: in_env(release_title: str)
+
+      
+      Determine if a release is installed in the environment.
+
+
+      :Parameters:
+
+          **release_title** : str
+              _description_
+
+      :Returns:
+
+          _type_
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: rm_release(release_title: str)
+
+      
+      Remove a release from the environment.
+
+
+      :Parameters:
+
+          **release_title** : str
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: with_suffixes_of(path: str | pathlib.Path, use_suffixes_of: str | pathlib.Path) -> pathlib.Path
+      :staticmethod:
+
+
+      
+      Replace name with the suffixes of use_suffixes_of.
+
+
+      :Parameters:
+
+          **name** : str | Path
+              string or path
+
+          **use_suffixes_of** : str | Path
+              String or path.
+
+      :Returns:
+
+          Path
+              Updated path
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: install_files_namespace(name: str, files: dict[str | pathlib.Path], resolve_relative_to: pathlib.Path)
+
+
+   .. py:method:: install_release(release_record: dict, workspace: str, host: str, cache: CacheInterface)
+
+      
+      Install a release into the environment.
+
+
+      :Parameters:
+
+          **release_record** : dict
+              _description_
+
+          **workspace** : str
+              _description_
+
+          **host** : str
+              _description_
+
+          **cache** : CacheInterface
+              _description_
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
+   .. py:method:: make_registry(release_record: dict, cache_release_dir: pathlib.Path, use_versioned_name: bool = True)
+
+      
+      Make a registry that symbolically links to datasets in the cache.
+
+      Only symbolic links to files are made, directory structures are copied.
+
+      :Parameters:
+
+          **release_record** : dict
+              The record of the of the package being linked too.
+
+          **cache** : Path
+              The cache of the package being linked too. It is assumed
+              to already be downloaded.
+
+          **env** : Path
+              The data environment directory.
+
+          **use_versioned_name: bool**
+              If True, used the versioned name when making the registry folder.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+

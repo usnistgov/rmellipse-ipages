@@ -147,9 +147,6 @@ magnitude increase in run time for the Monte Carlo propagation.
       :download:`Download zipped: plot_e05_vectorizing.zip <plot_e05_vectorizing.zip>`
 
 
-.. include:: plot_e05_vectorizing.recommendations
-
-
 .. only:: html
 
  .. rst-class:: sphx-glr-signature

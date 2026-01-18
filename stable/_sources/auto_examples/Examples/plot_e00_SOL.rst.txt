@@ -562,9 +562,6 @@ kit.
       :download:`Download zipped: plot_e00_SOL.zip <plot_e00_SOL.zip>`
 
 
-.. include:: plot_e00_SOL.recommendations
-
-
 .. only:: html
 
  .. rst-class:: sphx-glr-signature

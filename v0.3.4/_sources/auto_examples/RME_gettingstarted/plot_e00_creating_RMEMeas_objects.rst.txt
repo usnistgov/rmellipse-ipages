@@ -317,9 +317,6 @@ RMEMeas supports interpolation by wrapping xarray's built in `interp` function.
       :download:`Download zipped: plot_e00_creating_RMEMeas_objects.zip <plot_e00_creating_RMEMeas_objects.zip>`
 
 
-.. include:: plot_e00_creating_RMEMeas_objects.recommendations
-
-
 .. only:: html
 
  .. rst-class:: sphx-glr-signature

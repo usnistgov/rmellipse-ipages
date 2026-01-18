@@ -264,9 +264,6 @@ We can plot the montecarlo distributions of our results as well.
       :download:`Download zipped: plot_e01_basic_uncertainty_analysis.zip <plot_e01_basic_uncertainty_analysis.zip>`
 
 
-.. include:: plot_e01_basic_uncertainty_analysis.recommendations
-
-
 .. only:: html
 
  .. rst-class:: sphx-glr-signature
