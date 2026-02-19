@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rmellipse.uobjects &#8212; Rocky Mountain Ellipse 0.4.0b6.dev16+g869a34071 documentation</title>
+    <title>rmellipse.uobjects &#8212; Rocky Mountain Ellipse 0.4.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../_static/documentation_options.js?v=c8edb296"></script>
+    <script src="../../../_static/documentation_options.js?v=6c02275b"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -108,44 +108,6 @@ $(document).ready(function(){
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Generic Uncertain Object.</p>
 <p>Defines the interface that all uncertainty objects should inherit from.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="rmellipse.uobjects.UObj.copy">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.uobjects.UObj.copy" title="Link to this definition">¶</a></dt>
-<dd><dl class="field-list simple">
-<dt class="field-odd">Abstractmethod<span class="colon">:</span></dt>
-<dd class="field-odd"><p></p></dd>
-</dl>
-<p>Return a copy of a uncertain object.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py property">
-<dt class="sig sig-object py" id="rmellipse.uobjects.UObj.stdunc">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">stdunc</span></span><a class="headerlink" href="#rmellipse.uobjects.UObj.stdunc" title="Link to this definition">¶</a></dt>
-<dd><p>Get the standard uncertainty with expansion factor k.</p>
-<p>Return type should be the natural typing for the object being
-evauluated.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>k</strong><span class="classifier">float, optional</span></dt><dd><p>Expansion factor The default is 1.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>Standard uncertainty.</dt><dd></dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
 <dl class="py property">
 <dt class="sig sig-object py" id="rmellipse.uobjects.UObj.nom">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nom</span></span><a class="headerlink" href="#rmellipse.uobjects.UObj.nom" title="Link to this definition">¶</a></dt>
@@ -190,10 +152,10 @@ first label of the ‘parameter_dimensions’ coordinate must be
 coordinate should be strings corresponding the the uncertainty
 mechanism. The default is None.</p>
 </dd>
-<dt><strong>mc</strong><span class="classifier">xr.DataArray, optional</span></dt><dd><p>Montecarlo data for linear sensitivity analysis. Samples of the data
-sets distribution are stored along the first dimension (axis 0) of the DataArray, where
-the first index of axis 0 is the nominal data set, and the rest of
-the indexes are samples of the distribution.</p>
+<dt><strong>mc</strong><span class="classifier">xr.DataArray, optional</span></dt><dd><p>Montecarlo trials. Samples of the data
+sets distribution are stored along the first dimension (axis 0)
+of the DataArray, where the first index of axis 0 is the nominal
+data set, and the rest of the indexes are samples of the distribution.</p>
 <p>The first dimension must be called ‘umech_id’, and the
 first labels of the ‘parameter_dimensions’ must start at 0 and
 count up by 1 (i,e typical integer based indexing).
@@ -304,6 +266,7 @@ string.</p>
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.from_dist">
 <em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dist</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dist</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'gaussian'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mechanism_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">samples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'Type':</span> <span class="pre">'B'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_sample_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.from_dist" title="Link to this definition">¶</a></dt>
 <dd><p>Generate a RMEMeas object from a probability distribution.</p>
+<p>Will be deprecated in V0.5. Please use RMEmodel instead.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><dl class="simple">
@@ -854,48 +817,6 @@ from the same combine call (Type A Analysis) grouped together.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.categorize_by">
-<span class="sig-name descname"><span class="pre">categorize_by</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine_uncategorized</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">uncategorized_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'uncategorized'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.categorize_by" title="Link to this definition">¶</a></dt>
-<dd><p>Group linear uncertainty mechanisms into categories.</p>
-<p>Mechanisms sharing a common category will be combined quadratically
-into a single mechanism. For example, if the ‘Type’ category is
-selected, all the mechanisms with the ‘Type’ = ‘A’ designation in
-the covcats attribute will be quadratically combined.</p>
-<p>This function does NOT preserve the DOF’s or the category information
-of the uncertainty mechanisms after categorization, and is recommended
-to be used for debugging and presentation purposes only. It is NOT
-recommended for categorized RMEMeas objects to be saved.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>category</strong><span class="classifier">str</span></dt><dd><p>String identifying the category of uncertainty mechanism.</p>
-</dd>
-<dt><strong>combine_uncategorized: bool,</strong></dt><dd><p>If True, mechanisms that do not contain ‘category’ will all be
-combined into a single mechanism called uncategorized_name.</p>
-</dd>
-<dt><strong>uncategorized_name:str,</strong></dt><dd><p>String to call all uncategorized mechanisms IF they are being
-combined. The default is ‘uncategorized’.</p>
-</dd>
-<dt><strong>deg: bool,</strong></dt><dd><p>If true, calculates minimum angle differences for uncertainties
-as degrees.</p>
-</dd>
-<dt><strong>rad: bool,</strong></dt><dd><p>If true, calculates minimum angle differences for uncertainties
-as radians.</p>
-</dd>
-<dt><strong>verbose</strong><span class="classifier">bool, optional</span></dt><dd><p>Print information about grouping. The default is False.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>out</strong><span class="classifier">RMEMeas</span></dt><dd><p>DESCRIPTION.</p>
-</dd>
-</dl>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.get_unique_categories">
 <span class="sig-name descname"><span class="pre">get_unique_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.get_unique_categories" title="Link to this definition">¶</a></dt>
 <dd><p>Get list of unique categories.</p>
@@ -1279,6 +1200,7 @@ and iterates over each function evaluation, which can be slow.</p>
 <h3>Versions</h3>
 <ul>
   <li><a href="../../../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="../../../../v0.4.0/index.html">v0.4.0</a></li>
   <li><a href="index.html">development</a></li>
   <li><a href="../../../../stable/index.html">stable</a></li>
 </ul>

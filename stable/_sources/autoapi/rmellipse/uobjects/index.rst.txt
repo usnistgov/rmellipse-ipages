@@ -3,6 +3,31 @@ rmellipse.uobjects
 
 .. py:module:: rmellipse.uobjects
 
+.. autoapi-nested-parse::
+
+   
+   This module contains objects that represent data with uncertainties.
+
+   Data with uncertainties correspond to propagators in
+   ``rmellipse.propagators``
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
 
 Exceptions
 ----------
@@ -51,74 +76,6 @@ Package Contents
    ..
        !! processed by numpydoc !!
 
-   .. py:method:: copy()
-      :classmethod:
-
-      :abstractmethod:
-
-
-      
-      Return a copy of a uncertain object.
-
-
-
-      :Returns:
-
-          None.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
-   .. py:property:: stdunc
-      :abstractmethod:
-
-
-      
-      Get the standard uncertainty with expansion factor k.
-
-      Return type should be the natural typing for the object being
-      evauluated.
-
-      :Parameters:
-
-          **k** : float, optional
-              Expansion factor The default is 1.
-
-      :Returns:
-
-          Standard uncertainty.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
    .. py:property:: nom
       :abstractmethod:
 
@@ -151,7 +108,7 @@ Package Contents
           !! processed by numpydoc !!
 
 
-.. py:class:: RMEMeas(name: str = 'RMEMeas', cov: xarray.DataArray = None, mc: xarray.DataArray = None, covdofs: xarray.DataArray = None, covcats: xarray.DataArray = None)
+.. py:class:: RMEMeas(name: str = None, cov: xarray.DataArray = None, mc: xarray.DataArray = None, covdofs: xarray.DataArray = None, covcats: xarray.DataArray = None, parent: rmellipse.utils.GroupSaveable = None, attrs: dict = None)
 
    Bases: :py:obj:`rmellipse.uobjects.UObj`, :py:obj:`rmellipse.utils.GroupSaveable`
 
@@ -164,7 +121,7 @@ Package Contents
 
    Initialize a RMEMeas object.
 
-   Please refer to xarray's documentation for information about how to 
+   Please refer to xarray's documentation for information about how to
    use DataArrays, and how to define coordinates and dimensions.
 
    If covdofs is not provided, distributions of linear uncertainty
@@ -180,7 +137,7 @@ Package Contents
            are stored along the first dimension (axis 0) of the DataArray, where
            the first index of axis 0 is the nominal data set, and the rest of
            the indexes along that dimension are perturbed by one standard deviation
-           (i.e. 1 standard uncertainty). 
+           (i.e. 1 standard uncertainty).
            
            The first dimension must be called 'umech_id', and the
            first label of the 'parameter_dimensions' coordinate must be
@@ -189,10 +146,10 @@ Package Contents
            mechanism. The default is None.
 
        **mc** : xr.DataArray, optional
-           Montecarlo data for linear sensitivity analysis. Samples of the data
-           sets distribution are stored along the first dimension (axis 0) of the DataArray, where
-           the first index of axis 0 is the nominal data set, and the rest of
-           the indexes are samples of the distribution.
+           Montecarlo trials. Samples of the data
+           sets distribution are stored along the first dimension (axis 0)
+           of the DataArray, where the first index of axis 0 is the nominal
+           data set, and the rest of the indexes are samples of the distribution.
            
            The first dimension must be called 'umech_id', and the
            first labels of the 'parameter_dimensions' must start at 0 and
@@ -205,7 +162,7 @@ Package Contents
            DataArray with the dimension called 'umech_id' and
            the coordinate set should be identical to the
            'umech_id' coordinate in cov. If covariance data
-           is provided and covdofs is not, one will be created that assumes 
+           is provided and covdofs is not, one will be created that assumes
            all linear mechanisms have infinite degrees of freedom (i.e.
            gaussian distributions). The default is None.
 
@@ -353,6 +310,45 @@ Package Contents
           !! processed by numpydoc !!
 
 
+   .. py:property:: dims
+
+
+   .. py:property:: shape
+
+
+   .. py:property:: coords
+
+
+   .. py:property:: dtype
+
+
+   .. py:method:: cast_covcats()
+
+
+   .. py:method:: cast_umechids()
+
+      
+      Cast any umech_id dimensions to the correct type.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      ..
+          !! processed by numpydoc !!
+
+
    .. py:method:: from_nom(name: str, nom: xarray.DataArray) -> RMEMeas
       :classmethod:
 
@@ -397,6 +393,7 @@ Package Contents
       
       Generate a RMEMeas object from a probability distribution.
 
+      Will be deprecated in V0.5. Please use RMEmodel instead.
 
       :Parameters:
 
@@ -827,11 +824,12 @@ Package Contents
           !! processed by numpydoc !!
 
 
-   .. py:method:: add_umech(name: str, value: xarray.DataArray, dof: float = np.inf, category: dict = {'Type': 'B'}, add_uid: bool = False)
+   .. py:method:: add_umech(name: str, value: xarray.DataArray, dof: float = np.inf, category: dict = {'Type': 'B'}, use_uuid: str = None, add_uid=None)
 
       
       Add a linear mechanisms to covariance data.
 
+      Note:
 
       :Parameters:
 
@@ -840,7 +838,7 @@ Package Contents
 
           **value** : xr.DataArray
               Array of nominal+1 standard uncertainty of new mechanism.
-              If value has the same size as the nominal data, the function will insert a 
+              If value has the same size as the nominal data, the function will insert a
               new dimension at axis zero before concatenating to the covariance data.
 
           **dof: float,optional**
@@ -852,9 +850,12 @@ Package Contents
               mechanisms. E.g. {'Type':'B','Origin':'Datasheet'}. The default
               is {'Type':'B'}.
 
-          **add_uid: bool,**
-              If true, adds a uuid4 string to the uncertainty mechanism name
-              to make it unique.
+          **add_uid: bool, optional**
+              Will be deprecated, uids are used automatically now.
+
+          **use_uuid** : str, optional
+              Can optionally provide a UUID for th emechanism, otherwise one
+              will be generated
 
       :Returns:
 
@@ -943,7 +944,7 @@ Package Contents
       Generate the lower, upper confidence intervals for a fractional percent confidence.
 
       Confidence intervals are generate using the linear sensitivity analysis
-      data (.cov) using a student-t distribution with means of .nominal, and 
+      data (.cov) using a student-t distribution with means of .nominal, and
       a scale of 1 standard uncertainty.
 
       :Parameters:
@@ -1233,66 +1234,6 @@ Package Contents
           RMEMeas:
               New RMEMeas object with the linear uncertainty mechanisms originating
               from the same combine call (Type A Analysis) grouped together.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
-   .. py:method:: categorize_by(category: str, combine_uncategorized: bool = True, uncategorized_name: str = 'uncategorized', deg: bool = False, rad: bool = False, verbose: bool = False) -> RMEMeas
-
-      
-      Group linear uncertainty mechanisms into categories.
-
-      Mechanisms sharing a common category will be combined quadratically
-      into a single mechanism. For example, if the 'Type' category is
-      selected, all the mechanisms with the 'Type' = 'A' designation in
-      the covcats attribute will be quadratically combined.
-
-      This function does NOT preserve the DOF's or the category information
-      of the uncertainty mechanisms after categorization, and is recommended
-      to be used for debugging and presentation purposes only. It is NOT
-      recommended for categorized RMEMeas objects to be saved.
-
-      :Parameters:
-
-          **category** : str
-              String identifying the category of uncertainty mechanism.
-
-          **combine_uncategorized: bool,**
-              If True, mechanisms that do not contain 'category' will all be
-              combined into a single mechanism called uncategorized_name.
-
-          **uncategorized_name:str,**
-              String to call all uncategorized mechanisms IF they are being
-              combined. The default is 'uncategorized'.
-
-          **deg: bool,**
-              If true, calculates minimum angle differences for uncertainties
-              as degrees.
-
-          **rad: bool,**
-              If true, calculates minimum angle differences for uncertainties
-              as radians.
-
-          **verbose** : bool, optional
-              Print information about grouping. The default is False.
-
-      :Returns:
-
-          **out** : RMEMeas
-              DESCRIPTION.
 
 
 
@@ -1711,7 +1652,7 @@ Package Contents
 
           **func** : callable
               User specified function in the form f(x, *params) which returns a numpy array of length len(x).
-              Params are the fittable parameters which are optimized by scipy curve_fit. 
+              Params are the fittable parameters which are optimized by scipy curve_fit.
               x can also be specified as a sequence containing multiple coordinates, e.g. f((x0, x1), *params).
 
           **reduce_dims: str | Iterable | None, optional**

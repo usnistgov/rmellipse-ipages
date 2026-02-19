@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rmellipse.propagators &#8212; Rocky Mountain Ellipse 0.4.0b6.dev16+g869a34071 documentation</title>
+    <title>rmellipse.propagators &#8212; Rocky Mountain Ellipse 0.4.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -13,13 +13,13 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../_static/documentation_options.js?v=c8edb296"></script>
+    <script src="../../../_static/documentation_options.js?v=6c02275b"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="rmellipse.uobjects" href="../uobjects/index.html" />
-    <link rel="prev" title="rmellipse" href="../index.html" />
+    <link rel="prev" title="rmellipse.arrschema.examples" href="../arrschema/examples/index.html" />
 <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
   <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
@@ -74,6 +74,9 @@ $(document).ready(function(){
 
   <section id="module-rmellipse.propagators">
 <span id="rmellipse-propagators"></span><h1>rmellipse.propagators<a class="headerlink" href="#module-rmellipse.propagators" title="Link to this heading">¶</a></h1>
+<p>This module contains objects that propagate data with uncertainties.</p>
+<p>Propagators are intended for use with their respective uncertainty objects
+in  <code class="docutils literal notranslate"><span class="pre">rmellipse.uobjects</span></code></p>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -144,6 +147,30 @@ $(document).ready(function(){
 <dt><strong>function</strong><span class="classifier">Callable</span></dt><dd><p>any function that should be wrapped to be propagateable.</p>
 </dd>
 <dt><strong>*measurements: TYPE</strong></dt><dd><p>Realizations of the measurement.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt>combined measurement.</dt><dd></dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.propagators.Propagator.combine_across_dim">
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">combine_across_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator.combine_across_dim" title="Link to this definition">¶</a></dt>
+<dd><p>Combine realizations of the same measurement into a single measurement.</p>
+<p>Adds uncertainty based on the inputs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>function: Callable</strong></dt><dd><p>any function that should be wrapped to be propagateable.</p>
+</dd>
+<dt><strong>measurement: TYPE</strong></dt><dd><p>The measurement object.</p>
+</dd>
+<dt><strong>dim: string</strong></dt><dd><p>Dimension to average across.</p>
 </dd>
 </dl>
 </dd>
@@ -321,6 +348,49 @@ default is True.</p>
 </dl>
 </dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.propagators.RMEProp.combine_across_dim">
+<span class="sig-name descname"><span class="pre">combine_across_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">rmellipse.uobjects.RMEMeas</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_of_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_single_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine_basename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'combined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine_categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'Type':</span> <span class="pre">'A'}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="../uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">rmellipse.uobjects.RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.propagators.RMEProp.combine_across_dim" title="Link to this definition">¶</a></dt>
+<dd><p>Combine repeated measurements that are within a single RMEMeas object
+across a dimension with uncertainty into a single measurement.</p>
+<p>Additional uncertainty mechanisms are created with the ‘combine_basename’
+as the name of the mechanisms + an iterated integer. Principal component
+analysis is used to create the additional mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><dl class="simple">
+<dt><strong>*measurements</strong><span class="classifier">RMEMeas</span></dt><dd><p>DESCRIPTION.</p>
+</dd>
+<dt><strong>error_of_mean</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, uses the error of the mean when creating the new uncertainty
+mechanisms. The default is False.</p>
+</dd>
+<dt><strong>n_single_values</strong><span class="classifier">Union[float,int], optional</span></dt><dd><p>Describes how many of the singular values to keep as
+error mechanisms when performing the PCA.If n_single_values&lt;1,
+will provide the min number of values to describe n_single_values
+ratio of the total variance described by the SVD. If
+n_single_values&gt; 1, will utilize the integer n_single_values number
+of singular values. If None, will use all the singular values
+available. Useful for reducing the size of data sets when
+large numbers of repeated measurements are used.The default is None.</p>
+</dd>
+<dt><strong>combine_basename</strong><span class="classifier">dict[str], optional</span></dt><dd><p>Base name usd when creating new uncertainty mechanisms.
+Uncertainty mechanisms are named with &lt;basename&gt;+_+&lt;int&gt;, int is
+iterated for each new mechanism. The default is ‘combined’.</p>
+</dd>
+<dt><strong>add_uid: str, optional</strong></dt><dd><p>If true, adds a UID to the combine_basename to make it unique. The
+default is True.</p>
+</dd>
+</dl>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><dl class="simple">
+<dt><strong>out</strong><span class="classifier">RMEMeas</span></dt><dd><p>Returns a RMEMeas object with combined uncertainties.</p>
+</dd>
+</dl>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 </section>
@@ -336,11 +406,20 @@ default is True.</p>
         <div class="sphinxsidebarwrapper">
 <h3><a href="../../../index.html">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">rmellipse Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../get_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../cli/index.html">Command Line Interface</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../arrschema/index.html">rmellipse.arrschema</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">rmellipse.propagators</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../uobjects/index.html">rmellipse.uobjects</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../utils/index.html">rmellipse.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../workflows/index.html">rmellipse.workflows</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -367,6 +446,7 @@ default is True.</p>
 <h3>Versions</h3>
 <ul>
   <li><a href="../../../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="../../../../v0.4.0/index.html">v0.4.0</a></li>
   <li><a href="../../../../development/index.html">development</a></li>
   <li><a href="index.html">stable</a></li>
 </ul>

@@ -1,0 +1,105 @@
+rmellipse.workflows.extras
+==========================
+
+.. py:module:: rmellipse.workflows.extras
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rmellipse.workflows.extras.matches_any
+   rmellipse.workflows.extras.make_globs
+   rmellipse.workflows.extras.iter_blobable
+
+
+Module Contents
+---------------
+
+.. py:function:: matches_any(pattern: str, globs: list[str])
+
+   
+   True if pattern matches any of globs
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: make_globs(directory: pathlib.Path)
+
+   
+   Make include and ignore glob patters from a directory
+
+   Used .gitignore and .rmeinclude files in directory.
+
+   :Parameters:
+
+       **directory** : Path
+           Directory to look inside.
+
+   :Returns:
+
+       tuple[list[str]]
+           tuple of list of glob patterns, (ignore, include)
+
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
+.. py:function:: iter_blobable(dmap: dict)
+
+   
+   Iterate over a mapping and yield globable files.
+
+
+   :Parameters:
+
+       **dmap** : dict
+           Dictionary that maps a directory or item.
+
+
+   :Yields:
+
+       _type_
+           _description_
+
+
+
+
+
+
+
+
+
+
+
+
+   ..
+       !! processed by numpydoc !!
+
