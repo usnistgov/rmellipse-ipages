@@ -33,26 +33,7 @@ Module Contents
 
    Represents an edge in a job tree
 
-
    Initialize self.  See help(type(self)) for accurate signature.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
    .. py:property:: name
@@ -76,43 +57,16 @@ Module Contents
    dict(**kwargs) -> new dictionary initialized with the name=value pairs
        in the keyword argument list.  For example:  dict(one=1, two=2)
 
-
    Initialize a Job object.
 
+   :param job_dict:
+   :type job_dict: dict | io.FileIO | Path
+   :param project_settings: Project settings object.
+   :type project_settings: ProjectSettings
 
-   :Parameters:
-
-       **job_dict** : dict | io.FileIO | Path
-           ..
-
-       **project_settings** : ProjectSettings
-           Project settings object.
-
-
-
-
-
-   :Raises:
-
-       TypeError
-           _description_
-
-       ValueError
-           _description_
-
-       TypeError
-           _description_
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
+   :raises TypeError: _description_
+   :raises ValueError: _description_
+   :raises TypeError: _description_
 
 
    .. py:attribute:: logfile
@@ -156,285 +110,75 @@ Module Contents
    dict(**kwargs) -> new dictionary initialized with the name=value pairs
        in the keyword argument list.  For example:  dict(one=1, two=2)
 
-
    Initialize self.  See help(type(self)) for accurate signature.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
    .. py:property:: release
 
-      
       Release information about the workflow tree.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: nodes
 
-      
       Access all the nodes in the graph representation.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: jobs
 
-      
       All the job nodes.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: data_pointers
 
-      
       All the data_pointer nodes.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: edges
 
-      
       All the edges in the tree.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: add_data_pointer(data_pointer: DataPointer)
 
-      
       Add a data pointer to the tree.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
    .. py:method:: add_job(job: Job)
 
-      
       Add a job to the tree.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
    .. py:method:: add_edge(node1: DataPointer | Job, node2: DataPointer | Job, attrs: dict = None)
 
-      
       Add an edge to the workflow tree.
 
       Edges are always between a DataPointer and a Job.
 
-      :Parameters:
+      :param node1: DataPointer or Job
+      :type node1: DataPointer | Job
+      :param node2: DataPointer or Job
+      :type node2: DataPointer | Job
+      :param attrs: Dict of metadata, by default None
+      :type attrs: dict, optional
 
-          **node1** : DataPointer | Job
-              DataPointer or Job
-
-          **node2** : DataPointer | Job
-              DataPointer or Job
-
-          **attrs** : dict, optional
-              Dict of metadata, by default None
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: iter_data_pointer_paths()
 
-      
       Iterate over all the data_pointer paths.
 
+      :Yields: *Path* -- Path to data_pointers
 
-
-
-      :Yields:
-
-          Path
-              Path to data_pointers
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: iter_topological_groups()
 
-      
       Iterate over groups in a topologial sorting of jobs and datasets.
 
+      :Yields: *list* -- List of nodes in the next level of the topological sorting.
 
-
-
-      :Yields:
-
-          list
-              List of nodes in the next level of the topological sorting.
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: from_workflow_config(project_settings: rmellipse.workflows._settings.ProjectSettings, wf_config: rmellipse.workflows._settings.WorkflowConfig)
@@ -444,79 +188,31 @@ Module Contents
 
 .. py:function:: execute_concurrent_jobs(jobs: list[Job], level: int, max_threads: int = None)
 
-   
    Execute a set of concurrent jobs in wft.
 
+   :param jobs: List of jobs to execute concurrently.
+   :type jobs: list[job]
+   :param group_name: Name of group, used for printing.
+   :type group_name: str
+   :param max_threads: Max number of threads (i.e. subprocesses) that
+                       can be spun up at a time.
+   :type max_threads: int
 
-   :Parameters:
+   :raises TypeError: If non-jobs are passed.
+   :raises Exception: When a job fails.
 
-       **jobs** : list[job]
-           List of jobs to execute concurrently.
-
-       **group_name** : str
-           Name of group, used for printing.
-
-       **max_threads** : int
-           Max number of threads (i.e. subprocesses) that
-           can be spun up at a time.
-
-
-
-
-
-   :Raises:
-
-       TypeError
-           If non-jobs are passed.
-
-       Exception
-           When a job fails.
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: validate_datapointers(datapointers: list[DataPointer], project_settings: rmellipse.workflows._settings.ProjectSettings, level: int)
 
-   
    Validates if datapointers exist within a project.
 
+   :param datapointers: List of DataPointer objects.
+   :type datapointers: list[DataPointer]
+   :param project_settings: Project settings
+   :type project_settings: ProjectSettings
+   :param level: Execution level in the DAG
+   :type level: int
 
-   :Parameters:
+   :raises FileNotFoundError: If a dataset is missing
 
-       **datapointers** : list[DataPointer]
-           List of DataPointer objects.
-
-       **project_settings** : ProjectSettings
-           Project settings
-
-       **level** : int
-           Execution level in the DAG
-
-
-
-
-
-   :Raises:
-
-       FileNotFoundError
-           If a dataset is missing
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 

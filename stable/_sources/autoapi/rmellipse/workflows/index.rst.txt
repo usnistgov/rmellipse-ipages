@@ -5,7 +5,6 @@ rmellipse.workflows
 
 .. autoapi-nested-parse::
 
-   
    Workflows module, utilized by the command line interface.
 
    The workflows module exists to suppor the command line interface
@@ -13,22 +12,6 @@ rmellipse.workflows
    for transparency and to aid development, however the python API
    is not intended for use.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
 Submodules
@@ -83,26 +66,7 @@ Package Contents
 
    Common base class for all non-exit exceptions.
 
-
    Initialize self.  See help(type(self)) for accurate signature.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
 .. py:exception:: JobFailure(**kwargs)
@@ -112,26 +76,7 @@ Package Contents
 
    Common base class for all non-exit exceptions.
 
-
    Initialize self.  See help(type(self)) for accurate signature.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
 .. py:class:: ProjectSettings(project: pathlib.Path | str | dict)
@@ -143,414 +88,120 @@ Package Contents
 
    Can be serialized to a JSON like file.
 
-
    Initialize self.  See help(type(self)) for accurate signature.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
    .. py:property:: requires_files
       :type: dict
 
 
-      
       Get a list of required files
 
-
-
-      :Returns:
-
-          dict[str]
-              dictionary of required files or folder
-              patterns, keys are the new name of the
-              datset within environment.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: dictionary of required files or folder
+                patterns, keys are the new name of the
+                datset within environment.
+      :rtype: dict[str]
 
 
    .. py:property:: requires_releases
 
-      
       Releases required by a project.
 
-
-
-      :Returns:
-
-          list
-              list of version expression requirements,
-              empty if no requirements.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: list of version expression requirements,
+                empty if no requirements.
+      :rtype: list
 
 
    .. py:property:: requires_env
 
-      
       Releases required by a project.
 
-
-
-      :Returns:
-
-          list
-              list of version expression requirements,
-              empty if no requirements.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: list of version expression requirements,
+                empty if no requirements.
+      :rtype: list
 
 
    .. py:property:: rmesettings
       :type: RMESettings
 
 
-      
       Get RMESettings for this project.
 
-
-
-      :Returns:
-
-          dict
-              _description_
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: _description_
+      :rtype: dict
 
 
    .. py:property:: project_dir
       :type: pathlib.Path
 
 
-      
       Root directory of the project.
 
-
-
-      :Returns:
-
-          Path
-              Path to the projects root directory.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: Path to the projects root directory.
+      :rtype: Path
 
 
    .. py:property:: active_workflow
       :type: pathlib.Path
 
 
-      
       Return information about the active workflow.
 
-
-
-      :Returns:
-
-          Path:
-              Path to the active workflow file.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: Path to the active workflow file.
+      :rtype: Path
 
 
    .. py:property:: project_map
 
-      
       Returns a project map.
 
-
-
-      :Returns:
-
-          Path
-              Path to the project map.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: Path to the project map.
+      :rtype: Path
 
 
    .. py:property:: data_env_dir
 
-      
       Directory containing the dataest environment.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: data_env_packages
 
-      
       Directory containing the full linked packages in data_env_dir.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: processlogdir
       :type: pathlib.Path
 
 
-      
       Direcotry that stores process logs.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: dotrmedir
 
-      
       Directory for storing hidden files within a project.
 
-
-
-      :Returns:
-
-          Path
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :rtype: Path
 
 
    .. py:property:: wft_jsondir
 
-      
       Directory for storing workfow solution JSON files.
 
-
-
-      :Returns:
-
-          _type_
-              _description_
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: _description_
+      :rtype: _type_
 
 
    .. py:property:: rmeproj_file
 
-      
       Path to the project file within a directory.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: is_rmeproject(directory: pathlib.Path)
       :staticmethod:
 
 
-      
       True if directory is an RME project (i.e. has a rmeproject.yml file.)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
 .. py:data:: SCHEMAS
@@ -560,7 +211,6 @@ Package Contents
    Bases: :py:obj:`enum.Enum`
 
 
-   
    Create a collection of name/value pairs.
 
    Example enumeration:
@@ -598,22 +248,6 @@ Package Contents
    Methods can be added to enumerations, and members can have their own
    attributes -- see the documentation for details.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
    .. py:attribute:: WORKFLOW
       :value: 'workflow'
@@ -645,7 +279,6 @@ Package Contents
    Bases: :py:obj:`enum.Enum`
 
 
-   
    Create a collection of name/value pairs.
 
    Example enumeration:
@@ -683,22 +316,6 @@ Package Contents
    Methods can be added to enumerations, and members can have their own
    attributes -- see the documentation for details.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
    .. py:attribute:: JOB
       :value: 'jobs'
@@ -720,7 +337,6 @@ Package Contents
    Bases: :py:obj:`enum.Enum`
 
 
-   
    Create a collection of name/value pairs.
 
    Example enumeration:
@@ -758,22 +374,6 @@ Package Contents
    Methods can be added to enumerations, and members can have their own
    attributes -- see the documentation for details.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
    .. py:attribute:: DIRECTORY
       :value: 'Directory'
@@ -807,56 +407,19 @@ Package Contents
 
    Store and access a workflow configuration.
 
-   Parameters
-   ----------
-   dict : _type_
-           _description_
+   :param dict: _description_
+   :type dict: _type_
 
-   Returns
-   -------
-   _type_
-           _description_
+   :returns: _description_
+   :rtype: _type_
 
-   Raises
-   ------
-   Exception
-           _description_
-
-
-
-
-
-   :Parameters:
-
-       **workflow_file** : Path | str | dict
-           Workflow file.
-
-       **project_settings** : ProjectSettings
-           Project settings that contain the
-           workflow.
-
-
-
-
-
-   :Raises:
-
-       ValueError
-           Missing environment variables.
-
-       ValueError
-           Empry workflow file.
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
+   :raises Exception: _description_
+   :raises :param workflow_file: Workflow file.:
+   :raises :type workflow_file: Path | str | dict:
+   :raises :param project_settings: Project settings that contain the: workflow.
+   :raises :type project_settings: ProjectSettings:
+   :raises :raises ValueError: Missing environment variables.:
+   :raises :raises ValueError: Empry workflow file.:
 
 
    .. py:attribute:: project_settings
@@ -870,7 +433,6 @@ Package Contents
 
    .. py:method:: expand_variables(obj: str | dict | list, expand_env: bool = True, expand_datasets: bool = True) -> str | dict | list
 
-      
       Expand variables of any object that can be serialized
       to JSON.
 
@@ -881,38 +443,18 @@ Package Contents
       JSON is a faster serialization format, so using it here instead
       of YAML.
 
-      :Parameters:
+      :param obj: _description_
+      :type obj: str | dict | list
+      :param expand_env: If True, expands environment variables. Default
+                         is true.
+      :type expand_env: bool, optional
+      :param expand_datasets: If True, expands dataset variables. Default
+                              is True
+      :type expand_datasets: bool, optional
 
-          **obj** : str | dict | list
-              _description_
+      :returns: Same type as input with variables expanded.
+      :rtype: object
 
-          **expand_env: bool, optional**
-              If True, expands environment variables. Default
-              is true.
-
-          **expand_datasets: bool, optional**
-              If True, expands dataset variables. Default
-              is True
-
-      :Returns:
-
-          object
-              Same type as input with variables expanded.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: title
@@ -929,205 +471,67 @@ Package Contents
       :type: dict
 
 
-      
       Get a list of required files
 
       Includes required files of the project, any
       name-space conflicts are overwritten with the
       workspace requires_files.
 
-
-      :Returns:
-
-          dict[str]
-              dictionary of required files or folder
-              patterns, keys are the new name of the
-              datset within environment.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: dictionary of required files or folder
+                patterns, keys are the new name of the
+                datset within environment.
+      :rtype: dict[str]
 
 
    .. py:property:: requires_releases
       :type: None
 
 
-      
       Releases requirements defined in the workflow file.
 
-
-
-      :Returns:
-
-          _type_
-              _description_
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: _description_
+      :rtype: _type_
 
 
    .. py:property:: requires_env
       :type: None
 
 
-      
       Environment variable requirements.
 
-
-
-      :Returns:
-
-          _type_
-              _description_
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: _description_
+      :rtype: _type_
 
 
    .. py:property:: formatting_keys
       :type: dict
 
 
-      
       Dictionary of kwargs for string formating.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: datasets
 
-      
       List of defined datsets in the workflow config.
 
-
-
-      :Returns:
-
-          _type_
-              _description_
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: _description_
+      :rtype: _type_
 
 
    .. py:property:: jobs
 
-      
       List of defined datsets in the workflow config.
 
-
-
-      :Returns:
-
-          _type_
-              _description_
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: _description_
+      :rtype: _type_
 
 
    .. py:property:: release
 
-      
       Release related settings
 
-
-
-      :Returns:
-
-          _type_
-              _description_
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :returns: _description_
+      :rtype: _type_
 
 
 .. py:class:: RMESettings(project_dir: pathlib.Path)
@@ -1150,36 +554,13 @@ Package Contents
    User config -> project config
 
 
-   Parameters
-   ----------
-   dict : _type_
-           _description_
-
-
-   Initialize self.  See help(type(self)) for accurate signature.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
+   :param dict: _description_
+   :type dict: _type_
+   :param Initialize self.  See help(type(self)) for accurate signature.:
 
 
    .. py:method:: get_host_settings(host_name: str = None)
 
-      
       Get the host settings by host name.
 
       User and password are returned as None
@@ -1187,40 +568,15 @@ Package Contents
 
       Does not attempt to get credentials based on host.
 
-      :Parameters:
+      :param host_name: _description_, by default None
+      :type host_name: str, optional
 
-          **host_name** : str, optional
-              _description_, by default None
+      :returns: * *host* -- str
+                * *user* -- str
+                * *password* -- str
 
-      :Returns:
+      :raises LookupError:: If the host isn't in the settings.
 
-          host:
-              str
-
-          user:
-              str
-
-          password:
-              str
-
-
-
-
-      :Raises:
-
-          LookupError:
-              If the host isn't in the settings.
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:property:: hosts

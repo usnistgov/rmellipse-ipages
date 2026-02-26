@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rmellipse.uobjects &#8212; Rocky Mountain Ellipse 0.4.1.dev2+g10192224f documentation</title>
+    <title>rmellipse.uobjects &#8212; Rocky Mountain Ellipse 0.4.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../_static/documentation_options.js?v=8a866ab4"></script>
+    <script src="../../../_static/documentation_options.js?v=ff822928"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -115,10 +115,8 @@ $(document).ready(function(){
 <p>Return type should be the natural typing for the object being
 evauluated.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Nominal value.</dt><dd></dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Nominal value.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -136,12 +134,11 @@ evauluated.</p>
 use DataArrays, and how to define coordinates and dimensions.</p>
 <p>If covdofs is not provided, distributions of linear uncertainty
 mechanisms are assumed to have infinite degrees of freedom (Gaussian).</p>
-<dl class="field-list">
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl>
-<dt><strong>name</strong><span class="classifier">str, optional</span></dt><dd><p>Name of RMEMeas object. The default is ‘RMEMeas’.</p>
-</dd>
-<dt><strong>cov</strong><span class="classifier">xr.DataArray, optional</span></dt><dd><p>Covariance data for linear sensitivity analysis. Copies of data set
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of RMEMeas object. The default is ‘RMEMeas’.</p></li>
+<li><p><strong>cov</strong> (<em>xr.DataArray</em><em>, </em><em>optional</em>) – <p>Covariance data for linear sensitivity analysis. Copies of data set
 are stored along the first dimension (axis 0) of the DataArray, where
 the first index of axis 0 is the nominal data set, and the rest of
 the indexes along that dimension are perturbed by one standard deviation
@@ -151,8 +148,8 @@ first label of the ‘parameter_dimensions’ coordinate must be
 ‘nominal’. The remaining labels for the ‘umech_id’
 coordinate should be strings corresponding the the uncertainty
 mechanism. The default is None.</p>
-</dd>
-<dt><strong>mc</strong><span class="classifier">xr.DataArray, optional</span></dt><dd><p>Montecarlo trials. Samples of the data
+</p></li>
+<li><p><strong>mc</strong> (<em>xr.DataArray</em><em>, </em><em>optional</em>) – <p>Montecarlo trials. Samples of the data
 sets distribution are stored along the first dimension (axis 0)
 of the DataArray, where the first index of axis 0 is the nominal
 data set, and the rest of the indexes are samples of the distribution.</p>
@@ -160,53 +157,76 @@ data set, and the rest of the indexes are samples of the distribution.</p>
 first labels of the ‘parameter_dimensions’ must start at 0 and
 count up by 1 (i,e typical integer based indexing).
 The default is None.</p>
-</dd>
-<dt><strong>covdofs</strong><span class="classifier">xr.DataArray, optional</span></dt><dd><p>DataArray that stores the degrees of freedom for each linear
+</p></li>
+<li><p><strong>covdofs</strong> (<em>xr.DataArray</em><em>, </em><em>optional</em>) – DataArray that stores the degrees of freedom for each linear
 uncertainty mechanism in cov. It should be a 1 dimensional
 DataArray with the dimension called ‘umech_id’ and
 the coordinate set should be identical to the
 ‘umech_id’ coordinate in cov. If covariance data
 is provided and covdofs is not, one will be created that assumes
 all linear mechanisms have infinite degrees of freedom (i.e.
-gaussian distributions). The default is None.</p>
-</dd>
-<dt><strong>covcats</strong><span class="classifier">xr.DataArray, optional</span></dt><dd><p>DataArray that stores the categories of each uncertainty mechanism.
+gaussian distributions). The default is None.</p></li>
+<li><p><strong>covcats</strong> (<em>xr.DataArray</em><em>, </em><em>optional</em>) – DataArray that stores the categories of each uncertainty mechanism.
 Expected to be have dimensions (‘umech_id’,’categories’),
 If not provided, all umech_id are assigned a ‘Type’ category
 of ‘B’. If a mechanism doesn’t have a category, it should be an empty
-string.</p>
-</dd>
-</dl>
+string.</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py property">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.name">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.name" title="Link to this definition">¶</a></dt>
-<dd><p>str: The name of the object.</p>
+<dd><p>The name of the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.cov">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cov</span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.cov" title="Link to this definition">¶</a></dt>
-<dd><p>xr.DataArray: Linear uncertainty mechanisms.</p>
+<dd><p>Linear uncertainty mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.mc">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mc</span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.mc" title="Link to this definition">¶</a></dt>
-<dd><p>xr.DataArray: samples of Monte-Carlo distributions.</p>
+<dd><p>samples of Monte-Carlo distributions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.covdofs">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">covdofs</span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.covdofs" title="Link to this definition">¶</a></dt>
-<dd><p>xr.DataArray: The degrees of freedom on linear mechanisms.</p>
+<dd><p>The degrees of freedom on linear mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.covcats">
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">covcats</span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.covcats" title="Link to this definition">¶</a></dt>
-<dd><p>xr.DataArray: String metadata for linear uncertainty mechanisms.</p>
+<dd><p>String metadata for linear uncertainty mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py property">
@@ -246,18 +266,16 @@ string.</p>
 <dd><p>Create a RMEMeas object with just a nominal dataset.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>The name of the object to be created.</p>
-</dd>
-<dt><strong>nom</strong><span class="classifier">xr.DataArray</span></dt><dd><p>Nominal data set.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the object to be created.</p></li>
+<li><p><strong>nom</strong> (<em>xr.DataArray</em>) – Nominal data set.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>‘RMEMeas’</dt><dd><p>A RMEMeas object with only nominal values.</p>
+<dd class="field-even"><p>A RMEMeas object with only nominal values.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘RMEMeas’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -269,42 +287,31 @@ string.</p>
 <p>Will be deprecated in V0.5. Please use RMEmodel instead.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of the object.</p>
-</dd>
-<dt><strong>nom</strong><span class="classifier">float</span></dt><dd><p>Expected value of the distribution.</p>
-</dd>
-<dt><strong>std</strong><span class="classifier">float</span></dt><dd><p>Standard deviation of the distribution.</p>
-</dd>
-<dt><strong>dist</strong><span class="classifier">str, {‘gaussian’, ‘normal’, ‘uniform’, ‘rectangular’}</span></dt><dd><p>Name of the distribution to use. Supports ‘gaussian’ or ‘uniform’.
-The default is ‘gaussian’.</p>
-</dd>
-<dt><strong>mechanism_name</strong><span class="classifier">str, optional</span></dt><dd><p>What to name the linear uncertainty mechanisms associated with the
-distribution. The default is None.</p>
-</dd>
-<dt><strong>samples</strong><span class="classifier">float, optional</span></dt><dd><p>How many monte-carlo samples to draw from. The default is 100.</p>
-</dd>
-<dt><strong>categories</strong><span class="classifier">dict[str], optional</span></dt><dd><p>What to categorize the linear uncertainty mechanism as
-Should be {category:value} pairs. The default is {‘Type’:’B’}.</p>
-</dd>
-<dt><strong>use_sample_mean_std</strong><span class="classifier">bool, optional</span></dt><dd><p>If true, uses the mean and standard deviation of random samples drawn
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the object.</p></li>
+<li><p><strong>nom</strong> (<em>float</em>) – Expected value of the distribution.</p></li>
+<li><p><strong>std</strong> (<em>float</em>) – Standard deviation of the distribution.</p></li>
+<li><p><strong>dist</strong> (<em>str</em><em>, </em><em>{'gaussian'</em><em>, </em><em>'normal'</em><em>, </em><em>'uniform'</em><em>, </em><em>'rectangular'}</em>) – Name of the distribution to use. Supports ‘gaussian’ or ‘uniform’.
+The default is ‘gaussian’.</p></li>
+<li><p><strong>mechanism_name</strong> (<em>str</em><em>, </em><em>optional</em>) – What to name the linear uncertainty mechanisms associated with the
+distribution. The default is None.</p></li>
+<li><p><strong>samples</strong> (<em>float</em><em>, </em><em>optional</em>) – How many monte-carlo samples to draw from. The default is 100.</p></li>
+<li><p><strong>categories</strong> (<em>dict</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – What to categorize the linear uncertainty mechanism as
+Should be {category:value} pairs. The default is {‘Type’:’B’}.</p></li>
+<li><p><strong>use_sample_mean_std</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, uses the mean and standard deviation of random samples drawn
 from the defined distribution for the linear sensitivity analysis and
 as the nominal and standard uncertainty values. If False, uses the provided nominal and
-standard deviation of the distribution. The default is True.</p>
+standard deviation of the distribution. The default is True.</p></li>
+</ul>
 </dd>
-</dl>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – Unsupported distribution.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>‘RMEMeas’</dt><dd><p>RMEMeas based on defined distribution.</p>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RMEMeas based on defined distribution.</p>
 </dd>
-</dl>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Exception</dt><dd><p>Unsupported distribution.</p>
-</dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘RMEMeas’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -315,22 +322,19 @@ standard deviation of the distribution. The default is True.</p>
 <dd><p>Read any RMEMeas objects saved in an hdf5 group.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>file</strong><span class="classifier">str</span></dt><dd><p>path to the hdf5 file.</p>
-</dd>
-<dt><strong>group_path</strong><span class="classifier">str, optional</span></dt><dd><p>path to group. The default is None.</p>
-</dd>
-<dt><strong>verbose</strong><span class="classifier">bool , optional</span></dt><dd><p>If True, prints information about attempts to read
-files. The default is False.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>file</strong> (<em>str</em>) – path to the hdf5 file.</p></li>
+<li><p><strong>group_path</strong> (<em>str</em><em>, </em><em>optional</em>) – path to group. The default is None.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em> , </em><em>optional</em>) – If True, prints information about attempts to read
+files. The default is False.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>dict[‘RMEMeas’]</dt><dd><p>Dictionary where keys are names of the RMEMeas objects and values
+<dd class="field-even"><p>Dictionary where keys are names of the RMEMeas objects and values
 are the RMEMeas objects themselves.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict[‘RMEMeas’]</p>
 </dd>
 </dl>
 </dd></dl>
@@ -341,22 +345,19 @@ are the RMEMeas objects themselves.</p>
 <dd><p>Read a RMEMeas object from HDF5.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>group:</strong></dt><dd><p>HDF5 Group object</p>
-</dd>
-<dt><strong>nominal_only: bool, optional</strong></dt><dd><p>If true, will only load the nominal value of the data set. Saves
-time and memory if you don’t need that data.</p>
-</dd>
-<dt><strong>keep_attrs: bool, optional</strong></dt><dd><p>If true, copies over all metadata in attrs. Otherwise, only
-keeps metadata required for class instantiation.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> – HDF5 Group object</p></li>
+<li><p><strong>nominal_only</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, will only load the nominal value of the data set. Saves
+time and memory if you don’t need that data.</p></li>
+<li><p><strong>keep_attrs</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, copies over all metadata in attrs. Otherwise, only
+keeps metadata required for class instantiation.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>RMEMeas</dt><dd><p>RMEMeas object.</p>
+<dd class="field-even"><p>RMEMeas object.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -367,21 +368,16 @@ keeps metadata required for class instantiation.</p>
 <dd><p>Save to an hdf5 object. Wrapper for the group_saveable method ‘save’.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>group</strong><span class="classifier">h5py.Group</span></dt><dd><p>hdf5 group to save under.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>h5py.Group</em>) – hdf5 group to save under.</p></li>
+<li><p><strong>override</strong> (<em>bool</em><em>,</em>) – if True, will delete the group object being saved to if it already
+exists. Default is false.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>,</em>) – If provided will change Name of RMEMeas object prior to saving.
+Equivalent to calling self.name = name prior to calling save.</p></li>
+</ul>
 </dd>
-<dt><strong>override: bool,</strong></dt><dd><p>if True, will delete the group object being saved to if it already
-exists. Default is false.</p>
-</dd>
-<dt><strong>name:str,</strong></dt><dd><p>If provided will change Name of RMEMeas object prior to saving.
-Equivalent to calling self.name = name prior to calling save.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -393,32 +389,25 @@ Equivalent to calling self.name = name prior to calling save.</p>
 <p>covcats and covdofs metadata will be loaded as the default values.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>path</strong><span class="classifier">str</span></dt><dd><p>Path to xml header file.</p>
-</dd>
-<dt><strong>from_csv</strong><span class="classifier">callable</span></dt><dd><p>Read function, takes a path to a copy of the data file and returns
-an xarray object.</p>
-</dd>
-<dt><strong>old_dir</strong><span class="classifier">str, optional</span></dt><dd><p>Name of old path stored in xml file. Will be swapped with new_dir
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path to xml header file.</p></li>
+<li><p><strong>from_csv</strong> (<em>callable</em>) – Read function, takes a path to a copy of the data file and returns
+an xarray object.</p></li>
+<li><p><strong>old_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of old path stored in xml file. Will be swapped with new_dir
 if provided. Old XML format isn’t portable, and the paths
 need to be manually swapped when the files are moved around.
-The default is None.</p>
+The default is None.</p></li>
+<li><p><strong>new_dir</strong> (<em>str</em><em>, </em><em>optional</em>) – Path string to replace old_dir with. The default is None.</p></li>
+</ul>
 </dd>
-<dt><strong>new_dir</strong><span class="classifier">str, optional</span></dt><dd><p>Path string to replace old_dir with. The default is None.</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If old_dir/new_dir are not both provided, but one is.</p>
 </dd>
-</dl>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new</strong> – MUFmeas object from the legacy format.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>new</strong><span class="classifier">MUFmeas</span></dt><dd><p>MUFmeas object from the legacy format.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Exception</dt><dd><p>If old_dir/new_dir are not both provided, but one is.</p>
-</dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>MUFmeas</p>
 </dd>
 </dl>
 </dd></dl>
@@ -430,33 +419,23 @@ The default is None.</p>
 <p>This does not preserve metadata in covdofs or covcats.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>target_directory</strong><span class="classifier">str</span></dt><dd><p>Directory in which to save the support folder which stores all
-the copies of the data.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_directory</strong> (<em>str</em>) – Directory in which to save the support folder which stores all
+the copies of the data.</p></li>
+<li><p><strong>to_csv</strong> (<em>callable</em>) – Dataformat of the underlying cov-data. Will be inferred if left
+as None. The default is None.</p></li>
+<li><p><strong>data_extension</strong> (<em>str</em>) – What to save the datafile extensions as (e.g. .s1p, .csv, etc)</p></li>
+<li><p><strong>header_extension</strong> (<em>str</em><em>, </em><em>optional</em>) – What to save the xml header file extension as.
+The default is ‘.meas’.</p></li>
+<li><p><strong>header_directory</strong> (<em>str</em><em>, </em><em>optional</em>) – Location in which to store the header file. If None, defaults
+to the target_directory. Default is None.</p></li>
+</ul>
 </dd>
-<dt><strong>to_csv</strong><span class="classifier">callable</span></dt><dd><p>Dataformat of the underlying cov-data. Will be inferred if left
-as None. The default is None.</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If no dataformat provided and one cannot be inferred.</p>
 </dd>
-<dt><strong>data_extension: str</strong></dt><dd><p>What to save the datafile extensions as (e.g. .s1p, .csv, etc)</p>
-</dd>
-<dt><strong>header_extension</strong><span class="classifier">str, optional</span></dt><dd><p>What to save the xml header file extension as.
-The default is ‘.meas’.</p>
-</dd>
-<dt><strong>header_directory</strong><span class="classifier">str, optional</span></dt><dd><p>Location in which to store the header file. If None, defaults
-to the target_directory. Default is None.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Exception</dt><dd><p>If no dataformat provided and one cannot be inferred.</p>
-</dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -467,10 +446,10 @@ to the target_directory. Default is None.</p>
 <dd><p>Make a copy of a RMEMeas object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>RMEMeas</dt><dd><p>Copied object.</p>
+<dd class="field-odd"><p>Copied object.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -489,17 +468,12 @@ as 0.1 + 0.0 + 0.2 = 0.3, and not remove the mechanism.</p>
 propagator.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>tolerance</strong><span class="classifier">float, optional</span></dt><dd><p>Maximum value a sum of standard uncertainties that is deemed
+<dd class="field-odd"><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – Maximum value a sum of standard uncertainties that is deemed
 trivial, used to determine what mechanisms should be removed.
 The default is 0.</p>
 </dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -514,16 +488,11 @@ names of uncertainty files. (E.G, multiple device definitions come
 from calibration service formats with generic ‘ua,ub’ naming)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>same_uid: bool, optional</strong></dt><dd><p>If true, all parameter locations will have the same uid added
+<dd class="field-odd"><p><strong>same_uid</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, all parameter locations will have the same uid added
 to the end. Default is False.</p>
 </dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -534,17 +503,12 @@ to the end. Default is False.</p>
 <dd><p>Add a Monte Carlo sample to the distribution.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>sample</strong><span class="classifier">xr.DataArray</span></dt><dd><p>Single sample of the probability distribution that represents the
+<dd class="field-odd"><p><strong>sample</strong> (<em>xr.DataArray</em>) – Single sample of the probability distribution that represents the
 data set. Expected to be the same shape, dimensions, and
 coordinates of the nominal.</p>
 </dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -556,31 +520,23 @@ coordinates of the nominal.</p>
 <p>Note:</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>name</strong><span class="classifier">str</span></dt><dd><p>Name of new mechanism, must be unique.</p>
-</dd>
-<dt><strong>value</strong><span class="classifier">xr.DataArray</span></dt><dd><p>Array of nominal+1 standard uncertainty of new mechanism.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of new mechanism, must be unique.</p></li>
+<li><p><strong>value</strong> (<em>xr.DataArray</em>) – Array of nominal+1 standard uncertainty of new mechanism.
 If value has the same size as the nominal data, the function will insert a
-new dimension at axis zero before concatenating to the covariance data.</p>
-</dd>
-<dt><strong>dof: float,optional</strong></dt><dd><p>Degrees of freedom associated with the uncertainty mechanism.
-Default is infinite.</p>
-</dd>
-<dt><strong>category: dict,</strong></dt><dd><p>Dictionary of key-value string pairs categorizing the uncertainty
+new dimension at axis zero before concatenating to the covariance data.</p></li>
+<li><p><strong>dof</strong> (<em>float</em><em>,</em><em>optional</em>) – Degrees of freedom associated with the uncertainty mechanism.
+Default is infinite.</p></li>
+<li><p><strong>category</strong> (<em>dict</em><em>,</em>) – Dictionary of key-value string pairs categorizing the uncertainty
 mechanisms. E.g. {‘Type’:’B’,’Origin’:’Datasheet’}. The default
-is {‘Type’:’B’}.</p>
+is {‘Type’:’B’}.</p></li>
+<li><p><strong>add_uid</strong> (<em>bool</em><em>, </em><em>optional</em>) – Will be deprecated, uids are used automatically now.</p></li>
+<li><p><strong>use_uuid</strong> (<em>str</em><em>, </em><em>optional</em>) – Can optionally provide a UUID for th emechanism, otherwise one
+will be generated</p></li>
+</ul>
 </dd>
-<dt><strong>add_uid: bool, optional</strong></dt><dd><p>Will be deprecated, uids are used automatically now.</p>
-</dd>
-<dt><strong>use_uuid</strong><span class="classifier">str, optional</span></dt><dd><p>Can optionally provide a UUID for th emechanism, otherwise one
-will be generated</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -590,17 +546,14 @@ will be generated</p>
 <em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nom</span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.nom" title="Link to this definition">¶</a></dt>
 <dd><p>Get the nominal values of the RMEMeas object.</p>
 <dl class="field-list simple">
-<dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>xr.DataArray</dt><dd><p>Nominal values in an xr.DataArray</p>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – if no data is store.</p>
 </dd>
-</dl>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nominal values in an xr.DataArray</p>
 </dd>
-<dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>Exception</dt><dd><p>if no data is store.</p>
-</dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
 </dd>
 </dl>
 </dd></dl>
@@ -611,10 +564,10 @@ will be generated</p>
 <dd><p>Get the names of uncertainty mechanisms, excluding the nominal.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>List</dt><dd><p>List of uncertainty mechanism strings.</p>
+<dd class="field-odd"><p>List of uncertainty mechanism strings.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List</p>
 </dd>
 </dl>
 </dd></dl>
@@ -628,27 +581,23 @@ data (.cov) using a student-t distribution with means of .nominal, and
 a scale of 1 standard uncertainty.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>percent</strong><span class="classifier">float</span></dt><dd><p>Percent confidence to calculate intervals on, centered about the
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>percent</strong> (<em>float</em>) – Percent confidence to calculate intervals on, centered about the
 nominal. For example, a value of 0.5 will calculate intervals such
 that 0.25 of samples are between the mean and the lower, and 0.25
-of expected samples are between the mean and the upper.</p>
-</dd>
-<dt><strong>deg</strong><span class="classifier">bool, optional</span></dt><dd><p>If you are calculated confidence intervals on degrees.
-The default is False.</p>
-</dd>
-<dt><strong>rad</strong><span class="classifier">bool, optional</span></dt><dd><p>If you are calculating confidence intervals on radians.
-The default is False.</p>
-</dd>
-</dl>
+of expected samples are between the mean and the upper.</p></li>
+<li><p><strong>deg</strong> (<em>bool</em><em>, </em><em>optional</em>) – If you are calculated confidence intervals on degrees.
+The default is False.</p></li>
+<li><p><strong>rad</strong> (<em>bool</em><em>, </em><em>optional</em>) – If you are calculating confidence intervals on radians.
+The default is False.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>lower</strong><span class="classifier">xr.DataArray</span></dt><dd><p>Lower bounds on the confidence interval.</p>
-</dd>
-<dt><strong>upper</strong><span class="classifier">xr.DataArray</span></dt><dd><p>Upper bounds on the confidence interval.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>lower</strong> (<em>xr.DataArray</em>) – Lower bounds on the confidence interval.</p></li>
+<li><p><strong>upper</strong> (<em>xr.DataArray</em>) – Upper bounds on the confidence interval.</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -659,12 +608,11 @@ The default is False.</p>
 <dd><p>Get the dof of of the RMEMeas object’s covariance data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>float</dt><dd><p>degrees of freedom of standard uncertainty from linear sensitivity.</p>
-</dd>
-<dt>float</dt><dd><p>degrees of freedom of standard uncertainty from monte-carlo</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>float</em> – degrees of freedom of standard uncertainty from linear sensitivity.</p></li>
+<li><p><em>float</em> – degrees of freedom of standard uncertainty from monte-carlo</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -676,26 +624,22 @@ The default is False.</p>
 <p>Supports uncertainties on angles via the deg/rad key word arguments.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>k</strong><span class="classifier">float, optional</span></dt><dd><p>Expansion factor. The default is 1.</p>
-</dd>
-<dt><strong>deg: bool, optional</strong></dt><dd><p>If true, treats the values as angles and finds the minimum
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<em>float</em><em>, </em><em>optional</em>) – Expansion factor. The default is 1.</p></li>
+<li><p><strong>deg</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, treats the values as angles and finds the minimum
 distance between the perturbed and un-perturbed data sets in
-degrees. The default is False</p>
-</dd>
-<dt><strong>rad: bool, optional</strong></dt><dd><p>If true, treats the values as angles and finds the minimum
+degrees. The default is False</p></li>
+<li><p><strong>rad</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, treats the values as angles and finds the minimum
 distance between the perturbed and un-perturbed data sets in
-radians. The default is False</p>
-</dd>
-</dl>
+radians. The default is False</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>covunc</strong><span class="classifier">xr.DataArray</span></dt><dd><p>xr.DataArray of std unc from covariance data.</p>
-</dd>
-<dt><strong>mcunc</strong><span class="classifier">xr.DataArray</span></dt><dd><p>standard uncertainty of montecarlo data.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>covunc</strong> (<em>xr.DataArray</em>) – xr.DataArray of std unc from covariance data.</p></li>
+<li><p><strong>mcunc</strong> (<em>xr.DataArray</em>) – standard uncertainty of montecarlo data.</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -707,26 +651,22 @@ radians. The default is False</p>
 <p>Supports uncertainties on angles via the deg/rad key word arguments.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>k</strong><span class="classifier">float, optional</span></dt><dd><p>Expansion factor. The default is 1.</p>
-</dd>
-<dt><strong>deg: bool, optional</strong></dt><dd><p>If true, treats the values as angles and finds the minimum
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<em>float</em><em>, </em><em>optional</em>) – Expansion factor. The default is 1.</p></li>
+<li><p><strong>deg</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, treats the values as angles and finds the minimum
 distance between the perturbed and un-perturbed data sets in
-degrees. The default is False</p>
-</dd>
-<dt><strong>rad: bool, optional</strong></dt><dd><p>If true, treats the values as angles and finds the minimum
+degrees. The default is False</p></li>
+<li><p><strong>rad</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, treats the values as angles and finds the minimum
 distance between the perturbed and un-perturbed data sets in
-radians. The default is False</p>
-</dd>
-</dl>
+radians. The default is False</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>xr.DataArray</dt><dd><p>Uncertainty bounds from cov data.</p>
-</dd>
-<dt>xr.DataArray</dt><dd><p>Uncertainty bounds from montecarlo data.</p>
-</dd>
-</dl>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>xr.DataArray</em> – Uncertainty bounds from cov data.</p></li>
+<li><p><em>xr.DataArray</em> – Uncertainty bounds from montecarlo data.</p></li>
+</ul>
+</p>
 </dd>
 </dl>
 </dd></dl>
@@ -739,21 +679,16 @@ radians. The default is False</p>
 <p>categories and designation correspond to key,</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>mechanisms</strong><span class="classifier">list[str]</span></dt><dd><p>1-d List of mechanisms to be assigned a category</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mechanisms</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – 1-d List of mechanisms to be assigned a category</p></li>
+<li><p><strong>categories</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – 1-d list of categories being assigned. Can be new categories that don’t
+already exist. Index corresponds to index of mechanisms.</p></li>
+<li><p><strong>designation</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – 1-d list of designation to assign each mechanism. Index corresponds
+to index of mechanisms.</p></li>
+</ul>
 </dd>
-<dt><strong>categories</strong><span class="classifier">list[str]</span></dt><dd><p>1-d list of categories being assigned. Can be new categories that don’t
-already exist. Index corresponds to index of mechanisms.</p>
-</dd>
-<dt><strong>designation: list[str]</strong></dt><dd><p>1-d list of designation to assign each mechanism. Index corresponds
-to index of mechanisms.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -764,16 +699,11 @@ to index of mechanisms.</p>
 <dd><p>Assign categories to all the linear uncertainty mechanisms.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>**categories</strong><span class="classifier">list[str]</span></dt><dd><p>Keyword argument pairs of category names : designation to assign
+<dd class="field-odd"><p><strong>**categories</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Keyword argument pairs of category names : designation to assign
 to all linear uncertainty mechanisms in a variable.</p>
 </dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -785,16 +715,11 @@ to all linear uncertainty mechanisms in a variable.</p>
 <p>If an element in categories already exists, it is ignored and not added.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>category</strong><span class="classifier">list[str]</span></dt><dd><p>List of categories to create. If they already exist, they are not
+<dd class="field-odd"><p><strong>category</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of categories to create. If they already exist, they are not
 added.</p>
 </dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -807,11 +732,11 @@ added.</p>
 by the self.dof() function prior to running the welch-stat equation.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>RMEMeas:</dt><dd><p>New RMEMeas object with the linear uncertainty mechanisms originating
+<dd class="field-odd"><p>New RMEMeas object with the linear uncertainty mechanisms originating
 from the same combine call (Type A Analysis) grouped together.</p>
 </dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -835,36 +760,30 @@ from the same combine call (Type A Analysis) grouped together.</p>
 <p>See xarray interp documentation for more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>coords</strong><span class="classifier">dict, optional</span></dt><dd><p>Mapping from dimension names to the new coordinates.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coords</strong> (<em>dict</em><em>, </em><em>optional</em>) – Mapping from dimension names to the new coordinates.
 New coordinate can be a scalar, array-like or DataArray.
 If DataArrays are passed as new coordinates, their dimensions are
 used for the broadcasting. Missing values are skipped.
-The default is None.</p>
-</dd>
-<dt><strong>method</strong><span class="classifier">str, optional</span></dt><dd><dl class="simple">
-<dt>{“linear”, “nearest”, “zero”, “slinear”, “quadratic”, “cubic”,</dt><dd><p>“quintic”, “polynomial”, “pchip”, “barycentric”, “krogh”, “akima”,
+The default is None.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>{“linear”, “nearest”, “zero”, “slinear”, “quadratic”, “cubic”,</dt><dd><p>”quintic”, “polynomial”, “pchip”, “barycentric”, “krogh”, “akima”,
 “makima”}) – Interpolation method. The default is ‘linear’.</p>
 </dd>
 </dl>
-</dd>
-<dt><strong>assume_sorted</strong><span class="classifier">bool, optional</span></dt><dd><p>If False, values of x can be in any order and they are sorted
+</p></li>
+<li><p><strong>assume_sorted</strong> (<em>bool</em><em>, </em><em>optional</em>) – If False, values of x can be in any order and they are sorted
 first. If True, x has to be an array of monotonically increasing
-values. The default is False.</p>
-</dd>
-<dt><strong>kwargs</strong><span class="classifier">dict, optional</span></dt><dd><p>Additional keyword arguments passed to scipy’s interpolator.
+values. The default is False.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Additional keyword arguments passed to scipy’s interpolator.
 Valid options and their behavior depend whether interp1d or
-interpn is used.. The default is None.</p>
+interpn is used.. The default is None.</p></li>
+<li><p><strong>**coords_kwargs</strong> (<em>dict like</em>) – The keyword arguments form of coords. One of coords or
+coords_kwargs must be provided..</p></li>
+</ul>
 </dd>
-<dt><strong>**coords_kwargs</strong><span class="classifier">dict like</span></dt><dd><p>The keyword arguments form of coords. One of coords or
-coords_kwargs must be provided..</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>None.</dt><dd></dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -875,28 +794,23 @@ coords_kwargs must be provided..</p>
 <dd><p>Get a view into specific uncertainty mechanisms or Monte Carlo samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>umech_id</strong><span class="classifier">iter[str], optional</span></dt><dd><p>Linear uncertainty mechanisms to look at. The default is None.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>umech_id</strong> (<em>iter</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Linear uncertainty mechanisms to look at. The default is None.</p></li>
+<li><p><strong>mcsamples</strong> (<em>iter</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Monte Carlo samples to look at. The default is None.</p></li>
+</ul>
 </dd>
-<dt><strong>mcsamples</strong><span class="classifier">iter[int], optional</span></dt><dd><p>Monte Carlo samples to look at. The default is None.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>‘RMEMeas’</dt><dd><p>View into RMEMeas object with only the selected linear uncertainty
-mechanisms and Monte Carlo samples.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>If ‘nominal’ is passed to umech_id, or 0 is passed to
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If ‘nominal’ is passed to umech_id, or 0 is passed to
 the mcsamples. Those represent the nominal values and are
 always included by default, since an uncertainty object should
 always have a nominal value.</p>
 </dd>
-</dl>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>View into RMEMeas object with only the selected linear uncertainty
+mechanisms and Monte Carlo samples.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘RMEMeas’</p>
 </dd>
 </dl>
 </dd></dl>
@@ -926,40 +840,33 @@ and covdofs array. Use .copy() to create an unconnected version.</p>
 <p>See documentation on DataArray.sel in the xarray package for details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>indexers</strong><span class="classifier">TYPE, optional</span></dt><dd><p>A dict with keys matching dimensions and values given by scalars,
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indexers</strong> (<em>TYPE</em><em>, </em><em>optional</em>) – A dict with keys matching dimensions and values given by scalars,
 slices or arrays of tick labels. For dimensions with multi-index,
 the indexer may also be a dict-like object with keys matching index
 level names.
-umech_id can’t be provided.</p>
-</dd>
-<dt><strong>method</strong><span class="classifier">str, optional</span></dt><dd><p>Method to use for inexact matches:
+umech_id can’t be provided.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – Method to use for inexact matches:
 * None (default): only exact matches
 * pad / ffill: propagate last valid index value forward
 * backfill / bfill: propagate next valid index value backward
 * nearest: use nearest valid index value
-The default is None.</p>
-</dd>
-<dt><strong>tolerance</strong><span class="classifier">float, optional</span></dt><dd><p>Maximum distance between original and new labels for inexact
+The default is None.</p></li>
+<li><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – Maximum distance between original and new labels for inexact
 matches. The values of the index at the matching locations must
-satisfy the equation abs(index[indexer] - target) &lt;= tolerance.</p>
+satisfy the equation abs(index[indexer] - target) &lt;= tolerance.</p></li>
+<li><p><strong>**indexers_kwargs</strong> (<em>dict</em>) – The keyword arguments form of indexers.
+One of indexers or indexers_kwargs must be provided.</p></li>
+</ul>
 </dd>
-<dt><strong>**indexers_kwargs</strong><span class="classifier">dict</span></dt><dd><p>The keyword arguments form of indexers.
-One of indexers or indexers_kwargs must be provided.</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – DESCRIPTION.</p>
 </dd>
-</dl>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out</strong> – View into indexed RMEMeas object.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>out</strong><span class="classifier">RMEMeas</span></dt><dd><p>View into indexed RMEMeas object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>DESCRIPTION.</p>
-</dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -976,36 +883,29 @@ nominal)</p>
 and covdofs array. Use .copy() to create an unconnected version.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>indexers</strong><span class="classifier">dict, optional</span></dt><dd><p>A dict with keys matching dimensions and values given by integers,
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indexers</strong> (<em>dict</em><em>, </em><em>optional</em>) – A dict with keys matching dimensions and values given by integers,
 slice objects or arrays. indexer can be a integer, slice,
 array-like or DataArray. If DataArrays are passed as indexers,
 xarray-style indexing will be carried out.One of indexers or
-indexers_kwargs must be provided.. The default is None.</p>
-</dd>
-<dt><strong>drop</strong><span class="classifier">bool, optional</span></dt><dd><p>drop coordinates variables indexed by integers instead of making
-them scalar. The default is False.</p>
-</dd>
-<dt><strong>missing_dims</strong><span class="classifier">str, optional</span></dt><dd><p>What to do if dimensions that should be selected from are not
+indexers_kwargs must be provided.. The default is None.</p></li>
+<li><p><strong>drop</strong> (<em>bool</em><em>, </em><em>optional</em>) – drop coordinates variables indexed by integers instead of making
+them scalar. The default is False.</p></li>
+<li><p><strong>missing_dims</strong> (<em>str</em><em>, </em><em>optional</em>) – What to do if dimensions that should be selected from are not
 present in the DataArray: - “raise”: raise an exception - “warn”:
 raise a warning, and ignore the missing dimensions - “ignore”:
-ignore the missing dimensions. The default is ‘raise’.</p>
+ignore the missing dimensions. The default is ‘raise’.</p></li>
+<li><p><strong>**indexers_kwargs</strong> (<em>TYPE</em>) – The keyword arguments form of indexers..</p></li>
+</ul>
 </dd>
-<dt><strong>**indexers_kwargs</strong><span class="classifier">TYPE</span></dt><dd><p>The keyword arguments form of indexers..</p>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – DESCRIPTION.</p>
 </dd>
-</dl>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out</strong> – View into indexed RMEMeas object.</p>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt><strong>out</strong><span class="classifier">RMEMeas</span></dt><dd><p>View into indexed RMEMeas object.</p>
-</dd>
-</dl>
-</dd>
-<dt class="field-odd">Raises<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>ValueError</dt><dd><p>DESCRIPTION.</p>
-</dd>
-</dl>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1016,19 +916,17 @@ ignore the missing dimensions. The default is ‘raise’.</p>
 <dd><p>Apply a polynominal fit along dim.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>dim</strong><span class="classifier">str</span></dt><dd><p>Name of dimension to fit along.</p>
-</dd>
-<dt><strong>deg</strong><span class="classifier">int</span></dt><dd><p>Degree of fit</p>
-</dd>
-<dt><strong>aoo</strong></dt><dd></dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em>) – Name of dimension to fit along.</p></li>
+<li><p><strong>deg</strong> (<em>int</em>) – Degree of fit</p></li>
+<li><p><strong>aoo</strong></p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>RMEMeas</dt><dd><p>Coefficients of data.</p>
+<dd class="field-even"><p>Coefficients of data.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1041,18 +939,16 @@ ignore the missing dimensions. The default is ‘raise’.</p>
 dimension of polynomial fits along degree_dim.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>coord</strong><span class="classifier">xr.DataArray</span></dt><dd><p>Coordinate to fit along.</p>
-</dd>
-<dt><strong>degree_dim</strong><span class="classifier">str</span></dt><dd><p>Polynomial degree dimension.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coord</strong> (<em>xr.DataArray</em>) – Coordinate to fit along.</p></li>
+<li><p><strong>degree_dim</strong> (<em>str</em>) – Polynomial degree dimension.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>RMEMeas</dt><dd><p>Coefficients of data.</p>
+<dd class="field-even"><p>Coefficients of data.</p>
 </dd>
-</dl>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -1067,41 +963,32 @@ perturbed datasets.</p>
 more details.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>coords</strong><span class="classifier">str | xr.DataArray | Sequence[str] | Sequence[xr.DataArray], DataArray</span></dt><dd><p>Independent coordinate(s) over which to perform the curve fitting.
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coords</strong> (<em>str</em><em> | </em><em>xr.DataArray</em><em> | </em><em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>Sequence</em><em>[</em><em>xr.DataArray</em><em>]</em><em>, </em><em>DataArray</em>) – Independent coordinate(s) over which to perform the curve fitting.
 Must share at least one dimension with the calling object.
 When fitting multi-dimensional functions,
 supply coords as a sequence in the same order as arguments in func.
-To fit along existing dimensions of the calling object, coords can also be specified as a str or sequence of strs.</p>
-</dd>
-<dt><strong>func</strong><span class="classifier">callable</span></dt><dd><p>User specified function in the form f(x, <a href="#id1"><span class="problematic" id="id2">*</span></a>params) which returns a numpy array of length len(x).
+To fit along existing dimensions of the calling object, coords can also be specified as a str or sequence of strs.</p></li>
+<li><p><strong>func</strong> (<em>callable</em>) – User specified function in the form f(x, <a href="#id1"><span class="problematic" id="id2">*</span></a>params) which returns a numpy array of length len(x).
 Params are the fittable parameters which are optimized by scipy curve_fit.
-x can also be specified as a sequence containing multiple coordinates, e.g. f((x0, x1), <a href="#id3"><span class="problematic" id="id4">*</span></a>params).</p>
-</dd>
-<dt><strong>reduce_dims: str | Iterable | None, optional</strong></dt><dd><p>Additional dimension(s) over which to aggregate while fitting. For example, calling ds.curvefit(coords=’time’, reduce_dims=[‘lat’, ‘lon’], …)
-will aggregate all lat and lon points and fit the specified function along the time dimension.</p>
-</dd>
-<dt><strong>skipna</strong><span class="classifier">bool, optional</span></dt><dd><p>Whether to skip missing values when fitting. Default is True.</p>
-</dd>
-<dt><strong>p0</strong><span class="classifier">dict, optional</span></dt><dd><p>Optional dictionary of parameter names to initial guesses passed to the curve_fit p0 arg.
+x can also be specified as a sequence containing multiple coordinates, e.g. f((x0, x1), <a href="#id3"><span class="problematic" id="id4">*</span></a>params).</p></li>
+<li><p><strong>reduce_dims</strong> (<em>str</em><em> | </em><em>Iterable</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Additional dimension(s) over which to aggregate while fitting. For example, calling ds.curvefit(coords=’time’, reduce_dims=[‘lat’, ‘lon’], …)
+will aggregate all lat and lon points and fit the specified function along the time dimension.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to skip missing values when fitting. Default is True.</p></li>
+<li><p><strong>p0</strong> (<em>dict</em><em>, </em><em>optional</em>) – Optional dictionary of parameter names to initial guesses passed to the curve_fit p0 arg.
 If the values are DataArrays, they will be appropriately broadcast to the coordinates of the array.
 If none or only some parameters are passed, the rest will be assigned initial values following the default
-scipy behavior</p>
-</dd>
-<dt><strong>bounds</strong><span class="classifier">dict, optional</span></dt><dd><p>Optional dictionary of parameter names to tuples of bounding values passed to the curve_fit bounds arg.
+scipy behavior</p></li>
+<li><p><strong>bounds</strong> (<em>dict</em><em>, </em><em>optional</em>) – Optional dictionary of parameter names to tuples of bounding values passed to the curve_fit bounds arg.
 If any of the bounds are DataArrays, they will be appropriately broadcast to the coordinates of the array.
-If none or only some parameters are passed, the rest will be unbounded following the default scipy behavior.</p>
-</dd>
-<dt><strong>param_names</strong><span class="classifier">Sequence | None, optional</span></dt><dd><p>Sequence of names for the fittable parameters of func. If not supplied, this will be automatically determined
+If none or only some parameters are passed, the rest will be unbounded following the default scipy behavior.</p></li>
+<li><p><strong>param_names</strong> (<em>Sequence</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Sequence of names for the fittable parameters of func. If not supplied, this will be automatically determined
 by arguments of func. param_names should be manually supplied when fitting a function that takes a
-variable number of parameters.</p>
-</dd>
-<dt><strong>errors</strong><span class="classifier">str, optional</span></dt><dd><p>If ‘raise’, any errors from the scipy.optimize_curve_fit optimization will raise an exception.
-If ‘ignore’, the coefficients and covariances for the coordinates where the fitting failed will be NaN.</p>
-</dd>
-<dt><strong>**kwargs</strong><span class="classifier">optional</span></dt><dd><p>Additional keyword arguments passed to scipy curve_fit.</p>
-</dd>
-</dl>
+variable number of parameters.</p></li>
+<li><p><strong>errors</strong> (<em>str</em><em>, </em><em>optional</em>) – If ‘raise’, any errors from the scipy.optimize_curve_fit optimization will raise an exception.
+If ‘ignore’, the coefficients and covariances for the coordinates where the fitting failed will be NaN.</p></li>
+<li><p><strong>**kwargs</strong> (<em>optional</em>) – Additional keyword arguments passed to scipy curve_fit.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1115,12 +1002,10 @@ to the fit coefficients of func. Assumes function is nonlinear
 and iterates over each function evaluation, which can be slow.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>func</strong><span class="classifier">callable</span></dt><dd><p>callable function</p>
-</dd>
-<dt><strong>coords</strong><span class="classifier">xr.DataArray</span></dt><dd><p>coordinates.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>callable</em>) – callable function</p></li>
+<li><p><strong>coords</strong> (<em>xr.DataArray</em>) – coordinates.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -1132,19 +1017,19 @@ and iterates over each function evaluation, which can be slow.</p>
 <em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.uobjects.</span></span><span class="sig-name descname"><span class="pre">RMEMeasFormatError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.uobjects.RMEMeasFormatError" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
 <p>Error in formatting of data inside RMEMeas</p>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">¶</a></h3>
-<dl class="simple">
-<dt>Exception<span class="classifier">_type_</span></dt><dd><p>_description_</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Exception</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>signature.</strong> (<em>Initialize self.  See help</em><em>(</em><em>type</em><em>(</em><em>self</em><em>)</em><em>) </em><em>for accurate</em>)</p></li>
+</ul>
 </dd>
 </dl>
-<p>Initialize self.  See help(type(self)) for accurate signature.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeasFormatError.message">
 <span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeasFormatError.message" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
-</section>
 </dd></dl>
 
 </section>
@@ -1200,7 +1085,7 @@ and iterates over each function evaluation, which can be slow.</p>
 <h3>Versions</h3>
 <ul>
   <li><a href="../../../../v0.3.4/index.html">v0.3.4</a></li>
-  <li><a href="../../../../v0.4.1/index.html">v0.4.1</a></li>
+  <li><a href="../../../../v0.4.2/index.html">v0.4.2</a></li>
   <li><a href="index.html">development</a></li>
   <li><a href="../../../../stable/index.html">stable</a></li>
 </ul>

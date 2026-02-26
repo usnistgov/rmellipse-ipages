@@ -5,28 +5,11 @@ rmellipse.propagators
 
 .. autoapi-nested-parse::
 
-   
    This module contains objects that propagate data with uncertainties.
 
    Propagators are intended for use with their respective uncertainty objects
    in  ``rmellipse.uobjects``
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
 Classes
@@ -46,26 +29,8 @@ Package Contents
    Bases: :py:obj:`abc.ABC`
 
 
-   
    Defines what a Propagator should look like and how it should behave.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
    .. py:attribute:: active
       :value: None
@@ -77,145 +42,61 @@ Package Contents
 
    .. py:method:: set_active()
 
-      
       Make this propagator the active one.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: propagate(*args, **kwargs)
       :abstractmethod:
 
 
-      
       Wrap a function in an uncertainty propagation engine.
 
+      :param function: any function that should be wrapped to be propagateable.
+      :type function: Callable
+      :param \*args: DESCRIPTION.
+      :type \*args: TYPE
+      :param \*\*kwargs: DESCRIPTION.
+      :type \*\*kwargs: TYPE
 
-      :Parameters:
+      :rtype: Function wrapped in the propagation logic.
 
-          **function** : Callable
-              any function that should be wrapped to be propagateable.
-
-          **\*args** : TYPE
-              DESCRIPTION.
-
-          **\*\*kwargs** : TYPE
-              DESCRIPTION.
-
-      :Returns:
-
-          Function wrapped in the propagation logic.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: combine(*measurements)
       :abstractmethod:
 
 
-      
       Combine realizations of the same measurement into a single measurement.
 
       Adds uncertainty based on the inputs.
 
-      :Parameters:
+      :param function: any function that should be wrapped to be propagateable.
+      :type function: Callable
+      :param \*measurements: Realizations of the measurement.
+      :type \*measurements: TYPE
 
-          **function** : Callable
-              any function that should be wrapped to be propagateable.
+      :rtype: combined measurement.
 
-          **\*measurements: TYPE**
-              Realizations of the measurement.
-
-      :Returns:
-
-          combined measurement.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: combine_across_dim(measurement, dim)
       :abstractmethod:
 
 
-      
       Combine realizations of the same measurement into a single measurement.
 
       Adds uncertainty based on the inputs.
 
-      :Parameters:
+      :param function: any function that should be wrapped to be propagateable.
+      :type function: Callable
+      :param measurement: The measurement object.
+      :type measurement: TYPE
+      :param dim: Dimension to average across.
+      :type dim: string
 
-          **function: Callable**
-              any function that should be wrapped to be propagateable.
+      :rtype: combined measurement.
 
-          **measurement: TYPE**
-              The measurement object.
-
-          **dim: string**
-              Dimension to average across.
-
-      :Returns:
-
-          combined measurement.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
 .. py:class:: RMEProp(montecarlo_sims: int = 0, sensitivity: bool = False, handle_common_grid_method: str = None, common_grid: str = 'frequency', common_coords: dict = {}, interp_kwargs: dict = {}, verbose: bool = False, vectorize: bool = True, set_active: bool = True)
@@ -243,151 +124,79 @@ Package Contents
    grid/dimensions, like frequency points.
 
 
-
    Creates a RMEMeas propagators.Propagator initialized with the defined settings.
    Keyword arguments are initialized into a settings dictionary that
    can be modified on runtime.
 
-
-   :Parameters:
-
-       **montecarlo_sims** : int, optional
-           How many Monte Carlo trials to run. 0 turns off. The default is 0.
-
-       **sensitivity** : bool, optional
-           If true, performs a sensitivity analysis, linear first order
-           via finite differences. The default is False.
-
-       **handle_common_grid_method** : str, optional
-           How to select common dimensions on RMEMeas inputs, done automatically
-           by propagated functions. See
-           RMEMeas.handle_common_grid for more info. None turns off.
-
-       **common_grid** : str, optional
-           Name of the common dimension to handle. The default is 'frequency'.
-
-       **common_coords** : dict, optional
-           Coordinates to pair RMEMeas inputs down to. Used for certain
-           handle_common_grid_method values.See
-           RMEMeas.handle_common_grid The default is {}.
-
-       **verbose** : bool, optional
-           IF true, propagators.Propagator prints information about operations
-           as they happen. The default is False.
-
-       **vectorize: bool, optional;**
-           IF true, propagators.Propagator will loop over uncertainty mechanisms and
-           repeatedly call the propagating function. The default is False.
-
-       **set_active** : bool, optional
-           Sets this as the active propagators.Propagator, used for some magic
-           methods that need to infer what propagators.Propagator to use.
-           The default is True.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
+   :param montecarlo_sims: How many Monte Carlo trials to run. 0 turns off. The default is 0.
+   :type montecarlo_sims: int, optional
+   :param sensitivity: If true, performs a sensitivity analysis, linear first order
+                       via finite differences. The default is False.
+   :type sensitivity: bool, optional
+   :param handle_common_grid_method: How to select common dimensions on RMEMeas inputs, done automatically
+                                     by propagated functions. See
+                                     RMEMeas.handle_common_grid for more info. None turns off.
+   :type handle_common_grid_method: str, optional
+   :param common_grid: Name of the common dimension to handle. The default is 'frequency'.
+   :type common_grid: str, optional
+   :param common_coords: Coordinates to pair RMEMeas inputs down to. Used for certain
+                         handle_common_grid_method values.See
+                         RMEMeas.handle_common_grid The default is {}.
+   :type common_coords: dict, optional
+   :param verbose: IF true, propagators.Propagator prints information about operations
+                   as they happen. The default is False.
+   :type verbose: bool, optional
+   :param vectorize: IF true, propagators.Propagator will loop over uncertainty mechanisms and
+                     repeatedly call the propagating function. The default is False.
+   :type vectorize: bool, optional;
+   :param set_active: Sets this as the active propagators.Propagator, used for some magic
+                      methods that need to infer what propagators.Propagator to use.
+                      The default is True.
+   :type set_active: bool, optional
 
 
    .. py:attribute:: settings
 
-      
-      dict: Stores the current settings of the propagator.
+      Stores the current settings of the propagator.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+      :type: dict
 
 
    .. py:method:: handle_common_grid(process_args: tuple, process_kwargs: dict, dim: str, handle_method: str) -> tuple[tuple, dict]
 
-      
       Handle common grids on RMEMeas objects in process_args or process_kwargs.
 
       This function is called automatically by propagate to align and select
       common grid elements of RMEMeas objects so they are suitable for
       arithemetic and linear algebra.
 
-      :Parameters:
+      :param process_args: DESCRIPTION.
+      :type process_args: tuple
+      :param process_kwargs: DESCRIPTION.
+      :type process_kwargs: dict
+      :param dim: Name of the dimensions being handled.
+      :type dim: str
+      :param handle_method: Name of the handle method. Valid options are:
+                            "common","interp_smallest","interp_common"
+                            "common" will only use values along dim that are shared among ALL
+                            the inputs.
 
-          **process_args** : tuple
-              DESCRIPTION.
+                            "interp_common" will interpolate (1D) to the the provided frequency list
+                            in the common_coords dictionary of the propagators.Propagators settings. The
+                            common_coords settings is expected to be a dictionary of key value
+                            pairs with {dim:array} where dim is the name of the dimension and
+                            array is the 1d set of indexes.
+      :type handle_method: str
 
-          **process_kwargs** : dict
-              DESCRIPTION.
+      :raises Exception: If a handle common grid method is provided that has not been defined.
 
-          **dim** : str
-              Name of the dimensions being handled.
+      :returns: * *tuple* -- Modified positional arguments with common grid handled.
+                * *dict* -- Modified key worded arguments with common grid handled.
 
-          **handle_method** : str
-              Name of the handle method. Valid options are:
-              "common","interp_smallest","interp_common"
-              "common" will only use values along dim that are shared among ALL
-              the inputs.
-              
-              "interp_common" will interpolate (1D) to the the provided frequency list
-              in the common_coords dictionary of the propagators.Propagators settings. The
-              common_coords settings is expected to be a dictionary of key value
-              pairs with {dim:array} where dim is the name of the dimension and
-              array is the 1d set of indexes.
-
-      :Returns:
-
-          tuple
-              Modified positional arguments with common grid handled.
-
-          dict
-              Modified key worded arguments with common grid handled.
-
-
-
-
-      :Raises:
-
-          Exception
-              If a handle common grid method is provided that has not been defined.
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: propagate(fun)
 
-      
       Decorate to make function automatically pass itself through propagate.
 
       Assumes that all the RMEMeas arguments are passed as positional arguments.
@@ -396,89 +205,48 @@ Package Contents
       'auto_arg'. The  __name__ property of the function is assigned as the name
       of the output RMEMeas object.
 
+      :returns: RMEMeas object of output.
+      :rtype: RMEMeas
 
-      :Returns:
-
-          RMEMeas
-              RMEMeas object of output.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: combine(*measurements: rmellipse.uobjects.RMEMeas, error_of_mean: bool = False, n_single_values: Union[float, int] = None, combine_basename: str = 'combined', add_uuid: bool = True, combine_categories: dict[str] = {'Type': 'A'}) -> rmellipse.uobjects.RMEMeas
 
-      
       Combine repeated measurements with uncertainty into a single measurement.
 
       Additional uncertainty mechanisms are created with the 'combine_basename'
       as the name of the mechanisms + an iterated integer. Principal component
       analysis is used to create the additional mechanisms.
 
-      :Parameters:
+      :param \*measurements: DESCRIPTION.
+      :type \*measurements: RMEMeas
+      :param error_of_mean: If true, uses the error of the mean when creating the new uncertainty
+                            mechanisms. The default is False.
+      :type error_of_mean: bool, optional
+      :param n_single_values: Describes how many of the singular values to keep as
+                              error mechanisms when performing the PCA.If n_single_values<1,
+                              will provide the min number of values to describe n_single_values
+                              ratio of the total variance described by the SVD. If
+                              n_single_values> 1, will utilize the integer n_single_values number
+                              of singular values. If None, will use all the singular values
+                              available. Useful for reducing the size of data sets when
+                              large numbers of repeated measurements are used.The default is None.
+      :type n_single_values: Union[float,int], optional
+      :param combine_basename: Base name usd when creating new uncertainty mechanisms.
+                               Uncertainty mechanisms are named with <basename>+_+<int>, int is
+                               iterated for each new mechanism. The default is 'combined'.
+      :type combine_basename: dict[str], optional
+      :param add_uid: If true, adds a UID to the combine_basename to make it unique. The
+                      default is True.
+      :type add_uid: str, optional
 
-          **\*measurements** : RMEMeas
-              DESCRIPTION.
+      :returns: **out** -- Returns a RMEMeas object with combined uncertainties.
+      :rtype: RMEMeas
 
-          **error_of_mean** : bool, optional
-              If true, uses the error of the mean when creating the new uncertainty
-              mechanisms. The default is False.
-
-          **n_single_values** : Union[float,int], optional
-              Describes how many of the singular values to keep as
-              error mechanisms when performing the PCA.If n_single_values<1,
-              will provide the min number of values to describe n_single_values
-              ratio of the total variance described by the SVD. If
-              n_single_values> 1, will utilize the integer n_single_values number
-              of singular values. If None, will use all the singular values
-              available. Useful for reducing the size of data sets when
-              large numbers of repeated measurements are used.The default is None.
-
-          **combine_basename** : dict[str], optional
-              Base name usd when creating new uncertainty mechanisms.
-              Uncertainty mechanisms are named with <basename>+_+<int>, int is
-              iterated for each new mechanism. The default is 'combined'.
-
-          **add_uid: str, optional**
-              If true, adds a UID to the combine_basename to make it unique. The
-              default is True.
-
-      :Returns:
-
-          **out** : RMEMeas
-              Returns a RMEMeas object with combined uncertainties.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: combine_across_dim(measurement: rmellipse.uobjects.RMEMeas, dim: str, error_of_mean: bool = False, n_single_values: Union[float, int] = None, combine_basename: str = 'combined', add_uuid: bool = True, combine_categories: dict[str] = {'Type': 'A'}) -> rmellipse.uobjects.RMEMeas
 
-      
       Combine repeated measurements that are within a single RMEMeas object
       across a dimension with uncertainty into a single measurement.
 
@@ -486,52 +254,30 @@ Package Contents
       as the name of the mechanisms + an iterated integer. Principal component
       analysis is used to create the additional mechanisms.
 
-      :Parameters:
+      :param \*measurements: DESCRIPTION.
+      :type \*measurements: RMEMeas
+      :param error_of_mean: If true, uses the error of the mean when creating the new uncertainty
+                            mechanisms. The default is False.
+      :type error_of_mean: bool, optional
+      :param n_single_values: Describes how many of the singular values to keep as
+                              error mechanisms when performing the PCA.If n_single_values<1,
+                              will provide the min number of values to describe n_single_values
+                              ratio of the total variance described by the SVD. If
+                              n_single_values> 1, will utilize the integer n_single_values number
+                              of singular values. If None, will use all the singular values
+                              available. Useful for reducing the size of data sets when
+                              large numbers of repeated measurements are used.The default is None.
+      :type n_single_values: Union[float,int], optional
+      :param combine_basename: Base name usd when creating new uncertainty mechanisms.
+                               Uncertainty mechanisms are named with <basename>+_+<int>, int is
+                               iterated for each new mechanism. The default is 'combined'.
+      :type combine_basename: dict[str], optional
+      :param add_uid: If true, adds a UID to the combine_basename to make it unique. The
+                      default is True.
+      :type add_uid: str, optional
 
-          **\*measurements** : RMEMeas
-              DESCRIPTION.
+      :returns: **out** -- Returns a RMEMeas object with combined uncertainties.
+      :rtype: RMEMeas
 
-          **error_of_mean** : bool, optional
-              If true, uses the error of the mean when creating the new uncertainty
-              mechanisms. The default is False.
-
-          **n_single_values** : Union[float,int], optional
-              Describes how many of the singular values to keep as
-              error mechanisms when performing the PCA.If n_single_values<1,
-              will provide the min number of values to describe n_single_values
-              ratio of the total variance described by the SVD. If
-              n_single_values> 1, will utilize the integer n_single_values number
-              of singular values. If None, will use all the singular values
-              available. Useful for reducing the size of data sets when
-              large numbers of repeated measurements are used.The default is None.
-
-          **combine_basename** : dict[str], optional
-              Base name usd when creating new uncertainty mechanisms.
-              Uncertainty mechanisms are named with <basename>+_+<int>, int is
-              iterated for each new mechanism. The default is 'combined'.
-
-          **add_uid: str, optional**
-              If true, adds a UID to the combine_basename to make it unique. The
-              default is True.
-
-      :Returns:
-
-          **out** : RMEMeas
-              Returns a RMEMeas object with combined uncertainties.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 

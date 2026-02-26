@@ -41,26 +41,7 @@ Package Contents
 
    Common base class for all non-exit exceptions.
 
-
    Initialize self.  See help(type(self)) for accurate signature.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 
 .. py:class:: ArraySchema(name: str, shape: tuple[str | int], dims: tuple[str], dtype: str, units: Mapping | str = None, coords: Mapping = None, uid: str = None, attrs_schema: Mapping = None)
@@ -70,306 +51,208 @@ Package Contents
 
    Specialized dict subclass to describe the shape an array.
 
-
    Initialize an ArraySchema.
 
+   :param name: Name of the array structure.
+   :type name: str
+   :param shape: Shape of structure. Ellipses indicate arbitrary dimensions,
+                 letters indicate a required dimension of unknown length, and
+                 integers indicate a required dimension of a required length.
+   :type shape: tuple[str  |  int]
+   :param dims: Names assigned to dimensions specified by shape. Any required
+                dimension must be names, and arbitrary dimensions must also be
+                ellipses.
+   :type dims: tuple[str]
+   :param dtype: Type string, corresponds to numpy's dtype (e.g. f8, c8, u8, etc)
+   :type dtype: str
+   :param units: Mapping of units to the array structure. If the whole structure
+                 has a single unit, then a string can be passed. Optionally, a
+                 single required dimension can be mapped to a 1-d array of units.
+                 For example, if a dimension called "col" corresponds to columns in spread-sheet
+                 like data and each column has its own unit, you could specify that
+                 as {"col":["unit 1", "unit 2"]}.
+   :type units: Mapping, optional
+   :param coords: Mapping of required dimensions to a coordinate space. Must provide
+                  at least a dtype and a single unit as a string. Optionally,
+                  if the coordinates are fixed (i.e. the row and column indices of
+                  stacks of 2-d matrices) then you may specify those coordinates
+                  here.
+   :type coords: Mapping, optional
+   :param uid: The uid of a schema can be provided here, it is created using
+               uuid4 if it is not provided, by default None.
+   :type uid: str, optional
+   :param attrs_schema: JSON Schema for validating metadata attributes.
+   :type attrs_schema: mapping, optional
 
-   :Parameters:
+   :returns: Dictionary conforming to an arrschema specification.
+   :rtype: dict
 
-       **name** : str
-           Name of the array structure.
-
-       **shape** : tuple[str  |  int]
-           Shape of structure. Ellipses indicate arbitrary dimensions,
-           letters indicate a required dimension of unknown length, and
-           integers indicate a required dimension of a required length.
-
-       **dims** : tuple[str]
-           Names assigned to dimensions specified by shape. Any required
-           dimension must be names, and arbitrary dimensions must also be
-           ellipses.
-
-       **dtype** : str
-           Type string, corresponds to numpy's dtype (e.g. f8, c8, u8, etc)
-
-       **units** : Mapping, optional
-           Mapping of units to the array structure. If the whole structure
-           has a single unit, then a string can be passed. Optionally, a
-           single required dimension can be mapped to a 1-d array of units.
-           For example, if a dimension called "col" corresponds to columns in spread-sheet
-           like data and each column has its own unit, you could specify that
-           as {"col":["unit 1", "unit 2"]}.
-
-       **coords** : Mapping, optional
-           Mapping of required dimensions to a coordinate space. Must provide
-           at least a dtype and a single unit as a string. Optionally,
-           if the coordinates are fixed (i.e. the row and column indices of
-           stacks of 2-d matrices) then you may specify those coordinates
-           here.
-
-       **uid** : str, optional
-           The uid of a schema can be provided here, it is created using
-           uuid4 if it is not provided, by default None.
-
-       **attrs_schema** : mapping, optional
-           JSON Schema for validating metadata attributes.
-
-   :Returns:
-
-       dict
-           Dictionary conforming to an arrschema specification.
-
-
-
-
-   :Raises:
-
-       Exception
-           If some logical inconsistency or is found, or the provided
-           schema doesn't follow the specification for an array schema.
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
+   :raises Exception: If some logical inconsistency or is found, or the provided
+       schema doesn't follow the specification for an array schema.
 
 
    .. py:method:: validate(arr: AnnotatedArray, attach_schema: bool = True)
 
-      
       Test if array conforms to schema.
 
+      :param arr: Array to check.
+      :type arr: AnnotatedArray
+      :param attach_schema: If True, the schema is dumped into a string and
+                            attatched to the attrs of the input data array.
+                            The default is True.
+      :type attach_schema: bool, optional
 
-      :Parameters:
+      :raises ValidationError: If a discrepancy is found between the data and the schema.
 
-          **arr** : AnnotatedArray
-              Array to check.
-
-          **attach_schema** : bool, optional
-              If True, the schema is dumped into a string and
-              attatched to the attrs of the input data array.
-              The default is True.
-
-      :Returns:
-
-          None.
-              ..
+      :rtype: None.
 
 
 
+.. py:class:: AnnotatedArray(*args, **kwargs)
 
-      :Raises:
-
-          ValidationError
-              If a discrepancy is found between the data and the schema.
+   Bases: :py:obj:`xarray.DataArray`
 
 
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
-.. py:class:: AnnotatedArray
-
-   
    Interface for an array structure with annotate dimensions and coordinates.
 
    Inspired by xarray DataArray. Classes conforming to this specification
    can be registered in an ArrayClassRegister.
 
 
+   .. py:attribute:: schema
+      :type:  ArraySchema
 
 
+   .. py:attribute:: registry
+      :type:  ArrayClassRegistry
 
 
+   .. py:method:: validate()
 
+      Validate array data against the schema of this type.
 
 
 
+   .. py:method:: save(path: str | pathlib.Path, *saver_args, saver_type: str = None, validate_schema: bool = True, verbose: bool = False, **saver_kwargs) -> object
 
+      Save array using specified saver.
 
+      This function dispatches to saver functions supplied
+      to the registry through add_saver.
 
+      :param path: Path to location where data should will be saved.
+      :type path: str | Path
+      :param \*saver_args: Passed to saver as positional args.
+      :type \*saver_args: positional arguments
+      :param saver_type: Used to pick which saver to use.
+                         The default is None.
+      :type saver_type: str, optional
+      :param validate_schema: If True, raise an exception if data does not conform to schema.
+                              The default is True.
+      :type validate_schema: bool, optional
+      :param verbose: DESCRIPTION. The default is False.
+      :type verbose: bool, optional
+      :param \*\*saver_kwargs: Passed to saver as keyword arguments.
+      :type \*\*saver_kwargs: keyword arguments
 
+      :returns: Object returned by saver fuction.
+      :rtype: object
 
-   ..
-       !! processed by numpydoc !!
 
-   .. py:property:: shape
-      :type: tuple[int]
 
-      :abstractmethod:
+   .. py:method:: convert_to(output_type: type) -> AnnotatedArray
 
+       Convert self to a specified type.
 
-      
-      Tuple of dimension sizes corresponding to dim.
+      This function dispatches to converter functions supplied
+      to the registry through add_converter.
 
+       Parameters
+       ----------
+       output_schema : ArraySchema | type
+           Schema for output array type or an array schema
+           class built by a registry.
 
+       Returns
+       -------
+       AnnotatedArray
+           Array matching output schema.
 
 
 
 
+   .. py:method:: convert_from(input_array: AnnotatedArray) -> Self
+      :classmethod:
 
 
+       Initialize from an input array.
 
+      This function dispatches to converter functions supplied
+      to the registry through add_converter.
 
+       Parameters
+       ----------
+       input_array : AnnotatedArray
+           Input data.
 
+       Returns
+       -------
+       Self
+           New array.
 
 
 
 
+   .. py:method:: load(path: pathlib.Path | str, *load_args, loader_type: str = None, validate_schema: bool = True, verbose=False, **load_kwargs) -> Self
+      :classmethod:
 
-      ..
-          !! processed by numpydoc !!
 
+       Save a dataset.
 
-   .. py:property:: dims
-      :type: tuple[str]
+      This function dispatches to loader functions supplied
+      to the registry through add_loader.
 
-      :abstractmethod:
+       Parameters
+       ----------
+       path : Path | str
+               Path to data to load.
+       loader_type : str, optional
+               If there are mulitple loaders, specify which one.
+       validate_schema : bool, optional
+               If True, raise an exception if data do not conform to schema.
+               The default is True.
+       verbose : bool, optional
+               If True, print debugging messages.
+               The default is False.
 
+       Returns
+       -------
+       Self
+               Loaded data.
 
-      
-      Tuple of dimension names corresponding to shape.
 
 
+   .. py:method:: from_dataarray(array: xarray.DataArray) -> Self
+      :classmethod:
 
 
+      Cast an array into an annotated array.
 
+      :param array: Array that can be cast into this format.
+      :type array: xr.DataArray
 
+      :returns: New array.
+      :rtype: Self
 
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
-   .. py:property:: coords
-      :type: Mapping[str, AnnotatedArray]
-
-      :abstractmethod:
-
-
-      
-      Mapping of dimension names to cooordinate sets.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
-   .. py:property:: dtype
-      :type: str | Any
-
-      :abstractmethod:
-
-
-      
-      Data type that conforms to numpy dtype_string specs.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
-   .. py:property:: attrs
-      :type: dict
-
-      :abstractmethod:
-
-
-      
-      JSON compatable dictionary of metadata.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
 .. py:class:: ArrayClassRegistry
 
-   
    Organizes schema, classes, loaders, savers, and converters.
 
    All of these objects are stored in dictionaries, indexed by unique ids.
    The unique ids correspond to the schema's unique id attribute.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
    .. py:attribute:: classes
 
@@ -388,358 +271,142 @@ Package Contents
 
    .. py:method:: find_schema(schema_name: str = None, schema_uid: str = None) -> ArraySchema
 
-      
       Find a schema.
 
       Name of uid must be provided. Will throw an error if only
       the name is provided and multiple schema in the registry
       share a name.
 
-      :Parameters:
+      :param name: Name of the schema to look for.
+      :type name: str
+      :param uid: uid of the schema to find.
+      :type uid: str
 
-          **name** : str
-              Name of the schema to look for.
+      :returns: Requested schema
+      :rtype: ArraySchema
 
-          **uid: str**
-              uid of the schema to find.
+      :raises ValueError: If multiple schemas in the regsitry have the same name.
 
-      :Returns:
-
-          ArraySchema
-              Requested schema
-
-
-
-
-      :Raises:
-
-          ValueError
-              If multiple schemas in the regsitry have the same name.
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: show_schema()
 
-      
       Show schema.
 
+      :rtype: None.
 
-
-      :Returns:
-
-          None.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: import_saver(schema_name=None, schema_uid: str = None, extension: str = None, saver_type: str = None, verbose: bool = False)
 
-      
       Get a loader function associated
       with a schema.
 
+      :param schema_name: Name of the schema being saved, by default None
+      :type schema_name: str, optional
+      :param schema_uid: Unique id of the schema being saved, by default None
+      :type schema_uid: str, optional
+      :param extension: File extension, by default None
+      :type extension: str, optional
+      :param saver_type: Type of saver to use, by default None
+      :type saver_type: str, optional
+      :param verbose: Print info, by default False
+      :type verbose: bool, optional
 
-      :Parameters:
+      :returns: Saver function imported from the registry
+      :rtype: callable
 
-          **schema_name** : str, optional
-              Name of the schema being saved, by default None
-
-          **schema_uid** : str, optional
-              Unique id of the schema being saved, by default None
-
-          **extension** : str, optional
-              File extension, by default None
-
-          **saver_type** : str, optional
-              Type of saver to use, by default None
-
-          **verbose** : bool, optional
-              Print info, by default False
-
-      :Returns:
-
-          callable
-              Saver function imported from the registry
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: import_loader(schema_name=None, schema_uid: str = None, extension: str = None, loader_type: str = None, verbose: bool = False)
 
-      
       Get a loader function associated
       with a schema.
 
+      :param schema_name: Name of the schema being saved, by default None
+      :type schema_name: str, optional
+      :param schema_uid: Unique id of the schema being saved, by default None
+      :type schema_uid: str, optional
+      :param extension: File extension, by default None
+      :type extension: str, optional
+      :param loader_type: Type of loader to use, by default None
+      :type loader_type: str, optional
+      :param verbose: Print info, by default False
+      :type verbose: bool, optional
 
-      :Parameters:
+      :returns: _description_
+      :rtype: _type_
 
-          **schema_name** : str, optional
-              Name of the schema being saved, by default None
-
-          **schema_uid** : str, optional
-              Unique id of the schema being saved, by default None
-
-          **extension** : str, optional
-              File extension, by default None
-
-          **loader_type** : str, optional
-              Type of loader to use, by default None
-
-          **verbose** : bool, optional
-              Print info, by default False
-
-          **Returns**
-              ..
-
-          **-------**
-              ..
-
-          **_type_**
-              _description_
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: add_converter(funspec: str, input_schema: dict, output_schema: dict)
 
-      
       Add a converting functiom between two schema.
 
       Converting functions take in exactly one argument
       and output exactly 1
 
-      :Parameters:
+      :param funspec: Path spec of function in dot-notation
+                      (module.submodule:function)
+      :type funspec: str
+      :param input_schema: name of schema (or provide the uid) for converter
+      :type input_schema: dict, optional
+      :param output_schema: output_schema for converter
+      :type output_schema: dict, optional
 
-          **funspec** : str
-              Path spec of function in dot-notation
-              (module.submodule:function)
-
-          **input_schema** : dict, optional
-              name of schema (or provide the uid) for converter
-
-          **output_schema** : dict, optional
-              output_schema for converter
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: import_converter(input_schema_uid: str = None, output_schema_uid: str = None) -> callable
 
-      
       Add a converting functiom between two schema.
 
       Converting functions take in exactly one argument
       and output exactly 1
 
-      :Parameters:
+      :param input_schema_uid: uid of input schema (or provide the name), by default None
+      :type input_schema_uid: str, optional
+      :param output_schema_uid: _description_, by default None
+      :type output_schema_uid: str, optional
 
-          **input_schema_uid** : str, optional
-              uid of input schema (or provide the name), by default None
-
-          **output_schema_uid** : str, optional
-              _description_, by default None
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: add_saver(funspec: str, extension: str, saver_type: str, schema: dict)
 
-      
       Add a saving function to the registry.
 
+      :param funspec: _description_
+      :type funspec: str
+      :param extension: _description_, by default None
+      :type extension: list[str], optional
+      :param saver_type: Specify the type of saver (e.g. csv like, HDF5, group_saveable).
+                         If notprovided, '' is used.
+      :type saver_type: str, optional
+      :param schema: Schema, by default None
+      :type schema: dict, optional
 
-      :Parameters:
+      :raises ValueError: _description_
 
-          **funspec** : str
-              _description_
-
-          **extension** : list[str], optional
-              _description_, by default None
-
-          **saver_type** : str, optional
-              Specify the type of saver (e.g. csv like, HDF5, group_saveable).
-              If notprovided, '' is used.
-
-          **schema** : dict, optional
-              Schema, by default None
-
-
-
-
-
-      :Raises:
-
-          ValueError
-              _description_
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: add_loader(funspec: str, extension: str, loader_type: str, schema: dict | Mapping)
 
-      
+      :param funspec: _description_
+      :type funspec: str
+      :param extension: _description_, by default None
+      :type extension: list[str], optional
+      :param loader_type: Specify the type of loader (e.g. csv like, HDF5, group_saveable).
+                          If notprovided, '' is used.
+      :type loader_type: str, optional
+      :param schema: Schema to use
+      :type schema: dict | Mapping
 
+      :raises ValueError: _description_
 
-
-      :Parameters:
-
-          **funspec** : str
-              _description_
-
-          **extension** : list[str], optional
-              _description_, by default None
-
-          **loader_type** : str, optional
-              Specify the type of loader (e.g. csv like, HDF5, group_saveable).
-              If notprovided, '' is used.
-
-          **schema** : dict | Mapping
-              Schema to use
-
-
-
-
-
-      :Raises:
-
-          ValueError
-              _description_
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: add_schema(schema: dict | Mapping | pathlib.Path)
 
 
-   .. py:method:: add_class(class_to_add: type, schema: ArraySchema)
-
-
-   .. py:method:: build_and_add_class(schema: ArraySchema) -> type
-
-      
-      Build and register a custom subclass of Xarray.DataArray.
-
-
-      :Parameters:
-
-          **schema** : ArraySchema | Mapping
-              Schema to turn into a class.
-
-      :Returns:
-
-          type
-              The newly created class.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
+   .. py:method:: add_class(class_to_add: AnnotatedArray, schema: ArraySchema)
 
 

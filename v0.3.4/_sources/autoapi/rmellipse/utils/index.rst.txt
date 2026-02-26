@@ -29,30 +29,10 @@ Package Contents
 
    Object for reading legacy Microwave Uncertainry Framework xml files into uncertainty objects.
 
-
    Initialize a MUFMeas parser.
 
-
-   :Parameters:
-
-       **file** : str, optional
-           Path to xml header file (usually has extension .meas), by default None.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
+   :param file: Path to xml header file (usually has extension .meas), by default None.
+   :type file: str, optional
 
 
    .. py:attribute:: etree
@@ -92,35 +72,15 @@ Package Contents
 
    .. py:method:: open_meas(file: str)
 
-      
       Open up an xml header file and parse it for file paths and other info.
 
+      :param file: Path to file to be opened.
+      :type file: str
 
-      :Parameters:
-
-          **file** : str
-              Path to file to be opened.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: open_data(open_fcn: callable, open_fcn_extra_args=(), old_base_dir=None, new_base_dir=None)
 
-      
       Loads data into an initialized object.
 
       Loads into memory all of the perturbed measurements in the sensitivity
@@ -130,71 +90,31 @@ Package Contents
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
-
-
    .. py:method:: init_from_data(name: str, montecarlo_data: list, nominal_data: object, covariance_data: list, umech_id: list = None)
 
-      
       Generate an object from user supplied data.
 
+      :param name: _description_
+      :type name: _type_
+      :param montecarlo_data: a list of data objects of the same type as
+                              nominal_data, representing Monte-Carlo trials. Can be empty.
+      :type montecarlo_data: list
+      :param nominal_data: a data object (usually a numpy array) representing
+                           a nominal value for some quantity
+      :type nominal_data: object
+      :param covariance_data: a list of data objects of the same type as
+                              nominal_data, representing the nominal data perturbed by
+                              various error mechanisms. Can be empty.
+      :type covariance_data: list
+      :param umech_id: a list of strings with the
+                       same length as covariance_data. The locations of parameter files
+                       for error mechanisms. If empty, the location will be set to
+      :type umech_id: list, optional
 
-      :Parameters:
-
-          **name** : _type_
-              _description_
-
-          **montecarlo_data** : list
-              a list of data objects of the same type as
-              nominal_data, representing Monte-Carlo trials. Can be empty.
-
-          **nominal_data** : object
-              a data object (usually a numpy array) representing
-              a nominal value for some quantity
-
-          **covariance_data** : list
-              a list of data objects of the same type as
-              nominal_data, representing the nominal data perturbed by
-              various error mechanisms. Can be empty.
-
-          **umech_id** : list, optional
-              a list of strings with the
-              same length as covariance_data. The locations of parameter files
-              for error mechanisms. If empty, the location will be set to
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: save_data(target_dir: str, save_fcn: callable = None, save_fcn_extra_args=(), file_ext: str = None)
 
-      
       Save data to disk, call before save_meas.
 
       Given a target directory, creates a "<self.name>_Support" folder with
@@ -203,42 +123,21 @@ Package Contents
       of Monte-Carlo trials. The save_fcn provide is called as
       save_fcn_extra_args(data,filepath,*save_fcn_extra_args).
 
-      :Parameters:
+      :param target_dir: directory where data should be saved
+      :type target_dir: str
+      :param save_fcn: function that saves data in the propper format. Should take
+                       the data to be saved as the first argument and the file path as
+                       the second.
+      :type save_fcn: callable, optional
+      :param save_fcn_extra_args: extra arguments for the save function if necessary, by default ().
+      :type save_fcn_extra_args: tuple, optional
+      :param file_ext: Extension to use for filepaths, by default None
+      :type file_ext: str, optional
 
-          **target_dir** : str
-              directory where data should be saved
-
-          **save_fcn** : callable, optional
-              function that saves data in the propper format. Should take
-              the data to be saved as the first argument and the file path as
-              the second.
-
-          **save_fcn_extra_args** : tuple, optional
-              extra arguments for the save function if necessary, by default ().
-
-          **file_ext** : str, optional
-              Extension to use for filepaths, by default None
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: save_meas(output_file)
 
-      
       Save the xml header.
 
       Saves a MUF-style .meas file. This function only writes the XML file,
@@ -247,109 +146,47 @@ Package Contents
       If you are also saving raw data, you should do that first, because
       that function will alter file paths.
 
-      :Parameters:
+      :param output_file: Path to the xml header.
+      :type output_file: str
 
-          **output_file** : str
-              Path to the xml header.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
 .. py:function:: load_object(saved_object: Union[GROUP, DATASET], parent: GROUP_SAVEABLE = None, load_big_objects: bool = False) -> any
 
-   
    Construct Python object from group or dataset.
 
+   :param saved_object: Group or datset that contains Python object.
+   :type saved_object: Union[GROUP, DATASET]
+   :param parent: Parent of this object (Python object). The default is None.
+   :type parent: GROUP_SAVEABLE, optional
+   :param load_big_objects: If True, fully load all objects into memory. If False,
+                            only the attributes of big objects will be loaded. The default is False.
+   :type load_big_objects: bool, optional
 
-   :Parameters:
+   :returns: A Python object.
+   :rtype: any
 
-       **saved_object** : Union[GROUP, DATASET]
-           Group or datset that contains Python object.
-
-       **parent** : GROUP_SAVEABLE, optional
-           Parent of this object (Python object). The default is None.
-
-       **load_big_objects** : bool, optional
-           If True, fully load all objects into memory. If False,
-           only the attributes of big objects will be loaded. The default is False.
-
-   :Returns:
-
-       any
-           A Python object.
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: save_object(group: GROUP, name: str, o: any, verbose: bool = False) -> SAVED
 
-   
    Save an object to a group.
 
+   :param group: Group where object will be saved.
+   :type group: GROUP
+   :param name: Name the object will have in the group.
+   :type name: str
+   :param o: Object to save.
+   :type o: any
 
-   :Parameters:
+   :returns: The newly-created saved object.
+   :rtype: SAVED
 
-       **group** : GROUP
-           Group where object will be saved.
-
-       **name** : str
-           Name the object will have in the group.
-
-       **o** : any
-           Object to save.
-
-   :Returns:
-
-       SAVED
-           The newly-created saved object.
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:class:: GroupSaveable(name: str = None, parent: GROUP_SAVEABLE = None, attrs: dict = None, **kwargs)
 
    Bases: :py:obj:`GROUP_SAVEABLE`
 
 
-   
    Interface for objects that can be saved as HDF5 or Exdir groups or files.
 
    These objects are organized in a tree-like structure to avoid data
@@ -359,22 +196,52 @@ Package Contents
    Each node also has a lookup table that stores the paths to data objects
    below it.
 
+   Save strategy
+   -------------
+       * Group saveable objects can be saved to groups and initialized from
+       groups. There should be a 1-1 mapping of objects to groups.
+
+       * After initialization, the group saveable object is independent
+       from the goup that it was initialized from, and the group(s) it was
+       saved to. So, changing the group saveable object does not change either
+       the group it was initialized from, or the group(s) it was saved to.
+
+   Recomendations for derived classes
+   ----------------------------------
+       * All attributes should be saveable types (see module description)
+
+       * The names of all attributes match the keywords of contructor
+       keyword arguments. Ex. if the object has an attribute called "foo",
+       the constructor will take a keyword argument called "foo".
+
+       * In the constructor, you use self.add_child to initialize object
+       attributes. Big objects should be marked with is_big_object = True.
+
+       * Any modules that define classes derived from group_saveable are
+       in sys.path, so that import <module_name> works.
+
+       * If you plan on saving an object attribute as a group attribute, add
+       it to self.attrs.
+
+       * For best performance, do not store any data in a LIST_SAVEABLE type
+       (list, set, or tuple) if it can be stored in an array. Arrays are
+       stored as datasets (efficient), while list-likes are stored in a custom
+       format (inelegant, inefficient).
+
+   Tree structure
+   --------------
+       * Group saveable objects have a unique id. If you know an object's id,
+       you can retrieve the object from a tree.
+
+       * Any group_saveable object can serve as the root of a tree. The only
+       thing that makes the root special is that it has no parent.
+       Consequently, roots can be assigned parents, and children can be
+       detached from their parents.
+
+       * Nodes can't store information about nodes that are not their
+       children or their parent. Otherwise, we would have to define a root.
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
    .. py:attribute:: attrs
       :value: None
@@ -399,7 +266,6 @@ Package Contents
       :classmethod:
 
 
-      
       Initialize GROUP_SAVEABLE object from a group.
 
       The group_saveable class is designed to be used as an archive, and may
@@ -410,103 +276,43 @@ Package Contents
       fully loaded or not. If an object is not loaded, a placeholder with
       the same attributes will be added.
 
-      :Parameters:
+      :param group: An hdf5 (or equivalent) group.
+      :type group: GROUP
+      :param parent: The parent of this object. The default is None.
+      :type parent: GROUP_SAVEABLE, optional
+      :param load_big_objects: If False, attributes marked as big objects are not loaded into
+                               memory. The default is False.
+      :type load_big_objects: bool, optional
 
-          **group** : GROUP
-              An hdf5 (or equivalent) group.
+      :returns: **new_object** -- New data tree object loaded from group.
+      :rtype: GROUP_SAVEABLE
 
-          **parent** : GROUP_SAVEABLE, optional
-              The parent of this object. The default is None.
-
-          **load_big_objects** : bool, optional
-              If False, attributes marked as big objects are not loaded into
-              memory. The default is False.
-
-      :Returns:
-
-          **new_object** : GROUP_SAVEABLE
-              New data tree object loaded from group.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: get_root() -> GROUP_SAVEABLE
 
-      
       Get the root of the data tree.
 
+      :returns: The root (the tree with no parents).
+      :rtype: GROUP_SAVEABLE
 
-
-      :Returns:
-
-          GROUP_SAVEABLE
-              The root (the tree with no parents).
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: look_up_node(unique_id: str) -> GROUP_SAVEABLE
 
-      
       Find the node that holds an object by unique id.
 
+      :param unique_id: The hex representation of the unique id of an object stored in a
+                        subtree.
+      :type unique_id: str
 
-      :Parameters:
+      :returns: The data tree that holds the object with that unique id.
+      :rtype: GROUP_SAVEABLE
 
-          **unique_id** : str
-              The hex representation of the unique id of an object stored in a
-              subtree.
-
-      :Returns:
-
-          GROUP_SAVEABLE
-              The data tree that holds the object with that unique id.
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: update_lookup_table(unique_id: str, path: str = '') -> bool
 
-      
       Try to update lookup table with path to data stored in a subtree.
 
       This method will also recursively try to update the parent's lookup
@@ -516,145 +322,61 @@ Package Contents
       parent's lookup table, then that is the real one, and this is a copy.
       In that case, do not upate the lookup table.
 
-      :Parameters:
+      :param unique_id: The hex representation of the unique id of an object stored in a
+                        subtree.
+      :type unique_id: str
+      :param path: Used for recursion. Do not change. The default is "".
+      :type path: str, optional
 
-          **unique_id** : str
-              The hex representation of the unique id of an object stored in a
-              subtree.
+      :returns: True if object is successfully added (does not already exist in
+                parents' lookup table)
+      :rtype: bool
 
-          **path** : str, optional
-              Used for recursion. Do not change. The default is "".
-
-      :Returns:
-
-          bool
-              True if object is successfully added (does not already exist in
-              parents' lookup table)
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: save(parent: GROUP, name: str = None, verbose: bool = False)
 
-      
       Save a group_saveable object as a group.
 
+      :param parent: Parent of group to be created.
+      :type parent: GROUP
+      :param name: If not None, overwrite name attribute of the group. The default is
+                   None.
+      :type name: str, optional
+      :param verbose: if True, prints information about what is being saved
+      :type verbose: bool, optional
 
-      :Parameters:
+      :rtype: None.
 
-          **parent** : GROUP
-              Parent of group to be created.
-
-          **name** : str, optional
-              If not None, overwrite name attribute of the group. The default is
-              None.
-
-          **verbose: bool, optional**
-              if True, prints information about what is being saved
-
-      :Returns:
-
-          None.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: add_child(key: str = None, data: SAVEABLE = None, is_big_object: bool = False)
 
-      
       Add child to this node.
 
       If the new data is a GROUP_SAVEABLE object, enforce that
       data.attrs["name"] == key.
 
-      :Parameters:
+      :param key: Name of child. If None, check if the data has a name.
+                  The defualt is None.
+      :type key: str, optional
+      :param data: Data to add. If None, initialize an empty group_saveable object.
+                   The defualt is None.
+      :type data: SAVEABLE, optional
+      :param is_big_object: If True, when this object is read from a file, it will
+                            be ignored if the load_big_objects argument is set to False.
+                            The default is False.
+      :type is_big_object: bool, optional
 
-          **key: str, optional**
-              Name of child. If None, check if the data has a name.
-              The defualt is None.
+      :rtype: None.
 
-          **data** : SAVEABLE, optional
-              Data to add. If None, initialize an empty group_saveable object.
-              The defualt is None.
-
-          **is_big_object: bool, optional**
-              If True, when this object is read from a file, it will
-              be ignored if the load_big_objects argument is set to False.
-              The default is False.
-
-      :Returns:
-
-          None.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 
    .. py:method:: update_parents()
 
-      
       Recursively update the parents lookup tables all of this object's children.
 
+      :rtype: None.
 
-
-      :Returns:
-
-          None.
-              ..
-
-
-
-
-
-
-
-
-
-
-
-
-
-      ..
-          !! processed by numpydoc !!
 
 

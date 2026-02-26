@@ -32,35 +32,14 @@ Module Contents
 
 .. py:function:: get_header(path, comment)
 
-   
    Returns the header of a file.
 
+   :param path: File path.
+   :type path: str
+   :param comment: The comment character for the header.
+   :type comment: str
 
-   :Parameters:
+   :returns: list of each line of the header.
+   :rtype: list
 
-       **path** : str
-           File path.
-
-       **comment** : str
-           The comment character for the header.
-
-   :Returns:
-
-       list
-           list of each line of the header.
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 

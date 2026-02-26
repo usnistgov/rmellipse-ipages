@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Command Line Interface &#8212; Rocky Mountain Ellipse 0.4.2 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../_static/documentation_options.js?v=ff822928"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="API Reference" href="../autoapi/index.html" />
+    <link rel="prev" title="Using the Developer Tools" href="../for_contributors/dev_tools.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="command-line-interface">
+<h1>Command Line Interface<a class="headerlink" href="#command-line-interface" title="Link to this heading">¶</a></h1>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>The rmellipse CLI is designed to interact with an instance of NIST’s <a class="reference external" href="https://www.nist.gov/programs-projects/configurable-data-curation-system-cdcs">CDCS</a> that
+is configured to behave as a repository that serves datasets and their
+metrological records. It is under active development, and this interface
+is expected to be extremely volatile. Instructions to configure and host
+this data archive are not a part of this repository. Documentation is presented
+only as part of the development process.</p>
+</div>
+<section id="rme">
+<h2>rme<a class="headerlink" href="#rme" title="Link to this heading">¶</a></h2>
+<p>A tool for executing traceable data-analysis workflows. Contains tools
+to help define, run, map, and release workflows that can
+be consumed downstream by other analysis as packages.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rme<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>COMMAND<span class="w"> </span><span class="o">[</span>ARGS<span class="o">]</span>...
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-version">
+<span class="sig-name descname"><span class="pre">--version</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-version" title="Link to this definition">¶</a></dt>
+<dd><p>Show the version and exit.</p>
+</dd></dl>
+
+<section id="rme-log">
+<h3>log<a class="headerlink" href="#rme-log" title="Link to this heading">¶</a></h3>
+<p>Interact with log files created by jobs.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rme<span class="w"> </span>log<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>JOB
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-log-file">
+<span class="sig-name descname"><span class="pre">--file</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-log-file" title="Link to this definition">¶</a></dt>
+<dd><p>Print the log file path.</p>
+</dd></dl>
+
+<p class="rubric">Arguments</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-log-arg-JOB">
+<span class="sig-name descname"><span class="pre">JOB</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-log-arg-JOB" title="Link to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+</section>
+<section id="rme-map">
+<h3>map<a class="headerlink" href="#rme-map" title="Link to this heading">¶</a></h3>
+<p>Make a map of a workflow’s project structure.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rme<span class="w"> </span>map<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>WORKFLOW_FILE
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-map-show-attrs">
+<span class="sig-name descname"><span class="pre">--show-attrs</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-map-show-attrs" title="Link to this definition">¶</a></dt>
+<dd><p>Show the attrs of mapped items.</p>
+</dd></dl>
+
+<p class="rubric">Arguments</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-map-arg-WORKFLOW_FILE">
+<span class="sig-name descname"><span class="pre">WORKFLOW_FILE</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-map-arg-WORKFLOW_FILE" title="Link to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+</section>
+<section id="rme-release">
+<h3>release<a class="headerlink" href="#rme-release" title="Link to this heading">¶</a></h3>
+<p>Release a workflow to an archive.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rme<span class="w"> </span>release<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>WORKFLOW_FILE<span class="w"> </span>HOST
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-release-no-blobs">
+<span class="sig-name descname"><span class="pre">--no-blobs</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-release-no-blobs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-release-repeat-release">
+<span class="sig-name descname"><span class="pre">--repeat-release</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-release-repeat-release" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-release-workspace">
+<span class="sig-name descname"><span class="pre">--workspace</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;workspace&gt;</span></span><a class="headerlink" href="#cmdoption-rme-release-workspace" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-release-max-threads">
+<span class="sig-name descname"><span class="pre">--max-threads</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;max_threads&gt;</span></span><a class="headerlink" href="#cmdoption-rme-release-max-threads" title="Link to this definition">¶</a></dt>
+<dd><p>Maximum number of threads to use.</p>
+</dd></dl>
+
+<p class="rubric">Arguments</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-release-arg-WORKFLOW_FILE">
+<span class="sig-name descname"><span class="pre">WORKFLOW_FILE</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-release-arg-WORKFLOW_FILE" title="Link to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-release-arg-HOST">
+<span class="sig-name descname"><span class="pre">HOST</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-release-arg-HOST" title="Link to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+</section>
+<section id="rme-run">
+<h3>run<a class="headerlink" href="#rme-run" title="Link to this heading">¶</a></h3>
+<p>Run a workflow in the project.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rme<span class="w"> </span>run<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>WORKFLOW_FILE
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-run-default-host">
+<span class="sig-name descname"><span class="pre">--default-host</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;default_host&gt;</span></span><a class="headerlink" href="#cmdoption-rme-run-default-host" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-run-max-threads">
+<span class="sig-name descname"><span class="pre">--max-threads</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;max_threads&gt;</span></span><a class="headerlink" href="#cmdoption-rme-run-max-threads" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Arguments</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-run-arg-WORKFLOW_FILE">
+<span class="sig-name descname"><span class="pre">WORKFLOW_FILE</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-run-arg-WORKFLOW_FILE" title="Link to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+</section>
+<section id="rme-sync">
+<h3>sync<a class="headerlink" href="#rme-sync" title="Link to this heading">¶</a></h3>
+<p>Synchronize the data environment with requirements.</p>
+<p class="rubric">Usage</p>
+<div class="highlight-shell notranslate"><div class="highlight"><pre><span></span>rme<span class="w"> </span>sync<span class="w"> </span><span class="o">[</span>OPTIONS<span class="o">]</span><span class="w"> </span>WORKFLOW_FILE<span class="w"> </span>__DEFAULT_HOST
+</pre></div>
+</div>
+<p class="rubric">Options</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-sync-force-download">
+<span class="sig-name descname"><span class="pre">--force-download</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-sync-force-download" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-sync-force-relink">
+<span class="sig-name descname"><span class="pre">--force-relink</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-sync-force-relink" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-sync-max-threads">
+<span class="sig-name descname"><span class="pre">--max-threads</span></span><span class="sig-prename descclassname"> <span class="pre">&lt;max_threads&gt;</span></span><a class="headerlink" href="#cmdoption-rme-sync-max-threads" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-sync-update-all">
+<span class="sig-name descname"><span class="pre">--update-all</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-sync-update-all" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<p class="rubric">Arguments</p>
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-sync-arg-WORKFLOW_FILE">
+<span class="sig-name descname"><span class="pre">WORKFLOW_FILE</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-sync-arg-WORKFLOW_FILE" title="Link to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+<dl class="std option">
+<dt class="sig sig-object std" id="cmdoption-rme-sync-arg-__DEFAULT_HOST">
+<span class="sig-name descname"><span class="pre">__DEFAULT_HOST</span></span><span class="sig-prename descclassname"></span><a class="headerlink" href="#cmdoption-rme-sync-arg-__DEFAULT_HOST" title="Link to this definition">¶</a></dt>
+<dd><p>Required argument</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../auto_examples/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Command Line Interface</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#rme">rme</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#rme-log">log</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rme-map">map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rme-release">release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rme-run">run</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#rme-sync">sync</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../autoapi/index.html">API Reference</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/cli/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="index.html">v0.4.2</a></li>
+  <li><a href="../../development/cli/index.html">development</a></li>
+  <li><a href="../../stable/cli/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../_sources/cli/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

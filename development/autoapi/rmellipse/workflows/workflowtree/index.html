@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rmellipse.workflows.workflowtree &#8212; Rocky Mountain Ellipse 0.4.1.dev2+g10192224f documentation</title>
+    <title>rmellipse.workflows.workflowtree &#8212; Rocky Mountain Ellipse 0.4.2 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=12dfc556" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=fd3f3429" />
@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../../_static/documentation_options.js?v=8a866ab4"></script>
+    <script src="../../../../_static/documentation_options.js?v=ff822928"></script>
     <script src="../../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -144,21 +144,17 @@ for k, v in iterable:</p>
 <p>Initialize a Job object.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>job_dict</strong><span class="classifier">dict | io.FileIO | Path</span></dt><dd></dd>
-<dt><strong>project_settings</strong><span class="classifier">ProjectSettings</span></dt><dd><p>Project settings object.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>job_dict</strong> (<em>dict</em><em> | </em><em>io.FileIO</em><em> | </em><em>Path</em>)</p></li>
+<li><p><strong>project_settings</strong> (<a class="reference internal" href="../index.html#rmellipse.workflows.ProjectSettings" title="rmellipse.workflows.ProjectSettings"><em>ProjectSettings</em></a>) – Project settings object.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>TypeError</dt><dd><p>_description_</p>
-</dd>
-<dt>ValueError</dt><dd><p>_description_</p>
-</dd>
-<dt>TypeError</dt><dd><p>_description_</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – _description_</p></li>
+<li><p><strong>ValueError</strong> – _description_</p></li>
+<li><p><strong>TypeError</strong> – _description_</p></li>
+</ul>
 </dd>
 </dl>
 <dl class="py attribute">
@@ -272,14 +268,11 @@ for k, v in iterable:</p>
 <p>Edges are always between a DataPointer and a Job.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>node1</strong><span class="classifier">DataPointer | Job</span></dt><dd><p>DataPointer or Job</p>
-</dd>
-<dt><strong>node2</strong><span class="classifier">DataPointer | Job</span></dt><dd><p>DataPointer or Job</p>
-</dd>
-<dt><strong>attrs</strong><span class="classifier">dict, optional</span></dt><dd><p>Dict of metadata, by default None</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>node1</strong> (<a class="reference internal" href="#rmellipse.workflows.workflowtree.DataPointer" title="rmellipse.workflows.workflowtree.DataPointer"><em>DataPointer</em></a><em> | </em><a class="reference internal" href="#rmellipse.workflows.workflowtree.Job" title="rmellipse.workflows.workflowtree.Job"><em>Job</em></a>) – DataPointer or Job</p></li>
+<li><p><strong>node2</strong> (<a class="reference internal" href="#rmellipse.workflows.workflowtree.DataPointer" title="rmellipse.workflows.workflowtree.DataPointer"><em>DataPointer</em></a><em> | </em><a class="reference internal" href="#rmellipse.workflows.workflowtree.Job" title="rmellipse.workflows.workflowtree.Job"><em>Job</em></a>) – DataPointer or Job</p></li>
+<li><p><strong>attrs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Dict of metadata, by default None</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -290,10 +283,7 @@ for k, v in iterable:</p>
 <dd><p>Iterate over all the data_pointer paths.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Yields<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>Path</dt><dd><p>Path to data_pointers</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><em>Path</em> – Path to data_pointers</p>
 </dd>
 </dl>
 </dd></dl>
@@ -304,10 +294,7 @@ for k, v in iterable:</p>
 <dd><p>Iterate over groups in a topologial sorting of jobs and datasets.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Yields<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt>list</dt><dd><p>List of nodes in the next level of the topological sorting.</p>
-</dd>
-</dl>
+<dd class="field-odd"><p><em>list</em> – List of nodes in the next level of the topological sorting.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -325,23 +312,18 @@ for k, v in iterable:</p>
 <dd><p>Execute a set of concurrent jobs in wft.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>jobs</strong><span class="classifier">list[job]</span></dt><dd><p>List of jobs to execute concurrently.</p>
-</dd>
-<dt><strong>group_name</strong><span class="classifier">str</span></dt><dd><p>Name of group, used for printing.</p>
-</dd>
-<dt><strong>max_threads</strong><span class="classifier">int</span></dt><dd><p>Max number of threads (i.e. subprocesses) that
-can be spun up at a time.</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>jobs</strong> (<em>list</em><em>[</em><em>job</em><em>]</em>) – List of jobs to execute concurrently.</p></li>
+<li><p><strong>group_name</strong> (<em>str</em>) – Name of group, used for printing.</p></li>
+<li><p><strong>max_threads</strong> (<em>int</em>) – Max number of threads (i.e. subprocesses) that
+can be spun up at a time.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>TypeError</dt><dd><p>If non-jobs are passed.</p>
-</dd>
-<dt>Exception</dt><dd><p>When a job fails.</p>
-</dd>
-</dl>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>TypeError</strong> – If non-jobs are passed.</p></li>
+<li><p><strong>Exception</strong> – When a job fails.</p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -352,20 +334,14 @@ can be spun up at a time.</p>
 <dd><p>Validates if datapointers exist within a project.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><dl class="simple">
-<dt><strong>datapointers</strong><span class="classifier">list[DataPointer]</span></dt><dd><p>List of DataPointer objects.</p>
-</dd>
-<dt><strong>project_settings</strong><span class="classifier">ProjectSettings</span></dt><dd><p>Project settings</p>
-</dd>
-<dt><strong>level</strong><span class="classifier">int</span></dt><dd><p>Execution level in the DAG</p>
-</dd>
-</dl>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>datapointers</strong> (<em>list</em><em>[</em><a class="reference internal" href="#rmellipse.workflows.workflowtree.DataPointer" title="rmellipse.workflows.workflowtree.DataPointer"><em>DataPointer</em></a><em>]</em>) – List of DataPointer objects.</p></li>
+<li><p><strong>project_settings</strong> (<a class="reference internal" href="../index.html#rmellipse.workflows.ProjectSettings" title="rmellipse.workflows.ProjectSettings"><em>ProjectSettings</em></a>) – Project settings</p></li>
+<li><p><strong>level</strong> (<em>int</em>) – Execution level in the DAG</p></li>
+</ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><dl class="simple">
-<dt>FileNotFoundError</dt><dd><p>If a dataset is missing</p>
-</dd>
-</dl>
+<dd class="field-even"><p><strong>FileNotFoundError</strong> – If a dataset is missing</p>
 </dd>
 </dl>
 </dd></dl>
@@ -423,7 +399,7 @@ can be spun up at a time.</p>
 <h3>Versions</h3>
 <ul>
   <li><a href="../../../../../v0.3.4/index.html">v0.3.4</a></li>
-  <li><a href="../../../../../v0.4.1/index.html">v0.4.1</a></li>
+  <li><a href="../../../../../v0.4.2/index.html">v0.4.2</a></li>
   <li><a href="index.html">development</a></li>
   <li><a href="../../../../../stable/index.html">stable</a></li>
 </ul>

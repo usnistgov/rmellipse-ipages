@@ -19,87 +19,29 @@ Module Contents
 
 .. py:function:: matches_any(pattern: str, globs: list[str])
 
-   
    True if pattern matches any of globs
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
-
 .. py:function:: make_globs(directory: pathlib.Path)
 
-   
    Make include and ignore glob patters from a directory
 
    Used .gitignore and .rmeinclude files in directory.
 
-   :Parameters:
+   :param directory: Directory to look inside.
+   :type directory: Path
 
-       **directory** : Path
-           Directory to look inside.
+   :returns: tuple of list of glob patterns, (ignore, include)
+   :rtype: tuple[list[str]]
 
-   :Returns:
-
-       tuple[list[str]]
-           tuple of list of glob patterns, (ignore, include)
-
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
 .. py:function:: iter_blobable(dmap: dict)
 
-   
    Iterate over a mapping and yield globable files.
 
+   :param dmap: Dictionary that maps a directory or item.
+   :type dmap: dict
 
-   :Parameters:
+   :Yields: *_type_* -- _description_
 
-       **dmap** : dict
-           Dictionary that maps a directory or item.
-
-
-   :Yields:
-
-       _type_
-           _description_
-
-
-
-
-
-
-
-
-
-
-
-
-   ..
-       !! processed by numpydoc !!
 
