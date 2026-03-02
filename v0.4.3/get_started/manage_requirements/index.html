@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Manage Requirements &#8212; Rocky Mountain Ellipse 0.4.3a3.dev1+g00fbdaca1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../_static/documentation_options.js?v=614588b6"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Array Schema" href="../arrayschema/index.html" />
+    <link rel="prev" title="Make Your First Workflow" href="../first_workflow/index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="manage-requirements">
+<span id="id1"></span><h1>Manage Requirements<a class="headerlink" href="#manage-requirements" title="Link to this heading">¶</a></h1>
+<p>This page will walk through the steps to managing
+requirements for your workflow.</p>
+<p>It assumes you have followed the
+previous steps in the <a class="reference internal" href="../index.html#getting-started"><span class="std std-ref">Getting Started</span></a> page.</p>
+<section id="make-a-new-workflow">
+<h2>Make a New Workflow<a class="headerlink" href="#make-a-new-workflow" title="Link to this heading">¶</a></h2>
+<p>Lets start a new project that depends on the the results of the previous
+one. Make a new folder called <code class="docutils literal notranslate"><span class="pre">second-workflow</span></code>, and copy the contents from
+<a class="reference internal" href="../first_workflow/index.html#first-workflow"><span class="std std-ref">Make Your First Workflow</span></a> into it. Then, change the name of the <code class="docutils literal notranslate"><span class="pre">first-workflow.rme.yml</span></code>
+to <code class="docutils literal notranslate"><span class="pre">second-workflow.rme.yml</span></code> and update the release title to <code class="docutils literal notranslate"><span class="pre">second-workfow</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">release</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># name of the release</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;second-workflow&#39;</span>
+<span class="w">  </span><span class="c1"># version tag</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.1.0&#39;</span>
+<span class="w">  </span><span class="c1"># make custom include patterns</span>
+<span class="w">  </span><span class="nt">includes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span>
+<span class="w">  </span><span class="nt">ignores</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;inputs/&#39;</span>
+
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;inputs/input-file.txt&#39;</span>
+<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results/output-file.txt&#39;</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">copy-file</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;my_input&#39;</span>
+<span class="w">    </span><span class="nt">outputs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;my_output&#39;</span>
+<span class="w">    </span><span class="nt">commands</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;cp&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_input}&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="add-workflow-requirements">
+<h2>Add Workflow Requirements<a class="headerlink" href="#add-workflow-requirements" title="Link to this heading">¶</a></h2>
+<p>Requirments are declared by adding a <code class="docutils literal notranslate"><span class="pre">requires-releases</span></code> field to one of two places:</p>
+<ol class="arabic simple">
+<li><p>Add a project wide requirment by adding it to <code class="docutils literal notranslate"><span class="pre">rmeproject.yml</span></code></p></li>
+<li><p>Add a workflow specific requirement by adding it to <code class="docutils literal notranslate"><span class="pre">second-workflow.rme.yml</span></code></p></li>
+</ol>
+<p>A project is a folder, that may contain more then one workflow. A project wide requirement
+is a requirement shared by every workflow in a project. A workflow specific dependency is only
+shared by the workflow it is included in.</p>
+<p>For example,</p>
+<ul class="simple">
+<li><p>some-release==0.1.0</p></li>
+<li><p>some-release&gt;=0.1.0</p></li>
+<li><p>some-release&gt;=0.1.0, &lt;0.2.0</p></li>
+</ul>
+<p>Make the <code class="docutils literal notranslate"><span class="pre">first-workflow</span></code> a requirement of <code class="docutils literal notranslate"><span class="pre">second-workflow</span></code> by adding it
+to the requires-releases.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requires-releases</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;first-workflow&gt;=0.1.0&#39;</span>
+
+<span class="nt">release</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># name of the release</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;second-workflow&#39;</span>
+<span class="w">  </span><span class="c1"># version tag</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.1.0&#39;</span>
+<span class="w">  </span><span class="c1"># make custom include patterns</span>
+<span class="w">  </span><span class="nt">includes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span>
+<span class="w">  </span><span class="nt">ignores</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;inputs/&#39;</span>
+
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;inputs/input-file.txt&#39;</span>
+<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results/output-file.txt&#39;</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">copy-file</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;my_input&#39;</span>
+<span class="w">    </span><span class="nt">outputs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;my_output&#39;</span>
+<span class="w">    </span><span class="nt">commands</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;cp&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_input}&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Run the <code class="docutils literal notranslate"><span class="pre">sync</span></code> command in order to synce your new project.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rme sync second-workflow</span>
+</pre></div>
+</div>
+<p>This will create a data environment folder called <code class="docutils literal notranslate"><span class="pre">data_env</span></code> inside your project. The data environment
+will store shortcuts to all the data you’ve declared in your requirements file.</p>
+<p>Datasets exists within the context of a project folder, that project folder structure is recreated and soft-linked to inside the <code class="docutils literal notranslate"><span class="pre">.packages</span></code> folder. If you
+go into <code class="docutils literal notranslate"><span class="pre">data_env/.packages/first-workflow-v0.1.3</span></code> you will see the project we made previously. Individual files are soft-linked
+to the actual files, which are stored in a cache that rme manages.</p>
+<p>In the root folder of <code class="docutils literal notranslate"><span class="pre">data_env/</span></code> are the registry folders. These folders contain recreations of only the datasets released by a particular
+workflow, that have been renamed based on the name for the dataset defined in the workflow file. This is the intended access point for data
+within a particular workflow. The extensions of the original datasets (if they have one) are copied onto these registry links to make it easier
+to identify what types of files there are.</p>
+<p>A requirements file can declare multiple versions of the same workflow, folders in the registry and the .packages folder are versioned. However,
+for convenience, the registry will duplicate the most recent version of a particular workflow without a version identifier. This way, you can structure
+your code to use the links in the “most recent”” links. If the datasets are updated to newer versions, your code will automatically pull from the most
+recent requirement.</p>
+</section>
+<section id="add-file-system-requirements">
+<h2>Add File System Requirements<a class="headerlink" href="#add-file-system-requirements" title="Link to this heading">¶</a></h2>
+<p>It’s also possible to declare dependencies on files stored on your local file system
+(or on a network drive). You can do that with a <code class="docutils literal notranslate"><span class="pre">requires-files</span></code> field. You declare
+a folder you want to group the files under, then assign the files to that folder.</p>
+<p>This lets you organize files spread out across multiple folders and network drive locations
+in a way that is logical and coherent to your project, without having to duplicate the data.</p>
+<p>While it’s preffered to have external data dependencies be derived from release packages,
+so their provenance can be inferred from the package metadata, in cases where that isn’t possible
+this at least provides a way to track where your data is coming from in a reproducable way.</p>
+<p>This example creates a folder in data_env called <code class="docutils literal notranslate"><span class="pre">my-files</span></code>, and inside that folder a file
+called <code class="docutils literal notranslate"><span class="pre">my-file.ext</span></code> and a subfolder called <code class="docutils literal notranslate"><span class="pre">some-sub-folder</span></code> that links to the files on
+a network drive stored in <code class="docutils literal notranslate"><span class="pre">${network-drive-path}/path/to/folder</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requires-files</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># group under a folder name space</span>
+<span class="w">  </span><span class="nt">my-files</span><span class="p">:</span>
+<span class="w">    </span><span class="c1"># link out to files</span>
+<span class="w">    </span><span class="nt">my-file</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;path/to/external/file.ext&#39;</span>
+<span class="w">    </span><span class="nt">some-sub-folder</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;${network-drive-path}/path/to/folder&#39;</span>
+</pre></div>
+</div>
+<p>Using environment variables allows sensitive information like network-drive paths to be
+hidden in the config file.</p>
+</section>
+<section id="run-the-new-workflow">
+<h2>Run the New Workflow<a class="headerlink" href="#run-the-new-workflow" title="Link to this heading">¶</a></h2>
+<p>Update the <code class="docutils literal notranslate"><span class="pre">datasets</span></code> field of our second workflow to that <code class="docutils literal notranslate"><span class="pre">my_input</span></code> points to the datasets
+<code class="docutils literal notranslate"><span class="pre">my_result</span></code> of our first workflow.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;data_env/first-workflow/my_result.txt&#39;</span>
+<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results/output-file.txt&#39;</span>
+</pre></div>
+</div>
+<p>If we run our second workflow,</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rme run second-workflow</span>
+</pre></div>
+</div>
+<p>you will notice that the environment is synchronized. The core idea is that rme will
+always attempt to synchronize your data environment with the definition of your data requirements.</p>
+<p>In addition, you will notice that the after synchronizing your environment for the fist time, there will
+be a file called <code class="docutils literal notranslate"><span class="pre">second-workflow.rme.lock</span></code>. The lock file stores the solution to your data requirements
+for a given workflow.</p>
+<p>For example, our requirement  <code class="docutils literal notranslate"><span class="pre">first-workflow&gt;=0.1.0</span></code> is statisfied by any workflow <code class="docutils literal notranslate"><span class="pre">first-workflow</span></code> with
+a version greater then or equal to 0.1.0. To facilitate recreating analysis, the lock file stores the exact solution
+to that requirement found at runtime. If you wish to update a dataset, then you will need to update the lockfile.</p>
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../install/index.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configure_archives/index.html">Make an Archive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../first_workflow/index.html">Make Your First Workflow</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Manage Requirements</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#make-a-new-workflow">Make a New Workflow</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-workflow-requirements">Add Workflow Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-file-system-requirements">Add File System Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-the-new-workflow">Run the New Workflow</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../arrayschema/index.html">Array Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli/index.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/get_started/manage_requirements/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="index.html">v0.4.3</a></li>
+  <li><a href="../../../development/get_started/manage_requirements/index.html">development</a></li>
+  <li><a href="../../../stable/get_started/manage_requirements/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/get_started/manage_requirements/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
