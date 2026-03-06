@@ -92,8 +92,8 @@ Package Contents
               of the DataArray, where the first index of axis 0 is the nominal
               data set, and the rest of the indexes are samples of the distribution.
 
-              The first dimension must be called 'umech_id', and the
-              first labels of the 'parameter_dimensions' must start at 0 and
+              The first dimension must be called 'sample_id', and the
+              first labels of the 'sample_id' must start at 0 and
               count up by 1 (i,e typical integer based indexing).
               The default is None.
    :type mc: xr.DataArray, optional
@@ -629,17 +629,17 @@ Package Contents
 
 
 
-   .. py:method:: usel(umech_id: collections.abc.Iterable[str] = None, mcsamples: collections.abc.Iterable[int] = None) -> RMEMeas
+   .. py:method:: usel(umech_id: collections.abc.Iterable[str] = None, sample_id: collections.abc.Iterable[int] = None) -> RMEMeas
 
       Get a view into specific uncertainty mechanisms or Monte Carlo samples.
 
       :param umech_id: Linear uncertainty mechanisms to look at. The default is None.
       :type umech_id: iter[str], optional
-      :param mcsamples: Monte Carlo samples to look at. The default is None.
-      :type mcsamples: iter[int], optional
+      :param sample_id: Monte Carlo samples to look at. The default is None.
+      :type sample_id: iter[int], optional
 
       :raises ValueError: If 'nominal' is passed to umech_id, or 0 is passed to
-          the mcsamples. Those represent the nominal values and are
+          the sample_id. Those represent the nominal values and are
           always included by default, since an uncertainty object should
           always have a nominal value.
 

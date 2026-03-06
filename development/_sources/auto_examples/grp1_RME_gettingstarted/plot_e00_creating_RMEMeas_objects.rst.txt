@@ -207,7 +207,7 @@ samples in the Monte Carlo distribution, then use the function `usel`.
 
     # This example throws away the montecarlo samples and looks only at a single
     # linear uncertainty mechanism.
-    mech = meas.usel(umech_id=meas.umech_id[0], mcsamples=[])
+    mech = meas.usel(umech_id=meas.umech_id[0], sample_id=[])
 
     linunc, mcunc = mech.stdunc(k=1)
     print(linunc)
@@ -223,7 +223,7 @@ samples.
 
 .. code-block:: Python
 
-    sample = meas.usel(umech_id=[], mcsamples=[1])
+    sample = meas.usel(umech_id=[], sample_id=[1])
 
     print(sample.mc[1, ...])
 
@@ -246,7 +246,7 @@ uncertainties.
 .. code-block:: Python
 
 
-    nominal_only = meas.usel(umech_id=[], mcsamples=[])
+    nominal_only = meas.usel(umech_id=[], sample_id=[])
 
     print(nominal_only.nom)
     print(nominal_only.stdunc())
