@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rmellipse.uobjects &#8212; Rocky Mountain Ellipse 0.4.3a3.dev13+gaf7016abc documentation</title>
+    <title>rmellipse.uobjects &#8212; Rocky Mountain Ellipse 0.4.3a3.dev17+g0db0ba2bb documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
@@ -13,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../_static/documentation_options.js?v=72d609aa"></script>
+    <script src="../../../_static/documentation_options.js?v=77803872"></script>
     <script src="../../../_static/doctools.js?v=9a2dae69"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -153,8 +153,8 @@ mechanism. The default is None.</p>
 sets distribution are stored along the first dimension (axis 0)
 of the DataArray, where the first index of axis 0 is the nominal
 data set, and the rest of the indexes are samples of the distribution.</p>
-<p>The first dimension must be called ‘umech_id’, and the
-first labels of the ‘parameter_dimensions’ must start at 0 and
+<p>The first dimension must be called ‘sample_id’, and the
+first labels of the ‘sample_id’ must start at 0 and
 count up by 1 (i,e typical integer based indexing).
 The default is None.</p>
 </p></li>
@@ -515,7 +515,7 @@ coordinates of the nominal.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.add_umech">
-<span class="sig-name descname"><span class="pre">add_umech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np.inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'Type':</span> <span class="pre">'B'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.add_umech" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">add_umech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np.inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'Type':</span> <span class="pre">'B'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.add_umech" title="Link to this definition">¶</a></dt>
 <dd><p>Add a linear mechanisms to covariance data.</p>
 <p>Note:</p>
 <dl class="field-list simple">
@@ -530,9 +530,7 @@ Default is infinite.</p></li>
 <li><p><strong>category</strong> (<em>dict</em><em>,</em>) – Dictionary of key-value string pairs categorizing the uncertainty
 mechanisms. E.g. {‘Type’:’B’,’Origin’:’Datasheet’}. The default
 is {‘Type’:’B’}.</p></li>
-<li><p><strong>add_uid</strong> (<em>bool</em><em>, </em><em>optional</em>) – Will be deprecated, uids are used automatically now.</p></li>
-<li><p><strong>use_uuid</strong> (<em>str</em><em>, </em><em>optional</em>) – Can optionally provide a UUID for th emechanism, otherwise one
-will be generated</p></li>
+<li><p><strong>add_uid</strong> (<em>bool</em><em>, </em><em>optional</em>) – Append a UID to name to guarantee uniqueness.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -790,18 +788,18 @@ coords_kwargs must be provided..</p></li>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.usel">
-<span class="sig-name descname"><span class="pre">usel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">umech_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mcsamples</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.usel" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">usel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">umech_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.usel" title="Link to this definition">¶</a></dt>
 <dd><p>Get a view into specific uncertainty mechanisms or Monte Carlo samples.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>umech_id</strong> (<em>iter</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Linear uncertainty mechanisms to look at. The default is None.</p></li>
-<li><p><strong>mcsamples</strong> (<em>iter</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Monte Carlo samples to look at. The default is None.</p></li>
+<li><p><strong>sample_id</strong> (<em>iter</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Monte Carlo samples to look at. The default is None.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
 <dd class="field-even"><p><strong>ValueError</strong> – If ‘nominal’ is passed to umech_id, or 0 is passed to
-the mcsamples. Those represent the nominal values and are
+the sample_id. Those represent the nominal values and are
 always included by default, since an uncertainty object should
 always have a nominal value.</p>
 </dd>
@@ -1085,7 +1083,7 @@ and iterates over each function evaluation, which can be slow.</p>
 <h3>Versions</h3>
 <ul>
   <li><a href="../../../../v0.3.4/index.html">v0.3.4</a></li>
-  <li><a href="../../../../v0.4.3/index.html">v0.4.3</a></li>
+  <li><a href="../../../../v0.4.4/index.html">v0.4.4</a></li>
   <li><a href="../../../../development/index.html">development</a></li>
   <li><a href="index.html">stable</a></li>
 </ul>

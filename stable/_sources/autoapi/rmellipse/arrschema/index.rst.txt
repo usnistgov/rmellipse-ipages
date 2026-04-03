@@ -44,7 +44,7 @@ Package Contents
    Initialize self.  See help(type(self)) for accurate signature.
 
 
-.. py:class:: ArraySchema(name: str, shape: tuple[str | int], dims: tuple[str], dtype: str, units: Mapping | str = None, coords: Mapping = None, uid: str = None, attrs_schema: Mapping = None)
+.. py:class:: ArraySchema(name: str, shape: tuple[str | int | types.EllipsisType, Ellipsis], dims: tuple[str | types.EllipsisType, Ellipsis], dtype: str | type[float] | type[complex], units: str | None = None, coords: Mapping = {}, uid: str | None = None, attrs_schema: Mapping | None = None)
 
    Bases: :py:obj:`dict`
 
@@ -58,13 +58,13 @@ Package Contents
    :param shape: Shape of structure. Ellipses indicate arbitrary dimensions,
                  letters indicate a required dimension of unknown length, and
                  integers indicate a required dimension of a required length.
-   :type shape: tuple[str  |  int]
+   :type shape: tuple[str | int | EllipsisType, ...]
    :param dims: Names assigned to dimensions specified by shape. Any required
                 dimension must be names, and arbitrary dimensions must also be
                 ellipses.
-   :type dims: tuple[str]
-   :param dtype: Type string, corresponds to numpy's dtype (e.g. f8, c8, u8, etc)
-   :type dtype: str
+   :type dims: tuple[str | EllipsisType, ...]
+   :param dtype: Type must be parseable by numpy's dtype (e.g. f8, c8, u8, etc)
+   :type dtype: str | type[float]
    :param units: Mapping of units to the array structure. If the whole structure
                  has a single unit, then a string can be passed. Optionally, a
                  single required dimension can be mapped to a 1-d array of units.
@@ -133,7 +133,7 @@ Package Contents
 
 
 
-   .. py:method:: save(path: str | pathlib.Path, *saver_args, saver_type: str = None, validate_schema: bool = True, verbose: bool = False, **saver_kwargs) -> object
+   .. py:method:: save(path: str | pathlib.Path, *saver_args, saver_type: str | None = None, validate_schema: bool = True, verbose: bool = False, **saver_kwargs) -> object
 
       Save array using specified saver.
 
@@ -203,7 +203,7 @@ Package Contents
 
 
 
-   .. py:method:: load(path: pathlib.Path | str, *load_args, loader_type: str = None, validate_schema: bool = True, verbose=False, **load_kwargs) -> Self
+   .. py:method:: load(path: pathlib.Path | str, *load_args, loader_type: str | None = None, validate_schema: bool = True, verbose=False, **load_kwargs) -> Self
       :classmethod:
 
 
@@ -269,7 +269,7 @@ Package Contents
    .. py:attribute:: converters
 
 
-   .. py:method:: find_schema(schema_name: str = None, schema_uid: str = None) -> ArraySchema
+   .. py:method:: find_schema(schema_name: str | None = None, schema_uid: str | None = None) -> ArraySchema
 
       Find a schema.
 
@@ -297,7 +297,7 @@ Package Contents
 
 
 
-   .. py:method:: import_saver(schema_name=None, schema_uid: str = None, extension: str = None, saver_type: str = None, verbose: bool = False)
+   .. py:method:: import_saver(schema_name=None, schema_uid: str | None = None, extension: str | None = None, saver_type: str | None = None, verbose: bool = False)
 
       Get a loader function associated
       with a schema.
@@ -318,7 +318,7 @@ Package Contents
 
 
 
-   .. py:method:: import_loader(schema_name=None, schema_uid: str = None, extension: str = None, loader_type: str = None, verbose: bool = False)
+   .. py:method:: import_loader(schema_name=None, schema_uid: str | None = None, extension: str | None = None, loader_type: str | None = None, verbose: bool = False)
 
       Get a loader function associated
       with a schema.
@@ -356,7 +356,7 @@ Package Contents
 
 
 
-   .. py:method:: import_converter(input_schema_uid: str = None, output_schema_uid: str = None) -> callable
+   .. py:method:: import_converter(input_schema_uid: str | None = None, output_schema_uid: str | None = None) -> Callable
 
       Add a converting functiom between two schema.
 
@@ -407,6 +407,6 @@ Package Contents
    .. py:method:: add_schema(schema: dict | Mapping | pathlib.Path)
 
 
-   .. py:method:: add_class(class_to_add: AnnotatedArray, schema: ArraySchema)
+   .. py:method:: add_class(class_to_add: type[AnnotatedArray], schema: ArraySchema)
 
 
