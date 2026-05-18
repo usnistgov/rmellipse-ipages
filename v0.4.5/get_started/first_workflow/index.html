@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Make Your First Workflow &#8212; Rocky Mountain Ellipse 0.4.3a3.dev19+g414227755 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../_static/documentation_options.js?v=f2b2c5c6"></script>
+    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Manage Requirements" href="../manage_requirements/index.html" />
+    <link rel="prev" title="Make an Archive" href="../configure_archives/index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="make-your-first-workflow">
+<span id="first-workflow"></span><h1>Make Your First Workflow<a class="headerlink" href="#make-your-first-workflow" title="Link to this heading">¶</a></h1>
+<p>This tutorial will walk through how to set up
+a project, make a workflow, and release it to an
+archive (without any dependencies).</p>
+<section id="create-a-project">
+<h2>Create a Project<a class="headerlink" href="#create-a-project" title="Link to this heading">¶</a></h2>
+<p>Make a folder (this is your project) and in that directory make a file called <code class="docutils literal notranslate"><span class="pre">rmeproject.yml</span></code>. This
+is where project settings will be stored, which is where you can define settings that workflows in
+a project should have. For now, leave it empty.</p>
+</section>
+<section id="make-a-workflow-file">
+<h2>Make a Workflow File<a class="headerlink" href="#make-a-workflow-file" title="Link to this heading">¶</a></h2>
+<p>Make a workflow file anywhere in your
+project with the extension <code class="docutils literal notranslate"><span class="pre">.rme.yml</span></code>. This can have any filename. For this example
+we will do <code class="docutils literal notranslate"><span class="pre">first-workflow.rme.yml</span></code>.</p>
+</section>
+<section id="describe-the-release">
+<h2>Describe the Release<a class="headerlink" href="#describe-the-release" title="Link to this heading">¶</a></h2>
+<p>Add a <code class="docutils literal notranslate"><span class="pre">release</span></code> field in <code class="docutils literal notranslate"><span class="pre">first-workflow.rme.yml</span></code>.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">release</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># name of the release</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;first-workflow&#39;</span>
+<span class="w">  </span><span class="c1"># version tag</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.1.0&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="add-datasets">
+<h2>Add Datasets<a class="headerlink" href="#add-datasets" title="Link to this heading">¶</a></h2>
+<p>Datasets are files and/or folders within a project that are intended to be bundled
+with a particular release. They are the the inputs and outputs of jobs, which together
+comprise the workflow.</p>
+<p>Add a <code class="docutils literal notranslate"><span class="pre">release</span></code> field in <code class="docutils literal notranslate"><span class="pre">first-workflow.rme.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;inputs/input-file.txt&#39;</span>
+<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results/output-file.txt&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="add-jobs">
+<h2>Add Jobs<a class="headerlink" href="#add-jobs" title="Link to this heading">¶</a></h2>
+<p>Jobs are a set of terminal commands that are associated with an input and an output.</p>
+<p>Add a <code class="docutils literal notranslate"><span class="pre">jobs</span></code> field, and make one called <code class="docutils literal notranslate"><span class="pre">copy-file</span></code> that takes in <code class="docutils literal notranslate"><span class="pre">my_input</span></code> and
+outputs <code class="docutils literal notranslate"><span class="pre">my_output</span></code>. The command <code class="docutils literal notranslate"><span class="pre">cp</span></code> copies the file in the first argument to the
+file in the second.</p>
+<p>We can use curly braces in a string to replace dataset names defined in the <code class="docutils literal notranslate"><span class="pre">datasets</span></code> field
+with the actual file path.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">copy-file</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_input</span>
+<span class="w">    </span><span class="nt">outputs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_output</span>
+<span class="w">    </span><span class="nt">commands</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;cp&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_input}&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="environment-variables">
+<h2>Environment Variables<a class="headerlink" href="#environment-variables" title="Link to this heading">¶</a></h2>
+<p>Environment variables can be defined for <code class="docutils literal notranslate"><span class="pre">jobs</span></code>, and expressed
+as requirements for a particular workflow. This is done by adding A
+<code class="docutils literal notranslate"><span class="pre">requires-env</span></code> field with a list environment variables. These can then
+be used in jobs by adding <code class="docutils literal notranslate"><span class="pre">${VARIABLE}</span></code> anywhere in a job configuration.</p>
+<p>Environment variables can be defined in a <code class="docutils literal notranslate"><span class="pre">.env</span></code> and will be loaded in
+and used to expand variables in the workflow file. For rme to discover them
+they need to be located:</p>
+<ol class="arabic simple">
+<li><p>a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file located at the project’s root directory for project-level environment variables.</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">.env</span></code> file in the same directory as the workflow for workflow level environment variables. This overloads project level environment variables.</p></li>
+</ol>
+<p>Create a file in the project directory called <code class="docutils literal notranslate"><span class="pre">.env</span></code> and add the following to it:</p>
+<div class="highlight-ini notranslate"><div class="highlight"><pre><span></span><span class="na">MY_NAME</span><span class="o">=</span><span class="s">READER</span>
+</pre></div>
+</div>
+<p>Then declare that environment variable as a requirement and add an echo
+command to the copy-file job.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">requires-env</span><span class="p">:</span>
+<span class="c1"># For something</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MY_NAME</span>
+
+<span class="w">  </span><span class="l l-Scalar l-Scalar-Plain">jobs</span><span class="p p-Indicator">:</span>
+<span class="w">    </span><span class="nt">copy-file</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_input</span>
+<span class="w">      </span><span class="nt">outputs</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_output</span>
+<span class="w">      </span><span class="nt">commands</span><span class="p">:</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;echo&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;hello</span><span class="nv"> </span><span class="s">${MY_NAME}!&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;cp&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_input}&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+</section>
+<section id="run-jobs">
+<h2>Run Jobs<a class="headerlink" href="#run-jobs" title="Link to this heading">¶</a></h2>
+<p>You don’t need to include the file extension when running
+workflows, but you need to include the path to the workflow from
+the root directory of your project.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rme run first-workflow</span>
+</pre></div>
+</div>
+<p>The runner will print the status of each jobs and their datasets, but not each of their standard
+outputs - unless they return a failing status code. Each command is run sequentially within a job,
+and checked for a successful status code. The standard output of each job is logged to a file.</p>
+<p>You can view the log with the <code class="docutils literal notranslate"><span class="pre">rme</span> <span class="pre">log</span></code> command.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rme log copy-file</span>
+</pre></div>
+</div>
+</section>
+<section id="mapping-the-release">
+<h2>Mapping the Release<a class="headerlink" href="#mapping-the-release" title="Link to this heading">¶</a></h2>
+<p>When you release a workflow, you release the datasets and the project
+structure that it was created in.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rme</span></code> respects <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> rules when determining what files to
+include in the release, except for datasets which are included by
+default.</p>
+<p>Add this to a folder called <code class="docutils literal notranslate"><span class="pre">.gitignore</span></code> at the root of the project.
+The .env file may contain sensitivie information, and the .rme file
+contains runtime infromation that rme uses. Neither of those should be
+commited to version control nor shared with a release, so add them
+both to gitignore.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>.rme/
+.env/
+</pre></div>
+</div>
+<p>And add this to a <code class="docutils literal notranslate"><span class="pre">results/.gitignore</span></code> to ignore the contents of the
+results folder but keep the folder itself under version control.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>*
+!.gitignore
+</pre></div>
+</div>
+<p>Check the release mapping with:</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rme map first-workflow</span>
+</pre></div>
+</div>
+<p>You should see a printout of everything that will be included in the
+release.</p>
+<p>We can modify what files are included or excluded in the release
+by adding the <code class="docutils literal notranslate"><span class="pre">release.ignores</span></code> and <code class="docutils literal notranslate"><span class="pre">release.includes</span></code> fields.
+These fields can utilize curly braces to sub in dataset paths, and
+folow the same glob pattern conventions as gitignore relative to the
+project’s root directory.</p>
+<p>In this case, we opt in to include the output file, and elect to ignore the
+input file. The default behaviour is to ignore everything not included by git ignore,
+so if you want to include a dataset as part of the release then make sure to add it here.</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">release</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># name of the release</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;first-workflow&#39;</span>
+<span class="w">  </span><span class="c1"># version tag</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.1.0&#39;</span>
+<span class="w">  </span><span class="c1"># make custom include patterns</span>
+<span class="w">  </span><span class="nt">includes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span>
+<span class="w">  </span><span class="nt">ignores</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;inputs/&#39;</span>
+</pre></div>
+</div>
+<p>At this point your workflow file should look like this:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">release</span><span class="p">:</span>
+<span class="w">  </span><span class="c1"># name of the release</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;first-workflow&#39;</span>
+<span class="w">  </span><span class="c1"># version tag</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.1.0&#39;</span>
+<span class="w">  </span><span class="c1"># make custom include patterns</span>
+<span class="w">  </span><span class="nt">includes</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span>
+<span class="w">  </span><span class="nt">ignores</span><span class="p">:</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;inputs/&#39;</span>
+
+<span class="nt">datasets</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;inputs/input-file.txt&#39;</span>
+<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results/output-file.txt&#39;</span>
+
+<span class="nt">requires-env</span><span class="p">:</span>
+<span class="c1"># For something</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">MY_NAME</span>
+
+<span class="nt">jobs</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">copy-file</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">inputs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_input</span>
+<span class="w">    </span><span class="nt">outputs</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_output</span>
+<span class="w">    </span><span class="nt">commands</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;echo&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;hello</span><span class="nv"> </span><span class="s">${MY_NAME}!&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;cp&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_input}&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span><span class="p p-Indicator">]</span>
+</pre></div>
+</div>
+<p>Run the map command again and check that the input file is ignored,
+and the output file is included.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rme map first-workflow</span>
+</pre></div>
+</div>
+</section>
+<section id="publish-a-release">
+<h2>Publish a Release<a class="headerlink" href="#publish-a-release" title="Link to this heading">¶</a></h2>
+<p>To publish a release, use the release command, replacing
+<code class="docutils literal notranslate"><span class="pre">archive_host</span></code> with the path to the archive you
+are publishing to. The default workspace is the <code class="docutils literal notranslate"><span class="pre">Global</span> <span class="pre">Public</span> <span class="pre">Workspace</span></code>.</p>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">rme release first-workflow &lt;archive_host&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Getting Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../install/index.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../configure_archives/index.html">Make an Archive</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Make Your First Workflow</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-a-project">Create a Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#make-a-workflow-file">Make a Workflow File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#describe-the-release">Describe the Release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-datasets">Add Datasets</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#add-jobs">Add Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment Variables</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#run-jobs">Run Jobs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mapping-the-release">Mapping the Release</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#publish-a-release">Publish a Release</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../manage_requirements/index.html">Manage Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../arrayschema/index.html">Array Schema</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cli/index.html">Command Line Interface</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/get_started/first_workflow/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="index.html">v0.4.5</a></li>
+  <li><a href="../../../development/get_started/first_workflow/index.html">development</a></li>
+  <li><a href="../../../stable/get_started/first_workflow/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+      |
+      <a href="../../_sources/get_started/first_workflow/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
