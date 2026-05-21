@@ -161,9 +161,6 @@ Package Contents
    .. py:property:: dtype
 
 
-   .. py:method:: cast_covcats()
-
-
    .. py:method:: cast_umechids()
 
       Cast any umech_id dimensions to the correct type.
