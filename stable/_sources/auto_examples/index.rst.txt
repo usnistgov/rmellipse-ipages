@@ -178,10 +178,10 @@ Fundementals you should know to get started with Rocky Mountain Ellipse.
 
     </div>
 
-Using Array Schema in Python
-----------------------------
+ArraySchema and AnnotatedArray
+------------------------------
 
-Some examples for using Array Schema in Python
+Some examples for using Array Schema in Python.
 
 
 .. raw:: html
@@ -192,7 +192,7 @@ Some examples for using Array Schema in Python
 
 .. raw:: html
 
-    <div class="sphx-glr-thumbcontainer" tooltip="Array schema are json documents that act as metadata describing the structure of array-like data. The submodule provides some python bindings for generating the schema in python.">
+    <div class="sphx-glr-thumbcontainer" tooltip="Defining ArraySchema and AnnotatedArray&#x27;s">
 
 .. only:: html
 
@@ -203,7 +203,7 @@ Some examples for using Array Schema in Python
 
 .. raw:: html
 
-      <div class="sphx-glr-thumbnail-title">Defining Array Schema</div>
+      <div class="sphx-glr-thumbnail-title">Defining ArraySchema and AnnotatedArray's</div>
     </div>
 
 

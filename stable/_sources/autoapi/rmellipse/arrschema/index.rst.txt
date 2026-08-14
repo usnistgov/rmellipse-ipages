@@ -28,7 +28,6 @@ Classes
 
    rmellipse.arrschema.ArraySchema
    rmellipse.arrschema.AnnotatedArray
-   rmellipse.arrschema.ArrayClassRegistry
 
 
 Package Contents
@@ -44,7 +43,7 @@ Package Contents
    Initialize self.  See help(type(self)) for accurate signature.
 
 
-.. py:class:: ArraySchema(name: str, shape: tuple[str | int | types.EllipsisType, Ellipsis], dims: tuple[str | types.EllipsisType, Ellipsis], dtype: str | type[float] | type[complex], units: str | None = None, coords: Mapping = {}, uid: str | None = None, attrs_schema: Mapping | None = None)
+.. py:class:: ArraySchema(name: str, shape: tuple[str | int | types.EllipsisType, Ellipsis], dims: tuple[str | types.EllipsisType, Ellipsis], dtype: str | type[float] | type[complex], units: str | None = None, coords: Mapping = {}, attrs_schema: Mapping | None = None)
 
    Bases: :py:obj:`dict`
 
@@ -78,9 +77,6 @@ Package Contents
                   stacks of 2-d matrices) then you may specify those coordinates
                   here.
    :type coords: Mapping, optional
-   :param uid: The uid of a schema can be provided here, it is created using
-               uuid4 if it is not provided, by default None.
-   :type uid: str, optional
    :param attrs_schema: JSON Schema for validating metadata attributes.
    :type attrs_schema: mapping, optional
 
@@ -113,7 +109,7 @@ Package Contents
    Bases: :py:obj:`xarray.DataArray`
 
 
-   Interface for an array structure with annotate dimensions and coordinates.
+   Interface for an array structure with annotated dimensions and coordinates.
 
    Inspired by xarray DataArray. Classes conforming to this specification
    can be registered in an ArrayClassRegister.
@@ -123,112 +119,9 @@ Package Contents
       :type:  ArraySchema
 
 
-   .. py:attribute:: registry
-      :type:  ArrayClassRegistry
-
-
    .. py:method:: validate()
 
       Validate array data against the schema of this type.
-
-
-
-   .. py:method:: save(path: str | pathlib.Path, *saver_args, saver_type: str | None = None, validate_schema: bool = True, verbose: bool = False, **saver_kwargs) -> object
-
-      Save array using specified saver.
-
-      This function dispatches to saver functions supplied
-      to the registry through add_saver.
-
-      :param path: Path to location where data should will be saved.
-      :type path: str | Path
-      :param \*saver_args: Passed to saver as positional args.
-      :type \*saver_args: positional arguments
-      :param saver_type: Used to pick which saver to use.
-                         The default is None.
-      :type saver_type: str, optional
-      :param validate_schema: If True, raise an exception if data does not conform to schema.
-                              The default is True.
-      :type validate_schema: bool, optional
-      :param verbose: DESCRIPTION. The default is False.
-      :type verbose: bool, optional
-      :param \*\*saver_kwargs: Passed to saver as keyword arguments.
-      :type \*\*saver_kwargs: keyword arguments
-
-      :returns: Object returned by saver fuction.
-      :rtype: object
-
-
-
-   .. py:method:: convert_to(output_type: type) -> AnnotatedArray
-
-       Convert self to a specified type.
-
-      This function dispatches to converter functions supplied
-      to the registry through add_converter.
-
-       Parameters
-       ----------
-       output_schema : ArraySchema | type
-           Schema for output array type or an array schema
-           class built by a registry.
-
-       Returns
-       -------
-       AnnotatedArray
-           Array matching output schema.
-
-
-
-
-   .. py:method:: convert_from(input_array: AnnotatedArray) -> Self
-      :classmethod:
-
-
-       Initialize from an input array.
-
-      This function dispatches to converter functions supplied
-      to the registry through add_converter.
-
-       Parameters
-       ----------
-       input_array : AnnotatedArray
-           Input data.
-
-       Returns
-       -------
-       Self
-           New array.
-
-
-
-
-   .. py:method:: load(path: pathlib.Path | str, *load_args, loader_type: str | None = None, validate_schema: bool = True, verbose=False, **load_kwargs) -> Self
-      :classmethod:
-
-
-       Save a dataset.
-
-      This function dispatches to loader functions supplied
-      to the registry through add_loader.
-
-       Parameters
-       ----------
-       path : Path | str
-               Path to data to load.
-       loader_type : str, optional
-               If there are mulitple loaders, specify which one.
-       validate_schema : bool, optional
-               If True, raise an exception if data do not conform to schema.
-               The default is True.
-       verbose : bool, optional
-               If True, print debugging messages.
-               The default is False.
-
-       Returns
-       -------
-       Self
-               Loaded data.
 
 
 
@@ -244,169 +137,5 @@ Package Contents
       :returns: New array.
       :rtype: Self
 
-
-
-.. py:class:: ArrayClassRegistry
-
-   Organizes schema, classes, loaders, savers, and converters.
-
-   All of these objects are stored in dictionaries, indexed by unique ids.
-   The unique ids correspond to the schema's unique id attribute.
-
-
-   .. py:attribute:: classes
-
-
-   .. py:attribute:: schema
-
-
-   .. py:attribute:: loaders
-
-
-   .. py:attribute:: savers
-
-
-   .. py:attribute:: converters
-
-
-   .. py:method:: find_schema(schema_name: str | None = None, schema_uid: str | None = None) -> ArraySchema
-
-      Find a schema.
-
-      Name of uid must be provided. Will throw an error if only
-      the name is provided and multiple schema in the registry
-      share a name.
-
-      :param name: Name of the schema to look for.
-      :type name: str
-      :param uid: uid of the schema to find.
-      :type uid: str
-
-      :returns: Requested schema
-      :rtype: ArraySchema
-
-      :raises ValueError: If multiple schemas in the regsitry have the same name.
-
-
-
-   .. py:method:: show_schema()
-
-      Show schema.
-
-      :rtype: None.
-
-
-
-   .. py:method:: import_saver(schema_name=None, schema_uid: str | None = None, extension: str | None = None, saver_type: str | None = None, verbose: bool = False)
-
-      Get a loader function associated
-      with a schema.
-
-      :param schema_name: Name of the schema being saved, by default None
-      :type schema_name: str, optional
-      :param schema_uid: Unique id of the schema being saved, by default None
-      :type schema_uid: str, optional
-      :param extension: File extension, by default None
-      :type extension: str, optional
-      :param saver_type: Type of saver to use, by default None
-      :type saver_type: str, optional
-      :param verbose: Print info, by default False
-      :type verbose: bool, optional
-
-      :returns: Saver function imported from the registry
-      :rtype: callable
-
-
-
-   .. py:method:: import_loader(schema_name=None, schema_uid: str | None = None, extension: str | None = None, loader_type: str | None = None, verbose: bool = False)
-
-      Get a loader function associated
-      with a schema.
-
-      :param schema_name: Name of the schema being saved, by default None
-      :type schema_name: str, optional
-      :param schema_uid: Unique id of the schema being saved, by default None
-      :type schema_uid: str, optional
-      :param extension: File extension, by default None
-      :type extension: str, optional
-      :param loader_type: Type of loader to use, by default None
-      :type loader_type: str, optional
-      :param verbose: Print info, by default False
-      :type verbose: bool, optional
-
-      :returns: _description_
-      :rtype: _type_
-
-
-
-   .. py:method:: add_converter(funspec: str, input_schema: dict, output_schema: dict)
-
-      Add a converting functiom between two schema.
-
-      Converting functions take in exactly one argument
-      and output exactly 1
-
-      :param funspec: Path spec of function in dot-notation
-                      (module.submodule:function)
-      :type funspec: str
-      :param input_schema: name of schema (or provide the uid) for converter
-      :type input_schema: dict, optional
-      :param output_schema: output_schema for converter
-      :type output_schema: dict, optional
-
-
-
-   .. py:method:: import_converter(input_schema_uid: str | None = None, output_schema_uid: str | None = None) -> Callable
-
-      Add a converting functiom between two schema.
-
-      Converting functions take in exactly one argument
-      and output exactly 1
-
-      :param input_schema_uid: uid of input schema (or provide the name), by default None
-      :type input_schema_uid: str, optional
-      :param output_schema_uid: _description_, by default None
-      :type output_schema_uid: str, optional
-
-
-
-   .. py:method:: add_saver(funspec: str, extension: str, saver_type: str, schema: dict)
-
-      Add a saving function to the registry.
-
-      :param funspec: _description_
-      :type funspec: str
-      :param extension: _description_, by default None
-      :type extension: list[str], optional
-      :param saver_type: Specify the type of saver (e.g. csv like, HDF5, group_saveable).
-                         If notprovided, '' is used.
-      :type saver_type: str, optional
-      :param schema: Schema, by default None
-      :type schema: dict, optional
-
-      :raises ValueError: _description_
-
-
-
-   .. py:method:: add_loader(funspec: str, extension: str, loader_type: str, schema: dict | Mapping)
-
-      :param funspec: _description_
-      :type funspec: str
-      :param extension: _description_, by default None
-      :type extension: list[str], optional
-      :param loader_type: Specify the type of loader (e.g. csv like, HDF5, group_saveable).
-                          If notprovided, '' is used.
-      :type loader_type: str, optional
-      :param schema: Schema to use
-      :type schema: dict | Mapping
-
-      :raises ValueError: _description_
-
-
-
-   .. py:method:: add_schema(schema: dict | Mapping | pathlib.Path)
-
-
-   .. py:method:: add_class(class_to_add: type[AnnotatedArray], schema: ArraySchema)
 
 

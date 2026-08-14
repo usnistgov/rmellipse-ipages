@@ -1,0 +1,45 @@
+rmellipse.arrschema.examples
+============================
+
+.. py:module:: rmellipse.arrschema.examples
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rmellipse.arrschema.examples.convert_float_to_int
+   rmellipse.arrschema.examples.convert_zeros_to_s2p_ri
+   rmellipse.arrschema.examples.load_group_saveable
+   rmellipse.arrschema.examples.save_group_saveable
+   rmellipse.arrschema.examples.load_csv_like_s2p_ri
+   rmellipse.arrschema.examples.get_header
+
+
+Module Contents
+---------------
+
+.. py:function:: convert_float_to_int(zeros)
+
+.. py:function:: convert_zeros_to_s2p_ri(s2p_ri)
+
+.. py:function:: load_group_saveable(path, group: str = None, load_big_objects=True)
+
+.. py:function:: save_group_saveable(path, object, name: str, group: str = None, write_mode='w')
+
+.. py:function:: load_csv_like_s2p_ri(path, comment='#')
+
+.. py:function:: get_header(path, comment)
+
+   Returns the header of a file.
+
+   :param path: File path.
+   :type path: str
+   :param comment: The comment character for the header.
+   :type comment: str
+
+   :returns: list of each line of the header.
+   :rtype: list
+
+
