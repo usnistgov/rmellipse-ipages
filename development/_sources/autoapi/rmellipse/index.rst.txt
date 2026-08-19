@@ -3,6 +3,13 @@ rmellipse
 
 .. py:module:: rmellipse
 
+.. autoapi-nested-parse::
+
+   Core components of the API are import and exposed to the top level module.
+
+   These components are also made available through their respective submodules.
+
+
 
 Submodules
 ----------
@@ -14,5 +21,1439 @@ Submodules
    /autoapi/rmellipse/propagators/index
    /autoapi/rmellipse/uobjects/index
    /autoapi/rmellipse/utils/index
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   rmellipse.RMEMeasFormatError
+   rmellipse.MissingSchemaWarning
+   rmellipse.ValidationError
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   rmellipse.RMEMeas
+   rmellipse.CovarianceDataArray
+   rmellipse.CovarianceStrMetadata
+   rmellipse.MonteCarloDataArray
+   rmellipse.RMEUncTuple
+   rmellipse.RMEProp
+   rmellipse.GroupSaveable
+   rmellipse.AnnotatedArray
+   rmellipse.ArraySchema
+   rmellipse.CoordinateSchema
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   rmellipse.load_object
+   rmellipse.save_object
+   rmellipse.load_file
+   rmellipse.save_file
+
+
+Package Contents
+----------------
+
+.. py:class:: RMEMeas(name: str | None = None, cov: A | CovarianceDataArray = None, mc: A | MonteCarloDataArray | None = None, covdofs: xarray.DataArray | CovarianceDOFMetadata | None = None, covcats: xarray.DataArray | CovarianceStrMetadata | None = None, parent: rmellipse.utils.GroupSaveable = None, attrs: dict | None = None)
+
+   Bases: :py:obj:`rmellipse.utils.GroupSaveable`
+
+
+   Class that stores data along with uncertainties.
+
+   Stores linear uncertainties in the cov attribute and
+   montecarlo uncertainties in the cov attribute.
+
+   Used with the rmellipse.RMEProp propagator.
+
+   Initialize a RMEMeas object.
+
+   Please refer to xarray's documentation for information about how to
+   use DataArrays, and how to define coordinates and dimensions.
+
+   If covdofs is not provided, distributions of linear uncertainty
+   mechanisms are assumed to have infinite degrees of freedom (Gaussian).
+
+
+   :param name: Name of RMEMeas object. The default is 'RMEMeas'.
+   :type name: str, optional
+   :param cov: Covariance data for linear sensitivity analysis. Copies of data set
+               are stored along the first dimension (axis 0) of the DataArray, where
+               the first index of axis 0 is the nominal data set, and the rest of
+               the indexes along that dimension are perturbed by one standard deviation
+               (i.e. 1 standard uncertainty).
+
+               The first dimension must be called 'umech_id', and the
+               first label of the 'parameter_dimensions' coordinate must be
+               'nominal'. The remaining labels for the 'umech_id'
+               coordinate should be strings corresponding the the uncertainty
+               mechanism. The default is None.
+   :type cov: A | CovarianceDataArray, optional
+   :param mc: Montecarlo trials. Samples of the data
+              sets distribution are stored along the first dimension (axis 0)
+              of the DataArray, where the first index of axis 0 is the nominal
+              data set, and the rest of the indexes are samples of the distribution.
+
+              The first dimension must be called 'sample_id', and the
+              first labels of the 'sample_id' must start at 0 and
+              count up by 1 (i,e typical integer based indexing).
+              The default is None.
+   :type mc: A | MonteCarloDataArray, optional
+   :param covdofs: DataArray that stores the degrees of freedom for each linear
+                   uncertainty mechanism in cov. It should be a 1 dimensional
+                   DataArray with the dimension called 'umech_id' and
+                   the coordinate set should be identical to the
+                   'umech_id' coordinate in cov. If covariance data
+                   is provided and covdofs is not, one will be created that assumes
+                   all linear mechanisms have infinite degrees of freedom (i.e.
+                   gaussian distributions). The default is None.
+   :type covdofs: xr.DataArray, optional
+   :param covcats: DataArray that stores the categories of each uncertainty mechanism.
+                   Expected to be have dimensions ('umech_id','categories'),
+                   If not provided, all umech_id are assigned a 'Type' category
+                   of 'B'. If a mechanism doesn't have a category, it should be an empty
+                   string.
+   :type covcats: xr.DataArray, optional
+
+
+   .. py:property:: name
+
+      The name of the object.
+
+      :type: str
+
+
+   .. py:property:: cov
+
+      Linear uncertainty mechanisms.
+
+      :type: xr.DataArray
+
+
+   .. py:property:: mc
+
+      samples of Monte-Carlo distributions.
+
+      :type: xr.DataArray
+
+
+   .. py:property:: covdofs
+
+      The degrees of freedom on linear mechanisms.
+
+      :type: xr.DataArray
+
+
+   .. py:property:: covcats
+
+      String metadata for linear uncertainty mechanisms.
+
+      :type: xr.DataArray
+
+
+   .. py:property:: dims
+
+
+   .. py:property:: shape
+
+
+   .. py:property:: coords
+
+
+   .. py:property:: dtype
+
+
+   .. py:method:: cast_umechids()
+
+      Cast any umech_id dimensions or other dimensions to the correct type.
+
+      Generally, umech_id and covcats should be 'T' (variable width strings).
+
+
+
+   .. py:method:: from_nom(name: str, nom: xarray.DataArray) -> RMEMeas
+      :classmethod:
+
+
+      Create a RMEMeas object with just a nominal dataset.
+
+      :param name: The name of the object to be created.
+      :type name: str
+      :param nom: Nominal data set.
+      :type nom: xr.DataArray
+
+      :returns: A RMEMeas object with only nominal values.
+      :rtype: 'RMEMeas'
+
+
+
+   .. py:method:: from_xml(path: str, from_csv: callable, old_dir: str | None = None, new_dir: str | None = None, verbose: bool = False) -> RMEMeas
+      :classmethod:
+
+
+      Read an XML file from the Microwave Uncertainty Framework.
+
+      covcats and covdofs metadata will be loaded as the default values.
+
+      :param path: Path to xml header file.
+      :type path: str
+      :param from_csv: Read function, takes a path to a copy of the data file and returns
+                       an xarray object.
+      :type from_csv: callable
+      :param old_dir: Name of old path stored in xml file. Will be swapped with new_dir
+                      if provided. Old XML format isn't portable, and the paths
+                      need to be manually swapped when the files are moved around.
+                      The default is None.
+      :type old_dir: str | None, optional
+      :param new_dir: Path string to replace old_dir with. The default is None.
+      :type new_dir: str | None, optional
+
+      :raises Exception: If old_dir/new_dir are not both provided, but one is.
+
+      :returns: **new** -- MUFmeas object from the legacy format.
+      :rtype: MUFmeas
+
+
+
+   .. py:method:: to_xml(target_directory: str, to_csv: callable, data_extension: str, header_extension: str = '.meas', header_directory: str | None = None)
+
+      Save to a the Microwave Uncertainty Framework Format.
+
+      This does not preserve metadata in covdofs or covcats.
+
+      :param target_directory: Directory in which to save the support folder which stores all
+                               the copies of the data.
+      :type target_directory: str
+      :param to_csv: Dataformat of the underlying cov-data. Will be inferred if left
+                     as None. The default is None.
+      :type to_csv: callable
+      :param data_extension: What to save the datafile extensions as (e.g. .s1p, .csv, etc)
+      :type data_extension: str
+      :param header_extension: What to save the xml header file extension as.
+                               The default is '.meas'.
+      :type header_extension: str, optional
+      :param header_directory: Location in which to store the header file. If None, defaults
+                               to the target_directory. Default is None.
+      :type header_directory: str | None, optional
+
+      :raises Exception: If no dataformat provided and one cannot be inferred.
+
+      :rtype: None.
+
+
+
+   .. py:method:: copy() -> RMEMeas
+
+      Make a copy of a RMEMeas object.
+
+      :returns: Copied object.
+      :rtype: RMEMeas
+
+
+
+   .. py:method:: cull_cov(tolerance: float = 0)
+
+      Remove trivial linear uncertainty mechanisms set by tolerance.
+
+      Any linear uncertainty mechanisms with a sum of all standard
+      uncertainties < tolerance will be removed from the object.
+
+      For example if tolerance is 0.1, the nominal is  [0,0,0] and
+      the perturbed data for a mechanisms is [0.0,0.1,-0.2], then the
+      function will evaluate the total standard uncertainty for the mechanism
+      as 0.1 + 0.0 + 0.2 = 0.3, and not remove the mechanism.
+
+      This function is called by the auto-cull setting in the RME
+      propagator.
+
+
+      :param tolerance: Maximum value a sum of standard uncertainties that is deemed
+                        trivial, used to determine what mechanisms should be removed.
+                        The default is 0.
+      :type tolerance: float, optional
+
+      :rtype: None.
+
+
+
+   .. py:method:: make_umechs_unique(same_uid: bool = False)
+
+      Make parameter locations unique by adding a uuid4 string to end of each.
+
+      A uiid4 string is added to the end of each parameter_location string.
+      Useful when reading data from different sources that have the same
+      names of uncertainty files. (E.G, multiple device definitions come
+      from calibration service formats with generic 'ua,ub' naming)
+
+      :param same_uid: If true, all parameter locations will have the same uid added
+                       to the end. Default is False.
+      :type same_uid: bool, optional
+
+      :rtype: None.
+
+
+
+   .. py:method:: add_mc_sample(sample: xarray.DataArray)
+
+      Add a Monte Carlo sample to the distribution.
+
+      :param sample: Single sample of the probability distribution that represents the
+                     data set. Expected to be the same shape, dimensions, and
+                     coordinates of the nominal.
+      :type sample: xr.DataArray
+
+      :rtype: None.
+
+
+
+   .. py:method:: add_umech(name: str, value: xarray.DataArray, dof: float = np.inf, category: dict = {'Type': 'B'}, add_uid=None)
+
+      Add a linear mechanisms to covariance data.
+
+      Note:
+
+      :param name: Name of new mechanism, must be unique.
+      :type name: str
+      :param value: Array of nominal+1 standard uncertainty of new mechanism.
+                    If value has the same size as the nominal data, the function will insert a
+                    new dimension at axis zero before concatenating to the covariance data.
+      :type value: xr.DataArray
+      :param dof: Degrees of freedom associated with the uncertainty mechanism.
+                  Default is infinite.
+      :type dof: float,optional
+      :param category: Dictionary of key-value string pairs categorizing the uncertainty
+                       mechanisms. E.g. {'Type':'B','Origin':'Datasheet'}. The default
+                       is {'Type':'B'}.
+      :type category: dict,
+      :param add_uid: Append a UID to name to guarantee uniqueness.
+      :type add_uid: bool, optional
+
+      :rtype: None.
+
+
+
+   .. py:property:: nom
+
+      Get the nominal values of the RMEMeas object.
+
+      :raises Exception: if no data is store.
+
+      :returns: Nominal values in an xr.DataArray
+      :rtype: xr.DataArray
+
+
+   .. py:property:: umech_id
+
+      Get the names of uncertainty mechanisms, excluding the nominal.
+
+      :returns: List of uncertainty mechanism strings.
+      :rtype: List
+
+
+   .. py:method:: confint(percent: float, deg: bool = False, rad: bool = False)
+
+      Generate the lower, upper confidence intervals for a fractional percent confidence.
+
+      Confidence intervals are generate using the linear sensitivity analysis
+      data (.cov) using a student-t distribution with means of .nominal, and
+      a scale of 1 standard uncertainty.
+
+      :param percent: Percent confidence to calculate intervals on, centered about the
+                      nominal. For example, a value of 0.5 will calculate intervals such
+                      that 0.25 of samples are between the mean and the lower, and 0.25
+                      of expected samples are between the mean and the upper.
+      :type percent: float
+      :param deg: If you are calculated confidence intervals on degrees.
+                  The default is False.
+      :type deg: bool, optional
+      :param rad: If you are calculating confidence intervals on radians.
+                  The default is False.
+      :type rad: bool, optional
+
+      :returns: * **lower** (*xr.DataArray*) -- Lower bounds on the confidence interval.
+                * **upper** (*xr.DataArray*) -- Upper bounds on the confidence interval.
+
+
+
+   .. py:method:: dof(deg: bool = False, rad: bool = False)
+
+      Get the dof of of the RMEMeas object's covariance data.
+
+      :returns: * *float* -- degrees of freedom of standard uncertainty from linear sensitivity.
+                * *float* -- degrees of freedom of standard uncertainty from monte-carlo
+
+
+
+   .. py:method:: stdunc(k: float = 1, deg: bool = False, rad: bool = False)
+
+      Get the standard uncertainty with expansion factor k.
+
+      Supports uncertainties on angles via the deg/rad key word arguments.
+
+      :param k: Expansion factor. The default is 1.
+      :type k: float, optional
+      :param deg: If true, treats the values as angles and finds the minimum
+                  distance between the perturbed and un-perturbed data sets in
+                  degrees. The default is False
+      :type deg: bool, optional
+      :param rad: If true, treats the values as angles and finds the minimum
+                  distance between the perturbed and un-perturbed data sets in
+                  radians. The default is False
+      :type rad: bool, optional
+
+      :returns: * **covunc** (*xr.DataArray*) -- xr.DataArray of std unc from covariance data.
+                * **mcunc** (*xr.DataArray*) -- standard uncertainty of montecarlo data.
+
+
+
+   .. py:method:: uncbounds(k: float = 1, deg: bool = False, rad: bool = False)
+
+      Get uncertainty bounds (nominal + k*stdunc).
+
+      Supports uncertainties on angles via the deg/rad key word arguments.
+
+      :param k: Expansion factor. The default is 1.
+      :type k: float, optional
+      :param deg: If true, treats the values as angles and finds the minimum
+                  distance between the perturbed and un-perturbed data sets in
+                  degrees. The default is False
+      :type deg: bool, optional
+      :param rad: If true, treats the values as angles and finds the minimum
+                  distance between the perturbed and un-perturbed data sets in
+                  radians. The default is False
+      :type rad: bool, optional
+
+      :returns: * *xr.DataArray* -- Uncertainty bounds from cov data.
+                * *xr.DataArray* -- Uncertainty bounds from montecarlo data.
+
+
+
+   .. py:method:: assign_categories(mechanisms: list[str], categories: list[str], designation: list[str])
+
+      Assign categories to mechanisms.
+
+      Mechanisms, categories, and designation should all be the same shape.
+
+      categories and designation correspond to key,
+
+      :param mechanisms: 1-d List of mechanisms to be assigned a category
+      :type mechanisms: list[str]
+      :param categories: 1-d list of categories being assigned. Can be new categories that don't
+                         already exist. Index corresponds to index of mechanisms.
+      :type categories: list[str]
+      :param designation: 1-d list of designation to assign each mechanism. Index corresponds
+                          to index of mechanisms.
+      :type designation: list[str]
+
+      :rtype: None.
+
+
+
+   .. py:method:: assign_categories_to_all(**categories: dict)
+
+      Assign categories to all the linear uncertainty mechanisms.
+
+      :param \*\*categories: Keyword argument pairs of category names : designation to assign
+                             to all linear uncertainty mechanisms in a variable.
+      :type \*\*categories: list[str]
+
+      :rtype: None.
+
+
+
+   .. py:method:: create_empty_categories(categories: list[str])
+
+      Add empty categories to the covcats array.
+
+      If an element in categories already exists, it is ignored and not added.
+
+      :param category: List of categories to create. If they already exist, they are not
+                       added.
+      :type category: list[str]
+
+      :rtype: None.
+
+
+
+   .. py:method:: group_combine_mechanisms(deg: bool = False, rad: bool = False) -> RMEMeas
+
+      Group linear uncertainty mechanism originating from the same combine call.
+
+      Preserves degrees of freedom does NOT preserve categorical information, used
+      by the self.dof() function prior to running the welch-stat equation.
+
+      :returns: New RMEMeas object with the linear uncertainty mechanisms originating
+                from the same combine call (Type A Analysis) grouped together.
+      :rtype: RMEMeas
+
+
+
+   .. py:method:: get_unique_categories()
+
+      Get list of unique categories.
+
+
+
+   .. py:method:: print_categories()
+
+      Print out the unique categories.
+
+
+
+   .. py:method:: interp(coords: dict = None, method: str = 'linear', assume_sorted: bool = False, kwargs: dict = None, **coords_kwargs)
+
+      Interpolate RMEMeas object.
+
+      See xarray interp documentation for more details.
+
+      :param coords: Mapping from dimension names to the new coordinates.
+                     New coordinate can be a scalar, array-like or DataArray.
+                     If DataArrays are passed as new coordinates, their dimensions are
+                     used for the broadcasting. Missing values are skipped.
+                     The default is None.
+      :type coords: dict, optional
+      :param method:
+                     {"linear", "nearest", "zero", "slinear", "quadratic", "cubic",
+                      "quintic", "polynomial", "pchip", "barycentric", "krogh", "akima",
+                      "makima"}) – Interpolation method. The default is 'linear'.
+      :type method: str, optional
+      :param assume_sorted: If False, values of x can be in any order and they are sorted
+                            first. If True, x has to be an array of monotonically increasing
+                            values. The default is False.
+      :type assume_sorted: bool, optional
+      :param kwargs: Additional keyword arguments passed to scipy’s interpolator.
+                     Valid options and their behavior depend whether interp1d or
+                     interpn is used.. The default is None.
+      :type kwargs: dict, optional
+      :param \*\*coords_kwargs: The keyword arguments form of coords. One of coords or
+                                coords_kwargs must be provided..
+      :type \*\*coords_kwargs: dict like
+
+      :rtype: None.
+
+
+
+   .. py:method:: usel(umech_id: collections.abc.Iterable[str] = None, sample_id: collections.abc.Iterable[int] = None) -> RMEMeas
+
+      Get a view into specific uncertainty mechanisms or Monte Carlo samples.
+
+      :param umech_id: Linear uncertainty mechanisms to look at. The default is None.
+      :type umech_id: iter[str], optional
+      :param sample_id: Monte Carlo samples to look at. The default is None.
+      :type sample_id: iter[int], optional
+
+      :raises ValueError: If 'nominal' is passed to umech_id, or 0 is passed to
+          the sample_id. Those represent the nominal values and are
+          always included by default, since an uncertainty object should
+          always have a nominal value.
+
+      :returns: View into RMEMeas object with only the selected linear uncertainty
+                mechanisms and Monte Carlo samples.
+      :rtype: 'RMEMeas'
+
+
+
+   .. py:property:: loc
+
+      Get view into underlying data with label based indexing.
+
+      Ignores the umech_id dimension, it cannot be indexed into
+      with this function.Index into array assuming the umech_id
+      dimensions doesn't exist in cov (i.e. as if indexing into only the
+      nominal)
+
+      Generates a view on the underlying cov,mc, covcats
+      and covdofs array. Use .copy() to create an unconnected version.
+
+
+   .. py:method:: sel(indexers: dict = None, method: str = None, tolerance: float = None, **indexers_kwargs) -> RMEMeas
+
+      Get view into underlying data with label based selection.
+
+      Ignores the umech_id dimension, it cannot be indexed into
+      with this function.Index into array assuming the umech_id
+      dimensions doesn't exist in cov (i.e. as if indexing into only the
+      nominal)
+
+      Generates a view on the underlying cov,mc, covcats
+      and covdofs array. Use .copy() to create an unconnected version.
+
+      See documentation on DataArray.sel in the xarray package for details.
+
+      :param indexers: A dict with keys matching dimensions and values given by scalars,
+                       slices or arrays of tick labels. For dimensions with multi-index,
+                       the indexer may also be a dict-like object with keys matching index
+                       level names.
+                       umech_id can't be provided.
+      :type indexers: TYPE, optional
+      :param method: Method to use for inexact matches:
+                     * None (default): only exact matches
+                     * pad / ffill: propagate last valid index value forward
+                     * backfill / bfill: propagate next valid index value backward
+                     * nearest: use nearest valid index value
+                     The default is None.
+      :type method: str, optional
+      :param tolerance: Maximum distance between original and new labels for inexact
+                        matches. The values of the index at the matching locations must
+                        satisfy the equation abs(index[indexer] - target) <= tolerance.
+      :type tolerance: float, optional
+      :param \*\*indexers_kwargs: The keyword arguments form of indexers.
+                                  One of indexers or indexers_kwargs must be provided.
+      :type \*\*indexers_kwargs: dict
+
+      :raises ValueError: DESCRIPTION.
+
+      :returns: **out** -- View into indexed RMEMeas object.
+      :rtype: RMEMeas
+
+
+
+   .. py:method:: isel(indexers: dict = None, drop: bool = False, missing_dims: str = 'raise', **indexers_kwargs) -> RMEMeas
+
+      Get view into underlying data with integer based selection.
+
+      Ignores the umech_id dimension, it cannot be indexed into
+      with this function.Index into array assuming the umech_id
+      dimensions doesn't exist in cov (i.e. as if indexing into only the
+      nominal)
+
+      Generates a view on the underlying cov,mc, covcats
+      and covdofs array. Use .copy() to create an unconnected version.
+
+      :param indexers: A dict with keys matching dimensions and values given by integers,
+                       slice objects or arrays. indexer can be a integer, slice,
+                       array-like or DataArray. If DataArrays are passed as indexers,
+                       xarray-style indexing will be carried out.One of indexers or
+                       indexers_kwargs must be provided.. The default is None.
+      :type indexers: dict, optional
+      :param drop: drop coordinates variables indexed by integers instead of making
+                   them scalar. The default is False.
+      :type drop: bool, optional
+      :param missing_dims: What to do if dimensions that should be selected from are not
+                           present in the DataArray: - “raise”: raise an exception - “warn”:
+                           raise a warning, and ignore the missing dimensions - “ignore”:
+                           ignore the missing dimensions. The default is 'raise'.
+      :type missing_dims: str, optional
+      :param \*\*indexers_kwargs: The keyword arguments form of indexers..
+      :type \*\*indexers_kwargs: TYPE
+
+      :raises ValueError: DESCRIPTION.
+
+      :returns: **out** -- View into indexed RMEMeas object.
+      :rtype: RMEMeas
+
+
+
+   .. py:method:: polyfit(dim: str, deg: int, apply_cov: bool = True) -> RMEMeas
+
+      Apply a polynominal fit along dim.
+
+      :param dim: Name of dimension to fit along.
+      :type dim: str
+      :param deg: Degree of fit
+      :type deg: int
+      :param aoo:
+
+      :returns: Coefficients of data.
+      :rtype: RMEMeas
+
+
+
+   .. py:method:: polyval(coord: xarray.DataArray, degree_dim: str) -> RMEMeas
+
+      Evaluate a polynomial fit along coord.
+
+      Assumes self is a measurement of fit-parameters, with the
+      dimension of polynomial fits along degree_dim.
+
+      :param coord: Coordinate to fit along.
+      :type coord: xr.DataArray
+      :param degree_dim: Polynomial degree dimension.
+      :type degree_dim: str
+
+      :returns: Coefficients of data.
+      :rtype: RMEMeas
+
+
+
+   .. py:method:: curvefit(coords: str | xarray.DataArray | collections.abc.Sequence[str] | collections.abc.Sequence[xarray.DataArray], func: callable, reduce_dims: str | collections.abc.Iterable | None = None, skipna: bool = True, p0: dict = None, bounds: dict = None, param_names: collections.abc.Sequence | None = None, errors: str = 'raise', **kwargs)
+
+      Simple binding to curvefit on xarray.
+
+      The nominal value is solved for first, than used as an initial guess for the
+      perturbed datasets.
+
+      See https://docs.xarray.dev/en/stable/generated/xarray.DataArray.curvefit.html for
+      more details.
+
+      :param coords: Independent coordinate(s) over which to perform the curve fitting.
+                     Must share at least one dimension with the calling object.
+                     When fitting multi-dimensional functions,
+                     supply coords as a sequence in the same order as arguments in func.
+                     To fit along existing dimensions of the calling object, coords can also be specified as a str or sequence of strs.
+      :type coords: str | xr.DataArray | Sequence[str] | Sequence[xr.DataArray], DataArray
+      :param func: User specified function in the form f(x, *params) which returns a numpy array of length len(x).
+                   Params are the fittable parameters which are optimized by scipy curve_fit.
+                   x can also be specified as a sequence containing multiple coordinates, e.g. f((x0, x1), *params).
+      :type func: callable
+      :param reduce_dims: Additional dimension(s) over which to aggregate while fitting. For example, calling ds.curvefit(coords=’time’, reduce_dims=[‘lat’, ‘lon’], …)
+                          will aggregate all lat and lon points and fit the specified function along the time dimension.
+      :type reduce_dims: str | Iterable | None, optional
+      :param skipna: Whether to skip missing values when fitting. Default is True.
+      :type skipna: bool, optional
+      :param p0: Optional dictionary of parameter names to initial guesses passed to the curve_fit p0 arg.
+                 If the values are DataArrays, they will be appropriately broadcast to the coordinates of the array.
+                 If none or only some parameters are passed, the rest will be assigned initial values following the default
+                 scipy behavior
+      :type p0: dict, optional
+      :param bounds: Optional dictionary of parameter names to tuples of bounding values passed to the curve_fit bounds arg.
+                     If any of the bounds are DataArrays, they will be appropriately broadcast to the coordinates of the array.
+                     If none or only some parameters are passed, the rest will be unbounded following the default scipy behavior.
+      :type bounds: dict, optional
+      :param param_names: Sequence of names for the fittable parameters of func. If not supplied, this will be automatically determined
+                          by arguments of func. param_names should be manually supplied when fitting a function that takes a
+                          variable number of parameters.
+      :type param_names: Sequence | None, optional
+      :param errors: If ‘raise’, any errors from the scipy.optimize_curve_fit optimization will raise an exception.
+                     If ‘ignore’, the coefficients and covariances for the coordinates where the fitting failed will be NaN.
+      :type errors: str, optional
+      :param \*\*kwargs: Additional keyword arguments passed to scipy curve_fit.
+      :type \*\*kwargs: optional
+
+
+
+   .. py:method:: curveval(func: callable, coords: xarray.DataArray)
+
+      Evaluate the output of curvefit.
+
+      Assumes there is a dimension called 'param' that coresponds.
+      to the fit coefficients of func. Assumes function is nonlinear
+      and iterates over each function evaluation, which can be slow.
+
+      :param func: callable function
+      :type func: callable
+      :param coords: coordinates.
+      :type coords: xr.DataArray
+
+
+
+.. py:class:: CovarianceDataArray(*args, **kwargs)
+
+   Bases: :py:obj:`rmellipse.arrschema.AnnotatedArray`
+
+
+   Store data with linear uncertainty mechanisms.
+
+   The first label of the umech_id coordinate is
+   expected to be 'nominal', and represents the
+   nominal (i.e. expected value) of the data set.
+   Each label of the umech_id coordinate after that
+   represents the nominal dataset perturbed by 1 standard
+   deviation of that uncertainty mechanism, where the label
+   is a universally unique ID that identifies the
+   uncertainty mechanism.
+
+
+   .. py:attribute:: schema
+
+
+.. py:class:: CovarianceStrMetadata(*args, **kwargs)
+
+   Bases: :py:obj:`rmellipse.arrschema.AnnotatedArray`
+
+
+   Stores metadata about linearuncertainty mechanisms.
+
+   The 'nominal' should not be included in the umech_id dim.
+
+
+   .. py:attribute:: schema
+
+
+.. py:class:: MonteCarloDataArray(*args, **kwargs)
+
+   Bases: :py:obj:`rmellipse.arrschema.AnnotatedArray`
+
+
+   Store data with monte carlo samples.
+
+   The first label of the sample_id coordinate is
+   the expected value of the distribution the data set.
+
+   Each sample_id after that represents a sample
+   from the underlying probability distribution.
+
+
+   .. py:attribute:: schema
+
+
+.. py:exception:: RMEMeasFormatError(message)
+
+   Bases: :py:obj:`Exception`
+
+
+   Error in formatting of data inside RMEMeas
+
+   :param Exception: _description_
+   :type Exception: _type_
+   :param Initialize self.  See help(type(self)) for accurate signature.:
+
+
+   .. py:attribute:: message
+
+
+.. py:class:: RMEUncTuple
+
+   Bases: :py:obj:`tuple`
+
+
+   .. py:attribute:: cov
+
+
+   .. py:attribute:: mc
+
+
+.. py:class:: RMEProp(montecarlo_sims: int = 0, sensitivity: bool = False, handle_common_grid_method: str = None, common_grid: str = 'frequency', common_coords: dict = {}, interp_kwargs: dict = {}, verbose: bool = False, vectorize: bool = True, set_active: bool = True)
+
+   Bases: :py:obj:`rmellipse.propagators.Propagator`
+
+
+   Microwave Uncertainty Framework uncertainty propagators.Propagator.
+
+   Stores perturbations to data sets and samples of a Monte Carlo distribution
+   along a dimension called 'umech_id' for the cov and mc
+   attributes respectively.
+
+   This class is used to represent data sets with uncertainty, and the provided
+   propagators.Propagator wrapper and combine function are used to propagate those
+   uncertainties through arbitrary functions using first order linear
+   sensitivity analysis, or monte carlo simulations.
+
+   The class structure and algorithms are designed to support vectorized
+   operations, and label based indexing with numpy/xarray libraries in the
+   functions being propagated, enabling larger data sets/large numbers of
+   uncertainties to be propagated efficiently without parallelization.
+
+   The class also supports the automatic handling of data sets with a common
+   grid/dimensions, like frequency points.
+
+
+   Creates a RMEMeas propagators.Propagator initialized with the defined settings.
+   Keyword arguments are initialized into a settings dictionary that
+   can be modified on runtime.
+
+   :param montecarlo_sims: How many Monte Carlo trials to run. 0 turns off. The default is 0.
+   :type montecarlo_sims: int, optional
+   :param sensitivity: If true, performs a sensitivity analysis, linear first order
+                       via finite differences. The default is False.
+   :type sensitivity: bool, optional
+   :param handle_common_grid_method: How to select common dimensions on RMEMeas inputs, done automatically
+                                     by propagated functions. See
+                                     RMEMeas.handle_common_grid for more info. None turns off.
+   :type handle_common_grid_method: str, optional
+   :param common_grid: Name of the common dimension to handle. The default is 'frequency'.
+   :type common_grid: str, optional
+   :param common_coords: Coordinates to pair RMEMeas inputs down to. Used for certain
+                         handle_common_grid_method values.See
+                         RMEMeas.handle_common_grid The default is {}.
+   :type common_coords: dict, optional
+   :param verbose: IF true, propagators.Propagator prints information about operations
+                   as they happen. The default is False.
+   :type verbose: bool, optional
+   :param vectorize: IF true, propagators.Propagator will loop over uncertainty mechanisms and
+                     repeatedly call the propagating function. The default is False.
+   :type vectorize: bool, optional;
+   :param set_active: Sets this as the active propagators.Propagator, used for some magic
+                      methods that need to infer what propagators.Propagator to use.
+                      The default is True.
+   :type set_active: bool, optional
+
+
+   .. py:attribute:: settings
+
+      Stores the current settings of the propagator.
+
+      :type: dict
+
+
+   .. py:method:: handle_common_grid(process_args: tuple, process_kwargs: dict, dim: str, handle_method: str) -> tuple[tuple, dict]
+
+      Handle common grids on RMEMeas objects in process_args or process_kwargs.
+
+      This function is called automatically by propagate to align and select
+      common grid elements of RMEMeas objects so they are suitable for
+      arithemetic and linear algebra.
+
+      :param process_args: DESCRIPTION.
+      :type process_args: tuple
+      :param process_kwargs: DESCRIPTION.
+      :type process_kwargs: dict
+      :param dim: Name of the dimensions being handled.
+      :type dim: str
+      :param handle_method: Name of the handle method. Valid options are:
+                            "common","interp_smallest","interp_common"
+                            "common" will only use values along dim that are shared among ALL
+                            the inputs.
+
+                            "interp_common" will interpolate (1D) to the the provided frequency list
+                            in the common_coords dictionary of the propagators.Propagators settings. The
+                            common_coords settings is expected to be a dictionary of key value
+                            pairs with {dim:array} where dim is the name of the dimension and
+                            array is the 1d set of indexes.
+      :type handle_method: str
+
+      :raises Exception: If a handle common grid method is provided that has not been defined.
+
+      :returns: * *tuple* -- Modified positional arguments with common grid handled.
+                * *dict* -- Modified key worded arguments with common grid handled.
+
+
+
+   .. py:method:: propagate(fun)
+
+      Decorate to make function automatically pass itself through propagate.
+
+      Assumes that all the RMEMeas arguments are passed as positional arguments.
+      Any positional arguments that are not RMEMeas instances are turned
+      into RMEMeas objects without any covariance or nominal data, and named
+      'auto_arg'. The  __name__ property of the function is assigned as the name
+      of the output RMEMeas object.
+
+      :returns: RMEMeas object of output.
+      :rtype: RMEMeas
+
+
+
+   .. py:method:: combine(*measurements: rmellipse.uobjects.RMEMeas, error_of_mean: bool = False, n_single_values: Union[float, int] = None, combine_basename: str = 'combined', add_uuid: bool = True, combine_categories: dict[str] = {'Type': 'A'}) -> rmellipse.uobjects.RMEMeas
+
+      Combine repeated measurements with uncertainty into a single measurement.
+
+      Additional uncertainty mechanisms are created with the 'combine_basename'
+      as the name of the mechanisms + an iterated integer. Principal component
+      analysis is used to create the additional mechanisms.
+
+      :param \*measurements: DESCRIPTION.
+      :type \*measurements: RMEMeas
+      :param error_of_mean: If true, uses the error of the mean when creating the new uncertainty
+                            mechanisms. The default is False.
+      :type error_of_mean: bool, optional
+      :param n_single_values: Describes how many of the singular values to keep as
+                              error mechanisms when performing the PCA.If n_single_values<1,
+                              will provide the min number of values to describe n_single_values
+                              ratio of the total variance described by the SVD. If
+                              n_single_values> 1, will utilize the integer n_single_values number
+                              of singular values. If None, will use all the singular values
+                              available. Useful for reducing the size of data sets when
+                              large numbers of repeated measurements are used.The default is None.
+      :type n_single_values: Union[float,int], optional
+      :param combine_basename: Base name usd when creating new uncertainty mechanisms.
+                               Uncertainty mechanisms are named with <basename>+_+<int>, int is
+                               iterated for each new mechanism. The default is 'combined'.
+      :type combine_basename: dict[str], optional
+      :param add_uid: If true, adds a UID to the combine_basename to make it unique. The
+                      default is True.
+      :type add_uid: str, optional
+
+      :returns: **out** -- Returns a RMEMeas object with combined uncertainties.
+      :rtype: RMEMeas
+
+
+
+   .. py:method:: combine_across_dim(measurement: rmellipse.uobjects.RMEMeas, dim: str, error_of_mean: bool = False, n_single_values: Union[float, int] = None, combine_basename: str = 'combined', add_uuid: bool = True, combine_categories: dict[str] = {'Type': 'A'}) -> rmellipse.uobjects.RMEMeas
+
+      Combine repeated measurements that are within a single RMEMeas object
+      across a dimension with uncertainty into a single measurement.
+
+      Additional uncertainty mechanisms are created with the 'combine_basename'
+      as the name of the mechanisms + an iterated integer. Principal component
+      analysis is used to create the additional mechanisms.
+
+      :param \*measurements: DESCRIPTION.
+      :type \*measurements: RMEMeas
+      :param error_of_mean: If true, uses the error of the mean when creating the new uncertainty
+                            mechanisms. The default is False.
+      :type error_of_mean: bool, optional
+      :param n_single_values: Describes how many of the singular values to keep as
+                              error mechanisms when performing the PCA.If n_single_values<1,
+                              will provide the min number of values to describe n_single_values
+                              ratio of the total variance described by the SVD. If
+                              n_single_values> 1, will utilize the integer n_single_values number
+                              of singular values. If None, will use all the singular values
+                              available. Useful for reducing the size of data sets when
+                              large numbers of repeated measurements are used.The default is None.
+      :type n_single_values: Union[float,int], optional
+      :param combine_basename: Base name usd when creating new uncertainty mechanisms.
+                               Uncertainty mechanisms are named with <basename>+_+<int>, int is
+                               iterated for each new mechanism. The default is 'combined'.
+      :type combine_basename: dict[str], optional
+      :param add_uid: If true, adds a UID to the combine_basename to make it unique. The
+                      default is True.
+      :type add_uid: str, optional
+
+      :returns: **out** -- Returns a RMEMeas object with combined uncertainties.
+      :rtype: RMEMeas
+
+
+
+.. py:function:: load_object(saved_object: Union[GROUP, DATASET], parent: GROUP_SAVEABLE = None, load_big_objects: bool = True, vlen_object_encoding: str = str) -> any
+
+   Construct Python object from group or dataset.
+
+   :param saved_object: Group or datset that contains Python object.
+   :type saved_object: Union[GROUP, DATASET]
+   :param parent: Parent of this object (Python object). The default is None.
+   :type parent: GROUP_SAVEABLE, optional
+   :param load_big_objects: If True, fully load all objects into memory. If False,
+                            only the attributes of big objects will be loaded. The default is True.
+   :type load_big_objects: bool, optional
+   :param vlen_object_encoding: Variable length byte objects (np.dtype('O')) are cast
+                                into this type when they are read into numpy arrays. The
+                                default is str.
+   :type vlen_object_encoding: str, optional
+
+   :returns: A Python object.
+   :rtype: any
+
+
+.. py:function:: save_object(group: GROUP, name: str, o: any, verbose: bool = False) -> SAVED
+
+   Save an object to a group.
+
+   :param group: Group where object will be saved.
+   :type group: GROUP
+   :param name: Name the object will have in the group.
+   :type name: str
+   :param o: Object to save.
+   :type o: any
+
+   :returns: The newly-created saved object.
+   :rtype: SAVED
+
+
+.. py:function:: load_file(path: str | pathlib.Path, **load_object_kwargs)
+
+   Load a GroupSaveable object from a file.
+
+   Follows the convention if there must be a single GroupSaveable
+   object at the root of the file.
+
+   :param path: File to read.
+   :type path: str | Path
+   :param \*\*load_object_kwargs: Any additional key word arguments that may be passed off to load_object.
+   :type \*\*load_object_kwargs: any
+
+
+.. py:function:: save_file(path: str | pathlib.Path, saveable: GroupSaveable, **save_object_kwargs)
+
+   Save a GroupSaveable object to a file.
+
+   Overwrites the target file if it already exists.
+
+   :param path: File to save to.
+   :type path: str | Path
+   :param saveable: GroupSaveable object.
+   :type saveable: GroupSaveable
+   :param \*\*save_object_kwargs: Any additional key word arguments that may be passed off to save_object.
+   :type \*\*save_object_kwargs: any
+
+
+.. py:class:: GroupSaveable(name: str = None, parent: GROUP_SAVEABLE = None, attrs: dict = None, **kwargs)
+
+   Bases: :py:obj:`GROUP_SAVEABLE`
+
+
+   Interface for objects that can be saved as HDF5 or Exdir groups or files.
+
+   These objects are organized in a tree-like structure to avoid data
+   duplication. Specifically, a group-saveable object is a node in a tree
+   graph. It stores references to its children, and also to its parent.
+
+   Each node also has a lookup table that stores the paths to data objects
+   below it.
+
+   Save strategy
+   -------------
+       * Group saveable objects can be saved to groups and initialized from
+       groups. There should be a 1-1 mapping of objects to groups.
+
+       * After initialization, the group saveable object is independent
+       from the goup that it was initialized from, and the group(s) it was
+       saved to. So, changing the group saveable object does not change either
+       the group it was initialized from, or the group(s) it was saved to.
+
+   Recomendations for derived classes
+   ----------------------------------
+       * All attributes should be saveable types (see module description)
+
+       * The names of all attributes match the keywords of contructor
+       keyword arguments. Ex. if the object has an attribute called "foo",
+       the constructor will take a keyword argument called "foo".
+
+       * In the constructor, you use self.add_child to initialize object
+       attributes. Big objects should be marked with is_big_object = True.
+
+       * Any modules that define classes derived from group_saveable are
+       in sys.path, so that import <module_name> works.
+
+       * If you plan on saving an object attribute as a group attribute, add
+       it to self.attrs.
+
+       * For best performance, do not store any data in a LIST_SAVEABLE type
+       (list, set, or tuple) if it can be stored in an array. Arrays are
+       stored as datasets (efficient), while list-likes are stored in a custom
+       format (inelegant, inefficient).
+
+   Tree structure
+   --------------
+       * Group saveable objects have a unique id. If you know an object's id,
+       you can retrieve the object from a tree.
+
+       * Any group_saveable object can serve as the root of a tree. The only
+       thing that makes the root special is that it has no parent.
+       Consequently, roots can be assigned parents, and children can be
+       detached from their parents.
+
+       * Nodes can't store information about nodes that are not their
+       children or their parent. Otherwise, we would have to define a root.
+
+
+
+   .. py:attribute:: attrs
+      :value: None
+
+
+
+   .. py:attribute:: parent
+      :value: None
+
+
+
+   .. py:attribute:: lookup_table
+
+
+   .. py:attribute:: children
+
+
+   .. py:attribute:: is_big_object
+
+
+   .. py:method:: load(group: GROUP, parent: GROUP_SAVEABLE = None, load_big_objects: bool = False) -> GROUP_SAVEABLE
+      :classmethod:
+
+
+      Initialize GROUP_SAVEABLE object from a group.
+
+      The group_saveable class is designed to be used as an archive, and may
+      store many large data sets. So, to save space in memory, some objects
+      must be open explicitly using the load_big_objects argument.
+
+      The attribute "is_big_object" determines if the object is
+      fully loaded or not. If an object is not loaded, a placeholder with
+      the same attributes will be added.
+
+      :param group: An hdf5 (or equivalent) group.
+      :type group: GROUP
+      :param parent: The parent of this object. The default is None.
+      :type parent: GROUP_SAVEABLE, optional
+      :param load_big_objects: If False, attributes marked as big objects are not loaded into
+                               memory. The default is False.
+      :type load_big_objects: bool, optional
+
+      :returns: **new_object** -- New data tree object loaded from group.
+      :rtype: GROUP_SAVEABLE
+
+
+
+   .. py:method:: get_root() -> GROUP_SAVEABLE
+
+      Get the root of the data tree.
+
+      :returns: The root (the tree with no parents).
+      :rtype: GROUP_SAVEABLE
+
+
+
+   .. py:method:: look_up_node(unique_id: str) -> GROUP_SAVEABLE
+
+      Find the node that holds an object by unique id.
+
+      :param unique_id: The hex representation of the unique id of an object stored in a
+                        subtree.
+      :type unique_id: str
+
+      :returns: The data tree that holds the object with that unique id.
+      :rtype: GROUP_SAVEABLE
+
+
+
+   .. py:method:: update_lookup_table(unique_id: str, path: str = '') -> bool
+
+      Try to update lookup table with path to data stored in a subtree.
+
+      This method will also recursively try to update the parent's lookup
+      tables.
+
+      If there is already an object with the same unique id in a
+      parent's lookup table, then that is the real one, and this is a copy.
+      In that case, do not upate the lookup table.
+
+      :param unique_id: The hex representation of the unique id of an object stored in a
+                        subtree.
+      :type unique_id: str
+      :param path: Used for recursion. Do not change. The default is "".
+      :type path: str, optional
+
+      :returns: True if object is successfully added (does not already exist in
+                parents' lookup table)
+      :rtype: bool
+
+
+
+   .. py:method:: save(parent: GROUP, name: str = None, verbose: bool = False)
+
+      Save a group_saveable object as a group.
+
+      :param parent: Parent of group to be created.
+      :type parent: GROUP
+      :param name: If not None, overwrite name attribute of the group. The default is
+                   None.
+      :type name: str, optional
+      :param verbose: if True, prints information about what is being saved
+      :type verbose: bool, optional
+
+      :rtype: None.
+
+
+
+   .. py:method:: add_child(key: str = None, data: SAVEABLE = None, is_big_object: bool = False)
+
+      Add child to this node.
+
+      If the new data is a GROUP_SAVEABLE object, enforce that
+      data.attrs["name"] == key.
+
+      :param key: Name of child. If None, check if the data has a name.
+                  The defualt is None.
+      :type key: str, optional
+      :param data: Data to add. If None, initialize an empty group_saveable object.
+                   The defualt is None.
+      :type data: SAVEABLE, optional
+      :param is_big_object: If True, when this object is read from a file, it will
+                            be ignored if the load_big_objects argument is set to False.
+                            The default is False.
+      :type is_big_object: bool, optional
+
+      :rtype: None.
+
+
+
+   .. py:method:: update_parents()
+
+      Recursively update the parents lookup tables all of this object's children.
+
+      :rtype: None.
+
+
+
+.. py:exception:: MissingSchemaWarning
+
+   Bases: :py:obj:`UserWarning`, :py:obj:`RuntimeWarning`
+
+
+   Base class for warnings generated by user code.
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+.. py:class:: AnnotatedArray(*args, **kwargs)
+
+   Bases: :py:obj:`xarray.DataArray`
+
+
+   Extension of xr.DataArray that is expected to conform to a specific schema.
+
+   Schema is defined by an ArraySchema class.
+
+
+   .. py:attribute:: schema
+      :type:  ArraySchema
+
+
+   .. py:method:: validate()
+
+      Validate array data against the schema of this type.
+
+
+
+   .. py:method:: from_dataarray(array: xarray.DataArray) -> Self
+      :classmethod:
+
+
+      Cast an array into an annotated array.
+
+      :param array: Array that can be cast into this format.
+      :type array: xr.DataArray
+
+      :returns: New array.
+      :rtype: Self
+
+
+
+   .. py:method:: zeros(attrs: Mapping | None = None, **coords: numpy.ndarray | xarray.DataArray) -> AnnotatedArray
+      :classmethod:
+
+
+      Generate an empty array of zeros based on the schema.
+
+      If extra coordinates are
+      supplied they will be inserted at the first arbitrary dimension
+      specificier in the AnnotatedArray's schema ('...'). Coordinates
+      with set values can be ignored, and will be automatically inserted.
+
+      Zero array is initialized with numpy.zeros.
+
+      :param attrs: Provided metadata to instantiate the AnnotatedArray with. The
+                    values in the supplied metadata are
+                    shallow copied onto the instantiated AnnotatedArrays's attrs.
+      :type attrs: Mapping | None = None
+      :param \*\*coords: KeyValue pairs of coordinates. Must include the required
+                         coordinates of the AnnotatedArray.
+      :type \*\*coords: np.ndarray | xr.DataArray
+
+      :returns: Array with supplied coordinates that conforms to the schema.
+      :rtype: AnnotatedArray
+
+      :raises KeyError: DESCRIPTION.
+
+
+
+   .. py:method:: zeros_from(prototype: AnnotatedArray, drop_dims: list[str] | None = None, rename_dims: Mapping | None = None, use_coords: Mapping | None = None, reorder: bool = True, validate: bool = True, attrs: Mapping | None = None, **coords) -> AnnotatedArray
+      :classmethod:
+
+
+      Generate a new zeros array based on a prototype array.
+
+      Dimensions that are mapped from the prototype array to the output
+      array are cast into the correct type. Otherwise, dimensions are
+      inserted in the expected place.
+
+      :param prototype: Array to base the new array off of.
+      :type prototype: AnnotatedArray
+      :param drop_dims: Drop these dimensions. The default is None.
+      :type drop_dims: list[str], optional
+      :param rename_dims: Mapping of dimensions on the prototype array that should be
+                          converted to dimensions of this type of array. The default is None.
+      :type rename_dims: Mapping | dict, optional
+      :param use_coords: Additional dimensions required for the new type, key is
+                         the dimension name and value is the new coordinate to use for
+                         that dimension.
+      :type use_coords: Mapping | dict, optional
+      :param reorder: Automatically try to reorder dimensions to conform
+                      to the specification.
+      :type reorder: bool, optional
+      :param validate: If true, validate after creation. Default is False
+      :type validate: bool, optional
+      :param attrs: If provided, supply metadata to be used as attributes.
+      :type attrs: Mapping | dict, optional
+      :param \*\*coords: Keyword version of use_coords. Is merged with ontop of
+                         use_coords.
+      :type \*\*coords: Mapping | None, optional
+
+      :returns: **zeros** -- Zeros array in the new format.
+      :rtype: AnnotatedArray
+
+
+
+.. py:class:: ArraySchema(shape: tuple[str | int | types.EllipsisType, Ellipsis], dims: tuple[str | types.EllipsisType, Ellipsis], dtype: type | None = None, units: str | None = None, coords: Mapping = {}, attrs: pydantic.BaseModel = None)
+
+   Bases: :py:obj:`dict`
+
+
+   Specialized dict subclass to describe the shape an array.
+
+   Initialize an ArraySchema.
+
+   :param shape: Shape of structure. Ellipses indicate arbitrary dimensions,
+                 letters indicate a required dimension of unknown length, and
+                 integers indicate a required dimension of a required length.
+   :type shape: tuple[str | int | EllipsisType, ...]
+   :param dims: Names assigned to dimensions specified by shape. Any required
+                dimension must be names, and arbitrary dimensions must also be
+                ellipses.
+   :type dims: tuple[str | EllipsisType, ...]
+   :param dtype: Type must be parseable by numpy's dtype (e.g. f8, c8, u8, etc).
+                 None means no datatype requriement, can be Any.
+   :type dtype: type | None
+   :param units: Mapping of units to the array structure.
+   :type units: Mapping, optional
+   :param coords: Mapping of required dimensions to a coordinate space. Must provide
+                  at least a dtype and a single unit as a string. Optionally,
+                  if the coordinates are fixed (i.e. the row and column indices of
+                  stacks of 2-d matrices) then you may specify those coordinates
+                  here.
+   :type coords: Mapping, optional
+   :param attrs_schema: JSON Schema for validating metadata attributes.
+   :type attrs_schema: mapping, optional
+
+   :returns: Dictionary conforming to an arrschema specification.
+   :rtype: dict
+
+   :raises Exception: If some logical inconsistency or is found, or the provided
+       schema doesn't follow the specification for an array schema.
+
+
+   .. py:method:: validate(arr: AnnotatedArray, attach_schema: bool = True)
+
+      Test if array conforms to schema.
+
+      :param arr: Array to check.
+      :type arr: AnnotatedArray
+      :param attach_schema: If True, the schema is dumped into a string and
+                            attatched to the attrs of the input data array.
+                            The default is True.
+      :type attach_schema: bool, optional
+
+      :raises ValidationError: If a discrepancy is found between the data and the schema.
+
+      :rtype: None.
+
+
+
+.. py:class:: CoordinateSchema(values: list | None = None, dtype: type | None = None, units: str | None = None)
+
+   Bases: :py:obj:`dict`
+
+
+   dict() -> new empty dictionary
+   dict(mapping) -> new dictionary initialized from a mapping object's
+       (key, value) pairs
+   dict(iterable) -> new dictionary initialized as if via:
+       d = {}
+       for k, v in iterable:
+           d[k] = v
+   dict(**kwargs) -> new dictionary initialized with the name=value pairs
+       in the keyword argument list.  For example:  dict(one=1, two=2)
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+.. py:exception:: ValidationError(*args, **kwargs)
+
+   Bases: :py:obj:`Exception`
+
+
+   Common base class for all non-exit exceptions.
+
+   Initialize self.  See help(type(self)) for accurate signature.
 
 

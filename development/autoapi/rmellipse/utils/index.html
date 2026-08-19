@@ -5,16 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rmellipse.utils &#8212; Rocky Mountain Ellipse 0.4.3a3.dev24+g30dbdf43d documentation</title>
+    <title>rmellipse.utils &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../_static/documentation_options.js?v=3443905a"></script>
-    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
@@ -107,7 +108,7 @@ $(document).ready(function(){
 <tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.utils.save_object" title="rmellipse.utils.save_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_object</span></code></a>(→ SAVED)</p></td>
 <td><p>Save an object to a group.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.utils.load_file" title="rmellipse.utils.load_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_file</span></code></a>(path, saveable, **load_object_kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.utils.load_file" title="rmellipse.utils.load_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_file</span></code></a>(path, **load_object_kwargs)</p></td>
 <td><p>Load a GroupSaveable object from a file.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.utils.save_file" title="rmellipse.utils.save_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_file</span></code></a>(path, saveable, **save_object_kwargs)</p></td>
@@ -120,7 +121,7 @@ $(document).ready(function(){
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="rmellipse.utils.MUFMeasParser">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">MUFMeasParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.utils.MUFMeasParser" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">MUFMeasParser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.utils.MUFMeasParser" title="Link to this definition">¶</a></dt>
 <dd><p>Object for reading legacy Microwave Uncertainry Framework xml files into uncertainty objects.</p>
 <p>Initialize a MUFMeas parser.</p>
 <dl class="field-list simple">
@@ -294,7 +295,7 @@ default is str.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="rmellipse.utils.load_file">
-<span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rmellipse.utils.GroupSaveable" title="rmellipse.utils.GroupSaveable"><span class="pre">GroupSaveable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">load_object_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.utils.load_file" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">load_object_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.utils.load_file" title="Link to this definition">¶</a></dt>
 <dd><p>Load a GroupSaveable object from a file.</p>
 <p>Follows the convention if there must be a single GroupSaveable
 object at the root of the file.</p>
@@ -326,7 +327,7 @@ object at the root of the file.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="rmellipse.utils.GroupSaveable">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">GroupSaveable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP_SAVEABLE</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.utils.GroupSaveable" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">GroupSaveable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP_SAVEABLE</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.utils.GroupSaveable" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">GROUP_SAVEABLE</span></code></p>
 <p>Interface for objects that can be saved as HDF5 or Exdir groups or files.</p>
 <p>These objects are organized in a tree-like structure to avoid data
@@ -423,7 +424,7 @@ detached from their parents.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="rmellipse.utils.GroupSaveable.load">
-<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP_SAVEABLE</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_big_objects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GROUP_SAVEABLE</span></span></span><a class="headerlink" href="#rmellipse.utils.GroupSaveable.load" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP_SAVEABLE</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_big_objects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GROUP_SAVEABLE</span></span></span><a class="headerlink" href="#rmellipse.utils.GroupSaveable.load" title="Link to this definition">¶</a></dt>
 <dd><p>Initialize GROUP_SAVEABLE object from a group.</p>
 <p>The group_saveable class is designed to be used as an archive, and may
 store many large data sets. So, to save space in memory, some objects
@@ -567,7 +568,7 @@ The default is False.</p></li>
 
 <dl class="py exception">
 <dt class="sig sig-object py" id="rmellipse.utils.MissingSchemaWarning">
-<em class="property"><span class="pre">exception</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">MissingSchemaWarning</span></span><a class="headerlink" href="#rmellipse.utils.MissingSchemaWarning" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">MissingSchemaWarning</span></span><a class="headerlink" href="#rmellipse.utils.MissingSchemaWarning" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">UserWarning</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></p>
 <p>Base class for warnings generated by user code.</p>
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
@@ -586,20 +587,11 @@ The default is False.</p></li>
         <div class="sphinxsidebarwrapper">
 <h3><a href="../../../index.html">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../get_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../for_contributors/index.html">For Contributors</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../arrschema/index.html">rmellipse.arrschema</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../propagators/index.html">rmellipse.propagators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../uobjects/index.html">rmellipse.uobjects</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">rmellipse.utils</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a></li>
 </ul>
 </li>
 </ul>
@@ -638,8 +630,8 @@ The default is False.</p></li>
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="../../../_sources/autoapi/rmellipse/utils/index.rst.txt"

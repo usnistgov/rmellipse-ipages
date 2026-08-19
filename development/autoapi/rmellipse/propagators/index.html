@@ -5,21 +5,22 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rmellipse.propagators &#8212; Rocky Mountain Ellipse 0.4.3a3.dev24+g30dbdf43d documentation</title>
+    <title>rmellipse.propagators &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../_static/documentation_options.js?v=3443905a"></script>
-    <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
     <link rel="next" title="rmellipse.uobjects" href="../uobjects/index.html" />
-    <link rel="prev" title="rmellipse.arrschema.examples" href="../arrschema/examples/index.html" />
+    <link rel="prev" title="rmellipse.arrschema" href="../arrschema/index.html" />
 <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
   <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
@@ -94,7 +95,7 @@ in  <code class="docutils literal notranslate"><span class="pre">rmellipse.uobje
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
 <dl class="py class">
 <dt class="sig sig-object py" id="rmellipse.propagators.Propagator">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.propagators.</span></span><span class="sig-name descname"><span class="pre">Propagator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.propagators.</span></span><span class="sig-name descname"><span class="pre">Propagator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">settings</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">abc.ABC</span></code></p>
 <p>Defines what a Propagator should look like and how it should behave.</p>
 <dl class="py attribute">
@@ -115,7 +116,7 @@ in  <code class="docutils literal notranslate"><span class="pre">rmellipse.uobje
 
 <dl class="py method">
 <dt class="sig sig-object py" id="rmellipse.propagators.Propagator.propagate">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator.propagate" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator.propagate" title="Link to this definition">¶</a></dt>
 <dd><p>Wrap a function in an uncertainty propagation engine.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -133,7 +134,7 @@ in  <code class="docutils literal notranslate"><span class="pre">rmellipse.uobje
 
 <dl class="py method">
 <dt class="sig sig-object py" id="rmellipse.propagators.Propagator.combine">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">measurements</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator.combine" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">measurements</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator.combine" title="Link to this definition">¶</a></dt>
 <dd><p>Combine realizations of the same measurement into a single measurement.</p>
 <p>Adds uncertainty based on the inputs.</p>
 <dl class="field-list simple">
@@ -151,7 +152,7 @@ in  <code class="docutils literal notranslate"><span class="pre">rmellipse.uobje
 
 <dl class="py method">
 <dt class="sig sig-object py" id="rmellipse.propagators.Propagator.combine_across_dim">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">combine_across_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator.combine_across_dim" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">abstractmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">combine_across_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurement</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.Propagator.combine_across_dim" title="Link to this definition">¶</a></dt>
 <dd><p>Combine realizations of the same measurement into a single measurement.</p>
 <p>Adds uncertainty based on the inputs.</p>
 <dl class="field-list simple">
@@ -172,7 +173,7 @@ in  <code class="docutils literal notranslate"><span class="pre">rmellipse.uobje
 
 <dl class="py class">
 <dt class="sig sig-object py" id="rmellipse.propagators.RMEProp">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.propagators.</span></span><span class="sig-name descname"><span class="pre">RMEProp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">montecarlo_sims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_common_grid_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'frequency'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vectorize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.RMEProp" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.propagators.</span></span><span class="sig-name descname"><span class="pre">RMEProp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">montecarlo_sims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_common_grid_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'frequency'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vectorize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.propagators.RMEProp" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#rmellipse.propagators.Propagator" title="rmellipse.propagators.Propagator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmellipse.propagators.Propagator</span></code></a></p>
 <p>Microwave Uncertainty Framework uncertainty propagators.Propagator.</p>
 <p>Stores perturbations to data sets and samples of a Monte Carlo distribution
@@ -277,7 +278,7 @@ of the output RMEMeas object.</p>
 <dd class="field-odd"><p>RMEMeas object of output.</p>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference internal" href="../uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
+<dd class="field-even"><p><a class="reference internal" href="../index.html#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -292,7 +293,7 @@ analysis is used to create the additional mechanisms.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>*measurements</strong> (<a class="reference internal" href="../uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><em>RMEMeas</em></a>) – DESCRIPTION.</p></li>
+<li><p><strong>*measurements</strong> (<a class="reference internal" href="../index.html#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><em>RMEMeas</em></a>) – DESCRIPTION.</p></li>
 <li><p><strong>error_of_mean</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, uses the error of the mean when creating the new uncertainty
 mechanisms. The default is False.</p></li>
 <li><p><strong>n_single_values</strong> (<em>Union</em><em>[</em><em>float</em><em>,</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Describes how many of the singular values to keep as
@@ -314,7 +315,7 @@ default is True.</p></li>
 <dd class="field-even"><p><strong>out</strong> – Returns a RMEMeas object with combined uncertainties.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../index.html#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -330,7 +331,7 @@ analysis is used to create the additional mechanisms.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>*measurements</strong> (<a class="reference internal" href="../uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><em>RMEMeas</em></a>) – DESCRIPTION.</p></li>
+<li><p><strong>*measurements</strong> (<a class="reference internal" href="../index.html#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><em>RMEMeas</em></a>) – DESCRIPTION.</p></li>
 <li><p><strong>error_of_mean</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, uses the error of the mean when creating the new uncertainty
 mechanisms. The default is False.</p></li>
 <li><p><strong>n_single_values</strong> (<em>Union</em><em>[</em><em>float</em><em>,</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Describes how many of the singular values to keep as
@@ -352,7 +353,7 @@ default is True.</p></li>
 <dd class="field-even"><p><strong>out</strong> – Returns a RMEMeas object with combined uncertainties.</p>
 </dd>
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p><a class="reference internal" href="../uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas">RMEMeas</a></p>
+<dd class="field-odd"><p><a class="reference internal" href="../index.html#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -372,20 +373,11 @@ default is True.</p></li>
         <div class="sphinxsidebarwrapper">
 <h3><a href="../../../index.html">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../get_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../for_contributors/index.html">For Contributors</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../arrschema/index.html">rmellipse.arrschema</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">rmellipse.propagators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../uobjects/index.html">rmellipse.uobjects</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../utils/index.html">rmellipse.utils</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a></li>
 </ul>
 </li>
 </ul>
@@ -424,8 +416,8 @@ default is True.</p></li>
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="../../../_sources/autoapi/rmellipse/propagators/index.rst.txt"

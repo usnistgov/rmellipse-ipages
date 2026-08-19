@@ -5,16 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Using Arbitrary Data Types &#8212; Rocky Mountain Ellipse 0.4.3a3.dev24+g30dbdf43d documentation</title>
+    <title>Using Arbitrary Data Types &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../_static/documentation_options.js?v=3443905a"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -103,7 +104,7 @@ functions as you expect.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">val</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s1">&#39;my val is &#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
+        <span class="k">return</span> <span class="s1">'my val is '</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">val</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="fm">__str__</span><span class="p">()</span>
@@ -116,8 +117,8 @@ functions as you expect.</p>
 <span class="n">nominal</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">myclass</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">perturbed</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">myclass</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">myclass</span><span class="p">(</span><span class="mf">0.1</span><span class="p">))</span>
 
-<span class="n">meas</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="n">nominal</span><span class="p">)</span>
-<span class="n">meas</span><span class="o">.</span><span class="n">add_umech</span><span class="p">(</span><span class="s1">&#39;sample_meas&#39;</span><span class="p">,</span> <span class="n">perturbed</span><span class="p">)</span>
+<span class="n">meas</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">'test'</span><span class="p">,</span> <span class="n">nominal</span><span class="p">)</span>
+<span class="n">meas</span><span class="o">.</span><span class="n">add_umech</span><span class="p">(</span><span class="s1">'sample_meas'</span><span class="p">,</span> <span class="n">perturbed</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">meas</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -255,8 +256,8 @@ use other built in features, like calculating standard uncertainty.</p>
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="../../_sources/auto_examples/grp1_RME_gettingstarted/plot_e06_using_other_datatypes.rst.txt"

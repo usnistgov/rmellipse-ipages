@@ -201,7 +201,7 @@ Package Contents
    :rtype: SAVED
 
 
-.. py:function:: load_file(path: str | pathlib.Path, saveable: GroupSaveable, **load_object_kwargs)
+.. py:function:: load_file(path: str | pathlib.Path, **load_object_kwargs)
 
    Load a GroupSaveable object from a file.
 

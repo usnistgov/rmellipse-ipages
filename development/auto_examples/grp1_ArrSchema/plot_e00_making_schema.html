@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Defining ArraySchema and AnnotatedArray’s &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Using Annotated Arrays" href="plot_e11_using_schema.html" />
+    <link rel="prev" title="ArraySchema and AnnotatedArray" href="index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <div class="sphx-glr-download-link-note admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="#sphx-glr-download-auto-examples-grp1-arrschema-plot-e00-making-schema-py"><span class="std std-ref">Go to the end</span></a>
+to download the full example code.</p>
+</div>
+<section class="sphx-glr-example-title" id="defining-arrayschema-and-annotatedarray-s">
+<span id="sphx-glr-auto-examples-grp1-arrschema-plot-e00-making-schema-py"></span><h1>Defining ArraySchema and AnnotatedArray’s<a class="headerlink" href="#defining-arrayschema-and-annotatedarray-s" title="Link to this heading">¶</a></h1>
+<p>ArraySchema are dictionary objects that describe the requirements of
+an array structure. AnnotatedArray are xarray.DataArray’s that are expected
+to conform to a given ArraySchema - subclasses of xarray.DataArray.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">rmellipse</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rme</span>
+</pre></div>
+</div>
+<section id="defining-annotatedarrays">
+<h2>Defining AnnotatedArrays<a class="headerlink" href="#defining-annotatedarrays" title="Link to this heading">¶</a></h2>
+<p>There are 2 required fields in a schema. The first is a shape and the second
+is a dimension specification.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Array2x2</span><span class="p">(</span><span class="n">rme</span><span class="o">.</span><span class="n">AnnotatedArray</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">rme</span><span class="o">.</span><span class="n">ArraySchema</span><span class="p">(</span>
+        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'row'</span><span class="p">,</span> <span class="s1">'column'</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>Dimension and shape specifiers can also be alphabetical letters (lower or
+upper case) that indicate arbitrary dimensionality. If two specifiers
+are the same letter, that indicates they are the same shape. For example,
+a stack of square matrices might be defined as</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ArrayMxNxN</span><span class="p">(</span><span class="n">rme</span><span class="o">.</span><span class="n">AnnotatedArray</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">rme</span><span class="o">.</span><span class="n">ArraySchema</span><span class="p">(</span>
+        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">'M'</span><span class="p">,</span> <span class="s1">'N'</span><span class="p">,</span> <span class="s1">'N'</span><span class="p">),</span>
+        <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'page'</span><span class="p">,</span> <span class="s1">'row'</span><span class="p">,</span> <span class="s1">'column'</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>It’s possible to define arbitary dimensionality or shape with ellipses.
+For example, the following schema is an array of arbitary leading dimensions
+ending in an NxN shape of rows and columns. If the shape is arbitary, then
+so are the dimension names in the same position. There can be only a single
+arbitrary specifier. So (…,’N’) is okay but (…,’N’,…) is not.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">ArrayLeadingNxN</span><span class="p">(</span><span class="n">rme</span><span class="o">.</span><span class="n">AnnotatedArray</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">rme</span><span class="o">.</span><span class="n">ArraySchema</span><span class="p">(</span>
+        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="s1">'N'</span><span class="p">,</span> <span class="s1">'N'</span><span class="p">),</span>
+        <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="o">...</span><span class="p">,</span> <span class="s1">'row'</span><span class="p">,</span> <span class="s1">'column'</span><span class="p">),</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="data-types">
+<h2>Data Types<a class="headerlink" href="#data-types" title="Link to this heading">¶</a></h2>
+<p>By default, an ArraySchema has no dtype specifier (None) but one can be
+provided to identity what kind of data is expected in the values of the
+DataArray. An array is considered valid to a schema it it can be casted
+into that schema’s dtype using the numpy.can_cast() function.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">Array2x2Float</span><span class="p">(</span><span class="n">rme</span><span class="o">.</span><span class="n">AnnotatedArray</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">rme</span><span class="o">.</span><span class="n">ArraySchema</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'row'</span><span class="p">,</span> <span class="s1">'column'</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="coordinates">
+<h2>Coordinates<a class="headerlink" href="#coordinates" title="Link to this heading">¶</a></h2>
+<p>You can specify the expected coordinates of an AnnotatedArray
+by including a coords field with a CoordinateSchema.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TimeDomainArray</span><span class="p">(</span><span class="n">rme</span><span class="o">.</span><span class="n">AnnotatedArray</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">rme</span><span class="o">.</span><span class="n">ArraySchema</span><span class="p">(</span>
+        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">'N'</span><span class="p">,),</span> <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'time'</span><span class="p">,),</span> <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">'time'</span><span class="p">:</span> <span class="n">rme</span><span class="o">.</span><span class="n">CoordinateSchema</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)}</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<p>If an array has a fixed dimension shape and coordinates, you can
+define the coordinate values by supplying values to the coordinate field.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TimeDomainArray2x2</span><span class="p">(</span><span class="n">rme</span><span class="o">.</span><span class="n">AnnotatedArray</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">rme</span><span class="o">.</span><span class="n">ArraySchema</span><span class="p">(</span>
+        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">'N'</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+        <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'time'</span><span class="p">,</span> <span class="s1">'row'</span><span class="p">,</span> <span class="s1">'col'</span><span class="p">),</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">{</span>
+            <span class="s1">'time'</span><span class="p">:</span> <span class="n">rme</span><span class="o">.</span><span class="n">CoordinateSchema</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">),</span>
+            <span class="s1">'row'</span><span class="p">:</span> <span class="n">rme</span><span class="o">.</span><span class="n">CoordinateSchema</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+            <span class="s1">'col'</span><span class="p">:</span> <span class="n">rme</span><span class="o">.</span><span class="n">CoordinateSchema</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]),</span>
+        <span class="p">},</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="units">
+<h2>Units<a class="headerlink" href="#units" title="Link to this heading">¶</a></h2>
+<p>By default the units field is None (which means no specified units, not
+unitless). If your array contains values of a physical unit, it can be
+supplied as a string in the units field. This can be provided to both
+the array values themselves, and to individual coordinates.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">TimeDomainVoltage</span><span class="p">(</span><span class="n">rme</span><span class="o">.</span><span class="n">AnnotatedArray</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">rme</span><span class="o">.</span><span class="n">ArraySchema</span><span class="p">(</span>
+        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">'N'</span><span class="p">,),</span>
+        <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'time'</span><span class="p">,),</span>
+        <span class="n">units</span><span class="o">=</span><span class="s1">'V'</span><span class="p">,</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">'time'</span><span class="p">:</span> <span class="n">rme</span><span class="o">.</span><span class="n">CoordinateSchema</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">'s'</span><span class="p">)},</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="metadata">
+<h2>Metadata<a class="headerlink" href="#metadata" title="Link to this heading">¶</a></h2>
+<p>Metadata on xarray.DataArrays (and consequently AnnotatedArrays) are stored
+in the attrs attribute as a dictionary. If your data model is expecting
+specific structures of metadata, those can be defined using Pydantic datamodels.
+For example, you may be making a system that records DC measurments, and want
+to require that operator, temperature, and source current metadata
+fields are always present. It’s strongly recommended that extra metadata
+fields be allowed as well.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">pydantic</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseModel</span><span class="p">,</span> <span class="n">ConfigDict</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">DCMeasurementMetadata</span><span class="p">(</span><span class="n">BaseModel</span><span class="p">):</span>
+    <span class="c1"># Enable extra fields</span>
+    <span class="n">model_config</span> <span class="o">=</span> <span class="n">ConfigDict</span><span class="p">(</span><span class="n">extra</span><span class="o">=</span><span class="s1">'allow'</span><span class="p">)</span>
+    <span class="n">operator</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">temperature_celcius</span><span class="p">:</span> <span class="nb">float</span>
+    <span class="n">source_current_amps</span><span class="p">:</span> <span class="nb">float</span>
+
+
+<span class="k">class</span><span class="w"> </span><span class="nc">TimeDomainVoltageWithMetadata</span><span class="p">(</span><span class="n">rme</span><span class="o">.</span><span class="n">AnnotatedArray</span><span class="p">):</span>
+    <span class="n">schema</span> <span class="o">=</span> <span class="n">rme</span><span class="o">.</span><span class="n">ArraySchema</span><span class="p">(</span>
+        <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="s1">'N'</span><span class="p">,),</span>
+        <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'time'</span><span class="p">,),</span>
+        <span class="n">units</span><span class="o">=</span><span class="s1">'V'</span><span class="p">,</span>
+        <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">'time'</span><span class="p">:</span> <span class="n">rme</span><span class="o">.</span><span class="n">CoordinateSchema</span><span class="p">(</span><span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">'s'</span><span class="p">)},</span>
+        <span class="n">attrs</span><span class="o">=</span><span class="n">DCMeasurementMetadata</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+<div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-grp1-arrschema-plot-e00-making-schema-py">
+<div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/c2eb612178cdc4475f7239572af9a7bb/plot_e00_making_schema.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_e00_making_schema.ipynb</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-python docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/82da2d18593d9f8d0c615edc1bffa40d/plot_e00_making_schema.py"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Python</span> <span class="pre">source</span> <span class="pre">code:</span> <span class="pre">plot_e00_making_schema.py</span></code></a></p>
+</div>
+<div class="sphx-glr-download sphx-glr-download-zip docutils container">
+<p><a class="reference download internal" download="" href="../../_downloads/705b59a51d8e7adb7354908dc4f212b5/plot_e00_making_schema.zip"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">zipped:</span> <span class="pre">plot_e00_making_schema.zip</span></code></a></p>
+</div>
+</div>
+<p class="sphx-glr-signature"><a class="reference external" href="https://sphinx-gallery.github.io">Gallery generated by Sphinx-Gallery</a></p>
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installation</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Examples Gallery</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../index.html#rmemeas-and-rmeprop">RMEMeas and RMEProp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#arrayschema-and-annotatedarray">ArraySchema and AnnotatedArray</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#python-script-examples">Python Script Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../autoapi/index.html">API Reference</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/auto_examples/grp1_ArrSchema/plot_e00_making_schema.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="../../../v0.4.5/index.html">v0.4.5</a></li>
+  <li><a href="../../../v0.5.0/index.html">v0.5.0</a></li>
+  <li><a href="plot_e00_making_schema.html">development</a></li>
+  <li><a href="../../../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../_sources/auto_examples/grp1_ArrSchema/plot_e00_making_schema.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

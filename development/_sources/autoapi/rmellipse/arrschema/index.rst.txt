@@ -4,15 +4,6 @@ rmellipse.arrschema
 .. py:module:: rmellipse.arrschema
 
 
-Submodules
-----------
-
-.. toctree::
-   :maxdepth: 1
-
-   /autoapi/rmellipse/arrschema/examples/index
-
-
 Exceptions
 ----------
 
@@ -26,24 +17,114 @@ Classes
 
 .. autoapisummary::
 
-   rmellipse.arrschema.ArraySchema
    rmellipse.arrschema.AnnotatedArray
+   rmellipse.arrschema.ArraySchema
+   rmellipse.arrschema.CoordinateSchema
 
 
 Package Contents
 ----------------
 
-.. py:exception:: ValidationError(*args, **kwargs)
+.. py:class:: AnnotatedArray(*args, **kwargs)
 
-   Bases: :py:obj:`Exception`
-
-
-   Common base class for all non-exit exceptions.
-
-   Initialize self.  See help(type(self)) for accurate signature.
+   Bases: :py:obj:`xarray.DataArray`
 
 
-.. py:class:: ArraySchema(name: str, shape: tuple[str | int | types.EllipsisType, Ellipsis], dims: tuple[str | types.EllipsisType, Ellipsis], dtype: str | type[float] | type[complex], units: str | None = None, coords: Mapping = {}, attrs_schema: Mapping | None = None)
+   Extension of xr.DataArray that is expected to conform to a specific schema.
+
+   Schema is defined by an ArraySchema class.
+
+
+   .. py:attribute:: schema
+      :type:  ArraySchema
+
+
+   .. py:method:: validate()
+
+      Validate array data against the schema of this type.
+
+
+
+   .. py:method:: from_dataarray(array: xarray.DataArray) -> Self
+      :classmethod:
+
+
+      Cast an array into an annotated array.
+
+      :param array: Array that can be cast into this format.
+      :type array: xr.DataArray
+
+      :returns: New array.
+      :rtype: Self
+
+
+
+   .. py:method:: zeros(attrs: Mapping | None = None, **coords: numpy.ndarray | xarray.DataArray) -> AnnotatedArray
+      :classmethod:
+
+
+      Generate an empty array of zeros based on the schema.
+
+      If extra coordinates are
+      supplied they will be inserted at the first arbitrary dimension
+      specificier in the AnnotatedArray's schema ('...'). Coordinates
+      with set values can be ignored, and will be automatically inserted.
+
+      Zero array is initialized with numpy.zeros.
+
+      :param attrs: Provided metadata to instantiate the AnnotatedArray with. The
+                    values in the supplied metadata are
+                    shallow copied onto the instantiated AnnotatedArrays's attrs.
+      :type attrs: Mapping | None = None
+      :param \*\*coords: KeyValue pairs of coordinates. Must include the required
+                         coordinates of the AnnotatedArray.
+      :type \*\*coords: np.ndarray | xr.DataArray
+
+      :returns: Array with supplied coordinates that conforms to the schema.
+      :rtype: AnnotatedArray
+
+      :raises KeyError: DESCRIPTION.
+
+
+
+   .. py:method:: zeros_from(prototype: AnnotatedArray, drop_dims: list[str] | None = None, rename_dims: Mapping | None = None, use_coords: Mapping | None = None, reorder: bool = True, validate: bool = True, attrs: Mapping | None = None, **coords) -> AnnotatedArray
+      :classmethod:
+
+
+      Generate a new zeros array based on a prototype array.
+
+      Dimensions that are mapped from the prototype array to the output
+      array are cast into the correct type. Otherwise, dimensions are
+      inserted in the expected place.
+
+      :param prototype: Array to base the new array off of.
+      :type prototype: AnnotatedArray
+      :param drop_dims: Drop these dimensions. The default is None.
+      :type drop_dims: list[str], optional
+      :param rename_dims: Mapping of dimensions on the prototype array that should be
+                          converted to dimensions of this type of array. The default is None.
+      :type rename_dims: Mapping | dict, optional
+      :param use_coords: Additional dimensions required for the new type, key is
+                         the dimension name and value is the new coordinate to use for
+                         that dimension.
+      :type use_coords: Mapping | dict, optional
+      :param reorder: Automatically try to reorder dimensions to conform
+                      to the specification.
+      :type reorder: bool, optional
+      :param validate: If true, validate after creation. Default is False
+      :type validate: bool, optional
+      :param attrs: If provided, supply metadata to be used as attributes.
+      :type attrs: Mapping | dict, optional
+      :param \*\*coords: Keyword version of use_coords. Is merged with ontop of
+                         use_coords.
+      :type \*\*coords: Mapping | None, optional
+
+      :returns: **zeros** -- Zeros array in the new format.
+      :rtype: AnnotatedArray
+
+
+
+.. py:class:: ArraySchema(shape: tuple[str | int | types.EllipsisType, Ellipsis], dims: tuple[str | types.EllipsisType, Ellipsis], dtype: type | None = None, units: str | None = None, coords: Mapping = {}, attrs: pydantic.BaseModel = None)
 
    Bases: :py:obj:`dict`
 
@@ -52,8 +133,6 @@ Package Contents
 
    Initialize an ArraySchema.
 
-   :param name: Name of the array structure.
-   :type name: str
    :param shape: Shape of structure. Ellipses indicate arbitrary dimensions,
                  letters indicate a required dimension of unknown length, and
                  integers indicate a required dimension of a required length.
@@ -62,14 +141,10 @@ Package Contents
                 dimension must be names, and arbitrary dimensions must also be
                 ellipses.
    :type dims: tuple[str | EllipsisType, ...]
-   :param dtype: Type must be parseable by numpy's dtype (e.g. f8, c8, u8, etc)
-   :type dtype: str | type[float]
-   :param units: Mapping of units to the array structure. If the whole structure
-                 has a single unit, then a string can be passed. Optionally, a
-                 single required dimension can be mapped to a 1-d array of units.
-                 For example, if a dimension called "col" corresponds to columns in spread-sheet
-                 like data and each column has its own unit, you could specify that
-                 as {"col":["unit 1", "unit 2"]}.
+   :param dtype: Type must be parseable by numpy's dtype (e.g. f8, c8, u8, etc).
+                 None means no datatype requriement, can be Any.
+   :type dtype: type | None
+   :param units: Mapping of units to the array structure.
    :type units: Mapping, optional
    :param coords: Mapping of required dimensions to a coordinate space. Must provide
                   at least a dtype and a single unit as a string. Optionally,
@@ -104,38 +179,31 @@ Package Contents
 
 
 
-.. py:class:: AnnotatedArray(*args, **kwargs)
+.. py:class:: CoordinateSchema(values: list | None = None, dtype: type | None = None, units: str | None = None)
 
-   Bases: :py:obj:`xarray.DataArray`
-
-
-   Interface for an array structure with annotated dimensions and coordinates.
-
-   Inspired by xarray DataArray. Classes conforming to this specification
-   can be registered in an ArrayClassRegister.
+   Bases: :py:obj:`dict`
 
 
-   .. py:attribute:: schema
-      :type:  ArraySchema
+   dict() -> new empty dictionary
+   dict(mapping) -> new dictionary initialized from a mapping object's
+       (key, value) pairs
+   dict(iterable) -> new dictionary initialized as if via:
+       d = {}
+       for k, v in iterable:
+           d[k] = v
+   dict(**kwargs) -> new dictionary initialized with the name=value pairs
+       in the keyword argument list.  For example:  dict(one=1, two=2)
+
+   Initialize self.  See help(type(self)) for accurate signature.
 
 
-   .. py:method:: validate()
+.. py:exception:: ValidationError(*args, **kwargs)
 
-      Validate array data against the schema of this type.
-
-
-
-   .. py:method:: from_dataarray(array: xarray.DataArray) -> Self
-      :classmethod:
+   Bases: :py:obj:`Exception`
 
 
-      Cast an array into an annotated array.
+   Common base class for all non-exit exceptions.
 
-      :param array: Array that can be cast into this format.
-      :type array: xr.DataArray
-
-      :returns: New array.
-      :rtype: Self
-
+   Initialize self.  See help(type(self)) for accurate signature.
 
 

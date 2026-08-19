@@ -5,16 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Reading/Writing RMEMeas Objects &#8212; Rocky Mountain Ellipse 0.4.3a3.dev24+g30dbdf43d documentation</title>
+    <title>Reading/Writing RMEMeas Objects &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../_static/documentation_options.js?v=3443905a"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -91,17 +92,17 @@ to download the full example code.</p>
 
 <span class="n">nom</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span>
     <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
-    <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;d1&#39;</span><span class="p">,</span> <span class="s1">&#39;d2&#39;</span><span class="p">),</span>
-    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;d1&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">&#39;d2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)},</span>
+    <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'d1'</span><span class="p">,</span> <span class="s1">'d2'</span><span class="p">),</span>
+    <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">'d1'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span> <span class="s1">'d2'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)},</span>
 <span class="p">)</span>
 
-<span class="n">meas</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;meas&#39;</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">)</span>
+<span class="n">meas</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'meas'</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">)</span>
 
 <span class="n">meas</span><span class="o">.</span><span class="n">add_umech</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mymechanisms&#39;</span><span class="p">,</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">'mymechanisms'</span><span class="p">,</span>
     <span class="n">value</span><span class="o">=</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">,</span>
     <span class="n">dof</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-    <span class="n">category</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;Origin&#39;</span><span class="p">:</span> <span class="s1">&#39;Data Sheet&#39;</span><span class="p">},</span>
+    <span class="n">category</span><span class="o">=</span><span class="p">{</span><span class="s1">'Type'</span><span class="p">:</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'Origin'</span><span class="p">:</span> <span class="s1">'Data Sheet'</span><span class="p">},</span>
     <span class="n">add_uid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span>
 
@@ -127,7 +128,7 @@ HDF5 object, and you will see that under the ‘myval’ group this creates, you
 will see the cov,mc,covdofs, and covcats attributes stored. Each one is an
 HDF5 representation of an xarray DataArray and together completely describe
 your RMEMeas object.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;meas.hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">'meas.hdf5'</span><span class="p">,</span> <span class="s1">'a'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="c1"># save object will throw an error if the group</span>
     <span class="c1"># or dataset name already exists. So you need</span>
     <span class="c1"># handle that manually if you want to overwrite</span>
@@ -146,7 +147,7 @@ your RMEMeas object.</p>
 <p>You can open the HDF5 file you made in read mode,
 then pass in the group with it’s name to
 <a class="reference internal" href="../../autoapi/rmellipse/utils/index.html#rmellipse.utils.load_object" title="rmellipse.utils.load_object"><code class="xref py py-func docutils literal notranslate"><span class="pre">rmellipse.utils.load_object()</span></code></a> in order to read it.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">&#39;meas.hdf5&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="s1">'meas.hdf5'</span><span class="p">,</span> <span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">meas</span> <span class="o">=</span> <span class="n">load_object</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="n">meas</span><span class="o">.</span><span class="n">name</span><span class="p">],</span> <span class="n">load_big_objects</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">meas</span><span class="p">)</span>
 </pre></div>
@@ -169,18 +170,18 @@ HDF5 format.</p>
 <p>First we turn our object into the s1p_ri format using the
 <code class="xref py py-func docutils literal notranslate"><span class="pre">rmellipse.dataformats.as_format()</span></code></p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">to_txt</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">path</span><span class="p">):</span>
-    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">savetxt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">','</span><span class="p">)</span>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">from_txt</span><span class="p">(</span><span class="n">path</span><span class="p">):</span>
-    <span class="n">values</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">&#39;,&#39;</span><span class="p">))</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delimiter</span><span class="o">=</span><span class="s1">','</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">values</span>
 
 
-<span class="n">m1</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">&#39;mymeas&#39;</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
-<span class="n">m1</span><span class="o">.</span><span class="n">add_umech</span><span class="p">(</span><span class="s1">&#39;my umech&#39;</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">'mymeas'</span><span class="p">,</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">))))</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">add_umech</span><span class="p">(</span><span class="s1">'my umech'</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span> <span class="o">+</span> <span class="mf">0.1</span><span class="p">)</span>
 
-<span class="n">m1</span><span class="o">.</span><span class="n">to_xml</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">to_txt</span><span class="p">,</span> <span class="n">data_extension</span><span class="o">=</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="n">header_extension</span><span class="o">=</span><span class="s1">&#39;.meas&#39;</span><span class="p">)</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">to_xml</span><span class="p">(</span><span class="s1">'.'</span><span class="p">,</span> <span class="n">to_txt</span><span class="p">,</span> <span class="n">data_extension</span><span class="o">=</span><span class="s1">'.csv'</span><span class="p">,</span> <span class="n">header_extension</span><span class="o">=</span><span class="s1">'.meas'</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Once we have our measurement in a format with read/write functions defined
@@ -197,7 +198,7 @@ function.
 So, be sure to change the name attribute to something useful if the function
 name
 is not specific enough.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m2</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_xml</span><span class="p">(</span><span class="s1">&#39;mymeas.meas&#39;</span><span class="p">,</span> <span class="n">from_csv</span><span class="o">=</span><span class="n">from_txt</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">m2</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_xml</span><span class="p">(</span><span class="s1">'mymeas.meas'</span><span class="p">,</span> <span class="n">from_csv</span><span class="o">=</span><span class="n">from_txt</span><span class="p">)</span>
 <span class="k">assert</span> <span class="p">(</span><span class="n">m2</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">values</span> <span class="o">==</span> <span class="n">m1</span><span class="o">.</span><span class="n">cov</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -284,8 +285,8 @@ is not specific enough.</p>
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="../../_sources/auto_examples/grp1_RME_gettingstarted/plot_e03_reading_writing.rst.txt"

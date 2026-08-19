@@ -25,44 +25,27 @@ Classes
 
 .. autoapisummary::
 
-   rmellipse.uobjects.UObj
    rmellipse.uobjects.RMEMeas
+   rmellipse.uobjects.CovarianceDataArray
+   rmellipse.uobjects.CovarianceStrMetadata
+   rmellipse.uobjects.MonteCarloDataArray
+   rmellipse.uobjects.RMEUncTuple
 
 
 Package Contents
 ----------------
 
-.. py:class:: UObj
+.. py:class:: RMEMeas(name: str | None = None, cov: A | CovarianceDataArray = None, mc: A | MonteCarloDataArray | None = None, covdofs: xarray.DataArray | CovarianceDOFMetadata | None = None, covcats: xarray.DataArray | CovarianceStrMetadata | None = None, parent: rmellipse.utils.GroupSaveable = None, attrs: dict | None = None)
 
-   Bases: :py:obj:`abc.ABC`
-
-
-   Generic Uncertain Object.
-
-   Defines the interface that all uncertainty objects should inherit from.
+   Bases: :py:obj:`rmellipse.utils.GroupSaveable`
 
 
-   .. py:property:: nom
-      :abstractmethod:
+   Class that stores data along with uncertainties.
 
-
-      Get the nominal value of the uncertain object.
-
-      Return type should be the natural typing for the object being
-      evauluated.
-
-      :rtype: Nominal value.
-
-
-.. py:class:: RMEMeas(name: str = None, cov: xarray.DataArray = None, mc: xarray.DataArray = None, covdofs: xarray.DataArray = None, covcats: xarray.DataArray = None, parent: rmellipse.utils.GroupSaveable = None, attrs: dict = None)
-
-   Bases: :py:obj:`rmellipse.uobjects.UObj`, :py:obj:`rmellipse.utils.GroupSaveable`
-
-
-   Class that stores monte-carlo and linear sensitivity uncertainty information.
+   Stores linear uncertainties in the cov attribute and
+   montecarlo uncertainties in the cov attribute.
 
    Used with the rmellipse.RMEProp propagator.
-
 
    Initialize a RMEMeas object.
 
@@ -86,7 +69,7 @@ Package Contents
                'nominal'. The remaining labels for the 'umech_id'
                coordinate should be strings corresponding the the uncertainty
                mechanism. The default is None.
-   :type cov: xr.DataArray, optional
+   :type cov: A | CovarianceDataArray, optional
    :param mc: Montecarlo trials. Samples of the data
               sets distribution are stored along the first dimension (axis 0)
               of the DataArray, where the first index of axis 0 is the nominal
@@ -96,7 +79,7 @@ Package Contents
               first labels of the 'sample_id' must start at 0 and
               count up by 1 (i,e typical integer based indexing).
               The default is None.
-   :type mc: xr.DataArray, optional
+   :type mc: A | MonteCarloDataArray, optional
    :param covdofs: DataArray that stores the degrees of freedom for each linear
                    uncertainty mechanism in cov. It should be a 1 dimensional
                    DataArray with the dimension called 'umech_id' and
@@ -163,7 +146,9 @@ Package Contents
 
    .. py:method:: cast_umechids()
 
-      Cast any umech_id dimensions to the correct type.
+      Cast any umech_id dimensions or other dimensions to the correct type.
+
+      Generally, umech_id and covcats should be 'T' (variable width strings).
 
 
 
@@ -183,105 +168,11 @@ Package Contents
 
 
 
-   .. py:method:: from_dist(name: str, nom: float, std: float, dist='gaussian', mechanism_name: str = None, samples: float = 100, categories: dict[str] = {'Type': 'B'}, use_sample_mean: bool = False) -> RMEMeas
+   .. py:method:: from_xml(path: str, from_csv: callable, old_dir: str | None = None, new_dir: str | None = None, verbose: bool = False) -> RMEMeas
       :classmethod:
 
 
-      Generate a RMEMeas object from a probability distribution.
-
-      Will be deprecated in V0.5. Please use RMEmodel instead.
-
-      :param name: Name of the object.
-      :type name: str
-      :param nom: Expected value of the distribution.
-      :type nom: float
-      :param std: Standard deviation of the distribution.
-      :type std: float
-      :param dist: Name of the distribution to use. Supports 'gaussian' or 'uniform'.
-                   The default is 'gaussian'.
-      :type dist: str, {'gaussian', 'normal', 'uniform', 'rectangular'}
-      :param mechanism_name: What to name the linear uncertainty mechanisms associated with the
-                             distribution. The default is None.
-      :type mechanism_name: str, optional
-      :param samples: How many monte-carlo samples to draw from. The default is 100.
-      :type samples: float, optional
-      :param categories: What to categorize the linear uncertainty mechanism as
-                         Should be {category:value} pairs. The default is {'Type':'B'}.
-      :type categories: dict[str], optional
-      :param use_sample_mean_std: If true, uses the mean and standard deviation of random samples drawn
-                                  from the defined distribution for the linear sensitivity analysis and
-                                  as the nominal and standard uncertainty values. If False, uses the provided nominal and
-                                  standard deviation of the distribution. The default is True.
-      :type use_sample_mean_std: bool, optional
-
-      :raises Exception: Unsupported distribution.
-
-      :returns: RMEMeas based on defined distribution.
-      :rtype: 'RMEMeas'
-
-
-
-   .. py:method:: dict_from_group(file: str, group_path: str = None, verbose: bool = False) -> dict[RMEMeas]
-      :classmethod:
-
-
-      Read any RMEMeas objects saved in an hdf5 group.
-
-      :param file: path to the hdf5 file.
-      :type file: str
-      :param group_path: path to group. The default is None.
-      :type group_path: str, optional
-      :param verbose: If True, prints information about attempts to read
-                      files. The default is False.
-      :type verbose: bool , optional
-
-      :returns: Dictionary where keys are names of the RMEMeas objects and values
-                are the RMEMeas objects themselves.
-      :rtype: dict['RMEMeas']
-
-
-
-   .. py:method:: from_h5(group: h5py.Group, nominal_only: bool = False, keep_attrs: bool = True) -> RMEMeas
-      :classmethod:
-
-
-      Read a RMEMeas object from HDF5.
-
-      :param group: HDF5 Group object
-      :param nominal_only: If true, will only load the nominal value of the data set. Saves
-                           time and memory if you don't need that data.
-      :type nominal_only: bool, optional
-      :param keep_attrs: If true, copies over all metadata in attrs. Otherwise, only
-                         keeps metadata required for class instantiation.
-      :type keep_attrs: bool, optional
-
-      :returns: RMEMeas object.
-      :rtype: RMEMeas
-
-
-
-   .. py:method:: to_h5(group: h5py.Group, override: bool = False, name: str = None, verbose: bool = False)
-
-      Save to an hdf5 object. Wrapper for the group_saveable method 'save'.
-
-      :param group: hdf5 group to save under.
-      :type group: h5py.Group
-      :param override: if True, will delete the group object being saved to if it already
-                       exists. Default is false.
-      :type override: bool,
-      :param name: If provided will change Name of RMEMeas object prior to saving.
-                   Equivalent to calling self.name = name prior to calling save.
-      :type name: str,
-
-      :rtype: None.
-
-
-
-   .. py:method:: from_xml(path: str, from_csv: callable, old_dir: str = None, new_dir: str = None, verbose: bool = False) -> RMEMeas
-      :classmethod:
-
-
-      Read a legacy xml MUFmeas object (xml .meas format).
+      Read an XML file from the Microwave Uncertainty Framework.
 
       covcats and covdofs metadata will be loaded as the default values.
 
@@ -294,9 +185,9 @@ Package Contents
                       if provided. Old XML format isn't portable, and the paths
                       need to be manually swapped when the files are moved around.
                       The default is None.
-      :type old_dir: str, optional
+      :type old_dir: str | None, optional
       :param new_dir: Path string to replace old_dir with. The default is None.
-      :type new_dir: str, optional
+      :type new_dir: str | None, optional
 
       :raises Exception: If old_dir/new_dir are not both provided, but one is.
 
@@ -305,7 +196,7 @@ Package Contents
 
 
 
-   .. py:method:: to_xml(target_directory: str, to_csv: callable, data_extension: str, header_extension: str = '.meas', header_directory: str = None)
+   .. py:method:: to_xml(target_directory: str, to_csv: callable, data_extension: str, header_extension: str = '.meas', header_directory: str | None = None)
 
       Save to a the Microwave Uncertainty Framework Format.
 
@@ -324,7 +215,7 @@ Package Contents
       :type header_extension: str, optional
       :param header_directory: Location in which to store the header file. If None, defaults
                                to the target_directory. Default is None.
-      :type header_directory: str, optional
+      :type header_directory: str | None, optional
 
       :raises Exception: If no dataformat provided and one cannot be inferred.
 
@@ -766,7 +657,7 @@ Package Contents
 
 
 
-   .. py:method:: curvefit(coords: str | xarray.DataArray | Sequence[str] | Sequence[xarray.DataArray], func: callable, reduce_dims: str | collections.abc.Iterable | None = None, skipna: bool = True, p0: dict = None, bounds: dict = None, param_names: Sequence | None = None, errors: str = 'raise', **kwargs)
+   .. py:method:: curvefit(coords: str | xarray.DataArray | collections.abc.Sequence[str] | collections.abc.Sequence[xarray.DataArray], func: callable, reduce_dims: str | collections.abc.Iterable | None = None, skipna: bool = True, p0: dict = None, bounds: dict = None, param_names: collections.abc.Sequence | None = None, errors: str = 'raise', **kwargs)
 
       Simple binding to curvefit on xarray.
 
@@ -827,6 +718,56 @@ Package Contents
 
 
 
+.. py:class:: CovarianceDataArray(*args, **kwargs)
+
+   Bases: :py:obj:`rmellipse.arrschema.AnnotatedArray`
+
+
+   Store data with linear uncertainty mechanisms.
+
+   The first label of the umech_id coordinate is
+   expected to be 'nominal', and represents the
+   nominal (i.e. expected value) of the data set.
+   Each label of the umech_id coordinate after that
+   represents the nominal dataset perturbed by 1 standard
+   deviation of that uncertainty mechanism, where the label
+   is a universally unique ID that identifies the
+   uncertainty mechanism.
+
+
+   .. py:attribute:: schema
+
+
+.. py:class:: CovarianceStrMetadata(*args, **kwargs)
+
+   Bases: :py:obj:`rmellipse.arrschema.AnnotatedArray`
+
+
+   Stores metadata about linearuncertainty mechanisms.
+
+   The 'nominal' should not be included in the umech_id dim.
+
+
+   .. py:attribute:: schema
+
+
+.. py:class:: MonteCarloDataArray(*args, **kwargs)
+
+   Bases: :py:obj:`rmellipse.arrschema.AnnotatedArray`
+
+
+   Store data with monte carlo samples.
+
+   The first label of the sample_id coordinate is
+   the expected value of the distribution the data set.
+
+   Each sample_id after that represents a sample
+   from the underlying probability distribution.
+
+
+   .. py:attribute:: schema
+
+
 .. py:exception:: RMEMeasFormatError(message)
 
    Bases: :py:obj:`Exception`
@@ -840,5 +781,16 @@ Package Contents
 
 
    .. py:attribute:: message
+
+
+.. py:class:: RMEUncTuple
+
+   Bases: :py:obj:`tuple`
+
+
+   .. py:attribute:: cov
+
+
+   .. py:attribute:: mc
 
 

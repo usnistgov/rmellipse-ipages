@@ -5,16 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SOL Calibration &#8212; Rocky Mountain Ellipse 0.4.3a3.dev24+g30dbdf43d documentation</title>
+    <title>SOL Calibration &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../_static/documentation_options.js?v=3443905a"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -104,13 +105,13 @@ to the files can be imported as well.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="c1"># text files paths as Path objects</span>
 <span class="c1"># replace these with the correct data paths</span>
 <span class="c1"># after downloading the sample data</span>
-<span class="n">short_raw_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span> <span class="o">/</span> <span class="s1">&#39;Short.s1p&#39;</span>
-<span class="n">open_raw_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span> <span class="o">/</span> <span class="s1">&#39;Open.s1p&#39;</span>
-<span class="n">load_raw_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span> <span class="o">/</span> <span class="s1">&#39;Load.s1p&#39;</span>
-<span class="n">dut_raw_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span> <span class="o">/</span> <span class="s1">&#39;Dut.s1p&#39;</span>
+<span class="n">short_raw_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span> <span class="o">/</span> <span class="s1">'Short.s1p'</span>
+<span class="n">open_raw_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span> <span class="o">/</span> <span class="s1">'Open.s1p'</span>
+<span class="n">load_raw_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span> <span class="o">/</span> <span class="s1">'Load.s1p'</span>
+<span class="n">dut_raw_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span> <span class="o">/</span> <span class="s1">'Dut.s1p'</span>
 
 <span class="c1"># HDF5 file containing the standard models</span>
-<span class="n">defs_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span><span class="o">/</span><span class="s1">&#39;definitions.hdf5&#39;</span>
+<span class="n">defs_path</span> <span class="o">=</span> <span class="n">sample_data_dir</span><span class="o">/</span><span class="s1">'definitions.hdf5'</span>
 </pre></div>
 </div>
 </section>
@@ -125,10 +126,10 @@ to calculate our error box and correct our raw data.</p>
 a dimension called Frequency (GHz), where we store the frequencies corresponding to each
 S-parameter. We also store our data as a complex-valued array.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">from_s1p</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">:</span>
-    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">loadtxt</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">delimiter</span> <span class="o">=</span> <span class="s1">'</span><span class="se">\t</span><span class="s1">'</span><span class="p">)</span>
     <span class="c1"># define a coordinate set</span>
     <span class="n">coords</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">:</span> <span class="n">arr</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
+        <span class="s1">'Frequency (GHz)'</span><span class="p">:</span> <span class="n">arr</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span>
         <span class="p">}</span>
     <span class="c1"># convert to 1 port complex data</span>
     <span class="n">values</span> <span class="o">=</span> <span class="n">arr</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mf">1.0</span><span class="n">j</span><span class="o">*</span><span class="n">arr</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span>
@@ -136,7 +137,7 @@ S-parameter. We also store our data as a complex-valued array.</p>
     <span class="n">out</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span>
         <span class="n">values</span><span class="p">,</span>
         <span class="n">coords</span> <span class="o">=</span> <span class="n">coords</span><span class="p">,</span>
-        <span class="n">dims</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">)</span>
+        <span class="n">dims</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'Frequency (GHz)'</span><span class="p">)</span>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">out</span>
 </pre></div>
@@ -164,20 +165,20 @@ passed in when the function is wrapped in a propagator.</p>
     <span class="n">defs</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">ms</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">stds</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="k">if</span> <span class="s1">&#39;def&#39;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">:</span>
+        <span class="k">if</span> <span class="s1">'def'</span> <span class="ow">in</span> <span class="n">k</span><span class="p">:</span>
             <span class="n">def_key</span> <span class="o">=</span> <span class="n">k</span>
-            <span class="n">m_key</span> <span class="o">=</span> <span class="n">def_key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;def_&#39;</span><span class="p">,</span> <span class="s1">&#39;raw_&#39;</span><span class="p">)</span>
+            <span class="n">m_key</span> <span class="o">=</span> <span class="n">def_key</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'def_'</span><span class="p">,</span> <span class="s1">'raw_'</span><span class="p">)</span>
             <span class="n">defs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stds</span><span class="p">[</span><span class="n">def_key</span><span class="p">])</span>
             <span class="n">ms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">stds</span><span class="p">[</span><span class="n">m_key</span><span class="p">])</span>
     <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">defs</span><span class="p">)</span>
-    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">ms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">]</span>
+    <span class="n">frequencies</span> <span class="o">=</span> <span class="n">ms</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="s1">'Frequency (GHz)'</span><span class="p">]</span>
 
     <span class="c1"># output has the same shape as the inputs except an</span>
     <span class="c1"># additional dimensions to hold the error terms</span>
     <span class="n">output_shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">+</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
-    <span class="n">output_dims</span> <span class="o">=</span>  <span class="nb">list</span><span class="p">(</span><span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">&#39;errterm&#39;</span><span class="p">]</span>
+    <span class="n">output_dims</span> <span class="o">=</span>  <span class="nb">list</span><span class="p">(</span><span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">dims</span><span class="p">)</span> <span class="o">+</span> <span class="p">[</span><span class="s1">'errterm'</span><span class="p">]</span>
     <span class="n">output_coords</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">coords</span><span class="p">)</span>
-    <span class="n">output_coords</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;errterm&#39;</span><span class="p">:[</span><span class="s1">&#39;e00&#39;</span><span class="p">,</span><span class="s1">&#39;e11&#39;</span><span class="p">,</span><span class="s1">&#39;delta&#39;</span><span class="p">]})</span>
+    <span class="n">output_coords</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">'errterm'</span><span class="p">:[</span><span class="s1">'e00'</span><span class="p">,</span><span class="s1">'e11'</span><span class="p">,</span><span class="s1">'delta'</span><span class="p">]})</span>
 
     <span class="c1"># pre allocate output xarray</span>
     <span class="c1"># 3 output has 3</span>
@@ -217,9 +218,9 @@ passed in when the function is wrapped in a propagator.</p>
     <span class="n">coeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">Mt</span> <span class="o">@</span> <span class="n">M</span><span class="p">)</span> <span class="o">@</span> <span class="n">Mt</span> <span class="o">@</span> <span class="n">y</span>
 
     <span class="c1"># reassign values to output</span>
-    <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="s1">&#39;e00&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="s1">&#39;e11&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="s1">&#39;delta&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="s1">'e00'</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="s1">'e11'</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="s1">'delta'</span><span class="p">]</span> <span class="o">=</span> <span class="n">coeff</span><span class="p">[</span><span class="o">...</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">result</span>
 </pre></div>
@@ -227,12 +228,12 @@ passed in when the function is wrapped in a propagator.</p>
 <p>Lets use the function without any uncertainty propagation
 to verify it works. I will do this by reading in the definitions
 and grabbing just a view into the underlying nominal DataArray.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">defs_path</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">def_short</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Short&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">nom</span>
-    <span class="n">def_open</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Open&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">nom</span>
-    <span class="n">def_load</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Load&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">nom</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">defs_path</span><span class="p">,</span><span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">def_short</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">'Short'</span><span class="p">])</span><span class="o">.</span><span class="n">nom</span>
+    <span class="n">def_open</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">'Open'</span><span class="p">])</span><span class="o">.</span><span class="n">nom</span>
+    <span class="n">def_load</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">'Load'</span><span class="p">])</span><span class="o">.</span><span class="n">nom</span>
 
-<span class="n">flist</span> <span class="o">=</span> <span class="n">raw_short</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">]</span>
+<span class="n">flist</span> <span class="o">=</span> <span class="n">raw_short</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">]</span>
 <span class="n">errbox</span> <span class="o">=</span> <span class="n">SOL_cal</span><span class="p">(</span>
     <span class="n">def_short</span> <span class="o">=</span> <span class="n">def_short</span><span class="p">,</span>
     <span class="n">def_open</span> <span class="o">=</span> <span class="n">def_open</span><span class="p">,</span>
@@ -252,9 +253,9 @@ and grabbing just a view into the underlying nominal DataArray.</p>
 and corrects a raw measurement.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">SOL_correct</span><span class="p">(</span><span class="n">errorbox</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">,</span> <span class="n">device</span><span class="p">:</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">:</span>
     <span class="n">S11</span> <span class="o">=</span> <span class="n">device</span>
-    <span class="n">e00</span> <span class="o">=</span> <span class="n">errorbox</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">errterm</span><span class="o">=</span><span class="s2">&quot;e00&quot;</span><span class="p">)</span>
-    <span class="n">e11</span> <span class="o">=</span> <span class="n">errorbox</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">errterm</span><span class="o">=</span><span class="s2">&quot;e11&quot;</span><span class="p">)</span>
-    <span class="n">delta</span> <span class="o">=</span> <span class="n">errorbox</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">errterm</span><span class="o">=</span><span class="s2">&quot;delta&quot;</span><span class="p">)</span>
+    <span class="n">e00</span> <span class="o">=</span> <span class="n">errorbox</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">errterm</span><span class="o">=</span><span class="s2">"e00"</span><span class="p">)</span>
+    <span class="n">e11</span> <span class="o">=</span> <span class="n">errorbox</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">errterm</span><span class="o">=</span><span class="s2">"e11"</span><span class="p">)</span>
+    <span class="n">delta</span> <span class="o">=</span> <span class="n">errorbox</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">errterm</span><span class="o">=</span><span class="s2">"delta"</span><span class="p">)</span>
 
     <span class="n">corrected</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">e00</span> <span class="o">+</span> <span class="n">S11</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="o">-</span><span class="n">delta</span> <span class="o">+</span> <span class="n">e11</span> <span class="o">*</span> <span class="n">S11</span><span class="p">)</span>
 
@@ -271,15 +272,15 @@ and corrects a raw measurement.</p>
 <p>We can plot this to check that it matches our expectations. This DUT is a load
 so we expect a magnitude close to 0.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">&#39;all&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s1">'all'</span><span class="p">)</span>
 <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;DUT Corrected Data&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dut</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dut</span><span class="p">))</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Linear Magnitude&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">'DUT Corrected Data'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dut</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">dut</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Linear Magnitude'</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dut</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">dut</span><span class="p">,</span> <span class="n">deg</span> <span class="o">=</span> <span class="kc">True</span><span class="p">))</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Phase (deg)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dut</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">dut</span><span class="p">,</span> <span class="n">deg</span> <span class="o">=</span> <span class="kc">True</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Frequency (GHz)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Phase (deg)'</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -307,18 +308,18 @@ through the function will be run through the linear sensitivity analysis.</p>
 <span class="n">SOL_cal</span> <span class="o">=</span> <span class="n">myprop</span><span class="o">.</span><span class="n">propagate</span><span class="p">(</span><span class="n">SOL_cal</span><span class="p">)</span>
 <span class="n">SOL_correct</span> <span class="o">=</span> <span class="n">myprop</span><span class="o">.</span><span class="n">propagate</span><span class="p">(</span><span class="n">SOL_correct</span><span class="p">)</span>
 
-<span class="c1"># turn xarray&#39;s into uncertainty objects with RMEMeas</span>
-<span class="n">raw_dut</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">&#39;DUT&#39;</span><span class="p">,</span><span class="n">raw_dut</span><span class="p">)</span>
-<span class="n">raw_short</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">&#39;DUT&#39;</span><span class="p">,</span><span class="n">raw_short</span><span class="p">)</span>
-<span class="n">raw_open</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">&#39;DUT&#39;</span><span class="p">,</span><span class="n">raw_open</span><span class="p">)</span>
-<span class="n">raw_load</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">&#39;DUT&#39;</span><span class="p">,</span><span class="n">raw_load</span><span class="p">)</span>
+<span class="c1"># turn xarray's into uncertainty objects with RMEMeas</span>
+<span class="n">raw_dut</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">'DUT'</span><span class="p">,</span><span class="n">raw_dut</span><span class="p">)</span>
+<span class="n">raw_short</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">'DUT'</span><span class="p">,</span><span class="n">raw_short</span><span class="p">)</span>
+<span class="n">raw_open</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">'DUT'</span><span class="p">,</span><span class="n">raw_open</span><span class="p">)</span>
+<span class="n">raw_load</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="s1">'DUT'</span><span class="p">,</span><span class="n">raw_load</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Lets also grab our definitions with the full uncertainty information</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">defs_path</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="n">def_short</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Short&#39;</span><span class="p">])</span>
-    <span class="n">def_open</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Open&#39;</span><span class="p">])</span>
-    <span class="n">def_load</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">&#39;Load&#39;</span><span class="p">])</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">defs_path</span><span class="p">,</span><span class="s1">'r'</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">def_short</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">'Short'</span><span class="p">])</span>
+    <span class="n">def_open</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">'Open'</span><span class="p">])</span>
+    <span class="n">def_load</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_h5</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s1">'Load'</span><span class="p">])</span>
 </pre></div>
 </div>
 </section>
@@ -373,40 +374,40 @@ so lets define some functions to propagate those conversions.</p>
 <span class="n">phs_upper</span> <span class="o">=</span> <span class="n">phase</span><span class="o">.</span><span class="n">uncbounds</span><span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="o">-</span><span class="n">k</span><span class="p">,</span> <span class="n">deg</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">cov</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">dut</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span>
+    <span class="n">dut</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span>
     <span class="n">y1</span> <span class="o">=</span> <span class="n">mag_lower</span><span class="p">,</span>
     <span class="n">y2</span> <span class="o">=</span> <span class="n">mag_upper</span><span class="p">,</span>
-    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">'k'</span><span class="p">,</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> Uncertainty&#39;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> Uncertainty'</span>
     <span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span>
-    <span class="n">dut</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span>
+    <span class="n">dut</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span>
     <span class="n">y1</span> <span class="o">=</span> <span class="n">phs_lower</span><span class="p">,</span>
     <span class="n">y2</span> <span class="o">=</span> <span class="n">phs_upper</span><span class="p">,</span>
     <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;k&#39;</span><span class="p">,</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> Uncertainty&#39;</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s1">'k'</span><span class="p">,</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">'k = </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> Uncertainty'</span>
     <span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">mag</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span>
+    <span class="n">mag</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span>
     <span class="n">mag</span><span class="o">.</span><span class="n">nom</span><span class="p">,</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;nominal&#39;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">'nominal'</span>
     <span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Linear Magnitude&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Linear Magnitude'</span><span class="p">)</span>
 
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">phase</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span>
+    <span class="n">phase</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span>
     <span class="n">phase</span><span class="o">.</span><span class="n">nom</span><span class="p">,</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;nominal&#39;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">'nominal'</span>
     <span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Phase (deg)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Frequency (GHz)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Phase (deg)'</span><span class="p">)</span>
 
 <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'upper center'</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -418,17 +419,17 @@ as the magnitude approaches zero. This is natural, as
 phase is not well defined if your magnitude is on the origin.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">mag</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span>
+    <span class="n">mag</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span>
     <span class="n">mag</span><span class="o">.</span><span class="n">stdunc</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">cov</span><span class="p">,</span>
     <span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Lin Magn k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> Uncertainty&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Lin Magn k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> Uncertainty'</span><span class="p">)</span>
 <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-    <span class="n">phase</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span>
+    <span class="n">phase</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span>
     <span class="n">phase</span><span class="o">.</span><span class="n">stdunc</span><span class="p">(</span><span class="n">k</span><span class="o">=</span><span class="n">k</span><span class="p">)</span><span class="o">.</span><span class="n">cov</span><span class="p">,</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;nominal&#39;</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="s1">'nominal'</span>
     <span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">)</span>
-<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Phase k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> Uncertainty (deg)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Frequency (GHz)'</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Phase k=</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s1"> Uncertainty (deg)'</span><span class="p">)</span>
 </pre></div>
 </div>
 </section>
@@ -446,8 +447,8 @@ by the VNA drift, cable bend variations, connection
 repeatability, and the physical dimensions of our
 the primary standards used to define the calibration
 kit.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_mag</span> <span class="o">=</span> <span class="n">mag</span><span class="o">.</span><span class="n">categorize_by</span><span class="p">(</span><span class="s1">&#39;Origin&#39;</span><span class="p">)</span>
-<span class="n">grouped_phase</span> <span class="o">=</span> <span class="n">phase</span><span class="o">.</span><span class="n">categorize_by</span><span class="p">(</span><span class="s1">&#39;Origin&#39;</span><span class="p">)</span>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">grouped_mag</span> <span class="o">=</span> <span class="n">mag</span><span class="o">.</span><span class="n">categorize_by</span><span class="p">(</span><span class="s1">'Origin'</span><span class="p">)</span>
+<span class="n">grouped_phase</span> <span class="o">=</span> <span class="n">phase</span><span class="o">.</span><span class="n">categorize_by</span><span class="p">(</span><span class="s1">'Origin'</span><span class="p">)</span>
 <span class="n">total_mag_variance</span> <span class="o">=</span> <span class="n">grouped_mag</span><span class="o">.</span><span class="n">stdunc</span><span class="p">()</span><span class="o">.</span><span class="n">cov</span><span class="o">**</span><span class="mi">2</span>
 <span class="n">total_phase_variance</span> <span class="o">=</span> <span class="n">grouped_phase</span><span class="o">.</span><span class="n">stdunc</span><span class="p">()</span><span class="o">.</span><span class="n">cov</span><span class="o">**</span><span class="mi">2</span>
 <span class="n">mag_variance</span> <span class="o">=</span> <span class="p">[]</span>
@@ -459,15 +460,15 @@ kit.</p>
     <span class="n">mag_variance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mag_var_i</span><span class="o">/</span><span class="n">total_mag_variance</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">phase_variance</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phase_var_i</span><span class="o">/</span><span class="n">total_phase_variance</span><span class="o">*</span><span class="mi">100</span><span class="p">)</span>
 
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span> <span class="n">mag_variance</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">grouped_mag</span><span class="o">.</span><span class="n">umech_id</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">],</span> <span class="n">mag_variance</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">grouped_phase</span><span class="o">.</span><span class="n">umech_id</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span> <span class="n">mag_variance</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">grouped_mag</span><span class="o">.</span><span class="n">umech_id</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">stackplot</span><span class="p">(</span><span class="n">dut</span><span class="o">.</span><span class="n">nom</span><span class="p">[</span><span class="s1">'Frequency (GHz)'</span><span class="p">],</span> <span class="n">mag_variance</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">grouped_phase</span><span class="o">.</span><span class="n">umech_id</span><span class="p">)</span>
 
 <span class="n">handles</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_legend_handles_labels</span><span class="p">()</span>
-<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper center&#39;</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">handles</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">'upper center'</span><span class="p">,</span> <span class="n">ncols</span> <span class="o">=</span> <span class="mi">3</span><span class="p">)</span>
 
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Frequency (GHz)&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Mag (</span><span class="si">% o</span><span class="s1">f Variation)&#39;</span><span class="p">)</span>
-<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Phase (</span><span class="si">% o</span><span class="s1">f Variation)&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">'Frequency (GHz)'</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Mag (</span><span class="si">% o</span><span class="s1">f Variation)'</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">'Phase (</span><span class="si">% o</span><span class="s1">f Variation)'</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-examples-plot-e00-sol-py">
@@ -543,8 +544,8 @@ kit.</p>
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="../../_sources/auto_examples/Examples/plot_e00_SOL.rst.txt"

@@ -5,16 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Common Grid Handling &#8212; Rocky Mountain Ellipse 0.4.3a3.dev24+g30dbdf43d documentation</title>
+    <title>Common Grid Handling &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../_static/documentation_options.js?v=3443905a"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -96,19 +97,19 @@ coordinates on dimension ‘d1’.</p>
 
 
 <span class="k">def</span><span class="w"> </span><span class="nf">make_measurement</span><span class="p">(</span><span class="n">d1_coords</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make a sample measurement with length 4 coordinate set.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Make a sample measurement with length 4 coordinate set."""</span>
     <span class="n">nom</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
-                       <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;d1&#39;</span><span class="p">,</span> <span class="s1">&#39;d2&#39;</span><span class="p">),</span>
-                       <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;d1&#39;</span><span class="p">:</span> <span class="n">d1_coords</span><span class="p">,</span>
-                               <span class="s1">&#39;d2&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)})</span>
+                       <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'d1'</span><span class="p">,</span> <span class="s1">'d2'</span><span class="p">),</span>
+                       <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">'d1'</span><span class="p">:</span> <span class="n">d1_coords</span><span class="p">,</span>
+                               <span class="s1">'d2'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)})</span>
 
-    <span class="n">meas</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;meas&#39;</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">)</span>
+    <span class="n">meas</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'meas'</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">)</span>
 
     <span class="n">meas</span><span class="o">.</span><span class="n">add_umech</span><span class="p">(</span>
-        <span class="n">name</span><span class="o">=</span><span class="s1">&#39;mymechanisms&#39;</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s1">'mymechanisms'</span><span class="p">,</span>
         <span class="n">value</span><span class="o">=</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">,</span>
         <span class="n">dof</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-        <span class="n">category</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;Type&#39;</span><span class="p">:</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;Origin&#39;</span><span class="p">:</span> <span class="s1">&#39;Data Sheet&#39;</span><span class="p">},</span>
+        <span class="n">category</span><span class="o">=</span><span class="p">{</span><span class="s1">'Type'</span><span class="p">:</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'Origin'</span><span class="p">:</span> <span class="s1">'Data Sheet'</span><span class="p">},</span>
         <span class="n">add_uid</span><span class="o">=</span><span class="kc">True</span>
     <span class="p">)</span>
 
@@ -138,16 +139,16 @@ propagator calls the function on the`RMEMeas.cov`attribute then on the`RMEMeas.m
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">myprop</span> <span class="o">=</span> <span class="n">RMEProp</span><span class="p">(</span>
     <span class="n">sensitivity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">montecarlo_sims</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">common_grid</span><span class="o">=</span><span class="s1">&#39;d1&#39;</span><span class="p">,</span>
-    <span class="n">handle_common_grid_method</span><span class="o">=</span><span class="s1">&#39;interp_common&#39;</span><span class="p">,</span>
-    <span class="n">common_coords</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;d1&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]},</span>
+    <span class="n">common_grid</span><span class="o">=</span><span class="s1">'d1'</span><span class="p">,</span>
+    <span class="n">handle_common_grid_method</span><span class="o">=</span><span class="s1">'interp_common'</span><span class="p">,</span>
+    <span class="n">common_coords</span><span class="o">=</span><span class="p">{</span><span class="s1">'d1'</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">]},</span>
     <span class="n">vectorize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
 <span class="nd">@myprop</span><span class="o">.</span><span class="n">propagate</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Add two data sets.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""Add two data sets."""</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">d1</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">d1</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 
@@ -227,8 +228,8 @@ propagator calls the function on the`RMEMeas.cov`attribute then on the`RMEMeas.m
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="../../_sources/auto_examples/RME_gettingstarted/plot_e04_common_grid_handling.rst.txt"

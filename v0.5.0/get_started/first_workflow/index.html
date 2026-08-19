@@ -5,16 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Make Your First Workflow &#8212; Rocky Mountain Ellipse 0.4.3a3.dev24+g30dbdf43d documentation</title>
+    <title>Make Your First Workflow &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
-    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=12dfc556" />
-    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../_static/documentation_options.js?v=3443905a"></script>
-    <script src="../../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
@@ -92,9 +93,9 @@ we will do <code class="docutils literal notranslate"><span class="pre">first-wo
 <p>Add a <code class="docutils literal notranslate"><span class="pre">release</span></code> field in <code class="docutils literal notranslate"><span class="pre">first-workflow.rme.yml</span></code>.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">release</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># name of the release</span>
-<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;first-workflow&#39;</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">'first-workflow'</span>
 <span class="w">  </span><span class="c1"># version tag</span>
-<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.1.0&#39;</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">'0.1.0'</span>
 </pre></div>
 </div>
 </section>
@@ -105,8 +106,8 @@ with a particular release. They are the the inputs and outputs of jobs, which to
 comprise the workflow.</p>
 <p>Add a <code class="docutils literal notranslate"><span class="pre">release</span></code> field in <code class="docutils literal notranslate"><span class="pre">first-workflow.rme.yml</span></code>:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">datasets</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;inputs/input-file.txt&#39;</span>
-<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results/output-file.txt&#39;</span>
+<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">'inputs/input-file.txt'</span>
+<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">'results/output-file.txt'</span>
 </pre></div>
 </div>
 </section>
@@ -125,7 +126,7 @@ with the actual file path.</p>
 <span class="w">    </span><span class="nt">outputs</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_output</span>
 <span class="w">    </span><span class="nt">commands</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;cp&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_input}&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'cp'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'{my_input}'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'{my_output}'</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
@@ -159,8 +160,8 @@ command to the copy-file job.</p>
 <span class="w">      </span><span class="nt">outputs</span><span class="p">:</span>
 <span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_output</span>
 <span class="w">      </span><span class="nt">commands</span><span class="p">:</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;echo&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;hello</span><span class="nv"> </span><span class="s">${MY_NAME}!&#39;</span><span class="p p-Indicator">]</span>
-<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;cp&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_input}&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'echo'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'hello</span><span class="nv"> </span><span class="s">${MY_NAME}!'</span><span class="p p-Indicator">]</span>
+<span class="w">        </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'cp'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'{my_input}'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'{my_output}'</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 </section>
@@ -218,31 +219,31 @@ input file. The default behaviour is to ignore everything not included by git ig
 so if you want to include a dataset as part of the release then make sure to add it here.</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">release</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># name of the release</span>
-<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;first-workflow&#39;</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">'first-workflow'</span>
 <span class="w">  </span><span class="c1"># version tag</span>
-<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.1.0&#39;</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">'0.1.0'</span>
 <span class="w">  </span><span class="c1"># make custom include patterns</span>
 <span class="w">  </span><span class="nt">includes</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'{my_output}'</span>
 <span class="w">  </span><span class="nt">ignores</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;inputs/&#39;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'inputs/'</span>
 </pre></div>
 </div>
 <p>At this point your workflow file should look like this:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">release</span><span class="p">:</span>
 <span class="w">  </span><span class="c1"># name of the release</span>
-<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;first-workflow&#39;</span>
+<span class="w">  </span><span class="nt">title</span><span class="p">:</span><span class="w"> </span><span class="s">'first-workflow'</span>
 <span class="w">  </span><span class="c1"># version tag</span>
-<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;0.1.0&#39;</span>
+<span class="w">  </span><span class="nt">version</span><span class="p">:</span><span class="w"> </span><span class="s">'0.1.0'</span>
 <span class="w">  </span><span class="c1"># make custom include patterns</span>
 <span class="w">  </span><span class="nt">includes</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'{my_output}'</span>
 <span class="w">  </span><span class="nt">ignores</span><span class="p">:</span>
-<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">&#39;inputs/&#39;</span>
+<span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="s">'inputs/'</span>
 
 <span class="nt">datasets</span><span class="p">:</span>
-<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;inputs/input-file.txt&#39;</span>
-<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;results/output-file.txt&#39;</span>
+<span class="w">  </span><span class="nt">my_input</span><span class="p">:</span><span class="w"> </span><span class="s">'inputs/input-file.txt'</span>
+<span class="w">  </span><span class="nt">my_result</span><span class="p">:</span><span class="w"> </span><span class="s">'results/output-file.txt'</span>
 
 <span class="nt">requires-env</span><span class="p">:</span>
 <span class="c1"># For something</span>
@@ -255,8 +256,8 @@ so if you want to include a dataset as part of the release then make sure to add
 <span class="w">    </span><span class="nt">outputs</span><span class="p">:</span>
 <span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">my_output</span>
 <span class="w">    </span><span class="nt">commands</span><span class="p">:</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;echo&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;hello</span><span class="nv"> </span><span class="s">${MY_NAME}!&#39;</span><span class="p p-Indicator">]</span>
-<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">&#39;cp&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_input}&#39;</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">&#39;{my_output}&#39;</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'echo'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'hello</span><span class="nv"> </span><span class="s">${MY_NAME}!'</span><span class="p p-Indicator">]</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="s">'cp'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'{my_input}'</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="s">'{my_output}'</span><span class="p p-Indicator">]</span>
 </pre></div>
 </div>
 <p>Run the map command again and check that the input file is ignored,
@@ -314,7 +315,7 @@ are publishing to. The default workspace is the <code class="docutils literal no
   <li><a href="../../../v0.3.4/index.html">v0.3.4</a></li>
   <li><a href="../../../v0.4.5/get_started/first_workflow/index.html">v0.4.5</a></li>
   <li><a href="index.html">v0.5.0</a></li>
-  <li><a href="../../../development/get_started/first_workflow/index.html">development</a></li>
+  <li><a href="../../../development/index.html">development</a></li>
   <li><a href="../../../stable/get_started/first_workflow/index.html">stable</a></li>
 </ul>
 
@@ -326,8 +327,8 @@ are publishing to. The default workspace is the <code class="docutils literal no
       &#169;2024, National Institute of Standards and Technology.
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.4.0</a>
-      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
       |
       <a href="../../_sources/get_started/first_workflow/index.rst.txt"
