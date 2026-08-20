@@ -19,7 +19,7 @@
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" />
-    <link rel="next" title="rmellipse.arrschema.examples" href="examples/index.html" />
+    <link rel="next" title="rmellipse.propagators" href="../propagators/index.html" />
     <link rel="prev" title="rmellipse" href="../index.html" />
 <link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
   <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
@@ -75,14 +75,6 @@ $(document).ready(function(){
 
   <section id="module-rmellipse.arrschema">
 <span id="rmellipse-arrschema"></span><h1>rmellipse.arrschema<a class="headerlink" href="#module-rmellipse.arrschema" title="Link to this heading">¶</a></h1>
-<section id="submodules">
-<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="examples/index.html">rmellipse.arrschema.examples</a></li>
-</ul>
-</div>
-</section>
 <section id="exceptions">
 <h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
@@ -97,48 +89,139 @@ $(document).ready(function(){
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.arrschema.ArraySchema" title="rmellipse.arrschema.ArraySchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArraySchema</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnnotatedArray</span></code></a></p></td>
+<td><p>Extension of xr.DataArray that is expected to conform to a specific schema.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.arrschema.ArraySchema" title="rmellipse.arrschema.ArraySchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArraySchema</span></code></a></p></td>
 <td><p>Specialized dict subclass to describe the shape an array.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnnotatedArray</span></code></a></p></td>
-<td><p>Interface for an array structure with annotated dimensions and coordinates.</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.arrschema.CoordinateSchema" title="rmellipse.arrschema.CoordinateSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoordinateSchema</span></code></a></p></td>
+<td><p>dict() -&gt; new empty dictionary</p></td>
 </tr>
 </tbody>
 </table>
 </section>
 <section id="package-contents">
 <h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
-<dl class="py exception">
-<dt class="sig sig-object py" id="rmellipse.arrschema.ValidationError">
-<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.arrschema.</span></span><span class="sig-name descname"><span class="pre">ValidationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.ValidationError" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
-<p>Common base class for all non-exit exceptions.</p>
-<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.arrschema.</span></span><span class="sig-name descname"><span class="pre">AnnotatedArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></p>
+<p>Extension of xr.DataArray that is expected to conform to a specific schema.</p>
+<p>Schema is defined by an ArraySchema class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#rmellipse.arrschema.ArraySchema" title="rmellipse.arrschema.ArraySchema"><span class="pre">ArraySchema</span></a></em><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray.schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray.validate" title="Link to this definition">¶</a></dt>
+<dd><p>Validate array data against the schema of this type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray.from_dataarray">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dataarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray.from_dataarray" title="Link to this definition">¶</a></dt>
+<dd><p>Cast an array into an annotated array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>array</strong> (<em>xr.DataArray</em>) – Array that can be cast into this format.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray.zeros">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">xarray.DataArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><span class="pre">AnnotatedArray</span></a></span></span><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray.zeros" title="Link to this definition">¶</a></dt>
+<dd><p>Generate an empty array of zeros based on the schema.</p>
+<p>If extra coordinates are
+supplied they will be inserted at the first arbitrary dimension
+specificier in the AnnotatedArray’s schema (’…’). Coordinates
+with set values can be ignored, and will be automatically inserted.</p>
+<p>Zero array is initialized with numpy.zeros.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attrs</strong> (<em>Mapping</em><em> | </em><em>None = None</em>) – Provided metadata to instantiate the AnnotatedArray with. The
+values in the supplied metadata are
+shallow copied onto the instantiated AnnotatedArrays’s attrs.</p></li>
+<li><p><strong>**coords</strong> (<em>np.ndarray</em><em> | </em><em>xr.DataArray</em>) – KeyValue pairs of coordinates. Must include the required
+coordinates of the AnnotatedArray.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array with supplied coordinates that conforms to the schema.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray">AnnotatedArray</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – DESCRIPTION.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray.zeros_from">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">zeros_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prototype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><span class="pre">AnnotatedArray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rename_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reorder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">coords</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><span class="pre">AnnotatedArray</span></a></span></span><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray.zeros_from" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a new zeros array based on a prototype array.</p>
+<p>Dimensions that are mapped from the prototype array to the output
+array are cast into the correct type. Otherwise, dimensions are
+inserted in the expected place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prototype</strong> (<a class="reference internal" href="#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><em>AnnotatedArray</em></a>) – Array to base the new array off of.</p></li>
+<li><p><strong>drop_dims</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Drop these dimensions. The default is None.</p></li>
+<li><p><strong>rename_dims</strong> (<em>Mapping</em><em> | </em><em>dict</em><em>, </em><em>optional</em>) – Mapping of dimensions on the prototype array that should be
+converted to dimensions of this type of array. The default is None.</p></li>
+<li><p><strong>use_coords</strong> (<em>Mapping</em><em> | </em><em>dict</em><em>, </em><em>optional</em>) – Additional dimensions required for the new type, key is
+the dimension name and value is the new coordinate to use for
+that dimension.</p></li>
+<li><p><strong>reorder</strong> (<em>bool</em><em>, </em><em>optional</em>) – Automatically try to reorder dimensions to conform
+to the specification.</p></li>
+<li><p><strong>validate</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, validate after creation. Default is False</p></li>
+<li><p><strong>attrs</strong> (<em>Mapping</em><em> | </em><em>dict</em><em>, </em><em>optional</em>) – If provided, supply metadata to be used as attributes.</p></li>
+<li><p><strong>**coords</strong> (<em>Mapping</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Keyword version of use_coords. Is merged with ontop of
+use_coords.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>zeros</strong> – Zeros array in the new format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray">AnnotatedArray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="rmellipse.arrschema.ArraySchema">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.arrschema.</span></span><span class="sig-name descname"><span class="pre">ArraySchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">types.EllipsisType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">types.EllipsisType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">type</span><span class="p"><span class="pre">[</span></span><span class="pre">complex</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs_schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.ArraySchema" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.arrschema.</span></span><span class="sig-name descname"><span class="pre">ArraySchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">types.EllipsisType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">types.EllipsisType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pydantic.BaseModel</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.ArraySchema" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
 <p>Specialized dict subclass to describe the shape an array.</p>
 <p>Initialize an ArraySchema.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>name</strong> (<em>str</em>) – Name of the array structure.</p></li>
 <li><p><strong>shape</strong> (<em>tuple</em><em>[</em><em>str</em><em> | </em><em>int</em><em> | </em><em>EllipsisType</em><em>, </em><em>...</em><em>]</em>) – Shape of structure. Ellipses indicate arbitrary dimensions,
 letters indicate a required dimension of unknown length, and
 integers indicate a required dimension of a required length.</p></li>
 <li><p><strong>dims</strong> (<em>tuple</em><em>[</em><em>str</em><em> | </em><em>EllipsisType</em><em>, </em><em>...</em><em>]</em>) – Names assigned to dimensions specified by shape. Any required
 dimension must be names, and arbitrary dimensions must also be
 ellipses.</p></li>
-<li><p><strong>dtype</strong> (<em>str</em><em> | </em><em>type</em><em>[</em><em>float</em><em>]</em>) – Type must be parseable by numpy’s dtype (e.g. f8, c8, u8, etc)</p></li>
-<li><p><strong>units</strong> (<em>Mapping</em><em>, </em><em>optional</em>) – Mapping of units to the array structure. If the whole structure
-has a single unit, then a string can be passed. Optionally, a
-single required dimension can be mapped to a 1-d array of units.
-For example, if a dimension called “col” corresponds to columns in spread-sheet
-like data and each column has its own unit, you could specify that
-as {“col”:[“unit 1”, “unit 2”]}.</p></li>
+<li><p><strong>dtype</strong> (<em>type</em><em> | </em><em>None</em>) – Type must be parseable by numpy’s dtype (e.g. f8, c8, u8, etc).
+None means no datatype requriement, can be Any.</p></li>
+<li><p><strong>units</strong> (<em>Mapping</em><em>, </em><em>optional</em>) – Mapping of units to the array structure.</p></li>
 <li><p><strong>coords</strong> (<em>Mapping</em><em>, </em><em>optional</em>) – Mapping of required dimensions to a coordinate space. Must provide
 at least a dtype and a single unit as a string. Optionally,
 if the coordinates are fixed (i.e. the row and column indices of
@@ -183,40 +266,33 @@ The default is True.</p></li>
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray">
-<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.arrschema.</span></span><span class="sig-name descname"><span class="pre">AnnotatedArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray" title="Link to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></p>
-<p>Interface for an array structure with annotated dimensions and coordinates.</p>
-<p>Inspired by xarray DataArray. Classes conforming to this specification
-can be registered in an ArrayClassRegister.</p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray.schema">
-<span class="sig-name descname"><span class="pre">schema</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#rmellipse.arrschema.ArraySchema" title="rmellipse.arrschema.ArraySchema"><span class="pre">ArraySchema</span></a></em><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray.schema" title="Link to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray.validate">
-<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray.validate" title="Link to this definition">¶</a></dt>
-<dd><p>Validate array data against the schema of this type.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="rmellipse.arrschema.AnnotatedArray.from_dataarray">
-<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dataarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#rmellipse.arrschema.AnnotatedArray.from_dataarray" title="Link to this definition">¶</a></dt>
-<dd><p>Cast an array into an annotated array.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>array</strong> (<em>xr.DataArray</em>) – Array that can be cast into this format.</p>
+<dt class="sig sig-object py" id="rmellipse.arrschema.CoordinateSchema">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.arrschema.</span></span><span class="sig-name descname"><span class="pre">CoordinateSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.CoordinateSchema" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object’s</p>
+<blockquote>
+<div><p>(key, value) pairs</p>
+</div></blockquote>
+<dl>
+<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt><dd><p>d = {}
+for k, v in iterable:</p>
+<blockquote>
+<div><p>d[k] = v</p>
+</div></blockquote>
 </dd>
-<dt class="field-even">Returns<span class="colon">:</span></dt>
-<dd class="field-even"><p>New array.</p>
-</dd>
-<dt class="field-odd">Return type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Self</p>
+<dt>dict(<a href="#id1"><span class="problematic" id="id2">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt><dd><p>in the keyword argument list.  For example:  dict(one=1, two=2)</p>
 </dd>
 </dl>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
+<dl class="py exception">
+<dt class="sig sig-object py" id="rmellipse.arrschema.ValidationError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.arrschema.</span></span><span class="sig-name descname"><span class="pre">ValidationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.arrschema.ValidationError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Common base class for all non-exit exceptions.</p>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
 </dd></dl>
 
 </section>
@@ -232,20 +308,11 @@ can be registered in an ArrayClassRegister.</p>
         <div class="sphinxsidebarwrapper">
 <h3><a href="../../../index.html">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../get_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../for_contributors/index.html">For Contributors</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4 current"><a class="current reference internal" href="#">rmellipse.arrschema</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../propagators/index.html">rmellipse.propagators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../uobjects/index.html">rmellipse.uobjects</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../utils/index.html">rmellipse.utils</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a></li>
 </ul>
 </li>
 </ul>
@@ -271,7 +338,7 @@ can be registered in an ArrayClassRegister.</p>
 <ul>
   <li><a href="../../../../v0.3.4/index.html">v0.3.4</a></li>
   <li><a href="../../../../v0.4.5/index.html">v0.4.5</a></li>
-  <li><a href="../../../../v0.5.0/index.html">v0.5.0</a></li>
+  <li><a href="../../../../v0.5.1/index.html">v0.5.1</a></li>
   <li><a href="../../../../development/index.html">development</a></li>
   <li><a href="index.html">stable</a></li>
 </ul>

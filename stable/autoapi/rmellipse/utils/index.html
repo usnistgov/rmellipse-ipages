@@ -108,7 +108,7 @@ $(document).ready(function(){
 <tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.utils.save_object" title="rmellipse.utils.save_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_object</span></code></a>(→ SAVED)</p></td>
 <td><p>Save an object to a group.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.utils.load_file" title="rmellipse.utils.load_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_file</span></code></a>(path, saveable, **load_object_kwargs)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.utils.load_file" title="rmellipse.utils.load_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_file</span></code></a>(path, **load_object_kwargs)</p></td>
 <td><p>Load a GroupSaveable object from a file.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.utils.save_file" title="rmellipse.utils.save_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_file</span></code></a>(path, saveable, **save_object_kwargs)</p></td>
@@ -295,7 +295,7 @@ default is str.</p></li>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="rmellipse.utils.load_file">
-<span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rmellipse.utils.GroupSaveable" title="rmellipse.utils.GroupSaveable"><span class="pre">GroupSaveable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">load_object_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.utils.load_file" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">rmellipse.utils.</span></span><span class="sig-name descname"><span class="pre">load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">load_object_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.utils.load_file" title="Link to this definition">¶</a></dt>
 <dd><p>Load a GroupSaveable object from a file.</p>
 <p>Follows the convention if there must be a single GroupSaveable
 object at the root of the file.</p>
@@ -587,20 +587,11 @@ The default is False.</p></li>
         <div class="sphinxsidebarwrapper">
 <h3><a href="../../../index.html">Table of Contents</a></h3>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../../../get_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../install/index.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../auto_examples/index.html">Examples Gallery</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../for_contributors/index.html">For Contributors</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a><ul class="current">
-<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
-<li class="toctree-l4"><a class="reference internal" href="../arrschema/index.html">rmellipse.arrschema</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../propagators/index.html">rmellipse.propagators</a></li>
-<li class="toctree-l4"><a class="reference internal" href="../uobjects/index.html">rmellipse.uobjects</a></li>
-<li class="toctree-l4 current"><a class="current reference internal" href="#">rmellipse.utils</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">rmellipse</a></li>
 </ul>
 </li>
 </ul>
@@ -626,7 +617,7 @@ The default is False.</p></li>
 <ul>
   <li><a href="../../../../v0.3.4/index.html">v0.3.4</a></li>
   <li><a href="../../../../v0.4.5/index.html">v0.4.5</a></li>
-  <li><a href="../../../../v0.5.0/index.html">v0.5.0</a></li>
+  <li><a href="../../../../v0.5.1/index.html">v0.5.1</a></li>
   <li><a href="../../../../development/index.html">development</a></li>
   <li><a href="index.html">stable</a></li>
 </ul>

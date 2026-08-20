@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Rocky Mountain Ellipse &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="_static/documentation_options.js?v=34a028c2"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="install/index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="rocky-mountain-ellipse">
+<h1>Rocky Mountain Ellipse<a class="headerlink" href="#rocky-mountain-ellipse" title="Link to this heading">¶</a></h1>
+<p>Rocky Mountain Ellipse (RME) is a software package designed to provide an explicit digital record of the metrological traceability of a measurement result. In other words, RME will allows users to build a record that describes how a measurement result can be related to a reference through a documented unbroken chain of calibrations, each contributing to the <a class="reference external" href="https://jcgm.bipm.org/vim/en/2.41.html">measurement uncertainty</a>. To show the traceability of measurements, RME provides a flexible, explicit system to organize and annotate scientific data and data analysis workflows.Because measurement uncertainty is closely related to traceability, RME allows users to track how the uncertainty of a measurement results derives from other measurements by providing tools to facilitate measurement uncertainty propagation (linear finite-difference and Monte-Carlo) through arbitrary Python functions. The system is compatible with the BIPM Guide to the expression of uncertainty in measurement (GUM). RME is intended to be part of a <a class="reference external" href="https://www.go-fair.org/fair-principles/">FAIR</a> software ecosystem that will facilitate re-use of code and data. This vision includes an online archive that could eventually store records of NIST’s entire traceability chain, and beyond. As part of that vision, this package focuses on the development of three core utilities:</p>
+<ol class="arabic simple">
+<li><p>RMEMeas and RMEProp for correlated uncertainty propagation using <a class="reference external" href="https://docs.xarray.dev/en/stable/">XArray</a>.</p></li>
+<li><p>AnnotatedArray to define xarray.DataArray structure specifications.</p></li>
+<li><p>GroupSaveable for serializing heirarchical objects to <a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5/">HDF5</a>.</p></li>
+</ol>
+<p>Please see the <a class="reference external" href="https://pages.nist.gov/rmellipse-ipages">documentation</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>RMEllipse is still in development. We expect to make changes that will break backward compatibility. Also, there are known bugs that we have not fixed yet. Specifically, we plan to re-write the Monte-Carlo uncertainty propagation algorithm in RMEProp. Please check back for updates. When we increment the version to 1.0, we expect that that version will be stable.</p>
+</div>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">¶</a></h2>
+<p>Install with pip</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">rmellipse</span>
+</pre></div>
+</div>
+</section>
+<section id="developer-tools">
+<h2>Developer Tools<a class="headerlink" href="#developer-tools" title="Link to this heading">¶</a></h2>
+<p>It is assumed you have the following programs installed on your computer.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.astral.sh/uv/">uv</a> for package management</p></li>
+<li><p><a class="reference external" href="https://git-scm.com/downloads">git bash</a> or similar terminal emulator to run shell scripts if you are on windows.</p></li>
+</ul>
+<p>Clone the repo and run, from the root directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span> <span class="n">sync</span>
+</pre></div>
+</div>
+<p>This will generate the virtual environment for the package.</p>
+<p>Install git pre-commit:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">uv</span> <span class="n">run</span> <span class="n">pre</span><span class="o">-</span><span class="n">commit</span> <span class="n">install</span>
+</pre></div>
+</div>
+<section id="running-local-tests">
+<h3>Running Local Tests<a class="headerlink" href="#running-local-tests" title="Link to this heading">¶</a></h3>
+<p>In a bash terminal, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sh</span>
+<span class="n">tools</span><span class="o">/</span><span class="n">test</span><span class="o">.</span><span class="n">sh</span> <span class="nb">open</span>
+</pre></div>
+</div>
+<p>This should execute all the defined tests with
+<a class="reference external" href="https://docs.pytest.org/en/stable/">pytest</a>. In addition, the
+open command will open a webpage with detailed reports about
+code coverage.</p>
+</section>
+<section id="building-local-documentation">
+<h3>Building Local Documentation<a class="headerlink" href="#building-local-documentation" title="Link to this heading">¶</a></h3>
+<p>Clean the local documentation build (this needs to be run sometimes
+if you are modifying the documentation and it gets into a broken state). It will reset the build directories and the next call to
+build it will be completely from scratch.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="o">/</span><span class="n">docs</span><span class="o">.</span><span class="n">sh</span> <span class="n">clean</span>
+</pre></div>
+</div>
+<p>To build a copy of the current state
+of the documentation with your changes run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="o">/</span><span class="n">docs</span><span class="o">.</span><span class="n">sh</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>To build the full documentation with tagged
+versions and the most recent stable and development
+changes (this takes a while and is usually only run
+as part of the release jobs) run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="o">/</span><span class="n">docs</span><span class="o">.</span><span class="n">sh</span> <span class="n">html</span><span class="o">-</span><span class="n">multiversioned</span>
+</pre></div>
+</div>
+<p>To open the documentation (you may have to call open
+in a new console) run</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="o">/</span><span class="n">docs</span><span class="o">.</span><span class="n">sh</span> <span class="n">serve</span>
+<span class="n">tools</span><span class="o">/</span><span class="n">docs</span><span class="o">.</span><span class="n">sh</span> <span class="nb">open</span>
+</pre></div>
+</div>
+<p>This will serve a local copy of the documentation on your local host,
+and the open command will launch your default web browser directly to that page.
+Currently, this web page is on port 8000.</p>
+</section>
+<section id="code-profiling">
+<h3>Code Profiling<a class="headerlink" href="#code-profiling" title="Link to this heading">¶</a></h3>
+<p>If you are writing a test script, you can run it in a code
+profile from the cloned directory. This will open a webpage
+to navigate the statistics of your tests script once it
+complete.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tools</span><span class="o">/</span><span class="n">profile</span><span class="o">.</span><span class="n">sh</span> <span class="o">&lt;</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">script</span><span class="o">.</span><span class="n">py</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="acknowledgements">
+<h2>Acknowledgements<a class="headerlink" href="#acknowledgements" title="Link to this heading">¶</a></h2>
+<p>The development of RMEllipse is partially funded through the <a class="reference external" href="https://www.nist.gov/chips/research-development-programs/metrology-program">CHIPS Metrology program</a>. Our goal is to use it to disseminate RF calibration and uncertainty analysis techniques to monitor RF power delivered to plasma etching and deposition tools used in semiconductor manufacturing.</p>
+</section>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Link to this heading">¶</a></h2>
+<p>Contributors names and contact info</p>
+<p>Daniel C. Gray, Zenn C. Roberts, Aaron M. Hagerstrom</p>
+</section>
+</section>
+<section id="table-of-contents">
+<h1>Table of Contents<a class="headerlink" href="#table-of-contents" title="Link to this heading">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install/index.html#dependencies">Dependencies</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/index.html#uv-installation">uv Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install/index.html#pip-installation">Pip Installation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples Gallery</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#rmemeas-and-rmeprop">RMEMeas and RMEProp</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#arrayschema-and-annotatedarray">ArraySchema and AnnotatedArray</a></li>
+<li class="toctree-l2"><a class="reference internal" href="auto_examples/index.html#python-script-examples">Python Script Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="for_contributors/index.html">For Contributors</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="for_contributors/dev_tools.html">Using the Developer Tools</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/rmellipse/index.html">rmellipse</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Link to this heading">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="#">Table of Contents</a></h3>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="auto_examples/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="../v0.4.5/index.html">v0.4.5</a></li>
+  <li><a href="index.html">v0.5.1</a></li>
+  <li><a href="../development/index.html">development</a></li>
+  <li><a href="../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

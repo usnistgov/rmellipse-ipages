@@ -1,0 +1,1809 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>rmellipse &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
+    <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
+    <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
+    <script src="../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="rmellipse.arrschema" href="arrschema/index.html" />
+    <link rel="prev" title="API Reference" href="../index.html" />
+<link rel="stylesheet" href="https://pages.nist.gov/nist-header-footer/css/nist-combined.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.min.js" type="text/javascript"></script>
+  <script src="https://pages.nist.gov/nist-header-footer/js/nist-header-footer.js" type="text/javascript" defer="defer"></script>
+
+
+<script type="text/javascript" src="https://pages.nist.gov/leaveNotice/js/jquery.leaveNotice-nist.min.js"></script>
+<script>
+$(document).ready(function(){
+  // Mark external (non-nist.gov) A tags with class "external"
+  //If the adress start with https and ends with nist.gov
+  var re_nist = new RegExp('^https?:\/\/((^\/)*\.)*nist\\.gov(\/|$)');
+  //Regex to find address that start with https
+  var re_absolute_address = new RegExp('^((https?:)?\/\/)');
+  $("a").each(function(){
+    var url=$(this).attr('href');
+    if(re_nist.test(url) || !re_absolute_address.test(url)){
+      $(this).addClass('local');
+    }else{
+      //This a href appears to be external, so tag it
+      $(this).addClass('external');
+    }
+  });
+  // Add leaveNotice to external A elements
+  $('a.external').leaveNotice();
+});
+</script>
+<link rel="stylesheet" type="text/css" href="https://pages.nist.gov/leaveNotice/css/jquery.leaveNotice.css" />
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RJSMY46M5C"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RJSMY46M5C');
+</script>
+<!-- Old DAP UA tag -->
+<script async type="text/javascript" id="_fed_an_ua_tag" src="https://dap.digitalgov.gov/Universal-Federated-Analytics-Min.js?agency=NIST&subagency=github&pua=UA-66610693-1&yt=true&exts=ppsx,pps,f90,sch,rtf,wrl,txz,m1v,xlsm,msi,xsd,f,tif,eps,mpg,xml,pl,xlt,c">
+</script>
+
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+
+
+  <section id="module-rmellipse">
+<span id="rmellipse"></span><h1>rmellipse<a class="headerlink" href="#module-rmellipse" title="Link to this heading">¶</a></h1>
+<p>Core components of the API are import and exposed to the top level module.</p>
+<p>These components are also made available through their respective submodules.</p>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Link to this heading">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="arrschema/index.html">rmellipse.arrschema</a></li>
+<li class="toctree-l1"><a class="reference internal" href="propagators/index.html">rmellipse.propagators</a></li>
+<li class="toctree-l1"><a class="reference internal" href="uobjects/index.html">rmellipse.uobjects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="utils/index.html">rmellipse.utils</a></li>
+</ul>
+</div>
+</section>
+<section id="exceptions">
+<h2>Exceptions<a class="headerlink" href="#exceptions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.RMEMeasFormatError" title="rmellipse.RMEMeasFormatError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMEMeasFormatError</span></code></a></p></td>
+<td><p>Error in formatting of data inside RMEMeas</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.MissingSchemaWarning" title="rmellipse.MissingSchemaWarning"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MissingSchemaWarning</span></code></a></p></td>
+<td><p>Base class for warnings generated by user code.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.ValidationError" title="rmellipse.ValidationError"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ValidationError</span></code></a></p></td>
+<td><p>Common base class for all non-exit exceptions.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMEMeas</span></code></a></p></td>
+<td><p>Class that stores data along with uncertainties.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.CovarianceDataArray" title="rmellipse.CovarianceDataArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CovarianceDataArray</span></code></a></p></td>
+<td><p>Store data with linear uncertainty mechanisms.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.CovarianceStrMetadata" title="rmellipse.CovarianceStrMetadata"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CovarianceStrMetadata</span></code></a></p></td>
+<td><p>Stores metadata about linearuncertainty mechanisms.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.MonteCarloDataArray" title="rmellipse.MonteCarloDataArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonteCarloDataArray</span></code></a></p></td>
+<td><p>Store data with monte carlo samples.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.RMEUncTuple" title="rmellipse.RMEUncTuple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMEUncTuple</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.RMEProp" title="rmellipse.RMEProp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMEProp</span></code></a></p></td>
+<td><p>Microwave Uncertainty Framework uncertainty propagators.Propagator.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.GroupSaveable" title="rmellipse.GroupSaveable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">GroupSaveable</span></code></a></p></td>
+<td><p>Interface for objects that can be saved as HDF5 or Exdir groups or files.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">AnnotatedArray</span></code></a></p></td>
+<td><p>Extension of xr.DataArray that is expected to conform to a specific schema.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.ArraySchema" title="rmellipse.ArraySchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ArraySchema</span></code></a></p></td>
+<td><p>Specialized dict subclass to describe the shape an array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.CoordinateSchema" title="rmellipse.CoordinateSchema"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CoordinateSchema</span></code></a></p></td>
+<td><p>dict() -&gt; new empty dictionary</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading">¶</a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.load_object" title="rmellipse.load_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_object</span></code></a>(→ any)</p></td>
+<td><p>Construct Python object from group or dataset.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.save_object" title="rmellipse.save_object"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_object</span></code></a>(→ SAVED)</p></td>
+<td><p>Save an object to a group.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.load_file" title="rmellipse.load_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_file</span></code></a>(path, **load_object_kwargs)</p></td>
+<td><p>Load a GroupSaveable object from a file.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.save_file" title="rmellipse.save_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">save_file</span></code></a>(path, saveable, **save_object_kwargs)</p></td>
+<td><p>Save a GroupSaveable object to a file.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="package-contents">
+<h2>Package Contents<a class="headerlink" href="#package-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">RMEMeas</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cov</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">A</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#rmellipse.CovarianceDataArray" title="rmellipse.CovarianceDataArray"><span class="pre">CovarianceDataArray</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">A</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#rmellipse.MonteCarloDataArray" title="rmellipse.MonteCarloDataArray"><span class="pre">MonteCarloDataArray</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covdofs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">CovarianceDOFMetadata</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">covcats</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="#rmellipse.CovarianceStrMetadata" title="rmellipse.CovarianceStrMetadata"><span class="pre">CovarianceStrMetadata</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="utils/index.html#rmellipse.utils.GroupSaveable" title="rmellipse.utils.GroupSaveable"><span class="pre">rmellipse.utils.GroupSaveable</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="utils/index.html#rmellipse.utils.GroupSaveable" title="rmellipse.utils.GroupSaveable"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmellipse.utils.GroupSaveable</span></code></a></p>
+<p>Class that stores data along with uncertainties.</p>
+<p>Stores linear uncertainties in the cov attribute and
+montecarlo uncertainties in the cov attribute.</p>
+<p>Used with the rmellipse.RMEProp propagator.</p>
+<p>Initialize a RMEMeas object.</p>
+<p>Please refer to xarray’s documentation for information about how to
+use DataArrays, and how to define coordinates and dimensions.</p>
+<p>If covdofs is not provided, distributions of linear uncertainty
+mechanisms are assumed to have infinite degrees of freedom (Gaussian).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of RMEMeas object. The default is ‘RMEMeas’.</p></li>
+<li><p><strong>cov</strong> (<em>A</em><em> | </em><a class="reference internal" href="#rmellipse.CovarianceDataArray" title="rmellipse.CovarianceDataArray"><em>CovarianceDataArray</em></a><em>, </em><em>optional</em>) – <p>Covariance data for linear sensitivity analysis. Copies of data set
+are stored along the first dimension (axis 0) of the DataArray, where
+the first index of axis 0 is the nominal data set, and the rest of
+the indexes along that dimension are perturbed by one standard deviation
+(i.e. 1 standard uncertainty).</p>
+<p>The first dimension must be called ‘umech_id’, and the
+first label of the ‘parameter_dimensions’ coordinate must be
+‘nominal’. The remaining labels for the ‘umech_id’
+coordinate should be strings corresponding the the uncertainty
+mechanism. The default is None.</p>
+</p></li>
+<li><p><strong>mc</strong> (<em>A</em><em> | </em><a class="reference internal" href="#rmellipse.MonteCarloDataArray" title="rmellipse.MonteCarloDataArray"><em>MonteCarloDataArray</em></a><em>, </em><em>optional</em>) – <p>Montecarlo trials. Samples of the data
+sets distribution are stored along the first dimension (axis 0)
+of the DataArray, where the first index of axis 0 is the nominal
+data set, and the rest of the indexes are samples of the distribution.</p>
+<p>The first dimension must be called ‘sample_id’, and the
+first labels of the ‘sample_id’ must start at 0 and
+count up by 1 (i,e typical integer based indexing).
+The default is None.</p>
+</p></li>
+<li><p><strong>covdofs</strong> (<em>xr.DataArray</em><em>, </em><em>optional</em>) – DataArray that stores the degrees of freedom for each linear
+uncertainty mechanism in cov. It should be a 1 dimensional
+DataArray with the dimension called ‘umech_id’ and
+the coordinate set should be identical to the
+‘umech_id’ coordinate in cov. If covariance data
+is provided and covdofs is not, one will be created that assumes
+all linear mechanisms have infinite degrees of freedom (i.e.
+gaussian distributions). The default is None.</p></li>
+<li><p><strong>covcats</strong> (<em>xr.DataArray</em><em>, </em><em>optional</em>) – DataArray that stores the categories of each uncertainty mechanism.
+Expected to be have dimensions (‘umech_id’,’categories’),
+If not provided, all umech_id are assigned a ‘Type’ category
+of ‘B’. If a mechanism doesn’t have a category, it should be an empty
+string.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.name">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#rmellipse.RMEMeas.name" title="Link to this definition">¶</a></dt>
+<dd><p>The name of the object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.cov">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">cov</span></span><a class="headerlink" href="#rmellipse.RMEMeas.cov" title="Link to this definition">¶</a></dt>
+<dd><p>Linear uncertainty mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.mc">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">mc</span></span><a class="headerlink" href="#rmellipse.RMEMeas.mc" title="Link to this definition">¶</a></dt>
+<dd><p>samples of Monte-Carlo distributions.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.covdofs">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">covdofs</span></span><a class="headerlink" href="#rmellipse.RMEMeas.covdofs" title="Link to this definition">¶</a></dt>
+<dd><p>The degrees of freedom on linear mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.covcats">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">covcats</span></span><a class="headerlink" href="#rmellipse.RMEMeas.covcats" title="Link to this definition">¶</a></dt>
+<dd><p>String metadata for linear uncertainty mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.dims">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dims</span></span><a class="headerlink" href="#rmellipse.RMEMeas.dims" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.shape">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">shape</span></span><a class="headerlink" href="#rmellipse.RMEMeas.shape" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.coords">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">coords</span></span><a class="headerlink" href="#rmellipse.RMEMeas.coords" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.dtype">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">dtype</span></span><a class="headerlink" href="#rmellipse.RMEMeas.dtype" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.cast_umechids">
+<span class="sig-name descname"><span class="pre">cast_umechids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.cast_umechids" title="Link to this definition">¶</a></dt>
+<dd><p>Cast any umech_id dimensions or other dimensions to the correct type.</p>
+<p>Generally, umech_id and covcats should be ‘T’ (variable width strings).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.from_nom">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_nom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nom</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.from_nom" title="Link to this definition">¶</a></dt>
+<dd><p>Create a RMEMeas object with just a nominal dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – The name of the object to be created.</p></li>
+<li><p><strong>nom</strong> (<em>xr.DataArray</em>) – Nominal data set.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A RMEMeas object with only nominal values.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>‘RMEMeas’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.from_xml">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">from_csv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">old_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">new_dir</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.from_xml" title="Link to this definition">¶</a></dt>
+<dd><p>Read an XML file from the Microwave Uncertainty Framework.</p>
+<p>covcats and covdofs metadata will be loaded as the default values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em>) – Path to xml header file.</p></li>
+<li><p><strong>from_csv</strong> (<em>callable</em>) – Read function, takes a path to a copy of the data file and returns
+an xarray object.</p></li>
+<li><p><strong>old_dir</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Name of old path stored in xml file. Will be swapped with new_dir
+if provided. Old XML format isn’t portable, and the paths
+need to be manually swapped when the files are moved around.
+The default is None.</p></li>
+<li><p><strong>new_dir</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Path string to replace old_dir with. The default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If old_dir/new_dir are not both provided, but one is.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>new</strong> – MUFmeas object from the legacy format.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>MUFmeas</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.to_xml">
+<span class="sig-name descname"><span class="pre">to_xml</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">target_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">to_csv</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_extension</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'.meas'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">header_directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.to_xml" title="Link to this definition">¶</a></dt>
+<dd><p>Save to a the Microwave Uncertainty Framework Format.</p>
+<p>This does not preserve metadata in covdofs or covcats.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>target_directory</strong> (<em>str</em>) – Directory in which to save the support folder which stores all
+the copies of the data.</p></li>
+<li><p><strong>to_csv</strong> (<em>callable</em>) – Dataformat of the underlying cov-data. Will be inferred if left
+as None. The default is None.</p></li>
+<li><p><strong>data_extension</strong> (<em>str</em>) – What to save the datafile extensions as (e.g. .s1p, .csv, etc)</p></li>
+<li><p><strong>header_extension</strong> (<em>str</em><em>, </em><em>optional</em>) – What to save the xml header file extension as.
+The default is ‘.meas’.</p></li>
+<li><p><strong>header_directory</strong> (<em>str</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Location in which to store the header file. If None, defaults
+to the target_directory. Default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If no dataformat provided and one cannot be inferred.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.copy" title="Link to this definition">¶</a></dt>
+<dd><p>Make a copy of a RMEMeas object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Copied object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.cull_cov">
+<span class="sig-name descname"><span class="pre">cull_cov</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.cull_cov" title="Link to this definition">¶</a></dt>
+<dd><p>Remove trivial linear uncertainty mechanisms set by tolerance.</p>
+<p>Any linear uncertainty mechanisms with a sum of all standard
+uncertainties &lt; tolerance will be removed from the object.</p>
+<p>For example if tolerance is 0.1, the nominal is  [0,0,0] and
+the perturbed data for a mechanisms is [0.0,0.1,-0.2], then the
+function will evaluate the total standard uncertainty for the mechanism
+as 0.1 + 0.0 + 0.2 = 0.3, and not remove the mechanism.</p>
+<p>This function is called by the auto-cull setting in the RME
+propagator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – Maximum value a sum of standard uncertainties that is deemed
+trivial, used to determine what mechanisms should be removed.
+The default is 0.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.make_umechs_unique">
+<span class="sig-name descname"><span class="pre">make_umechs_unique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">same_uid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.make_umechs_unique" title="Link to this definition">¶</a></dt>
+<dd><p>Make parameter locations unique by adding a uuid4 string to end of each.</p>
+<p>A uiid4 string is added to the end of each parameter_location string.
+Useful when reading data from different sources that have the same
+names of uncertainty files. (E.G, multiple device definitions come
+from calibration service formats with generic ‘ua,ub’ naming)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>same_uid</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, all parameter locations will have the same uid added
+to the end. Default is False.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.add_mc_sample">
+<span class="sig-name descname"><span class="pre">add_mc_sample</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">sample</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.add_mc_sample" title="Link to this definition">¶</a></dt>
+<dd><p>Add a Monte Carlo sample to the distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>sample</strong> (<em>xr.DataArray</em>) – Single sample of the probability distribution that represents the
+data set. Expected to be the same shape, dimensions, and
+coordinates of the nominal.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.add_umech">
+<span class="sig-name descname"><span class="pre">add_umech</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dof</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">np.inf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">category</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'Type':</span> <span class="pre">'B'}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_uid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.add_umech" title="Link to this definition">¶</a></dt>
+<dd><p>Add a linear mechanisms to covariance data.</p>
+<p>Note:</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of new mechanism, must be unique.</p></li>
+<li><p><strong>value</strong> (<em>xr.DataArray</em>) – Array of nominal+1 standard uncertainty of new mechanism.
+If value has the same size as the nominal data, the function will insert a
+new dimension at axis zero before concatenating to the covariance data.</p></li>
+<li><p><strong>dof</strong> (<em>float</em><em>,</em><em>optional</em>) – Degrees of freedom associated with the uncertainty mechanism.
+Default is infinite.</p></li>
+<li><p><strong>category</strong> (<em>dict</em><em>,</em>) – Dictionary of key-value string pairs categorizing the uncertainty
+mechanisms. E.g. {‘Type’:’B’,’Origin’:’Datasheet’}. The default
+is {‘Type’:’B’}.</p></li>
+<li><p><strong>add_uid</strong> (<em>bool</em><em>, </em><em>optional</em>) – Append a UID to name to guarantee uniqueness.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.nom">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nom</span></span><a class="headerlink" href="#rmellipse.RMEMeas.nom" title="Link to this definition">¶</a></dt>
+<dd><p>Get the nominal values of the RMEMeas object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>Exception</strong> – if no data is store.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Nominal values in an xr.DataArray</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>xr.DataArray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.umech_id">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">umech_id</span></span><a class="headerlink" href="#rmellipse.RMEMeas.umech_id" title="Link to this definition">¶</a></dt>
+<dd><p>Get the names of uncertainty mechanisms, excluding the nominal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of uncertainty mechanism strings.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>List</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.confint">
+<span class="sig-name descname"><span class="pre">confint</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">percent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.confint" title="Link to this definition">¶</a></dt>
+<dd><p>Generate the lower, upper confidence intervals for a fractional percent confidence.</p>
+<p>Confidence intervals are generate using the linear sensitivity analysis
+data (.cov) using a student-t distribution with means of .nominal, and
+a scale of 1 standard uncertainty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>percent</strong> (<em>float</em>) – Percent confidence to calculate intervals on, centered about the
+nominal. For example, a value of 0.5 will calculate intervals such
+that 0.25 of samples are between the mean and the lower, and 0.25
+of expected samples are between the mean and the upper.</p></li>
+<li><p><strong>deg</strong> (<em>bool</em><em>, </em><em>optional</em>) – If you are calculated confidence intervals on degrees.
+The default is False.</p></li>
+<li><p><strong>rad</strong> (<em>bool</em><em>, </em><em>optional</em>) – If you are calculating confidence intervals on radians.
+The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>lower</strong> (<em>xr.DataArray</em>) – Lower bounds on the confidence interval.</p></li>
+<li><p><strong>upper</strong> (<em>xr.DataArray</em>) – Upper bounds on the confidence interval.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.dof">
+<span class="sig-name descname"><span class="pre">dof</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.dof" title="Link to this definition">¶</a></dt>
+<dd><p>Get the dof of of the RMEMeas object’s covariance data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>float</em> – degrees of freedom of standard uncertainty from linear sensitivity.</p></li>
+<li><p><em>float</em> – degrees of freedom of standard uncertainty from monte-carlo</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.stdunc">
+<span class="sig-name descname"><span class="pre">stdunc</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.stdunc" title="Link to this definition">¶</a></dt>
+<dd><p>Get the standard uncertainty with expansion factor k.</p>
+<p>Supports uncertainties on angles via the deg/rad key word arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<em>float</em><em>, </em><em>optional</em>) – Expansion factor. The default is 1.</p></li>
+<li><p><strong>deg</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, treats the values as angles and finds the minimum
+distance between the perturbed and un-perturbed data sets in
+degrees. The default is False</p></li>
+<li><p><strong>rad</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, treats the values as angles and finds the minimum
+distance between the perturbed and un-perturbed data sets in
+radians. The default is False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>covunc</strong> (<em>xr.DataArray</em>) – xr.DataArray of std unc from covariance data.</p></li>
+<li><p><strong>mcunc</strong> (<em>xr.DataArray</em>) – standard uncertainty of montecarlo data.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.uncbounds">
+<span class="sig-name descname"><span class="pre">uncbounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">k</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.uncbounds" title="Link to this definition">¶</a></dt>
+<dd><p>Get uncertainty bounds (nominal + k*stdunc).</p>
+<p>Supports uncertainties on angles via the deg/rad key word arguments.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>k</strong> (<em>float</em><em>, </em><em>optional</em>) – Expansion factor. The default is 1.</p></li>
+<li><p><strong>deg</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, treats the values as angles and finds the minimum
+distance between the perturbed and un-perturbed data sets in
+degrees. The default is False</p></li>
+<li><p><strong>rad</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, treats the values as angles and finds the minimum
+distance between the perturbed and un-perturbed data sets in
+radians. The default is False</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>xr.DataArray</em> – Uncertainty bounds from cov data.</p></li>
+<li><p><em>xr.DataArray</em> – Uncertainty bounds from montecarlo data.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.assign_categories">
+<span class="sig-name descname"><span class="pre">assign_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mechanisms</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">designation</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.assign_categories" title="Link to this definition">¶</a></dt>
+<dd><p>Assign categories to mechanisms.</p>
+<p>Mechanisms, categories, and designation should all be the same shape.</p>
+<p>categories and designation correspond to key,</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mechanisms</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – 1-d List of mechanisms to be assigned a category</p></li>
+<li><p><strong>categories</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – 1-d list of categories being assigned. Can be new categories that don’t
+already exist. Index corresponds to index of mechanisms.</p></li>
+<li><p><strong>designation</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – 1-d list of designation to assign each mechanism. Index corresponds
+to index of mechanisms.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.assign_categories_to_all">
+<span class="sig-name descname"><span class="pre">assign_categories_to_all</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.assign_categories_to_all" title="Link to this definition">¶</a></dt>
+<dd><p>Assign categories to all the linear uncertainty mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>**categories</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – Keyword argument pairs of category names : designation to assign
+to all linear uncertainty mechanisms in a variable.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.create_empty_categories">
+<span class="sig-name descname"><span class="pre">create_empty_categories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.create_empty_categories" title="Link to this definition">¶</a></dt>
+<dd><p>Add empty categories to the covcats array.</p>
+<p>If an element in categories already exists, it is ignored and not added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>category</strong> (<em>list</em><em>[</em><em>str</em><em>]</em>) – List of categories to create. If they already exist, they are not
+added.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.group_combine_mechanisms">
+<span class="sig-name descname"><span class="pre">group_combine_mechanisms</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rad</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.group_combine_mechanisms" title="Link to this definition">¶</a></dt>
+<dd><p>Group linear uncertainty mechanism originating from the same combine call.</p>
+<p>Preserves degrees of freedom does NOT preserve categorical information, used
+by the self.dof() function prior to running the welch-stat equation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>New RMEMeas object with the linear uncertainty mechanisms originating
+from the same combine call (Type A Analysis) grouped together.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.get_unique_categories">
+<span class="sig-name descname"><span class="pre">get_unique_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.get_unique_categories" title="Link to this definition">¶</a></dt>
+<dd><p>Get list of unique categories.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.print_categories">
+<span class="sig-name descname"><span class="pre">print_categories</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.print_categories" title="Link to this definition">¶</a></dt>
+<dd><p>Print out the unique categories.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.interp">
+<span class="sig-name descname"><span class="pre">interp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'linear'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">assume_sorted</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">coords_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.interp" title="Link to this definition">¶</a></dt>
+<dd><p>Interpolate RMEMeas object.</p>
+<p>See xarray interp documentation for more details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coords</strong> (<em>dict</em><em>, </em><em>optional</em>) – Mapping from dimension names to the new coordinates.
+New coordinate can be a scalar, array-like or DataArray.
+If DataArrays are passed as new coordinates, their dimensions are
+used for the broadcasting. Missing values are skipped.
+The default is None.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – <dl class="simple">
+<dt>{“linear”, “nearest”, “zero”, “slinear”, “quadratic”, “cubic”,</dt><dd><p>”quintic”, “polynomial”, “pchip”, “barycentric”, “krogh”, “akima”,
+“makima”}) – Interpolation method. The default is ‘linear’.</p>
+</dd>
+</dl>
+</p></li>
+<li><p><strong>assume_sorted</strong> (<em>bool</em><em>, </em><em>optional</em>) – If False, values of x can be in any order and they are sorted
+first. If True, x has to be an array of monotonically increasing
+values. The default is False.</p></li>
+<li><p><strong>kwargs</strong> (<em>dict</em><em>, </em><em>optional</em>) – Additional keyword arguments passed to scipy’s interpolator.
+Valid options and their behavior depend whether interp1d or
+interpn is used.. The default is None.</p></li>
+<li><p><strong>**coords_kwargs</strong> (<em>dict like</em>) – The keyword arguments form of coords. One of coords or
+coords_kwargs must be provided..</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.usel">
+<span class="sig-name descname"><span class="pre">usel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">umech_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sample_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.usel" title="Link to this definition">¶</a></dt>
+<dd><p>Get a view into specific uncertainty mechanisms or Monte Carlo samples.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>umech_id</strong> (<em>iter</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Linear uncertainty mechanisms to look at. The default is None.</p></li>
+<li><p><strong>sample_id</strong> (<em>iter</em><em>[</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Monte Carlo samples to look at. The default is None.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If ‘nominal’ is passed to umech_id, or 0 is passed to
+the sample_id. Those represent the nominal values and are
+always included by default, since an uncertainty object should
+always have a nominal value.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>View into RMEMeas object with only the selected linear uncertainty
+mechanisms and Monte Carlo samples.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>‘RMEMeas’</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.loc">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">loc</span></span><a class="headerlink" href="#rmellipse.RMEMeas.loc" title="Link to this definition">¶</a></dt>
+<dd><p>Get view into underlying data with label based indexing.</p>
+<p>Ignores the umech_id dimension, it cannot be indexed into
+with this function.Index into array assuming the umech_id
+dimensions doesn’t exist in cov (i.e. as if indexing into only the
+nominal)</p>
+<p>Generates a view on the underlying cov,mc, covcats
+and covdofs array. Use .copy() to create an unconnected version.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.sel">
+<span class="sig-name descname"><span class="pre">sel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tolerance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">indexers_kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.sel" title="Link to this definition">¶</a></dt>
+<dd><p>Get view into underlying data with label based selection.</p>
+<p>Ignores the umech_id dimension, it cannot be indexed into
+with this function.Index into array assuming the umech_id
+dimensions doesn’t exist in cov (i.e. as if indexing into only the
+nominal)</p>
+<p>Generates a view on the underlying cov,mc, covcats
+and covdofs array. Use .copy() to create an unconnected version.</p>
+<p>See documentation on DataArray.sel in the xarray package for details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indexers</strong> (<em>TYPE</em><em>, </em><em>optional</em>) – A dict with keys matching dimensions and values given by scalars,
+slices or arrays of tick labels. For dimensions with multi-index,
+the indexer may also be a dict-like object with keys matching index
+level names.
+umech_id can’t be provided.</p></li>
+<li><p><strong>method</strong> (<em>str</em><em>, </em><em>optional</em>) – Method to use for inexact matches:
+* None (default): only exact matches
+* pad / ffill: propagate last valid index value forward
+* backfill / bfill: propagate next valid index value backward
+* nearest: use nearest valid index value
+The default is None.</p></li>
+<li><p><strong>tolerance</strong> (<em>float</em><em>, </em><em>optional</em>) – Maximum distance between original and new labels for inexact
+matches. The values of the index at the matching locations must
+satisfy the equation abs(index[indexer] - target) &lt;= tolerance.</p></li>
+<li><p><strong>**indexers_kwargs</strong> (<em>dict</em>) – The keyword arguments form of indexers.
+One of indexers or indexers_kwargs must be provided.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – DESCRIPTION.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out</strong> – View into indexed RMEMeas object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.isel">
+<span class="sig-name descname"><span class="pre">isel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexers</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">missing_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'raise'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">indexers_kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.isel" title="Link to this definition">¶</a></dt>
+<dd><p>Get view into underlying data with integer based selection.</p>
+<p>Ignores the umech_id dimension, it cannot be indexed into
+with this function.Index into array assuming the umech_id
+dimensions doesn’t exist in cov (i.e. as if indexing into only the
+nominal)</p>
+<p>Generates a view on the underlying cov,mc, covcats
+and covdofs array. Use .copy() to create an unconnected version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>indexers</strong> (<em>dict</em><em>, </em><em>optional</em>) – A dict with keys matching dimensions and values given by integers,
+slice objects or arrays. indexer can be a integer, slice,
+array-like or DataArray. If DataArrays are passed as indexers,
+xarray-style indexing will be carried out.One of indexers or
+indexers_kwargs must be provided.. The default is None.</p></li>
+<li><p><strong>drop</strong> (<em>bool</em><em>, </em><em>optional</em>) – drop coordinates variables indexed by integers instead of making
+them scalar. The default is False.</p></li>
+<li><p><strong>missing_dims</strong> (<em>str</em><em>, </em><em>optional</em>) – What to do if dimensions that should be selected from are not
+present in the DataArray: - “raise”: raise an exception - “warn”:
+raise a warning, and ignore the missing dimensions - “ignore”:
+ignore the missing dimensions. The default is ‘raise’.</p></li>
+<li><p><strong>**indexers_kwargs</strong> (<em>TYPE</em>) – The keyword arguments form of indexers..</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – DESCRIPTION.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out</strong> – View into indexed RMEMeas object.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.polyfit">
+<span class="sig-name descname"><span class="pre">polyfit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deg</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">apply_cov</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.polyfit" title="Link to this definition">¶</a></dt>
+<dd><p>Apply a polynominal fit along dim.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dim</strong> (<em>str</em>) – Name of dimension to fit along.</p></li>
+<li><p><strong>deg</strong> (<em>int</em>) – Degree of fit</p></li>
+<li><p><strong>aoo</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Coefficients of data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.polyval">
+<span class="sig-name descname"><span class="pre">polyval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coord</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">degree_dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><span class="pre">RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEMeas.polyval" title="Link to this definition">¶</a></dt>
+<dd><p>Evaluate a polynomial fit along coord.</p>
+<p>Assumes self is a measurement of fit-parameters, with the
+dimension of polynomial fits along degree_dim.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coord</strong> (<em>xr.DataArray</em>) – Coordinate to fit along.</p></li>
+<li><p><strong>degree_dim</strong> (<em>str</em>) – Polynomial degree dimension.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Coefficients of data.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.curvefit">
+<span class="sig-name descname"><span class="pre">curvefit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">xarray.DataArray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">collections.abc.Sequence</span><span class="p"><span class="pre">[</span></span><span class="pre">xarray.DataArray</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduce_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">collections.abc.Iterable</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">skipna</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">param_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">collections.abc.Sequence</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errors</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'raise'</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.curvefit" title="Link to this definition">¶</a></dt>
+<dd><p>Simple binding to curvefit on xarray.</p>
+<p>The nominal value is solved for first, than used as an initial guess for the
+perturbed datasets.</p>
+<p>See <a class="reference external" href="https://docs.xarray.dev/en/stable/generated/xarray.DataArray.curvefit.html">https://docs.xarray.dev/en/stable/generated/xarray.DataArray.curvefit.html</a> for
+more details.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coords</strong> (<em>str</em><em> | </em><em>xr.DataArray</em><em> | </em><em>Sequence</em><em>[</em><em>str</em><em>] </em><em>| </em><em>Sequence</em><em>[</em><em>xr.DataArray</em><em>]</em><em>, </em><em>DataArray</em>) – Independent coordinate(s) over which to perform the curve fitting.
+Must share at least one dimension with the calling object.
+When fitting multi-dimensional functions,
+supply coords as a sequence in the same order as arguments in func.
+To fit along existing dimensions of the calling object, coords can also be specified as a str or sequence of strs.</p></li>
+<li><p><strong>func</strong> (<em>callable</em>) – User specified function in the form f(x, <a href="#id1"><span class="problematic" id="id2">*</span></a>params) which returns a numpy array of length len(x).
+Params are the fittable parameters which are optimized by scipy curve_fit.
+x can also be specified as a sequence containing multiple coordinates, e.g. f((x0, x1), <a href="#id3"><span class="problematic" id="id4">*</span></a>params).</p></li>
+<li><p><strong>reduce_dims</strong> (<em>str</em><em> | </em><em>Iterable</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Additional dimension(s) over which to aggregate while fitting. For example, calling ds.curvefit(coords=’time’, reduce_dims=[‘lat’, ‘lon’], …)
+will aggregate all lat and lon points and fit the specified function along the time dimension.</p></li>
+<li><p><strong>skipna</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to skip missing values when fitting. Default is True.</p></li>
+<li><p><strong>p0</strong> (<em>dict</em><em>, </em><em>optional</em>) – Optional dictionary of parameter names to initial guesses passed to the curve_fit p0 arg.
+If the values are DataArrays, they will be appropriately broadcast to the coordinates of the array.
+If none or only some parameters are passed, the rest will be assigned initial values following the default
+scipy behavior</p></li>
+<li><p><strong>bounds</strong> (<em>dict</em><em>, </em><em>optional</em>) – Optional dictionary of parameter names to tuples of bounding values passed to the curve_fit bounds arg.
+If any of the bounds are DataArrays, they will be appropriately broadcast to the coordinates of the array.
+If none or only some parameters are passed, the rest will be unbounded following the default scipy behavior.</p></li>
+<li><p><strong>param_names</strong> (<em>Sequence</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Sequence of names for the fittable parameters of func. If not supplied, this will be automatically determined
+by arguments of func. param_names should be manually supplied when fitting a function that takes a
+variable number of parameters.</p></li>
+<li><p><strong>errors</strong> (<em>str</em><em>, </em><em>optional</em>) – If ‘raise’, any errors from the scipy.optimize_curve_fit optimization will raise an exception.
+If ‘ignore’, the coefficients and covariances for the coordinates where the fitting failed will be NaN.</p></li>
+<li><p><strong>**kwargs</strong> (<em>optional</em>) – Additional keyword arguments passed to scipy curve_fit.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEMeas.curveval">
+<span class="sig-name descname"><span class="pre">curveval</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">func</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeas.curveval" title="Link to this definition">¶</a></dt>
+<dd><p>Evaluate the output of curvefit.</p>
+<p>Assumes there is a dimension called ‘param’ that coresponds.
+to the fit coefficients of func. Assumes function is nonlinear
+and iterates over each function evaluation, which can be slow.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>func</strong> (<em>callable</em>) – callable function</p></li>
+<li><p><strong>coords</strong> (<em>xr.DataArray</em>) – coordinates.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.CovarianceDataArray">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">CovarianceDataArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.CovarianceDataArray" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="arrschema/index.html#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmellipse.arrschema.AnnotatedArray</span></code></a></p>
+<p>Store data with linear uncertainty mechanisms.</p>
+<p>The first label of the umech_id coordinate is
+expected to be ‘nominal’, and represents the
+nominal (i.e. expected value) of the data set.
+Each label of the umech_id coordinate after that
+represents the nominal dataset perturbed by 1 standard
+deviation of that uncertainty mechanism, where the label
+is a universally unique ID that identifies the
+uncertainty mechanism.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.CovarianceDataArray.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><a class="headerlink" href="#rmellipse.CovarianceDataArray.schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.CovarianceStrMetadata">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">CovarianceStrMetadata</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.CovarianceStrMetadata" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="arrschema/index.html#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmellipse.arrschema.AnnotatedArray</span></code></a></p>
+<p>Stores metadata about linearuncertainty mechanisms.</p>
+<p>The ‘nominal’ should not be included in the umech_id dim.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.CovarianceStrMetadata.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><a class="headerlink" href="#rmellipse.CovarianceStrMetadata.schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.MonteCarloDataArray">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">MonteCarloDataArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.MonteCarloDataArray" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="arrschema/index.html#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmellipse.arrschema.AnnotatedArray</span></code></a></p>
+<p>Store data with monte carlo samples.</p>
+<p>The first label of the sample_id coordinate is
+the expected value of the distribution the data set.</p>
+<p>Each sample_id after that represents a sample
+from the underlying probability distribution.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.MonteCarloDataArray.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><a class="headerlink" href="#rmellipse.MonteCarloDataArray.schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rmellipse.RMEMeasFormatError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">RMEMeasFormatError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">message</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEMeasFormatError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Error in formatting of data inside RMEMeas</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Exception</strong> (<em>_type_</em>) – _description_</p></li>
+<li><p><strong>signature.</strong> (<em>Initialize self.  See help</em><em>(</em><em>type</em><em>(</em><em>self</em><em>)</em><em>) </em><em>for accurate</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.RMEMeasFormatError.message">
+<span class="sig-name descname"><span class="pre">message</span></span><a class="headerlink" href="#rmellipse.RMEMeasFormatError.message" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.RMEUncTuple">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">RMEUncTuple</span></span><a class="headerlink" href="#rmellipse.RMEUncTuple" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">tuple</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.RMEUncTuple.cov">
+<span class="sig-name descname"><span class="pre">cov</span></span><a class="headerlink" href="#rmellipse.RMEUncTuple.cov" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.RMEUncTuple.mc">
+<span class="sig-name descname"><span class="pre">mc</span></span><a class="headerlink" href="#rmellipse.RMEUncTuple.mc" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.RMEProp">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">RMEProp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">montecarlo_sims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_common_grid_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_grid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'frequency'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">common_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">interp_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vectorize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">set_active</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEProp" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="propagators/index.html#rmellipse.propagators.Propagator" title="rmellipse.propagators.Propagator"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmellipse.propagators.Propagator</span></code></a></p>
+<p>Microwave Uncertainty Framework uncertainty propagators.Propagator.</p>
+<p>Stores perturbations to data sets and samples of a Monte Carlo distribution
+along a dimension called ‘umech_id’ for the cov and mc
+attributes respectively.</p>
+<p>This class is used to represent data sets with uncertainty, and the provided
+propagators.Propagator wrapper and combine function are used to propagate those
+uncertainties through arbitrary functions using first order linear
+sensitivity analysis, or monte carlo simulations.</p>
+<p>The class structure and algorithms are designed to support vectorized
+operations, and label based indexing with numpy/xarray libraries in the
+functions being propagated, enabling larger data sets/large numbers of
+uncertainties to be propagated efficiently without parallelization.</p>
+<p>The class also supports the automatic handling of data sets with a common
+grid/dimensions, like frequency points.</p>
+<p>Creates a RMEMeas propagators.Propagator initialized with the defined settings.
+Keyword arguments are initialized into a settings dictionary that
+can be modified on runtime.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>montecarlo_sims</strong> (<em>int</em><em>, </em><em>optional</em>) – How many Monte Carlo trials to run. 0 turns off. The default is 0.</p></li>
+<li><p><strong>sensitivity</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, performs a sensitivity analysis, linear first order
+via finite differences. The default is False.</p></li>
+<li><p><strong>handle_common_grid_method</strong> (<em>str</em><em>, </em><em>optional</em>) – How to select common dimensions on RMEMeas inputs, done automatically
+by propagated functions. See
+RMEMeas.handle_common_grid for more info. None turns off.</p></li>
+<li><p><strong>common_grid</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the common dimension to handle. The default is ‘frequency’.</p></li>
+<li><p><strong>common_coords</strong> (<em>dict</em><em>, </em><em>optional</em>) – Coordinates to pair RMEMeas inputs down to. Used for certain
+handle_common_grid_method values.See
+RMEMeas.handle_common_grid The default is {}.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – IF true, propagators.Propagator prints information about operations
+as they happen. The default is False.</p></li>
+<li><p><strong>vectorize</strong> (<em>bool</em><em>, </em><em>optional;</em>) – IF true, propagators.Propagator will loop over uncertainty mechanisms and
+repeatedly call the propagating function. The default is False.</p></li>
+<li><p><strong>set_active</strong> (<em>bool</em><em>, </em><em>optional</em>) – Sets this as the active propagators.Propagator, used for some magic
+methods that need to infer what propagators.Propagator to use.
+The default is True.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.RMEProp.settings">
+<span class="sig-name descname"><span class="pre">settings</span></span><a class="headerlink" href="#rmellipse.RMEProp.settings" title="Link to this definition">¶</a></dt>
+<dd><p>Stores the current settings of the propagator.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEProp.handle_common_grid">
+<span class="sig-name descname"><span class="pre">handle_common_grid</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">process_args</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">process_kwargs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">handle_method</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#rmellipse.RMEProp.handle_common_grid" title="Link to this definition">¶</a></dt>
+<dd><p>Handle common grids on RMEMeas objects in process_args or process_kwargs.</p>
+<p>This function is called automatically by propagate to align and select
+common grid elements of RMEMeas objects so they are suitable for
+arithemetic and linear algebra.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>process_args</strong> (<em>tuple</em>) – DESCRIPTION.</p></li>
+<li><p><strong>process_kwargs</strong> (<em>dict</em>) – DESCRIPTION.</p></li>
+<li><p><strong>dim</strong> (<em>str</em>) – Name of the dimensions being handled.</p></li>
+<li><p><strong>handle_method</strong> (<em>str</em>) – <p>Name of the handle method. Valid options are:
+“common”,”interp_smallest”,”interp_common”
+“common” will only use values along dim that are shared among ALL
+the inputs.</p>
+<p>”interp_common” will interpolate (1D) to the the provided frequency list
+in the common_coords dictionary of the propagators.Propagators settings. The
+common_coords settings is expected to be a dictionary of key value
+pairs with {dim:array} where dim is the name of the dimension and
+array is the 1d set of indexes.</p>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If a handle common grid method is provided that has not been defined.</p>
+</dd>
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><em>tuple</em> – Modified positional arguments with common grid handled.</p></li>
+<li><p><em>dict</em> – Modified key worded arguments with common grid handled.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEProp.propagate">
+<span class="sig-name descname"><span class="pre">propagate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fun</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.RMEProp.propagate" title="Link to this definition">¶</a></dt>
+<dd><p>Decorate to make function automatically pass itself through propagate.</p>
+<p>Assumes that all the RMEMeas arguments are passed as positional arguments.
+Any positional arguments that are not RMEMeas instances are turned
+into RMEMeas objects without any covariance or nominal data, and named
+‘auto_arg’. The  __name__ property of the function is assigned as the name
+of the output RMEMeas object.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>RMEMeas object of output.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEProp.combine">
+<span class="sig-name descname"><span class="pre">combine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">measurements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">rmellipse.uobjects.RMEMeas</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_of_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_single_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine_basename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'combined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine_categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'Type':</span> <span class="pre">'A'}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">rmellipse.uobjects.RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEProp.combine" title="Link to this definition">¶</a></dt>
+<dd><p>Combine repeated measurements with uncertainty into a single measurement.</p>
+<p>Additional uncertainty mechanisms are created with the ‘combine_basename’
+as the name of the mechanisms + an iterated integer. Principal component
+analysis is used to create the additional mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*measurements</strong> (<a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><em>RMEMeas</em></a>) – DESCRIPTION.</p></li>
+<li><p><strong>error_of_mean</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, uses the error of the mean when creating the new uncertainty
+mechanisms. The default is False.</p></li>
+<li><p><strong>n_single_values</strong> (<em>Union</em><em>[</em><em>float</em><em>,</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Describes how many of the singular values to keep as
+error mechanisms when performing the PCA.If n_single_values&lt;1,
+will provide the min number of values to describe n_single_values
+ratio of the total variance described by the SVD. If
+n_single_values&gt; 1, will utilize the integer n_single_values number
+of singular values. If None, will use all the singular values
+available. Useful for reducing the size of data sets when
+large numbers of repeated measurements are used.The default is None.</p></li>
+<li><p><strong>combine_basename</strong> (<em>dict</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Base name usd when creating new uncertainty mechanisms.
+Uncertainty mechanisms are named with &lt;basename&gt;+_+&lt;int&gt;, int is
+iterated for each new mechanism. The default is ‘combined’.</p></li>
+<li><p><strong>add_uid</strong> (<em>str</em><em>, </em><em>optional</em>) – If true, adds a UID to the combine_basename to make it unique. The
+default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>out</strong> – Returns a RMEMeas object with combined uncertainties.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.RMEProp.combine_across_dim">
+<span class="sig-name descname"><span class="pre">combine_across_dim</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">measurement</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">rmellipse.uobjects.RMEMeas</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">dim</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">error_of_mean</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n_single_values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine_basename</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'combined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_uuid</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">combine_categories</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{'Type':</span> <span class="pre">'A'}</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="uobjects/index.html#rmellipse.uobjects.RMEMeas" title="rmellipse.uobjects.RMEMeas"><span class="pre">rmellipse.uobjects.RMEMeas</span></a></span></span><a class="headerlink" href="#rmellipse.RMEProp.combine_across_dim" title="Link to this definition">¶</a></dt>
+<dd><p>Combine repeated measurements that are within a single RMEMeas object
+across a dimension with uncertainty into a single measurement.</p>
+<p>Additional uncertainty mechanisms are created with the ‘combine_basename’
+as the name of the mechanisms + an iterated integer. Principal component
+analysis is used to create the additional mechanisms.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>*measurements</strong> (<a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas"><em>RMEMeas</em></a>) – DESCRIPTION.</p></li>
+<li><p><strong>error_of_mean</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, uses the error of the mean when creating the new uncertainty
+mechanisms. The default is False.</p></li>
+<li><p><strong>n_single_values</strong> (<em>Union</em><em>[</em><em>float</em><em>,</em><em>int</em><em>]</em><em>, </em><em>optional</em>) – Describes how many of the singular values to keep as
+error mechanisms when performing the PCA.If n_single_values&lt;1,
+will provide the min number of values to describe n_single_values
+ratio of the total variance described by the SVD. If
+n_single_values&gt; 1, will utilize the integer n_single_values number
+of singular values. If None, will use all the singular values
+available. Useful for reducing the size of data sets when
+large numbers of repeated measurements are used.The default is None.</p></li>
+<li><p><strong>combine_basename</strong> (<em>dict</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Base name usd when creating new uncertainty mechanisms.
+Uncertainty mechanisms are named with &lt;basename&gt;+_+&lt;int&gt;, int is
+iterated for each new mechanism. The default is ‘combined’.</p></li>
+<li><p><strong>add_uid</strong> (<em>str</em><em>, </em><em>optional</em>) – If true, adds a UID to the combine_basename to make it unique. The
+default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>out</strong> – Returns a RMEMeas object with combined uncertainties.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.RMEMeas" title="rmellipse.RMEMeas">RMEMeas</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rmellipse.load_object">
+<span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">load_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">saved_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">DATASET</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP_SAVEABLE</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_big_objects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vlen_object_encoding</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">any</span></span></span><a class="headerlink" href="#rmellipse.load_object" title="Link to this definition">¶</a></dt>
+<dd><p>Construct Python object from group or dataset.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>saved_object</strong> (<em>Union</em><em>[</em><em>GROUP</em><em>, </em><em>DATASET</em><em>]</em>) – Group or datset that contains Python object.</p></li>
+<li><p><strong>parent</strong> (<em>GROUP_SAVEABLE</em><em>, </em><em>optional</em>) – Parent of this object (Python object). The default is None.</p></li>
+<li><p><strong>load_big_objects</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, fully load all objects into memory. If False,
+only the attributes of big objects will be loaded. The default is True.</p></li>
+<li><p><strong>vlen_object_encoding</strong> (<em>str</em><em>, </em><em>optional</em>) – Variable length byte objects (np.dtype(‘O’)) are cast
+into this type when they are read into numpy arrays. The
+default is str.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A Python object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>any</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rmellipse.save_object">
+<span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">save_object</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">o</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">SAVED</span></span></span><a class="headerlink" href="#rmellipse.save_object" title="Link to this definition">¶</a></dt>
+<dd><p>Save an object to a group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>GROUP</em>) – Group where object will be saved.</p></li>
+<li><p><strong>name</strong> (<em>str</em>) – Name the object will have in the group.</p></li>
+<li><p><strong>o</strong> (<em>any</em>) – Object to save.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The newly-created saved object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>SAVED</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rmellipse.load_file">
+<span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">load_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">load_object_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.load_file" title="Link to this definition">¶</a></dt>
+<dd><p>Load a GroupSaveable object from a file.</p>
+<p>Follows the convention if there must be a single GroupSaveable
+object at the root of the file.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em> | </em><em>Path</em>) – File to read.</p></li>
+<li><p><strong>**load_object_kwargs</strong> (<em>any</em>) – Any additional key word arguments that may be passed off to load_object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="rmellipse.save_file">
+<span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">save_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">pathlib.Path</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">saveable</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rmellipse.GroupSaveable" title="rmellipse.GroupSaveable"><span class="pre">GroupSaveable</span></a></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">save_object_kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.save_file" title="Link to this definition">¶</a></dt>
+<dd><p>Save a GroupSaveable object to a file.</p>
+<p>Overwrites the target file if it already exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<em>str</em><em> | </em><em>Path</em>) – File to save to.</p></li>
+<li><p><strong>saveable</strong> (<a class="reference internal" href="#rmellipse.GroupSaveable" title="rmellipse.GroupSaveable"><em>GroupSaveable</em></a>) – GroupSaveable object.</p></li>
+<li><p><strong>**save_object_kwargs</strong> (<em>any</em>) – Any additional key word arguments that may be passed off to save_object.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">GroupSaveable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP_SAVEABLE</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">dict</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.GroupSaveable" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">GROUP_SAVEABLE</span></code></p>
+<p>Interface for objects that can be saved as HDF5 or Exdir groups or files.</p>
+<p>These objects are organized in a tree-like structure to avoid data
+duplication. Specifically, a group-saveable object is a node in a tree
+graph. It stores references to its children, and also to its parent.</p>
+<p>Each node also has a lookup table that stores the paths to data objects
+below it.</p>
+<section id="save-strategy">
+<h3>Save strategy<a class="headerlink" href="#save-strategy" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Group saveable objects can be saved to groups and initialized from</p></li>
+</ul>
+<p>groups. There should be a 1-1 mapping of objects to groups.</p>
+<ul class="simple">
+<li><p>After initialization, the group saveable object is independent</p></li>
+</ul>
+<p>from the goup that it was initialized from, and the group(s) it was
+saved to. So, changing the group saveable object does not change either
+the group it was initialized from, or the group(s) it was saved to.</p>
+</div></blockquote>
+</section>
+<section id="recomendations-for-derived-classes">
+<h3>Recomendations for derived classes<a class="headerlink" href="#recomendations-for-derived-classes" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>All attributes should be saveable types (see module description)</p></li>
+<li><p>The names of all attributes match the keywords of contructor</p></li>
+</ul>
+<p>keyword arguments. Ex. if the object has an attribute called “foo”,
+the constructor will take a keyword argument called “foo”.</p>
+<ul class="simple">
+<li><p>In the constructor, you use self.add_child to initialize object</p></li>
+</ul>
+<p>attributes. Big objects should be marked with is_big_object = True.</p>
+<ul class="simple">
+<li><p>Any modules that define classes derived from group_saveable are</p></li>
+</ul>
+<p>in sys.path, so that import &lt;module_name&gt; works.</p>
+<ul class="simple">
+<li><p>If you plan on saving an object attribute as a group attribute, add</p></li>
+</ul>
+<p>it to self.attrs.</p>
+<ul class="simple">
+<li><p>For best performance, do not store any data in a LIST_SAVEABLE type</p></li>
+</ul>
+<p>(list, set, or tuple) if it can be stored in an array. Arrays are
+stored as datasets (efficient), while list-likes are stored in a custom
+format (inelegant, inefficient).</p>
+</div></blockquote>
+</section>
+<section id="tree-structure">
+<h3>Tree structure<a class="headerlink" href="#tree-structure" title="Link to this heading">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>Group saveable objects have a unique id. If you know an object’s id,</p></li>
+</ul>
+<p>you can retrieve the object from a tree.</p>
+<ul class="simple">
+<li><p>Any group_saveable object can serve as the root of a tree. The only</p></li>
+</ul>
+<p>thing that makes the root special is that it has no parent.
+Consequently, roots can be assigned parents, and children can be
+detached from their parents.</p>
+<ul class="simple">
+<li><p>Nodes can’t store information about nodes that are not their</p></li>
+</ul>
+<p>children or their parent. Otherwise, we would have to define a root.</p>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.attrs">
+<span class="sig-name descname"><span class="pre">attrs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rmellipse.GroupSaveable.attrs" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.parent">
+<span class="sig-name descname"><span class="pre">parent</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#rmellipse.GroupSaveable.parent" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.lookup_table">
+<span class="sig-name descname"><span class="pre">lookup_table</span></span><a class="headerlink" href="#rmellipse.GroupSaveable.lookup_table" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.children">
+<span class="sig-name descname"><span class="pre">children</span></span><a class="headerlink" href="#rmellipse.GroupSaveable.children" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.is_big_object">
+<span class="sig-name descname"><span class="pre">is_big_object</span></span><a class="headerlink" href="#rmellipse.GroupSaveable.is_big_object" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.load">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP_SAVEABLE</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">load_big_objects</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GROUP_SAVEABLE</span></span></span><a class="headerlink" href="#rmellipse.GroupSaveable.load" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize GROUP_SAVEABLE object from a group.</p>
+<p>The group_saveable class is designed to be used as an archive, and may
+store many large data sets. So, to save space in memory, some objects
+must be open explicitly using the load_big_objects argument.</p>
+<p>The attribute “is_big_object” determines if the object is
+fully loaded or not. If an object is not loaded, a placeholder with
+the same attributes will be added.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>group</strong> (<em>GROUP</em>) – An hdf5 (or equivalent) group.</p></li>
+<li><p><strong>parent</strong> (<em>GROUP_SAVEABLE</em><em>, </em><em>optional</em>) – The parent of this object. The default is None.</p></li>
+<li><p><strong>load_big_objects</strong> (<em>bool</em><em>, </em><em>optional</em>) – If False, attributes marked as big objects are not loaded into
+memory. The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>new_object</strong> – New data tree object loaded from group.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GROUP_SAVEABLE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.get_root">
+<span class="sig-name descname"><span class="pre">get_root</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GROUP_SAVEABLE</span></span></span><a class="headerlink" href="#rmellipse.GroupSaveable.get_root" title="Link to this definition">¶</a></dt>
+<dd><p>Get the root of the data tree.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The root (the tree with no parents).</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>GROUP_SAVEABLE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.look_up_node">
+<span class="sig-name descname"><span class="pre">look_up_node</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">GROUP_SAVEABLE</span></span></span><a class="headerlink" href="#rmellipse.GroupSaveable.look_up_node" title="Link to this definition">¶</a></dt>
+<dd><p>Find the node that holds an object by unique id.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unique_id</strong> (<em>str</em>) – The hex representation of the unique id of an object stored in a
+subtree.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The data tree that holds the object with that unique id.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>GROUP_SAVEABLE</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.update_lookup_table">
+<span class="sig-name descname"><span class="pre">update_lookup_table</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">unique_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">''</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#rmellipse.GroupSaveable.update_lookup_table" title="Link to this definition">¶</a></dt>
+<dd><p>Try to update lookup table with path to data stored in a subtree.</p>
+<p>This method will also recursively try to update the parent’s lookup
+tables.</p>
+<p>If there is already an object with the same unique id in a
+parent’s lookup table, then that is the real one, and this is a copy.
+In that case, do not upate the lookup table.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>unique_id</strong> (<em>str</em>) – The hex representation of the unique id of an object stored in a
+subtree.</p></li>
+<li><p><strong>path</strong> (<em>str</em><em>, </em><em>optional</em>) – Used for recursion. Do not change. The default is “”.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>True if object is successfully added (does not already exist in
+parents’ lookup table)</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.save">
+<span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">GROUP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">verbose</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.GroupSaveable.save" title="Link to this definition">¶</a></dt>
+<dd><p>Save a group_saveable object as a group.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parent</strong> (<em>GROUP</em>) – Parent of group to be created.</p></li>
+<li><p><strong>name</strong> (<em>str</em><em>, </em><em>optional</em>) – If not None, overwrite name attribute of the group. The default is
+None.</p></li>
+<li><p><strong>verbose</strong> (<em>bool</em><em>, </em><em>optional</em>) – if True, prints information about what is being saved</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.add_child">
+<span class="sig-name descname"><span class="pre">add_child</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">SAVEABLE</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">is_big_object</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.GroupSaveable.add_child" title="Link to this definition">¶</a></dt>
+<dd><p>Add child to this node.</p>
+<p>If the new data is a GROUP_SAVEABLE object, enforce that
+data.attrs[“name”] == key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of child. If None, check if the data has a name.
+The defualt is None.</p></li>
+<li><p><strong>data</strong> (<em>SAVEABLE</em><em>, </em><em>optional</em>) – Data to add. If None, initialize an empty group_saveable object.
+The defualt is None.</p></li>
+<li><p><strong>is_big_object</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, when this object is read from a file, it will
+be ignored if the load_big_objects argument is set to False.
+The default is False.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.GroupSaveable.update_parents">
+<span class="sig-name descname"><span class="pre">update_parents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.GroupSaveable.update_parents" title="Link to this definition">¶</a></dt>
+<dd><p>Recursively update the parents lookup tables all of this object’s children.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rmellipse.MissingSchemaWarning">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">MissingSchemaWarning</span></span><a class="headerlink" href="#rmellipse.MissingSchemaWarning" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">UserWarning</span></code>, <code class="xref py py-obj docutils literal notranslate"><span class="pre">RuntimeWarning</span></code></p>
+<p>Base class for warnings generated by user code.</p>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.AnnotatedArray">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">AnnotatedArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.AnnotatedArray" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">xarray.DataArray</span></code></p>
+<p>Extension of xr.DataArray that is expected to conform to a specific schema.</p>
+<p>Schema is defined by an ArraySchema class.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rmellipse.AnnotatedArray.schema">
+<span class="sig-name descname"><span class="pre">schema</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#rmellipse.ArraySchema" title="rmellipse.ArraySchema"><span class="pre">ArraySchema</span></a></em><a class="headerlink" href="#rmellipse.AnnotatedArray.schema" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.AnnotatedArray.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.AnnotatedArray.validate" title="Link to this definition">¶</a></dt>
+<dd><p>Validate array data against the schema of this type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.AnnotatedArray.from_dataarray">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_dataarray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">array</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">xarray.DataArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Self</span></span></span><a class="headerlink" href="#rmellipse.AnnotatedArray.from_dataarray" title="Link to this definition">¶</a></dt>
+<dd><p>Cast an array into an annotated array.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>array</strong> (<em>xr.DataArray</em>) – Array that can be cast into this format.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>New array.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Self</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.AnnotatedArray.zeros">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">zeros</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">xarray.DataArray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray"><span class="pre">AnnotatedArray</span></a></span></span><a class="headerlink" href="#rmellipse.AnnotatedArray.zeros" title="Link to this definition">¶</a></dt>
+<dd><p>Generate an empty array of zeros based on the schema.</p>
+<p>If extra coordinates are
+supplied they will be inserted at the first arbitrary dimension
+specificier in the AnnotatedArray’s schema (’…’). Coordinates
+with set values can be ignored, and will be automatically inserted.</p>
+<p>Zero array is initialized with numpy.zeros.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>attrs</strong> (<em>Mapping</em><em> | </em><em>None = None</em>) – Provided metadata to instantiate the AnnotatedArray with. The
+values in the supplied metadata are
+shallow copied onto the instantiated AnnotatedArrays’s attrs.</p></li>
+<li><p><strong>**coords</strong> (<em>np.ndarray</em><em> | </em><em>xr.DataArray</em>) – KeyValue pairs of coordinates. Must include the required
+coordinates of the AnnotatedArray.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array with supplied coordinates that conforms to the schema.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray">AnnotatedArray</a></p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>KeyError</strong> – DESCRIPTION.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.AnnotatedArray.zeros_from">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">zeros_from</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prototype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray"><span class="pre">AnnotatedArray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">drop_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rename_dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">use_coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reorder</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">coords</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray"><span class="pre">AnnotatedArray</span></a></span></span><a class="headerlink" href="#rmellipse.AnnotatedArray.zeros_from" title="Link to this definition">¶</a></dt>
+<dd><p>Generate a new zeros array based on a prototype array.</p>
+<p>Dimensions that are mapped from the prototype array to the output
+array are cast into the correct type. Otherwise, dimensions are
+inserted in the expected place.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>prototype</strong> (<a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray"><em>AnnotatedArray</em></a>) – Array to base the new array off of.</p></li>
+<li><p><strong>drop_dims</strong> (<em>list</em><em>[</em><em>str</em><em>]</em><em>, </em><em>optional</em>) – Drop these dimensions. The default is None.</p></li>
+<li><p><strong>rename_dims</strong> (<em>Mapping</em><em> | </em><em>dict</em><em>, </em><em>optional</em>) – Mapping of dimensions on the prototype array that should be
+converted to dimensions of this type of array. The default is None.</p></li>
+<li><p><strong>use_coords</strong> (<em>Mapping</em><em> | </em><em>dict</em><em>, </em><em>optional</em>) – Additional dimensions required for the new type, key is
+the dimension name and value is the new coordinate to use for
+that dimension.</p></li>
+<li><p><strong>reorder</strong> (<em>bool</em><em>, </em><em>optional</em>) – Automatically try to reorder dimensions to conform
+to the specification.</p></li>
+<li><p><strong>validate</strong> (<em>bool</em><em>, </em><em>optional</em>) – If true, validate after creation. Default is False</p></li>
+<li><p><strong>attrs</strong> (<em>Mapping</em><em> | </em><em>dict</em><em>, </em><em>optional</em>) – If provided, supply metadata to be used as attributes.</p></li>
+<li><p><strong>**coords</strong> (<em>Mapping</em><em> | </em><em>None</em><em>, </em><em>optional</em>) – Keyword version of use_coords. Is merged with ontop of
+use_coords.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>zeros</strong> – Zeros array in the new format.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray">AnnotatedArray</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.ArraySchema">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">ArraySchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">shape</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">types.EllipsisType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dims</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">types.EllipsisType</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Ellipsis</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coords</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Mapping</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">attrs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pydantic.BaseModel</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.ArraySchema" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>Specialized dict subclass to describe the shape an array.</p>
+<p>Initialize an ArraySchema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>shape</strong> (<em>tuple</em><em>[</em><em>str</em><em> | </em><em>int</em><em> | </em><em>EllipsisType</em><em>, </em><em>...</em><em>]</em>) – Shape of structure. Ellipses indicate arbitrary dimensions,
+letters indicate a required dimension of unknown length, and
+integers indicate a required dimension of a required length.</p></li>
+<li><p><strong>dims</strong> (<em>tuple</em><em>[</em><em>str</em><em> | </em><em>EllipsisType</em><em>, </em><em>...</em><em>]</em>) – Names assigned to dimensions specified by shape. Any required
+dimension must be names, and arbitrary dimensions must also be
+ellipses.</p></li>
+<li><p><strong>dtype</strong> (<em>type</em><em> | </em><em>None</em>) – Type must be parseable by numpy’s dtype (e.g. f8, c8, u8, etc).
+None means no datatype requriement, can be Any.</p></li>
+<li><p><strong>units</strong> (<em>Mapping</em><em>, </em><em>optional</em>) – Mapping of units to the array structure.</p></li>
+<li><p><strong>coords</strong> (<em>Mapping</em><em>, </em><em>optional</em>) – Mapping of required dimensions to a coordinate space. Must provide
+at least a dtype and a single unit as a string. Optionally,
+if the coordinates are fixed (i.e. the row and column indices of
+stacks of 2-d matrices) then you may specify those coordinates
+here.</p></li>
+<li><p><strong>attrs_schema</strong> (<em>mapping</em><em>, </em><em>optional</em>) – JSON Schema for validating metadata attributes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary conforming to an arrschema specification.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>Exception</strong> – If some logical inconsistency or is found, or the provided
+schema doesn’t follow the specification for an array schema.</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.ArraySchema.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">arr</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray"><span class="pre">AnnotatedArray</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">attach_schema</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.ArraySchema.validate" title="Link to this definition">¶</a></dt>
+<dd><p>Test if array conforms to schema.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>arr</strong> (<a class="reference internal" href="#rmellipse.AnnotatedArray" title="rmellipse.AnnotatedArray"><em>AnnotatedArray</em></a>) – Array to check.</p></li>
+<li><p><strong>attach_schema</strong> (<em>bool</em><em>, </em><em>optional</em>) – If True, the schema is dumped into a string and
+attatched to the attrs of the input data array.
+The default is True.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#rmellipse.ValidationError" title="rmellipse.ValidationError"><strong>ValidationError</strong></a> – If a discrepancy is found between the data and the schema.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rmellipse.CoordinateSchema">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">CoordinateSchema</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dtype</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">type</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">units</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.CoordinateSchema" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">dict</span></code></p>
+<p>dict() -&gt; new empty dictionary
+dict(mapping) -&gt; new dictionary initialized from a mapping object’s</p>
+<blockquote>
+<div><p>(key, value) pairs</p>
+</div></blockquote>
+<dl>
+<dt>dict(iterable) -&gt; new dictionary initialized as if via:</dt><dd><p>d = {}
+for k, v in iterable:</p>
+<blockquote>
+<div><p>d[k] = v</p>
+</div></blockquote>
+</dd>
+<dt>dict(<a href="#id5"><span class="problematic" id="id6">**</span></a>kwargs) -&gt; new dictionary initialized with the name=value pairs</dt><dd><p>in the keyword argument list.  For example:  dict(one=1, two=2)</p>
+</dd>
+</dl>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+<dl class="py exception">
+<dt class="sig sig-object py" id="rmellipse.ValidationError">
+<em class="property"><span class="k"><span class="pre">exception</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.</span></span><span class="sig-name descname"><span class="pre">ValidationError</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.ValidationError" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Common base class for all non-exit exceptions.</p>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+</dd></dl>
+
+</section>
+</section>
+
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="Main">
+        <div class="sphinxsidebarwrapper">
+<h3><a href="../../index.html">Table of Contents</a></h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../install/index.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../auto_examples/index.html">Examples Gallery</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../for_contributors/index.html">For Contributors</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">rmellipse</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../../_sources/autoapi/rmellipse/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+<h3>Versions</h3>
+<ul>
+  <li><a href="../../../v0.3.4/index.html">v0.3.4</a></li>
+  <li><a href="../../../v0.4.5/index.html">v0.4.5</a></li>
+  <li><a href="index.html">v0.5.1</a></li>
+  <li><a href="../../../development/index.html">development</a></li>
+  <li><a href="../../../stable/index.html">stable</a></li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, National Institute of Standards and Technology.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 8.2.3</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
+      
+      |
+      <a href="../../_sources/autoapi/rmellipse/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
