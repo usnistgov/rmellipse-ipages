@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>rmellipse.uobjects &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
+    <title>rmellipse.uobjects &#8212; Rocky Mountain Ellipse 0.4.3a3.dev32+g537152f60 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../../_static/documentation_options.js?v=7603136a"></script>
     <script src="../../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -102,7 +102,7 @@ $(document).ready(function(){
 <td><p>Stores metadata about linearuncertainty mechanisms.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#rmellipse.uobjects.MonteCarloDataArray" title="rmellipse.uobjects.MonteCarloDataArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MonteCarloDataArray</span></code></a></p></td>
-<td><p>Store data with monte carlo samples.</p></td>
+<td><p>Store stochastic Monte Carlo samples.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#rmellipse.uobjects.RMEUncTuple" title="rmellipse.uobjects.RMEUncTuple"><code class="xref py py-obj docutils literal notranslate"><span class="pre">RMEUncTuple</span></code></a></p></td>
 <td><p></p></td>
@@ -140,14 +140,12 @@ first label of the ‘parameter_dimensions’ coordinate must be
 coordinate should be strings corresponding the the uncertainty
 mechanism. The default is None.</p>
 </p></li>
-<li><p><strong>mc</strong> (<em>A</em><em> | </em><a class="reference internal" href="#rmellipse.uobjects.MonteCarloDataArray" title="rmellipse.uobjects.MonteCarloDataArray"><em>MonteCarloDataArray</em></a><em>, </em><em>optional</em>) – <p>Montecarlo trials. Samples of the data
-sets distribution are stored along the first dimension (axis 0)
-of the DataArray, where the first index of axis 0 is the nominal
-data set, and the rest of the indexes are samples of the distribution.</p>
-<p>The first dimension must be called ‘sample_id’, and the
-first labels of the ‘sample_id’ must start at 0 and
-count up by 1 (i,e typical integer based indexing).
-The default is None.</p>
+<li><p><strong>mc</strong> (<em>A</em><em> | </em><a class="reference internal" href="#rmellipse.uobjects.MonteCarloDataArray" title="rmellipse.uobjects.MonteCarloDataArray"><em>MonteCarloDataArray</em></a><em>, </em><em>optional</em>) – <p>Monte Carlo trials. Every entry along the first dimension (axis 0)
+is a stochastic sample of the data set’s distribution; the nominal
+data set is not duplicated in this array.</p>
+<p>The first dimension must be called ‘sample_id’, and the labels of
+‘sample_id’ must start at 0 and count up by 1 (i.e. typical integer
+based indexing). The default is None.</p>
 </p></li>
 <li><p><strong>covdofs</strong> (<em>xr.DataArray</em><em>, </em><em>optional</em>) – DataArray that stores the degrees of freedom for each linear
 uncertainty mechanism in cov. It should be a 1 dimensional
@@ -245,6 +243,12 @@ string.</p></li>
 <span class="sig-name descname"><span class="pre">cast_umechids</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.cast_umechids" title="Link to this definition">¶</a></dt>
 <dd><p>Cast any umech_id dimensions or other dimensions to the correct type.</p>
 <p>Generally, umech_id and covcats should be ‘T’ (variable width strings).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.validate">
+<span class="sig-name descname"><span class="pre">validate</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.validate" title="Link to this definition">¶</a></dt>
+<dd><p>Validate this object in place and return it for fluent use.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -428,6 +432,9 @@ is {‘Type’:’B’}.</p></li>
 <dt class="sig sig-object py" id="rmellipse.uobjects.RMEMeas.nom">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nom</span></span><a class="headerlink" href="#rmellipse.uobjects.RMEMeas.nom" title="Link to this definition">¶</a></dt>
 <dd><p>Get the nominal values of the RMEMeas object.</p>
+<p>Covariance data provides an explicit nominal value. If only Monte Carlo
+data is available, return the sample mean of all stored stochastic
+trials.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Raises<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>Exception</strong> – if no data is store.</p>
@@ -683,10 +690,8 @@ coords_kwargs must be provided..</p></li>
 </ul>
 </dd>
 <dt class="field-even">Raises<span class="colon">:</span></dt>
-<dd class="field-even"><p><strong>ValueError</strong> – If ‘nominal’ is passed to umech_id, or 0 is passed to
-the sample_id. Those represent the nominal values and are
-always included by default, since an uncertainty object should
-always have a nominal value.</p>
+<dd class="field-even"><p><strong>ValueError</strong> – If ‘nominal’ is passed to umech_id. The covariance nominal is always
+included because an uncertainty object must retain a nominal value.</p>
 </dd>
 <dt class="field-odd">Returns<span class="colon">:</span></dt>
 <dd class="field-odd"><p>View into RMEMeas object with only the selected linear uncertainty
@@ -932,11 +937,10 @@ uncertainty mechanism.</p>
 <dt class="sig sig-object py" id="rmellipse.uobjects.MonteCarloDataArray">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rmellipse.uobjects.</span></span><span class="sig-name descname"><span class="pre">MonteCarloDataArray</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#rmellipse.uobjects.MonteCarloDataArray" title="Link to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../arrschema/index.html#rmellipse.arrschema.AnnotatedArray" title="rmellipse.arrschema.AnnotatedArray"><code class="xref py py-obj docutils literal notranslate"><span class="pre">rmellipse.arrschema.AnnotatedArray</span></code></a></p>
-<p>Store data with monte carlo samples.</p>
-<p>The first label of the sample_id coordinate is
-the expected value of the distribution the data set.</p>
-<p>Each sample_id after that represents a sample
-from the underlying probability distribution.</p>
+<p>Store stochastic Monte Carlo samples.</p>
+<p>Every entry along the <code class="docutils literal notranslate"><span class="pre">sample_id</span></code> coordinate is a sample from the
+underlying probability distribution. Labels start at zero and count up by
+one. The nominal value is stored separately in the covariance data.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="rmellipse.uobjects.MonteCarloDataArray.schema">
 <span class="sig-name descname"><span class="pre">schema</span></span><a class="headerlink" href="#rmellipse.uobjects.MonteCarloDataArray.schema" title="Link to this definition">¶</a></dt>

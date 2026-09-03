@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>RMEMeas Objects &#8212; Rocky Mountain Ellipse 0.4.3a3.dev30+g980614856 documentation</title>
+    <title>RMEMeas Objects &#8212; Rocky Mountain Ellipse 0.4.3a3.dev32+g537152f60 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../_static/documentation_options.js?v=34a028c2"></script>
+    <script src="../../_static/documentation_options.js?v=7603136a"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
@@ -215,18 +215,15 @@ by throwing away the covariance data and just keeping one of the Monte Carlo
 samples.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">sample</span> <span class="o">=</span> <span class="n">meas</span><span class="o">.</span><span class="n">usel</span><span class="p">(</span><span class="n">umech_id</span><span class="o">=</span><span class="p">[],</span> <span class="n">sample_id</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">mc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="o">.</span><span class="n">mc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">...</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>While the xarray indexing methods index across uncertainty mechanisms and
-Monte Carlo samples, the usel method indexes into uncertainty mechanisms
-and Monte Carlo samples. In either case, the nominal values (the ‘nominal’
-parameter location and 0th Monte Carlo sample) are always protected and
-always kept regardless of method.</p>
-<p>For example, using usel and giving empty lists for umech_id
-and mcsamples throws away all the uncertainty information, and just keeps
-the nominal. This effectively means it no longer has any associated
-uncertainties.</p>
+<p>While the xarray indexing methods retain all uncertainty rows, <code class="docutils literal notranslate"><span class="pre">usel</span></code> can
+select specific covariance mechanisms and stochastic Monte Carlo samples.
+The covariance nominal (the <code class="docutils literal notranslate"><span class="pre">'nominal'</span></code> mechanism row) is always retained;
+Monte Carlo sample 0 is an ordinary stochastic trial and may be selected.</p>
+<p>For example, giving empty lists for <code class="docutils literal notranslate"><span class="pre">umech_id</span></code> and <code class="docutils literal notranslate"><span class="pre">sample_id</span></code> throws
+away all uncertainty information and keeps only the covariance nominal.</p>
 <div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">nominal_only</span> <span class="o">=</span> <span class="n">meas</span><span class="o">.</span><span class="n">usel</span><span class="p">(</span><span class="n">umech_id</span><span class="o">=</span><span class="p">[],</span> <span class="n">sample_id</span><span class="o">=</span><span class="p">[])</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">nominal_only</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>

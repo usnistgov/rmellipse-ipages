@@ -162,6 +162,28 @@ Package Contents
       :type: dict
 
 
+   .. py:method:: merge_categories(mechanism_ids, process_args, process_kwargs, sensitivity: bool = True, verbose: bool = False)
+      :staticmethod:
+
+
+      Merge covariance-category metadata for uncertainty mechanisms.
+
+      This applies the same alignment and conflict rules used during
+      propagation.
+
+
+
+   .. py:method:: merge_covdofs(mechanism_ids, process_args, process_kwargs, sensitivity: bool = True, verbose: bool = False)
+      :staticmethod:
+
+
+      Merge degree-of-freedom metadata for uncertainty mechanisms.
+
+      This applies the same alignment and aggregation rules used during
+      propagation.
+
+
+
    .. py:method:: handle_common_grid(process_args: tuple, process_kwargs: dict, dim: str, handle_method: str) -> tuple[tuple, dict]
 
       Handle common grids on RMEMeas objects in process_args or process_kwargs.

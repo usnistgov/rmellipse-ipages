@@ -70,15 +70,13 @@ Package Contents
                coordinate should be strings corresponding the the uncertainty
                mechanism. The default is None.
    :type cov: A | CovarianceDataArray, optional
-   :param mc: Montecarlo trials. Samples of the data
-              sets distribution are stored along the first dimension (axis 0)
-              of the DataArray, where the first index of axis 0 is the nominal
-              data set, and the rest of the indexes are samples of the distribution.
+   :param mc: Monte Carlo trials. Every entry along the first dimension (axis 0)
+              is a stochastic sample of the data set's distribution; the nominal
+              data set is not duplicated in this array.
 
-              The first dimension must be called 'sample_id', and the
-              first labels of the 'sample_id' must start at 0 and
-              count up by 1 (i,e typical integer based indexing).
-              The default is None.
+              The first dimension must be called 'sample_id', and the labels of
+              'sample_id' must start at 0 and count up by 1 (i.e. typical integer
+              based indexing). The default is None.
    :type mc: A | MonteCarloDataArray, optional
    :param covdofs: DataArray that stores the degrees of freedom for each linear
                    uncertainty mechanism in cov. It should be a 1 dimensional
@@ -149,6 +147,12 @@ Package Contents
       Cast any umech_id dimensions or other dimensions to the correct type.
 
       Generally, umech_id and covcats should be 'T' (variable width strings).
+
+
+
+   .. py:method:: validate()
+
+      Validate this object in place and return it for fluent use.
 
 
 
@@ -316,6 +320,10 @@ Package Contents
    .. py:property:: nom
 
       Get the nominal values of the RMEMeas object.
+
+      Covariance data provides an explicit nominal value. If only Monte Carlo
+      data is available, return the sample mean of all stored stochastic
+      trials.
 
       :raises Exception: if no data is store.
 
@@ -523,10 +531,8 @@ Package Contents
       :param sample_id: Monte Carlo samples to look at. The default is None.
       :type sample_id: iter[int], optional
 
-      :raises ValueError: If 'nominal' is passed to umech_id, or 0 is passed to
-          the sample_id. Those represent the nominal values and are
-          always included by default, since an uncertainty object should
-          always have a nominal value.
+      :raises ValueError: If 'nominal' is passed to umech_id. The covariance nominal is always
+          included because an uncertainty object must retain a nominal value.
 
       :returns: View into RMEMeas object with only the selected linear uncertainty
                 mechanisms and Monte Carlo samples.
@@ -756,13 +762,11 @@ Package Contents
    Bases: :py:obj:`rmellipse.arrschema.AnnotatedArray`
 
 
-   Store data with monte carlo samples.
+   Store stochastic Monte Carlo samples.
 
-   The first label of the sample_id coordinate is
-   the expected value of the distribution the data set.
-
-   Each sample_id after that represents a sample
-   from the underlying probability distribution.
+   Every entry along the ``sample_id`` coordinate is a sample from the
+   underlying probability distribution. Labels start at zero and count up by
+   one. The nominal value is stored separately in the covariance data.
 
 
    .. py:attribute:: schema

@@ -225,23 +225,20 @@ samples.
 
     sample = meas.usel(umech_id=[], sample_id=[1])
 
-    print(sample.mc[1, ...])
+    print(sample.mc[0, ...])
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 159-169
+.. GENERATED FROM PYTHON SOURCE LINES 159-166
 
-While the xarray indexing methods index across uncertainty mechanisms and
-Monte Carlo samples, the usel method indexes into uncertainty mechanisms
-and Monte Carlo samples. In either case, the nominal values (the 'nominal'
-parameter location and 0th Monte Carlo sample) are always protected and
-always kept regardless of method.
+While the xarray indexing methods retain all uncertainty rows, ``usel`` can
+select specific covariance mechanisms and stochastic Monte Carlo samples.
+The covariance nominal (the ``'nominal'`` mechanism row) is always retained;
+Monte Carlo sample 0 is an ordinary stochastic trial and may be selected.
 
-For example, using usel and giving empty lists for umech_id
-and mcsamples throws away all the uncertainty information, and just keeps
-the nominal. This effectively means it no longer has any associated
-uncertainties.
+For example, giving empty lists for ``umech_id`` and ``sample_id`` throws
+away all uncertainty information and keeps only the covariance nominal.
 
-.. GENERATED FROM PYTHON SOURCE LINES 169-175
+.. GENERATED FROM PYTHON SOURCE LINES 166-172
 
 .. code-block:: Python
 
@@ -252,7 +249,7 @@ uncertainties.
     print(nominal_only.stdunc())
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 176-181
+.. GENERATED FROM PYTHON SOURCE LINES 173-178
 
 Assigning RMEMeas
 -----------------
@@ -260,7 +257,7 @@ Assigning RMEMeas
 Currently, RMEMeas objects indexing functions do not support item assignment.
 Values can be reassigned through propagation.
 
-.. GENERATED FROM PYTHON SOURCE LINES 181-187
+.. GENERATED FROM PYTHON SOURCE LINES 178-184
 
 .. code-block:: Python
 
@@ -271,14 +268,14 @@ Values can be reassigned through propagation.
         print(e)
 
 
-.. GENERATED FROM PYTHON SOURCE LINES 188-192
+.. GENERATED FROM PYTHON SOURCE LINES 185-189
 
 Interpolating
 -------------
 
 RMEMeas supports interpolation by wrapping xarray's built in `interp` function.
 
-.. GENERATED FROM PYTHON SOURCE LINES 192-194
+.. GENERATED FROM PYTHON SOURCE LINES 189-191
 
 .. code-block:: Python
 
