@@ -44,7 +44,7 @@ Package Contents
    Initialize self.  See help(type(self)) for accurate signature.
 
 
-.. py:class:: ArraySchema(name: str, shape: tuple[str | int | types.EllipsisType, Ellipsis], dims: tuple[str | types.EllipsisType, Ellipsis], dtype: str | type[float] | type[complex], units: str | None = None, coords: Mapping = {}, uid: str | None = None, attrs_schema: Mapping | None = None)
+.. py:class:: ArraySchema(name: str, shape: tuple[str | int | types.EllipsisType, ...], dims: tuple[str | types.EllipsisType, ...], dtype: str | type[float] | type[complex], units: str | None = None, coords: Mapping = {}, uid: str | None = None, attrs_schema: Mapping | None = None)
 
    Bases: :py:obj:`dict`
 

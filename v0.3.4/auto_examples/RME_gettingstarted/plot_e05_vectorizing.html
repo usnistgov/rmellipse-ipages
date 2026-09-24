@@ -5,18 +5,19 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Using Non-Vectorized Propagation &#8212; Rocky Mountain Ellipse 0.4.3a3.dev32+g537152f60 documentation</title>
+    <title>Using Non-Vectorized Propagation &#8212; Rocky Mountain Ellipse 0.4.3a3.dev36+ga96a1e1e9 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=5ecbeea2" />
     <link rel="stylesheet" type="text/css" href="../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../_static/alabaster.css?v=27fed22d" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
-    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=d2d258e8" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery.css?v=c83e6b79" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-binder.css?v=f4aeca0c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-dataframe.css?v=2082cf3c" />
     <link rel="stylesheet" type="text/css" href="../../_static/sg_gallery-rendered-html.css?v=1277b6f3" />
-    <script src="../../_static/documentation_options.js?v=7603136a"></script>
+    <script src="../../_static/documentation_options.js?v=22b7aad7"></script>
     <script src="../../_static/doctools.js?v=9bcbadda"></script>
     <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/sg-tags.js?v=d80f6fa4"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="next" title="Using Arbitrary Data Types" href="plot_e06_using_other_datatypes.html" />
@@ -85,34 +86,33 @@ to download the full example code.</p>
 <h2>Setup<a class="headerlink" href="#setup" title="Link to this heading">¶</a></h2>
 <p>First lets create a RMEMeas object we can interact with and initialize
 a propagator.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">rmellipse.uobjects</span><span class="w"> </span><span class="kn">import</span> <span class="n">RMEMeas</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">rmellipse.propagators</span><span class="w"> </span><span class="kn">import</span> <span class="n">RMEProp</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
-
-<span class="n">nom</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)),</span>
-                   <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'d1'</span><span class="p">,</span> <span class="s1">'d2'</span><span class="p">),</span>
-                   <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">'d1'</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">],</span>
-                           <span class="s1">'d2'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)})</span>
-
-<span class="n">meas</span> <span class="o">=</span> <span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'meas'</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">)</span>
-
-<span class="n">meas</span><span class="o">.</span><span class="n">add_umech</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s1">'my_mechanism'</span><span class="p">,</span>
-    <span class="n">value</span><span class="o">=</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">,</span>
-    <span class="n">dof</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span>
-    <span class="n">category</span><span class="o">=</span><span class="p">{</span><span class="s1">'Type'</span><span class="p">:</span> <span class="s1">'B'</span><span class="p">,</span> <span class="s1">'Origin'</span><span class="p">:</span> <span class="s1">'Data Sheet'</span><span class="p">}</span>
-<span class="p">)</span>
-
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
-    <span class="n">meas</span><span class="o">.</span><span class="n">add_mc_sample</span><span class="p">(</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">)</span>
-
-<span class="n">myprop</span> <span class="o">=</span> <span class="n">RMEProp</span><span class="p">(</span>
-    <span class="n">sensitivity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">montecarlo_sims</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
-    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</pre></div>
-</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="kn">from</span><span class="w"> </span><span class="nn">rmellipse</span><span class="nn">.</span><span class="nn">uobjects</span><span class="w"> </span><span class="kn">import</span> <span class="n">RMEMeas</span><span class="w">
+</span><span class="kn">from</span><span class="w"> </span><span class="nn">rmellipse</span><span class="nn">.</span><span class="nn">propagators</span><span class="w"> </span><span class="kn">import</span> <a class="sphx-glr-backref-module-rmellipse-propagators sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../autoapi/rmellipse/propagators/index.html#rmellipse.propagators.RMEProp" title="rmellipse.propagators.RMEProp"><span class="n">RMEProp</span></a><span class="w">
+</span><span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span><span class="w">
+</span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span><span class="w">
+</span><span class="w">
+</span><span class="n">nom</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">DataArray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="p">)</span><span class="p">,</span><span class="w">
+</span>                   <span class="n">dims</span><span class="o">=</span><span class="p">(</span><span class="s1">'</span><span class="s1">d1</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'</span><span class="s1">d2</span><span class="s1">'</span><span class="p">)</span><span class="p">,</span><span class="w">
+</span>                   <span class="n">coords</span><span class="o">=</span><span class="p">{</span><span class="s1">'</span><span class="s1">d1</span><span class="s1">'</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span><span class="p">,</span><span class="w">
+</span>                           <span class="s1">'</span><span class="s1">d2</span><span class="s1">'</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="p">}</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">meas</span> <span class="o">=</span> <a class="sphx-glr-backref-module-rmellipse-uobjects-RMEMeas sphx-glr-backref-type-py-method reference internal" href="../../autoapi/rmellipse/uobjects/index.html#rmellipse.uobjects.RMEMeas.from_nom" title="rmellipse.uobjects.RMEMeas.from_nom"><span class="n">RMEMeas</span><span class="o">.</span><span class="n">from_nom</span></a><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'</span><span class="s1">meas</span><span class="s1">'</span><span class="p">,</span> <span class="n">nom</span><span class="o">=</span><span class="n">nom</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">meas</span><span class="o">.</span><span class="n">add_umech</span><span class="p">(</span><span class="w">
+</span>    <span class="n">name</span><span class="o">=</span><span class="s1">'</span><span class="s1">my_mechanism</span><span class="s1">'</span><span class="p">,</span><span class="w">
+</span>    <span class="n">value</span><span class="o">=</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">,</span><span class="w">
+</span>    <span class="n">dof</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span><span class="w">
+</span>    <span class="n">category</span><span class="o">=</span><span class="p">{</span><span class="s1">'</span><span class="s1">Type</span><span class="s1">'</span><span class="p">:</span> <span class="s1">'</span><span class="s1">B</span><span class="s1">'</span><span class="p">,</span> <span class="s1">'</span><span class="s1">Origin</span><span class="s1">'</span><span class="p">:</span> <span class="s1">'</span><span class="s1">Data Sheet</span><span class="s1">'</span><span class="p">}</span><span class="w">
+</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="p">:</span><span class="w">
+</span>    <span class="n">meas</span><span class="o">.</span><span class="n">add_mc_sample</span><span class="p">(</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="o">*</span><span class="n">meas</span><span class="o">.</span><span class="n">nom</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.01</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">myprop</span> <span class="o">=</span> <a class="sphx-glr-backref-module-rmellipse-propagators sphx-glr-backref-type-py-class sphx-glr-backref-instance reference internal" href="../../autoapi/rmellipse/propagators/index.html#rmellipse.propagators.RMEProp" title="rmellipse.propagators.RMEProp"><span class="n">RMEProp</span></a><span class="p">(</span><span class="w">
+</span>    <span class="n">sensitivity</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="w">
+</span>    <span class="n">montecarlo_sims</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="w">
+</span>    <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
 </section>
 <section id="non-vectorized-propagation">
 <h2>Non-Vectorized Propagation<a class="headerlink" href="#non-vectorized-propagation" title="Link to this heading">¶</a></h2>
@@ -125,23 +125,22 @@ names of the uncertainty mechanism. For non vectorized inputs, the
 propagator will loop over that first dimension, so the inputs will have a
 length 1 first dimension called ‘umech_id’. The output should
 also have that dimension and coordinate.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'montecarlo_sims'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'sensitivity'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'vectorize'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'verbose'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-
-
-<span class="nd">@myprop</span><span class="o">.</span><span class="n">propagate</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">"""Add 2 numbers."""</span>
-    <span class="n">output</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">umech_id</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">umech_id</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">output</span>
-
-
-<span class="n">added</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">meas</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-</pre></div>
-</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'</span><span class="s1">montecarlo_sims</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="w">
+</span><span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'</span><span class="s1">sensitivity</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="w">
+</span><span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'</span><span class="s1">vectorize</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="w">
+</span><span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'</span><span class="s1">verbose</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="nd">&#64;myprop</span><span class="o">.</span><span class="n">propagate</span><span class="w">
+</span><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span><span class="p">:</span><span class="w">
+</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;Add 2 numbers.&quot;&quot;&quot;</span><span class="w">
+</span>    <span class="n">output</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="w">
+</span>    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">umech_id</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">output</span><span class="o">.</span><span class="n">umech_id</span><span class="o">.</span><span class="n">values</span><span class="p">)</span><span class="w">
+</span>    <span class="k">return</span> <span class="n">output</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="n">added</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="n">meas</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
 </section>
 <section id="vectorized-vs-unvectorized">
 <h2>Vectorized vs. Unvectorized<a class="headerlink" href="#vectorized-vs-unvectorized" title="Link to this heading">¶</a></h2>
@@ -151,18 +150,17 @@ will save a lot of time, especially with large data sets and large numbers
 of uncertainty mechanisms. For comparison, here is the same function run
 once with the vectorize functionality and once without. Note the orders of
 magnitude increase in run time for the Monte Carlo propagation.</p>
-<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="nd">@myprop</span><span class="o">.</span><span class="n">propagate</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">add2</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
-
-
-<span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'vectorize'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
-<span class="n">add2</span><span class="p">(</span><span class="n">meas</span><span class="p">)</span>
-
-<span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'vectorize'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
-<span class="n">add2</span><span class="p">(</span><span class="n">meas</span><span class="p">)</span>
-</pre></div>
-</div>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span class="nd">&#64;myprop</span><span class="o">.</span><span class="n">propagate</span><span class="w">
+</span><span class="k">def</span><span class="w"> </span><span class="nf">add2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="p">:</span><span class="w">
+</span>    <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span><span class="w">
+</span><span class="w">
+</span><span class="w">
+</span><span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'</span><span class="s1">vectorize</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="w">
+</span><span class="n">add2</span><span class="p">(</span><span class="n">meas</span><span class="p">)</span><span class="w">
+</span><span class="w">
+</span><span class="n">myprop</span><span class="o">.</span><span class="n">settings</span><span class="p">[</span><span class="s1">'</span><span class="s1">vectorize</span><span class="s1">'</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="w">
+</span><span class="n">add2</span><span class="p">(</span><span class="n">meas</span><span class="p">)</span><span class="w">
+</span></pre></div></div>
 <div class="sphx-glr-footer sphx-glr-footer-example docutils container" id="sphx-glr-download-auto-examples-rme-gettingstarted-plot-e05-vectorizing-py">
 <div class="sphx-glr-download sphx-glr-download-jupyter docutils container">
 <p><a class="reference download internal" download="" href="../../_downloads/5ade33de5df6b4bfd0851766af761d51/plot_e05_vectorizing.ipynb"><code class="xref download docutils literal notranslate"><span class="pre">Download</span> <span class="pre">Jupyter</span> <span class="pre">notebook:</span> <span class="pre">plot_e05_vectorizing.ipynb</span></code></a></p>

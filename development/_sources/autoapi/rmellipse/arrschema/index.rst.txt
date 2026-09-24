@@ -124,7 +124,7 @@ Package Contents
 
 
 
-.. py:class:: ArraySchema(shape: tuple[str | int | types.EllipsisType, Ellipsis], dims: tuple[str | types.EllipsisType, Ellipsis], dtype: type | None = None, units: str | None = None, coords: Mapping = {}, attrs: pydantic.BaseModel = None)
+.. py:class:: ArraySchema(shape: tuple[str | int | types.EllipsisType, ...], dims: tuple[str | types.EllipsisType, ...], dtype: type | None = None, units: str | None = None, coords: Mapping = {}, attrs: pydantic.BaseModel = None)
 
    Bases: :py:obj:`dict`
 

@@ -35,7 +35,7 @@ Classes
 Package Contents
 ----------------
 
-.. py:class:: RMEMeas(name: str | None = None, cov: A | CovarianceDataArray = None, mc: A | MonteCarloDataArray | None = None, covdofs: xarray.DataArray | CovarianceDOFMetadata | None = None, covcats: xarray.DataArray | CovarianceStrMetadata | None = None, parent: rmellipse.utils.GroupSaveable = None, attrs: dict | None = None)
+.. py:class:: RMEMeas[A](name: str | None = None, cov: A | CovarianceDataArray = None, mc: A | MonteCarloDataArray | None = None, covdofs: xarray.DataArray | CovarianceDOFMetadata | None = None, covcats: xarray.DataArray | CovarianceStrMetadata | None = None, parent: rmellipse.utils.GroupSaveable = None, attrs: dict | None = None)
 
    Bases: :py:obj:`rmellipse.utils.GroupSaveable`
 
